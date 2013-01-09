@@ -15,5 +15,6 @@ foreach ($res as $key => $value) {
     $cnt++;
 }
 echo $cnt . "Recors are updated";
-*/echo "hi this si naresh ";
+*/
+echo "Hello this is naresh Gumte ";
 ?>
