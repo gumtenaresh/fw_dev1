@@ -1,0 +1,121 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-14 12:41:58
+         compiled from "/var/www/fanwire/views/admin/fanwires/profile.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:5703328565029fa3e55a224-98581314%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '25a1805cb3b770e8e38aece2ed200273b4846f03' => 
+    array (
+      0 => '/var/www/fanwire/views/admin/fanwires/profile.tpl.html',
+      1 => 1344928311,
+    ),
+  ),
+  'nocache_hash' => '5703328565029fa3e55a224-98581314',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/header.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+
+<script type="text/javascript">   
+ $(document).ready(function() { 	
+        $('#avatar_img').live('change', function(){             
+            document.avatar_form.submit();            
+        });
+        
+        $('#timeline_img').live('change', function(){             
+            document.timeline_form.submit();
+        });
+       
+    }); 
+    </script>
+
+  <div id="data_sectionarea">
+        	<?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/fanwires_left_section.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+            <div class="data_rightsection">
+            <div class="rightcontent">
+                <div class="datatabsection">
+                <div class="datatableftsection"><a href="<?php echo @ADMIN_URL;?>
+">Home</a> > <a href="<?php echo @ADMIN_URL;?>
+fanwires/fanwiresList/">FanWire Admin</a> > <a href="<?php echo @ADMIN_URL;?>
+fanwires/profile?id=<?php echo $_smarty_tpl->getVariable('fan_id')->value;?>
+/">Edit Profile</a></div>
+<!--               <div class="datatabrightsection"><span><a href="#">fanwire:</a> Lil wayne <a href="#">| Step 2 of 4</a></span></div>-->
+                </div>
+                    	<div class="clear"></div>
+                        
+        <div class="datasettingarea">            
+            <div class="profile_pic">
+                 	<?php if ($_smarty_tpl->getVariable('timeline_photo')->value==''){?> 
+                    <img src="<?php echo @SITE_URL;?>
+views/images/profile-img.png" height="294" width="1025"  />
+                 <?php }else{ ?>  
+                 <div style="height:294px;overflow: hidden;"> <img src="<?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->getVariable('timeline_photo')->value;?>
+"  alt=""  /> </div>
+                <?php }?>
+                <div class="connect_me">
+                
+                <span class="file-wrapper">
+                <form action="" name="timeline_form" id="timeline_form" method="post" enctype="multipart/form-data" >
+                        <input type="hidden" name="timeline" id="timeline">
+                        <input type="file" name="timeline_img" id="timeline_img" />
+                        <span class="button">Edit</span>
+                    </form> 
+              
+              </span> 
+                </div> 
+                <div class="profileimg">
+                <div class="profilsmaa">
+                <?php if ($_smarty_tpl->getVariable('avatar_photo')->value==''){?> 
+                    <img src="<?php echo @SITE_URL;?>
+views/images/profilesmall.png" height="144" width="143" alt=""  />
+                 <?php }else{ ?>  
+                    <img src="<?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->getVariable('avatar_photo')->value;?>
+" height="144" width="143" alt="" />
+                <?php }?> 
+                <span class="file-wrapper" style="margin:0 0 0 25px;">
+                
+                    <form action="" method="post" name="avatar_form" id="avatar_form"  enctype="multipart/form-data" >
+                    <input type="hidden" name="avatar" id="avatar">
+<!--                <input name="avatar_img" id="avatar_img" type="file" class="connect_btn" value="Edit"  style="margin:10px 0 0 35px;"/>-->
+                <input type="file" name="avatar_img" id="avatar_img" />
+              <span class="button">Edit</span>
+                </form>
+              
+              </span>
+                </div> 
+                <div class="profilsmaa1">
+                <h1><?php echo $_smarty_tpl->getVariable('name')->value;?>
+</h1>
+                <h2><?php echo $_smarty_tpl->getVariable('category')->value;?>
+</h2>
+                </div>
+                </div> 
+                </div> 
+        <div class="clear"></div>
+        <form action="" method="post" name="profile" id="profile">         
+        <div class="forms2">
+        
+        <div class="dataforms">
+        <label class="name">Additional<br />Biography Info:</label><textarea name="biography" id="biography" cols="" rows="" class="text_area0"><?php echo $_smarty_tpl->getVariable('description')->value;?>
+</textarea>
+        </div>
+        
+        </div>
+        <div class="bs_btns">
+                <div class="back_btn">back</div>
+                <div><input type="submit" name="submit" value="Next" class="save_btn" /></div>
+                <div class="clear"></div>
+        </div>
+                </form>
+        </div>
+        </div>
+       </div>
+     </div>
+<?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/footer.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>  

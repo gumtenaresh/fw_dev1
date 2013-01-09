@@ -1,0 +1,131 @@
+{include file='header.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+{include file='zoom.tpl.html'}
+<!--Right Section-->
+{literal}  
+<script type="text/javascript">
+    function acceptRequest(userId,fanId)
+    {
+         
+         
+        var dataString = 'userId='+userId+'&fanId='+fanId+'&action=ar';
+        var url = "{/literal}{$smarty.const.SITE_URL}{literal}respondRequest";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function(result) {
+                $("#message"+fanId).hide();
+                
+            }
+        });
+    }
+    function denyRequest(userId,fanId)
+    {
+         
+
+        var dataString = 'userId='+userId+'&fanId='+fanId+'&action=dr';
+        var url = "{/literal}{$smarty.const.SITE_URL}{literal}respondRequest";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function(result) {
+                $("#message"+fanId).hide();
+            }
+        });
+    }
+     
+</script>
+{/literal}
+<div class="right_container">
+    <div id="rightsection">
+
+        <div id="right_area">
+            <div class="connect_fans">
+
+                <div class="fanbox_title"><h2>fanbox</h2></div>
+
+                <div class="awards_active">
+                    <ul>
+                        <li {if $message eq messages} class="active" {/if}><a href="{$smarty.const.SITE_URL}messageCenter"><span><strong>messages</strong></span></a></li>
+                        <li {if $message eq notifications}class="active"{/if}><a href="{$smarty.const.SITE_URL}notifications"><span><strong>Notifications</strong></span></a></li>
+                        <li {if $message eq requests}class="active"{/if}><a href="{$smarty.const.SITE_URL}requests"><span><strong>Requests</strong></span></a></li>
+                    </ul>
+                </div>
+
+                <div class="clear"></div>
+
+                <div class="notification_body">
+
+                    <div class="message_data">
+
+                        <div class="msg_photo"><img src="{$smarty.const.SITE_URL}views/images/james.jpg" width="82" height="82" /><br />
+
+                            James Marchetti
+                        </div>
+                        <div class="msg_txt"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis. </div>
+
+                        <div class="notification_close_box">
+                            <input name="" type="button" class="close_btn" value="X" />
+                            <br />
+                            <p>Last Message:    Yesterday</p>
+                        </div>
+
+                    </div>
+
+                    <div class="message_data">
+
+                        <div class="msg_photo"><img src="{$smarty.const.SITE_URL}views/images/james.jpg" width="82" height="82" /><br />
+
+                            James Marchetti
+                        </div>
+                        <div class="msg_txt"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis. <br />
+                            <img src="images/notification_movie_img.jpg" /><br />
+                            <span>Tom Cruise official Intro Video</span>
+                        </div>
+
+                        <div class="notification_close_box">
+                            <input name="" type="button" class="close_btn" value="X" />
+                            <br />
+                            <p>Last Message:    Yesterday</p>
+                        </div>
+
+                    </div>
+
+                    <div class="message_data">
+
+                        <div class="msg_photo"><img src="{$smarty.const.SITE_URL}views/images/james.jpg" width="82" height="82" /><br />
+
+                            James Marchetti
+                        </div>
+                        <div class="msg_txt"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis.
+                            <div class="notification_btns">
+                                <a href="#" class="blue_btn">i'm going</a>
+                                <a href="#" class="orange_btn">not going</a>
+                            </div>
+                        </div>
+                        <div class="notification_close_box">
+                            <input name="" type="button" class="close_btn" value="X" />
+                            <br />
+                            <p>Last Message:    Yesterday</p>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="btm_line">
+              {if $msgcnt gt '5'}<div id="showmore" class="showmore"><a href="#">show more</a></div>{/if}
+                <input type="hidden" name="moreval" id="moreval" value="5" />
+            </div>
+
+
+        </div> {include file='footer.tpl.html'}

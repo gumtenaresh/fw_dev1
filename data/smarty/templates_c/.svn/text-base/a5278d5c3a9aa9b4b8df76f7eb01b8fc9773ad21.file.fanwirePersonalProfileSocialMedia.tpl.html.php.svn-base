@@ -1,0 +1,242 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-11 15:44:27
+         compiled from "/var/www/fanwire/views/fanwires/fanwirePersonalProfileSocialMedia.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:173995327050263083097468-95908449%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'a5278d5c3a9aa9b4b8df76f7eb01b8fc9773ad21' => 
+    array (
+      0 => '/var/www/fanwire/views/fanwires/fanwirePersonalProfileSocialMedia.tpl.html',
+      1 => 1344608164,
+    ),
+  ),
+  'nocache_hash' => '173995327050263083097468-95908449',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('headerguest.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('guest_left_section.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+
+<!--Right Section--> 
+<div class="right_container">
+    <div class="login">
+        <p><a href="javascript:void(0);" onclick="loginPop();" id="loginFacebook2">LOGIN</a></p>
+    </div> 
+    <div class="more_posts"><a href="#">More Posts</a></div>
+    <div id="inner_rightsection">
+        <div id="right_area"> 
+            <?php $_template = new Smarty_Internal_Template('fanwireshalfRightBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+            <!-- fanwireshalfRightBar -->
+            <?php if ($_smarty_tpl->getVariable('fans')->value){?>
+            <?php  $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable;
+ $_smarty_tpl->tpl_vars['myId'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->getVariable('fans')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+if (count($_from) > 0){
+    foreach ($_from as $_smarty_tpl->tpl_vars['i']->key => $_smarty_tpl->tpl_vars['i']->value){
+ $_smarty_tpl->tpl_vars['myId']->value = $_smarty_tpl->tpl_vars['i']->key;
+?>
+            <?php  $_smarty_tpl->tpl_vars['p'] = new Smarty_Variable;
+ $_smarty_tpl->tpl_vars['m'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['i']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+if (count($_from) > 0){
+    foreach ($_from as $_smarty_tpl->tpl_vars['p']->key => $_smarty_tpl->tpl_vars['p']->value){
+ $_smarty_tpl->tpl_vars['m']->value = $_smarty_tpl->tpl_vars['p']->key;
+?>
+            <div class="collection_page">
+                <div class="collect_photo">
+                    <img src="<?php echo @SITE_URL;?>
+profile_images/<?php echo $_smarty_tpl->tpl_vars['p']->value['profile_image'];?>
+" width="246" height="151" />
+                    <div class="data"><?php echo $_smarty_tpl->tpl_vars['p']->value['fname'];?>
+<?php echo $_smarty_tpl->tpl_vars['p']->value['lname'];?>
+ <br />
+                        <span></span></div>
+                    <div class="photo_post">
+                        <div class="message">(3)</div>
+                        <div class="blue">(11)</div>
+                        <div class="red">(19)</div>
+                    </div>
+                    <!--          uncomment to display the description of the fanwire -->
+                </div>         
+            </div>                 
+            <?php }} ?>  
+            <?php }} ?>  
+            <?php }else{ ?><div class="collection_page">
+                No records found ...   
+            </div>          <?php }?>            
+            <!--             <div class="btm_line">   -->
+            <!--                 <div class="showmore"><a href="#">show more</a></div> -->
+            <!--             </div>        -->
+            <div class="clear"></div> 
+
+        </div>	    
+
+        <?php $_template = new Smarty_Internal_Template('footerGuest.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+
+
+        
+        <script type="text/javascript">
+            window.fbAsyncInit = function() {
+                FB.init({appId: '<?php echo @FB_APP_ID;?>
+', status: true, cookie: true, xfbml: true});
+
+                /* All the events registered */
+                FB.Event.subscribe('auth.login', function(response) {
+                    // do something with response
+                  
+                    login();
+                });
+                FB.Event.subscribe('auth.logout', function(response) {
+                    // do something with response
+                  
+                    logout();
+                });
+
+                FB.getLoginStatus(function(response) {
+                    if (response.session) {
+                        // logged in and connected user, someone you know
+                        login();
+                    }
+                });
+            };
+            (function() {
+                var e = document.createElement('script');
+                e.type = 'text/javascript';
+                e.src = document.location.protocol +
+                    '//connect.facebook.net/en_US/all.js';
+                e.async = true;
+                document.getElementById('fb-root').appendChild(e);
+            }());
+
+            function login(){
+               
+                FB.api('/me', function(response) {
+                    //ajax registration form submission
+                    var fname=response.first_name;
+                    var lname=response.last_name;
+                    var name=response.name;
+                    var email=response.email;
+                    var link=response.link
+                    var fbid=response.id;
+                    var birthday=response.birthday;
+                    var sex=response.gender;
+                    
+ 
+                    var dataStringd="firstname="+fname+"&lastname="+lname+"&username="+name+"&email="+email+"&fb_url_link="+link+"&dob="+birthday+"&sex="+sex+"&fbid="+fbid;
+                    
+                    $.ajax({
+                        type: "POST",
+                        url:"<?php echo @SITE_URL;?>
+fbregisterAjax",
+                        data: dataStringd,
+                        beforeSend: function(){
+                            $('#step6').show();
+                            $('#fade6').show();
+                        },
+                        complete: function(){
+                            $('#step6').hide();
+                            $('#fade6').hide();
+                        },
+                        success: function(resa) {
+                            
+                            if(resa){
+                                
+                                window.location.href='<?php echo @SITE_URL;?>
+StepFurther?Axt=Itt';
+                            }else{
+                                
+                                window.location.href='<?php echo @SITE_URL;?>
+myFanwire';
+                            }
+                        },
+                        error:function(data){
+                            console.log(data);
+                        }
+                    });
+                });
+                /* var params = {};
+                params['message'] = 'Message';
+                params['name'] = 'Name';
+                params['description'] = 'Description';
+                params['link'] = 'http://apps.facebook.com/summer-mourning/';
+                params['picture'] = 'http://summer-mourning.zoocha.com/uploads/thumb.png';
+                params['caption'] = 'Caption';
+  
+                FB.api('/me/feed', 'post', params, function(response) {
+                    
+                    console.log(response);
+                    console.log(response.message);
+                     console.log(response.name);
+                     console.log(response.description);
+                     
+                    if (!response || response.error) {
+                        alert('Error occured');
+                    } else {
+                        alert('Published to stream - you might want to delete it now!');
+                    }
+                });*/
+            }
+            function logout(){
+                document.getElementById('login').style.display = "none";
+            }
+
+ 
+            function share(){
+                var share = {
+                    method: 'stream.share',
+                    u: 'http://202.136.65.24/fanwire'
+                };
+
+                FB.ui(share, function(response) { console.log(response); });
+            }
+
+            function graphStreamPublish(){
+                var body = 'Reading New Graph api & Javascript Base FBConnect Tutorial from Thinkdiff.net';
+                FB.api('/me/feed', 'post', { message: body }, function(response) {
+                    if (!response || response.error) {
+                        alert('Error occured');
+                    } else {
+                        alert('Post ID: ' + response.id);
+                    }
+                });
+            }
+
+            function fqlQuery(){
+                FB.api('/me', function(response) {
+                    var query = FB.Data.query('select name, hometown_location, sex, pic_square from user where uid={0}', response.id);
+                    query.wait(function(rows) {
+                       
+                        document.getElementById('name').innerHTML =
+                            'Your name: ' + rows[0].name + "<br />" +
+                            '<img src="' + rows[0].pic_square + '" alt="" />' + "<br />";
+                    });
+                });
+            }
+
+            function setStatus(){
+                status1 = document.getElementById('status').value;
+                FB.api(
+                {
+                    method: 'status.set',
+                    status: status1
+                },
+                function(response) {
+                    if (response == 0){
+                        alert('Your facebook status not updated. Give Status Update Permission.');
+                    }
+                    else{
+                        alert('Your facebook status updated');
+                    }
+                }
+            );
+            }
+        </script>
+        

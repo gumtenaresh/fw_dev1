@@ -1,0 +1,54 @@
+{include file='headerguest.tpl.html'}
+{include file='zoom.tpl.html'}
+ {include file='guest_left_section.tpl.html'}
+<!--Right Section-->
+
+<div class="right_container">
+    <div class="more_posts"><a href="#">More Posts</a></div>
+    <div id="inner_rightsection">
+        <div id="right_area">
+		    {if isset($smarty.request.fwrid)}
+            {include file='fanwireshalfRightBar.tpl.html'}
+            {/if}
+            {if isset($smarty.request.uid)}
+            {include file='fanshalfRightBar.tpl.html'}
+            {/if}
+            <!-- fanwireshalfRightBar -->
+		{section name=art loop=$vedios}
+		  {assign var=p value=$vedios[art]}
+
+            <div class="collection_page">
+                <div class="collect_photo">
+                    <a href="{$p.link}"  ><img src="{if $p.thumbnail}{$smarty.const.IMAGE_URL}thumbs/{$p.thumbnail}{else}{$smarty.const.IMAGE_URL}thumbs/default.jpg{/if}" width="246" height="151" /></a>
+
+                    <div class="data">{$p.title} <br />
+                        <span>{$p.description|truncate:200}</span>
+                    </div>
+
+                    <div class="photo_post">
+                        <div class="message">(3)</div>
+                        <div class="blue">(11)</div>
+                        <div class="red">(19)</div>
+                    </div>
+                    <!--          {*$fanwires.description*}uncomment to display the description of the fanwire -->
+                </div>
+            </div>
+
+{sectionelse}<div class="collection_page">norecords</div>
+		{/section}
+
+            {if $articles|@count gt 6}
+            <div class="btm_line">
+                <div class="showmore"><a href="#">show more</a></div>
+            </div>
+            {/if}
+
+            <div class="clear"></div>
+        </div>
+
+
+	{include file='footerGuest.tpl.html'}
+        
+         <div class="login">
+            <p><a href="javascript:void(0);" onclick="loginPop();" id="loginFacebook2">LOGIN</a></p>
+        </div> 

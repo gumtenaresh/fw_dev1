@@ -1,0 +1,276 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-04 18:12:01
+         compiled from "/var/www/fanwire/views/index/profile_photo.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:307675923501d1899cc9563-61427444%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'cc7965b5ea6b8bdf06251e9b78f257269ed48e78' => 
+    array (
+      0 => '/var/www/fanwire/views/index/profile_photo.tpl.html',
+      1 => 1342074258,
+    ),
+  ),
+  'nocache_hash' => '307675923501d1899cc9563-61427444',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('header2.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>  
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.Jcrop.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo @SITE_URL;?>
+css/jquery.Jcrop.css" />
+<!-- Bootstrap CSS Toolkit styles -->
+
+<link rel="stylesheet" href="<?php echo @SITE_URL;?>
+views/css/style.css">
+
+<link rel="stylesheet" href="<?php echo @SITE_URL;?>
+views/css/jquery.fileupload-ui.css">
+
+<style type="text/css">
+
+    .fileinput-button {
+        position: absolute;
+        float: left;
+    }
+
+    .fileinput-button input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        border: solid transparent;
+        border-width: 0 0 100px 200px;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        -moz-transform: translate(-300px, 0) scale(4);
+        direction: ltr;
+        cursor: pointer;
+    }
+</style>
+<script language="Javascript">
+    function uploadFile() {
+        var fd = new FormData();
+        fd.append("photoimg", document.getElementById('photoimg').files[0]);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", uploadProgress, false);
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.open("POST", "");
+        xhr.send(fd);    
+    }
+
+    function uploadProgress(evt) {         
+        var percentComplete = Math.round(evt.loaded * 100 / evt.total); 
+        document.getElementById('progressNumber').innerHTML = "<img src='images/progress.gif' />"; //percentComplete.toString() + '%';        
+    }
+    function uploadComplete(evt) {
+        document.getElementById("progressNumber").innerHTML = "";  
+    }
+    jQuery(function($) {
+        $('img#photo').Jcrop({
+            onSelect: showCoords,
+            onChange: showCoords,
+            bgColor:     'black',
+            bgOpacity:   .4,            
+            aspectRatio: 9 / 9
+        });
+    });
+    
+    function showCoords(obj)
+    {
+        // variables can be accessed here as
+        // c.x, c.y, c.x2, c.y2, c.w, c.h
+       
+        
+        var x_axis = obj.x;
+        var x2_axis = obj.x2;
+        var y_axis = obj.y;
+        var y2_axis = obj.y2;
+        var thumb_width = obj.w;
+        var thumb_height = obj.h;
+        document.getElementById("x1").value =obj.x;
+        document.getElementById("x2").value =obj.x2;
+        document.getElementById("y1").value =obj.y;
+        document.getElementById("y2").value =obj.y2;
+        document.getElementById("w").value =obj.w;
+        document.getElementById("h").value =obj.h;
+    };
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function() { 	
+        $('#photoimg').live('change', function(){     
+            document.imageform.submit();         
+            uploadFile();
+        });        
+    }); 
+</script>
+
+<div class="left_menu">
+    <ul>
+        <li><a href="#">1- FIND your
+                fans</a>
+        </li>
+        <li class="active"><a
+                href="#"
+                >2- profile photo</a>
+        </li>
+        <li><a href="#">3- add
+                fanwires</a>
+        </li>
+        <li><a href="#">4- social
+                media connect</a>
+        </li>
+    </ul>
+</div>
+</div>
+<!--Left Section End-->
+<!--Right Section-->
+<div class="right_container">
+    <div id="index_rightsection">
+        <div id="right_area">
+            <h2>
+                add a profile photo<br /> <span>Just a couple more steps
+                    left. The more you complete, the more we will reward you.</span>
+            </h2>
+            <div class="connect_fans">
+                <div class="account_details">
+                    <h3>Preview</h3>
+
+                    <div class="add_photo" id="preview" ><?php echo $_smarty_tpl->getVariable('image')->value;?>
+</div>
+                    <h3>
+                        <span></span>
+                    </h3>
+                </div>
+                <div class="profile_photo_btns_section">
+                    <div class="profile_photo_btns">
+
+
+                        <a class="your_desktop fileinput-button">Your Desktop
+                            <form id="imageform" name="imageform"
+                                  method="POST" enctype="multipart/form-data"
+                                  action='<?php echo @SITE_URL;?>
+uploadProfilePic'>
+                                 <input type="file" name="photoimg" id="photoimg" > <input
+                                    type="hidden" name='upload' value="upload"  />
+                                <div id="progressNumber"
+                                     style="float: left; margin-left: 450px; margin-top: -30px;"></div>
+
+                            </form>
+                        </a>
+
+
+                        <a href="#" class="your_fanwire_profile">Your fanwire profile</a>
+                        <a href="#" class="your_facebook">facebook</a>
+                    </div>
+                </div>
+                <div style="padding-top:166px;">
+                    <!-- <form id="imageform" name="imageform" method="POST" enctype="multipart/form-data" action='<?php echo @SITE_URL;?>
+uploadProfilePic'>
+                        <input	type="file" name="photoimg" id="photoimg"/>
+                        <input type="hidden" name='upload' value="upload"/><div id="progressNumber" style="float:left;margin-left: 450px;margin-top: -30px;"></div>
+                    </form> -->
+                </div>
+            </div>
+            <!-- newlu added start-->
+
+            <div
+                id="thumbs"
+                style="padding: 5px; width: 600px"
+                ></div>
+
+
+            <!-- newly added  end -->
+            <div class="clear"></div>
+            <hr />
+            <br />
+            <div class="skip">
+                <form id="changePhoto" name="changePhoto" method="POST" enctype="multipart/form-data" action='<?php echo @SITE_URL;?>
+uploadProfilePic'>                
+                    <input type="hidden" name="x1" id="x1" value="" />
+                    <input type="hidden" name="x2" id="x2" value="" />
+                    <input type="hidden" name="y1" id="y1" value="" />
+                    <input type="hidden" name="y2" id="y2" value="" />
+                    <input type="hidden" name="w" id="w" value="" />
+                    <input type="hidden" name="h" id="h" value="" />                    
+                    <input type="hidden" name="actual_image_name" id='actual_image_name' value="" /> 
+                    <input name="submitData" id="submitData" type="button" class="continue_btn" value="Continue" onclick="return changeImage1();" />
+                </form>                                    
+
+
+                <br />
+                <br />
+                <br /> <br />
+
+                <a href="<?php echo @SITE_URL;?>
+addFanwires"><i>Skip this
+                        step</i>
+                </a>
+            </div>
+            
+            <script type="text/javascript">
+                function changeImage1()
+                {
+                    // document.getElementById("actual_image_name").value = $("#photo").attr("src");
+                    document.getElementById("actual_image_name").value = $("#photo").attr("src");
+                    var x_axis =  document.getElementById("x1").value;
+                    var x2_axis = document.getElementById("x2").value;
+                    var y_axis = document.getElementById("y1").value;
+                    var y2_axis = document.getElementById("y2").value;
+                    var thumb_width = document.getElementById("w").value;
+                    var thumb_height = document.getElementById("h").value;
+                    $.ajax({
+                        type:"GET",
+                        url:"fanwires/ajax_image?t=ajax&img="+$("#photo").attr("src")+"&w="+thumb_width+"&h="+thumb_height+"&x="+x_axis+"&y="+y_axis+"&x2="+x2_axis+"&y2="+y2_axis,
+                        cache:false,
+                        success:function(response)
+                        {                        
+                            document.changePhoto.submit();
+                        }
+                    }); 
+        
+                }
+            </script>
+            
+            <div class="clear"></div>
+        </div>
+        <!--Right Section End-->
+        <?php $_template = new Smarty_Internal_Template('footerww.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <!-- include jquery library and remove above one -->
+        <script src="<?php echo @SITE_URL;?>
+views/js/vendor/jquery.ui.widget.js"></script>
+        <!-- The Templates plugin is included to render the upload/download listings -->
+        <script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
+        <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+        <script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
+        <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+        <script src="http://blueimp.github.com/JavaScript-Canvas-to-Blob/canvas-to-blob.min.js"></script>
+        <!-- Bootstrap JS and Bootstrap Image Gallery are not required, but included for the demo -->
+        <script src="http://blueimp.github.com/cdn/js/bootstrap.min.js"></script>
+        <script src="http://blueimp.github.com/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.min.js"></script>
+        <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+        <script src="<?php echo @SITE_URL;?>
+views/js/jquery.iframe-transport.js"></script>
+        <!-- The basic File Upload plugin -->
+        <script src="<?php echo @SITE_URL;?>
+views/js/jquery.fileupload.js"></script>
+        <!-- The File Upload file processing plugin -->
+        <script src="<?php echo @SITE_URL;?>
+views/js/jquery.fileupload-fp.js"></script>
+        <!-- The File Upload user interface plugin -->
+        <script src="<?php echo @SITE_URL;?>
+views/js/jquery.fileupload-ui.js"></script>
+        <!-- The localization script -->
+        <script src="<?php echo @SITE_URL;?>
+views/js/locale.js"></script>
+        <!-- The main application script -->
+        <script src="<?php echo @SITE_URL;?>
+views/js/main.js"></script>
+        <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
+        <!--[if gte IE 8]><script src="js/cors/jquery.xdr-transport.js"></script><![endif]-->

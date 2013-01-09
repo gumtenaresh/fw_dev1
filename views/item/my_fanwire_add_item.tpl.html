@@ -1,0 +1,45 @@
+{include file='header.tpl.html'}{include file='zoom.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="right_area">
+            <div class="connect_fans">
+                <h2>Add a new item</h2>
+                <br />
+
+                <!--                <div class="settings_page">
+                                    <div class="awards_active">
+                                        <ul>
+                                            <li class="active"><a href="#"><span><strong>Step 1. Content Type</strong></span></a></li>
+                                            <li><a href="#"><span><strong>Step 2. Add Information</strong></span></a></li>
+                                            <li><a href="#"><span><strong>Step 3. organize</strong></span></a></li>
+                                            <li><a href="#"><span><strong>step 4. preview and publish</strong></span></a></li>
+                                        </ul>
+
+                                    </div>
+                                </div>-->
+
+                <div class="heading2"><h2>what are you adding</h2></div>
+
+                <div class="clear"></div>
+
+                <div class="add_new_icon">
+                    <!--        put class in div tag to active it class="article active" -->
+                    <a href="{$smarty.const.SITE_URL}my_fanwire_new_article"  class="article ">Article</a>
+                    <a href="{$smarty.const.SITE_URL}addPhotos" class="photo">Photo</a>
+                    <a href="{$smarty.const.SITE_URL}my_fanwire_add_new_videos" class="videos">video</a>
+                    <!--        <a href="{$smarty.const.SITE_URL}my_fanwire_add_new_wire" class="personal">personal wire</a>-->
+
+                    <!--        <a href="#" class="link">Link/embed</a>-->
+
+
+                </div>
+                <div class="clear"></div>
+
+            </div>
+
+            <div class="clear"></div>
+        </div>
+
+        {include file='footer.tpl.html'}

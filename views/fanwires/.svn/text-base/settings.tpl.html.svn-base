@@ -1,0 +1,179 @@
+{include file='header.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+{literal}
+<script type="text/javascript">
+   
+    jQuery(function(){
+        jQuery("#current_password").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "Please enter a valid Password"
+        });
+        jQuery("#new_password").validate({
+            expression: "if (VAL.length > 5 && VAL) return true; else return false;",
+            message: "Please enter a valid Password"
+        });
+        jQuery("#verify_password").validate({
+            expression: "if ((VAL == jQuery('#new_password').val()) && VAL) return true; else return false;",
+            message: "Confirm password doesn't match the password"
+        });
+        jQuery('#change_password').validated(function(){
+            var current_password=document.getElementById('current_password').value;
+            var newpassword=document.getElementById('new_password').value;
+            $('#loaderpassword').show();
+            var dataStringd="current_password="+current_password+"&newpassword="+newpassword;
+            $.ajax({
+                type: "POST",
+                url:"{/literal}{$smarty.const.SITE_URL}{literal}changePassword",
+                data: dataStringd,
+                beforeSend: function(){
+                    $('#loaderpassword').show();
+                },
+                complete: function(){
+                    $('#loaderpassword').hide();
+                },
+                success: function(resa) {
+                    if(resa==1){
+                        $('.err').html('Password changed successfully.');
+                        $('#current_password').val('');
+                        $('#new_password').val('');
+                        $('#verify_password').val('');
+                        $('.err').fadeOut(3000);
+                        // Popup.hide('changepassword');
+                    }else if(resa==0){
+                        $('.err').html('Please check your password, might be wrong.');
+                        $('#current_password').val('');
+                        $('#new_password').val('');
+                        $('#verify_password').val('');
+                    }else{
+                        $('#errorpassword').html(resa);
+                    }
+                }
+            });          
+        }); 
+    });  
+</script>
+{/literal}
+<div class="login_popup" id="changepassword" style="display: none;">
+    <div class="login_popup1">
+        <div class="login_text">
+            <div class="login_textleft">
+                <p style="text-transform: uppercase;">Change your password</p>
+                <div class="err" id="errorpassword"></div>
+            </div>
+
+            <div id="loaderpassword" style="  left:34%;  position:absolute;  top:40%;  z-index:2;display: none;"><img src="{$smarty.const.SITE_URL}views/images/loader.gif"  /></div>
+            <div class="login_textright">
+                <div class="connect_close">
+                    <a  id="loginFaceBook" href="javascript:void(0);" onclick="Popup.hide('changepassword')"><img src="{$smarty.const.SITE_URL}views/images/_loginclose.png" height="12" width="8" alt="" /></a>
+                </div>
+            </div>  
+        </div>
+        <div class="clear"></div>
+        <div class="login_forms">
+            <form name="change_password" id ="change_password" method="POST" >
+                <div class="login_forms_left1">
+                    <div class="fealdpopup1">
+                        <label style="text-transform: uppercase;">Current Password:</label>
+                        <input type="password" name="current_password"  id="current_password"  />
+                    </div>
+                    <div class="clear"></div>
+                    <div class="fealdpopup1">
+                        <label style="text-transform: uppercase;">New Password:</label>
+                        <input type="password" name="new_password" id="new_password"  />
+                    </div>
+                    <div class="fealdpopup1">
+                        <label style="text-transform: uppercase;">Verify Password:</label>
+                        <input type="password" name="verify_password" id="verify_password"  />
+                    </div>
+                    <div class="clear"></div>
+
+                    <div class="clear">
+
+                    </div> 
+                    <p style="line-height:20px; padding:5px 0 0 0;"></p>
+                </div>
+                <div class="clear"></div>
+                <div class="changepassword">
+                    <input type="submit"  class="connect_loginlogout" value="SAVE CHANGES"/>
+                    <input type="button"  class="connect_loginlogout" value="CANCEL" onclick="cleanFeilds();"/></div>
+            </form>
+            <div style="width:50px; height:50px;background:url(views/images/1_fanwire.png) no-repeat 0 0; position:absolute; right:0; bottom:-8px; width:170px; height:159px; z-index: -1;"></div>
+        </div>
+    </div>        
+</div>
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="right_area">
+            <div class="connect_fans">
+                <div class="settings_page">
+                    <div class="awards_active">
+                        <ul>
+                            <li class="active"><a href="{$smarty.const.SITE_URL}settings"><span><strong>Profile
+                                            settings</strong>
+                                    </span>
+                                </a>
+                            </li>
+                            <!--                            <li><a href="{$smarty.const.SITE_URL}social"><span><strong> social
+                                                                        media</strong>
+                                                                </span>
+                                                            </a>
+                                                        </li>-->
+                            <!--                            <li><a href="{$smarty.const.SITE_URL}about"><span><strong> about me</strong>
+                                                                </span>
+                                                            </a>
+                                                        </li>-->
+                        </ul>
+                    </div>
+                </div>
+                {section name=na loop=$userdetails} {assign var=x value=$userdetails[na]}
+                <form action="" name="settings" method="post">
+                    <div class="profile_settings">
+                        <div class="messagesuccess" >
+                            <h3>{if $msg}{$msg} 
+                                <script>
+                                    $('.messagesuccess').fadeOut(6000);
+                                </script>
+                                {/if}
+                            </h3>
+                        </div>
+
+                        <div class="settings_details">
+                            <div class="name">First Name</div>
+                            <div class="field_details">
+                                <input name="fname" type="text" id='fname' class="textfield" value='{$x.fname}'/> 
+
+                            </div>
+                        </div>
+                        <div class="settings_details">
+                            <div class="name">Last Name</div>
+                            <div class="field_details">
+                                <input name="lname" type="text" id='lname' class="textfield" value='{$x.lname}'/> 
+                            </div>
+                        </div>
+                        <div class="settings_details">
+                            <div class="name">Email</div>
+                            <div class="field_details">
+                                <input name="email" id='email' type="text" class="textfield" value='{$x.email}' /> 
+
+                            </div>
+                        </div>
+                        <div class="settings_details">
+                            <div class="name">&nbsp;</div>
+                            <div > <input name="privacy3" type="checkbox" checked='checked' /> Let others find me by email address </div> 
+                        </div>
+                        <div class="settings_details">
+                            Password <a  href="javascript:void(0);" onclick="Popup.showModal('changepassword','','fixed','','')" style="margin-left:11%;">Change</a> 
+
+                        </div>
+
+                        <input type="submit" name="submit" value="save changes" class="connect_btn" style="margin: 0px;" />   
+                    </div>
+                </form>
+                {/section}
+            </div>
+            <a href="javascript:void(0);" onclick="Popup.showModal('deactivateaccount')" >Deactivate Account</a>
+            <div class="clear"></div>
+        </div>
+        {include file='footer.tpl.html'}
+

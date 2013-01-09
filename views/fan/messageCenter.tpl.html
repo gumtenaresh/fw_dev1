@@ -1,0 +1,194 @@
+{include file='header.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+{include file='zoom.tpl.html'}
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div class="clear"></div>
+        <div class="firebox">
+
+            <h2>fanbox</h2>
+
+            <div class="settings_page" style="margin:0 0 20px 0;">
+                <div class="awards_active">
+
+                    <ul>
+                        <li {if $message eq message} class="active" {/if}><a href="{$smarty.const.SITE_URL}messageCenter"><span><strong>messages</strong></span></a></li>
+                        <!--                             <li {*if $message eq notifications*}class="active"{*/if*}><a href="{*$smarty.const.SITE_URL*}notifications"><span><strong>Notifications</strong></span></a></li> -->
+                        <li {if $message eq requests}class="active"{/if}><a href="{$smarty.const.SITE_URL}requests"><span><strong>Requests</strong></span></a></li>
+                    </ul>
+                </div>
+                <div class="firebug_inbox">
+
+                    <div class='selectBox'>
+                        <span class='selected'></span>
+                        <span class='selectArrow'><img src="{$smarty.const.SITE_URL}views/images/0_down-arrow.png" height="25" width="18" alt="" /></span>
+                        <div class="selectOptions" >
+                            <span class="selectOption" value="Option 1">Inbox</span>
+                            <span class="selectOption" value="Option 2">Option 2</span>
+                            <span class="selectOption" value="Option 3">Option 3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="firebug_box">
+                <div class="firebug_left">
+                    {section name="id" loop= $list}
+
+
+
+                    <div class="fire_element" id="message{$list[id].id}">
+                        <div class="fire_element_content active">
+                            <span style="height:84px; width:86px;">  
+                                <a href="{$smarty.const.SITE_URL}profile?uid={$list[id].sender_id}">
+                                    {if $list[id].image eq ''}
+                                    <img src="{$smarty.const.SITE_URL}views/images/private_normal.png" width="84" height="86" />
+                                    {else}
+                                    <img src="{$smarty.const.PROFILE_IMAGES_VIEW_PATH}{$list[id].image}" width="84" height="86" />  
+                                    {/if}
+                                </a>
+                            </span>
+                            <span class="fire_text">{$list[id].sender}<br />
+                                <p>
+                                    <a href="{$smarty.const.SITE_URL}fan/conversations?sender_id={$list[id].sender_id}" onclick="msgread('{$list[id].sender_id}');"  {if $list[id].status eq 0} style="color:#000;font-weight:bold;cursor:pointer;" {/if} style="cursor:pointer;color:#000;">
+                                       {$list[id].message}
+                                </a>
+                            </p>
+                        </span>
+                    </div>
+                    <div class="fire_element_close"><a href="#"><img src="{$smarty.const.SITE_URL}views/images/0_close.png" height="13" width="13" alt="" /></a></div>
+
+                </div>
+                {/section}
+                <div class="fire_element">
+                    <div class="fire_element_content">
+                        <span style="height:84px; width:86px;">  
+
+                            <img src="{$smarty.const.SITE_URL}views/images/logodef.png" height="86"  width="84"/>
+
+                        </span>
+
+                        <div> <input type="text" class="fan_inbox"/></div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="firebug_right">
+                <div class="firebug_content">
+                    <div class="firebug_msg">
+                        <div class="firebug_img"><img src="{$smarty.const.SITE_URL}views/images/01_close.png" height="36" width="36" alt="" /></div>
+                        <div class="firebug_msgcount">
+                            <div class="firebug_msg_hedd">
+                                <h2>Stan Farrow <h2><h3>8 hours ago </h3>
+                                        <div class="clear"></div>
+                                        </div>
+                                        <div class="firebug_text">
+                                            <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Lorem ipsum dolor sit amet, consectetuer adipiscing ; melit. Phasellus hendreritLorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendreritPellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id</span>\
+                                        </div>
+
+                                        </div>
+                                        </div>
+
+                                        <div class="firebug_msg">
+                                            <div class="firebug_img"><img src="{$smarty.const.SITE_URL}views/images/01_close.png" height="36" width="36" alt="" /></div>
+                                            <div class="firebug_msgcount">
+                                                <div class="firebug_msg_hedd">
+                                                    <h2>Stan Farrow <h2><h3>8 hours ago </h3>
+                                                            <div class="clear"></div>
+                                                            </div>
+                                                            <div class="firebug_text"><span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Lorem ipsum dolor sit amet, consectetuer adipiscing ; melit. Phasellus hendreritLorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendreritPellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id</span></div>
+
+                                                            </div>
+                                                            </div>
+                                                            <div class="firebug_msg">
+                                                                <div class="firebug_img"><img src="{$smarty.const.SITE_URL}views/images/01_close.png" height="36" width="36" alt="" /></div>
+                                                                <div class="firebug_msgcount">
+                                                                    <div class="firebug_msg_hedd">
+                                                                        <h2>Stan Farrow <h2><h3>8 hours ago </h3>
+                                                                                <div class="clear"></div>
+                                                                                </div>
+                                                                                <div class="firebug_text"><span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Lorem ipsum dolor sit amet, consectetuer adipiscing ; melit. Phasellus hendreritLorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendreritPellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id</span></div>
+
+                                                                                </div>
+                                                                                </div>
+
+
+
+                                                                                <div class="firebug_msg">
+                                                                                    <div class="firebug_img"><img src="{$smarty.const.SITE_URL}views/images/01_close.png" height="36" width="36" alt="" /></div>
+                                                                                    <div class="firebug_msgcount">
+                                                                                        <div class="firebug_msg_hedd">
+                                                                                            <h2>Stan Farrow <h2><h3>8 hours ago </h3>
+                                                                                                    <div class="clear"></div>
+                                                                                                    </div>
+                                                                                                    <div class="firebug_text"><span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Lorem ipsum dolor sit amet, consectetuer adipiscing ; melit. Phasellus hendreritLorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendreritPellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id</span></div>
+
+                                                                                                    </div>
+                                                                                                    </div>
+
+
+
+
+
+                                                                                                    <div class="firebug_msg">
+                                                                                                        <div class="firebug_img"><img src="{$smarty.const.SITE_URL}views/images/01_close.png" height="36" width="36" alt="" /></div>
+                                                                                                        <div class="firebug_msgcount">
+
+                                                                                                            <textarea name="styled-textarea" id="styled" onfocus="this.value=''; setbg('#e5fff3');" onblur="setbg('white')">Say something</textarea>
+                                                                                                            <div class="firebug_msg_hedd" style="margin:10px 0 0 0">
+                                                                                                                <div class="save_btn">save</div><div style="float:right; margin:5px 10px 0 0"><a href="$"><img src="{$smarty.const.SITE_URL}views/images/0_clip.png" height="27" width="27" alt="" /></a></div>
+                                                                                                            </div>
+
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    </div>
+
+                                                                                                    <div class="clear"></div>
+                                                                                                    </div>
+
+
+
+                                                                                                   
+
+                                                                                                    </div>
+
+                                                                                                    </div>
+
+
+                                                                                                    <div class="clear"></div>
+
+
+                                                                                                    {include file='footer.tpl.html'}
+                                                                                                    <script type='text/javascript'> 
+                                                                                                        $(document).ready(function() {
+                                                                                                            enableSelectBoxes();
+                                                                                                        });
+			
+                                                                                                        function enableSelectBoxes(){
+                                                                                                            $('div.selectBox').each(function(){
+                                                                                                                $(this).children('span.selected').html($(this).children('div.selectOptions').children('span.selectOption:first').html());
+                                                                                                                $(this).attr('value',$(this).children('div.selectOptions').children('span.selectOption:first').attr('value'));
+					
+                                                                                                                $(this).children('span.selected,span.selectArrow').click(function(){
+                                                                                                                    if($(this).parent().children('div.selectOptions').css('display') == 'none'){
+                                                                                                                        $(this).parent().children('div.selectOptions').css('display','block');
+                                                                                                                    }
+                                                                                                                    else
+                                                                                                                    {
+                                                                                                                        $(this).parent().children('div.selectOptions').css('display','none');
+                                                                                                                    }
+                                                                                                                });
+					
+                                                                                                                $(this).find('span.selectOption').click(function(){
+                                                                                                                    $(this).parent().css('display','none');
+                                                                                                                    $(this).closest('div.selectBox').attr('value',$(this).attr('value'));
+                                                                                                                    $(this).parent().siblings('span.selected').html($(this).html());
+                                                                                                                });
+                                                                                                            });				
+                                                                                                        } 
+                                                                                                    </script>
+
+

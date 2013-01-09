@@ -1,0 +1,176 @@
+{include file='header.tpl.html'}
+ 
+           <div class="kory"> 
+    {if $profile_image}
+    
+    <a href="{$smarty.const.SITE_URL}changeProfilePic"><img src="{$profile_image}" width="82" height="82" /></a> <a href="#">{$smarty.session.name}</a> 
+    {else}
+    <a href="{$smarty.const.SITE_URL}changeProfilePic"><img src="{$smarty.const.SITE_URL}views/images/private_normal.png" width="82" height="82" /></a> <a href="#">{$smarty.session.name}</a> 
+    {/if}
+</div>
+
+<div class="logout"><a href="{$smarty.const.SITE_URL}logout">logout</a></div>
+ 
+
+            <div class="icon_set">    	
+                <ul>        
+                    <li><a href="#" class="addicon"></a></li>
+                    <li><a href="#" class="camicon"></a></li>
+                    <li><a href="my_fans.html" class="profileicon"></a></li>
+                    <li><a href="message_center.html" class="msgicon"></a></li>
+                    <li ><a href="settings.html" class="settingicon"></a></li>
+                    <div class="clear"></div>
+                </ul>            
+            </div>
+
+            <div class="searchbox">
+                <input name="" type="text" class="search_field" />
+                <input name="" type="button" class="go" />
+            </div>
+            <div class="left_menusec">
+                <ul>
+                    <li><a href="#" >My FANWIre</a></li>
+                    <li><a href="#">We recommend</a></li>
+                    <li><a href="#">fan network</a></li>
+                    <li><a href="#">My collection</a></li>
+
+                </ul>
+            </div>
+            <div class="total_list">
+                <div class="fans">
+                    <h2>Fan wires</h2>
+                    <img src="{$smarty.const.SITE_URL}views/images/add.png" width="13" height="13" hspace="5" vspace="3" align="right" /> </div>
+                <div class="fanslist">
+                    <h2>News</h2>
+                    <img src="{$smarty.const.SITE_URL}views/images/star.png" width="12" height="12" /><span>(145) </span>
+                    <div class="fanslist">
+                        <h2>Britney Spears</h2>
+                        <span>(111) </span></div>
+                    <div class="fanslist">
+                        <h2>Justin Bieber</h2>
+                        <span>(98) </span></div>
+                    <div class="fanslist">
+                        <h2>My Social Media</h2>
+                        <span>(76) </span></div>
+                    <div class="fanslist">
+                        <h2>Tom Cruise</h2>
+                        <span>(14) </span></div>
+                    <div class="fanslist">
+                        <h2>NY Giants</h2>
+                        <span>(3) </span></div>
+                </div>
+                <div class="viewall">
+                    <p style="background:#ededed; display:inline; padding:0 5px; color:#02a0bf;">View all (120)</p>
+                </div>
+                <div class="fans">
+                    <h2>Fan favorites</h2>
+                </div>
+                <div class="fanslist">
+                    <h2>Tool</h2>
+                </div>
+                <div class="fanslist">
+                    <h2>Food Lovers</h2>
+                </div>
+                <div class="fanslist">
+                    <h2>Vegan Cuisine</h2>
+                </div>
+                <div class="fanslist">
+                    <h2>Sports News</h2>
+                </div>
+            </div>
+            <div class="viewall">
+                <p style="background:#ededed; display:inline; padding:0 5px; color:#02a0bf;">View all</p>
+            </div>
+        </div>
+
+
+        <!--Left Section End--> 
+
+        <!--Right Section-->
+        <div class="right_container">
+            <div class="more_posts"><a href="#">More Posts</a></div>
+            <div id="inner_rightsection">
+
+                <div id="right_area">
+                    <div class="zoom"><img src="{$smarty.const.SITE_URL}views/images/zoom_icon.png" width="171" height="24" /></div>
+                    <div class="filters">&nbsp;<br/>
+<!--                        <h2>filter by:</h2>
+                        <img src="{$smarty.const.SITE_URL}views/images/fcb.png" width="25" height="21" /> <img src="{$smarty.const.SITE_URL}views/images/twt.png" width="25" height="21" /> <img src="{$smarty.const.SITE_URL}views/images/yu.png" width="25" height="21" /> <img src="{$smarty.const.SITE_URL}views/images/cam1.png" width="25" height="21" /> <img src="{$smarty.const.SITE_URL}views/images/vediio.png" width="25" height="21" /> <img src="{$smarty.const.SITE_URL}views/images/note.png" width="25" height="21" /> <img src="{$smarty.const.SITE_URL}views/images/music.png" width="25" height="21" /> | <a href="#">popularity</a>  |  <a href="#">recent</a>  |  <a href="#">a-z</a>  |  <a href="#">z-a</a></div>-->
+                    <div class="connect_fans">
+
+                        <h2>media manager</h2>
+                        <br />
+
+                        <div class="settings_page">
+                            <div class="awards_active">
+                                <ul>
+                                    <li class="active"><a href="#"><span><strong>My photos</strong></span></a></li>
+                                    <li><a href="#"><span><strong>My videos</strong></span></a></li>
+                                    <li><a href="#"><span><strong>my articles</strong></span></a></li>
+                                    <li><a href="#"><span><strong>my links</strong></span></a></li>
+                                </ul>
+
+                            </div></div>
+
+                        <div class="photo_list2">
+                            <div class="photos_list">
+                                <img src="{$smarty.const.SITE_URL}views/images/family.jpg" width="246" height="151" />
+                                <div class="data"><img src="{$smarty.const.SITE_URL}views/images/minus.png" width="19" height="19" /> Family picnic 2012 <br />
+                                    <span>21 Photos</span></div></div>
+                            <div class="photo_post">
+                                <div class="message">(3)</div>
+                                <div class="blue">(11)</div>
+                                <div class="red">(19)</div>
+                            </div>
+                        </div>
+
+                        <div class="photo_list2">
+                            <div class="photos_list">
+                                <img src="{$smarty.const.SITE_URL}views/images/family.jpg" width="246" height="151" />
+                                <div class="data"><img src="{$smarty.const.SITE_URL}views/images/minus.png" width="19" height="19" /> Family picnic 2012 <br />
+                                    <span>21 Photos</span></div></div>
+                            <div class="photo_post">
+                                <div class="message">(3)</div>
+                                <div class="blue">(11)</div>
+                                <div class="red">(19)</div>
+                            </div>
+                        </div>
+
+
+                        <div class="photo_list2">
+                            <div class="photos_list">
+                                <img src="{$smarty.const.SITE_URL}views/images/family.jpg" width="246" height="151" />
+                                <div class="data"><img src="{$smarty.const.SITE_URL}views/images/minus.png" width="19" height="19" /> Family picnic 2012 <br />
+                                    <span>21 Photos</span></div></div>
+                            <div class="photo_post">
+                                <div class="message">(3)</div>
+                                <div class="blue">(11)</div>
+                                <div class="red">(19)</div>
+                            </div>
+                        </div>
+
+                        <div class="photo_list2">
+                            <div class="photos_list">
+                                <img src="{$smarty.const.SITE_URL}views/images/family.jpg" width="246" height="151" />
+                                <div class="data"><img src="{$smarty.const.SITE_URL}views/images/minus.png" width="19" height="19" /> Family picnic 2012 <br />
+                                    <span>21 Photos</span></div></div>
+                            <div class="photo_post">
+                                <div class="message">(3)</div>
+                                <div class="blue">(11)</div>
+                                <div class="red">(19)</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="clear"></div> 
+
+                    <div class="btm_line">
+                        <div class="showmore"><a href="#">show more</a></div>
+                    </div>
+
+
+                </div>
+
+
+           {include file='footer.tpl.html'}

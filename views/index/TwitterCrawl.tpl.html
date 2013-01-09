@@ -1,0 +1,142 @@
+{include file="header.tpl.html"}
+
+<style type="text/css">
+    .collect_photo{
+        height: 180px!important;
+    }
+    table{
+        width:300px;;
+        font-size:12px ;
+    }h6 {
+        display: block;
+        font-size: 0.67em;
+        -webkit-margin-before: 2.33em;
+        -webkit-margin-after: 2.33em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        font-weight: bold;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 13px;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }.-cx-PRIVATE-fbTimelineUnitActor__header {
+        font-size: 11px;
+        font-weight: normal;
+        margin-right: 15px;
+    }
+    .fbTimelineCapsule .timelineUnitContainer {
+        background: white;
+        border-left: 1px solid #C4CDE0;
+        border-right: 1px solid #C4CDE0;
+        padding: 13px 15px;
+    }.timelineUnitContainer {
+        position: relative;
+    }.fbTimelineCapsule {
+        list-style: none;
+    }body {
+        font-size: 11px;
+        font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+        color: #333;
+        line-height: 1.28;
+        text-align: left;
+        direction: ltr;
+    }
+    .-cx-PRIVATE-fbTimelineUnitActor__root {
+        border-bottom: 1px solid #E5E5E5;
+    }.-cx-PRIVATE-fbTimelineUnitActor__root + .aboveUnitContent {
+        margin-top: 15px;
+    }.fbTimelineUFI {
+        background: white;
+        margin-bottom: 0 !important;
+        margin-top: -12px;
+        position: relative;
+        top: 12px;
+    }.timelineUnitContainer .uiCommentContainer {
+        margin-bottom: -12px;
+        margin-left: -12px;
+        padding-top: 3px;
+        width: 403px;
+    }
+    .fbTimelineUnit {
+        display: block;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+        padding: 10px;
+    }
+    label{
+        padding: 2px;
+        width: 100px!important;
+    }
+    iframe{
+        overflow: hidden;
+    }
+    body, label, input, textarea, select, button,p {
+        font-family: "Helvetica Neue",Arial,sans-serif;
+        font-size: 14px;
+        line-height: 18px;
+        color: #333;
+    }
+    .avatar {
+        width: 48px;
+        height: 48px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+    .content{
+        margin: 10px 0;
+        border: 1px solid #999;
+    }
+
+</style>
+</div>
+
+</div>
+<div style="width: 100%;float: left;">
+<!--    <form action="" method="post">
+        <input type="text" name="fanwirename" value="" />
+        <input type="submit" value="Submit"/>
+    </form>-->
+    {if $user neq null}
+    </br></br><b>{$user} Twitter Results</b></br></br></br>
+    {/if}
+    {if  $twitterRes|@count gt 0} 
+    {foreach from=$twitterRes key=myId item=i}
+    <!--Header with image-->
+    <div class="content">
+        <div class="stream-item-header">
+            <small class="time">
+                <img class="avatar js-action-profile-avatar" src="{$i->user->profile_image_url}" alt="Lady Gaga">
+                <strong class="fullname js-action-profile-name show-popup-with-id">{$i->user->name}</strong>
+            </small>
+        </div>
+        <p class="js-tweet-text">
+            {$i->text}</p>
+        {$i->created_at|date_format:"%A, %B %e, %Y %l:%M:%S"}
+    </div>
+    
+    
+    
+<!--<div class="collect_photo">
+    <div class="collect_logo"><img src="{$i->user->profile_image_url}" width="56" height="56" /> <h3>{$user} <br />
+     <span>via  </span></h3><span class="twt"><img src="{$smarty.const.SITE_URL}views/images/twt.png" width="25" height="21" align="left" />twitter</span>
+</div>
+
+    <div class="data">
+        <span> {$i->text}</span></div>
+    <div class="photo_post">
+        <div class="message">(3)</div>
+        <div class="blue">(11)</div>
+        <div class="red">(19)</div>
+    </div>
+
+</div>-->
+    {/foreach} 
+{else}
+<span style="font-size: 15px;">
+Sorry No results Found. <br/>
+Please check <b>{$user}</b> Twitter Id </span>
+{/if}</div>

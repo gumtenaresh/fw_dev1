@@ -1,0 +1,51 @@
+#messages {
+    background: none repeat scroll 0 0 #EBEBEB;
+    border-bottom: 1px dashed #02A0BF;
+    border-top: 1px dashed #02A0BF;
+    height: 127px;
+    left: 6px;
+    margin: 30px 27px 10px;
+    overflow: hidden;
+    padding: 0 0 81px;
+    position: relative;
+    width: 96%;
+   
+}
+
+
+
+
+
+
+#messages .items {
+    width: 20000em;
+    position: absolute;
+    height: 209px;
+    	clear: both;
+}
+
+#messages img {
+     margin: 30px 0 10px 0;
+
+    float:left;
+/*    opacity: 0.6;
+    margin:15px 5px 15px 15px;
+    background-color:#fff;
+    cursor:pointer;
+    width:150px;
+    height:113px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;*/
+}
+
+#messages .active {
+    opacity:1;
+    border:2px solid #000;
+    z-index:9999;
+    position:relative;
+}
+#messages ul li{
+    float: left;
+    height:127px;
+    width: 156px;
+}

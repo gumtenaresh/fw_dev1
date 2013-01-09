@@ -1,0 +1,173 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/purpletalk_fanwire/!svn/ver/881/fanwire/libs/adodb
+END
+tohtml.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tohtml.inc.php
+END
+adodb-memcache.lib.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-memcache.lib.inc.php
+END
+adodb-exceptions.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-exceptions.inc.php
+END
+xmlschema03.dtd
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/xmlschema03.dtd
+END
+adodb-pear.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-pear.inc.php
+END
+license.txt
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/license.txt
+END
+adodb.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/purpletalk_fanwire/!svn/ver/881/fanwire/libs/adodb/adodb.inc.php
+END
+adodb-errorpear.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-errorpear.inc.php
+END
+adodb-perf.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-perf.inc.php
+END
+pivottable.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/pivottable.inc.php
+END
+toexport.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/toexport.inc.php
+END
+adodb-time.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-time.inc.php
+END
+adodb-iterator.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-iterator.inc.php
+END
+server.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/server.php
+END
+adodb-xmlschema.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-xmlschema.inc.php
+END
+adodb-active-record.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-active-record.inc.php
+END
+readme.txt
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/readme.txt
+END
+adodb-xmlschema03.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-xmlschema03.inc.php
+END
+rsfilter.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/rsfilter.inc.php
+END
+adodb-php4.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-php4.inc.php
+END
+adodb-pager.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-pager.inc.php
+END
+adodb-csvlib.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-csvlib.inc.php
+END
+adodb-lib.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-lib.inc.php
+END
+adodb-datadict.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-datadict.inc.php
+END
+adodb-active-recordx.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-active-recordx.inc.php
+END
+xmlschema.dtd
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/xmlschema.dtd
+END
+adodb-errorhandler.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-errorhandler.inc.php
+END
+adodb-error.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/adodb-error.inc.php
+END

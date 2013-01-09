@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Fanwire</title>
+<link href="css/fanwire-css.css" rel="stylesheet" type="text/css">
+
+ <script src="jquery/place_holder/jquery.js"></script>
+    <script src="jquery/place_holder/modernizr.js"></script>
+    <script type="text/javascript">
+		
+		$(document).ready(function(){
+
+ if(!Modernizr.input.placeholder){
+
+	$('[placeholder]').focus(function() {
+	  var input = $(this);
+	  if (input.val() == input.attr('placeholder')) {
+		input.val('');
+		input.removeClass('placeholder');
+	  }
+	}).blur(function() {
+	  var input = $(this);
+	  if (input.val() == '' || input.val() == input.attr('placeholder')) {
+		input.addClass('placeholder');
+		input.val(input.attr('placeholder'));
+	  }
+	}).blur();
+	$('[placeholder]').parents('form').submit(function() {
+	  $(this).find('[placeholder]').each(function() {
+		var input = $(this);
+		if (input.val() == input.attr('placeholder')) {
+		  input.val('');
+		}
+	  })
+	});
+
+}
+
+});
+		
+		
+	</script>
+
+
+</head>
+
+<body>
+<div  class="wrapper">
+<div class="left_section">
+  <div class="logo"><a href="#"><img src="../../views/images/logo.png" height="120" width="109" alt=""></a></div>
+  <div class="guest_user"><a href="login.html">Guest User</a></div>
+  
+  <div class="search">
+	<div class="search_input">
+    	<input type="text" class="search_text" placeholder="Search">
+      <a href="#" class="search_icon"></a>
+    </div>
+      
+  </div>
+  
+  <div class="left_menusec">
+      <ul>
+        <li><a href="sign up.html">1. Connect <span style=" float:right; padding:5px 14px 0 0;"><img src="../../views/images/RIGHT-MARK.png" height="16" width="15" alt="" ></span></a></li>
+        <li><a href="sign up page 2.html">2. Add Fanwires <span style=" float:right; padding:5px 14px 0 0;"><img src="../../views/images/RIGHT-MARK.png" height="16" width="15" alt="" ></span></a></li>
+        <li><a href="sign up page 3.html" class="active">3. Profilephoto</a></li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+   <div class="popular"></div>
+
+    
+</div>
+
+<div class="right_menusec">
+
+	<div class="login_section"><div class="login"><a href="#" class="login_check">Login</a></div></div>
+    <div class="login_menu">
+    	<ul>
+        	<li><a href="#">Customize</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#" style="border:none;">Help</a></li>
+        </ul>
+    </div>
+    	<div class="clear"></div>
+    
+    
+    
+
+</div>
+
+
+<div class="main_section1">
+
+	<div class="fanwire_contact">
+    		<div class="contact_text">
+            	<p>Add A Profile Photo</p>
+                <span>This is your last step before you get full access to your FanWire account.</span>
+            </div>
+            
+            
+            <div class="contacts">
+            	<div class="upload">
+                	<div class="upld_img">
+                    	<p>Preview</p>
+                        <div class="img_display"> <img src="../../views/images/me.png" height="183" width="181" alt=""></div>
+                      	 
+                    </div>
+                    
+                    <div class="upld_content">
+                    	<div class="file_browse">
+                            <span class="file-wrapper">
+                            <input type="file" name="photo" id="photo" />
+                            <span class="button">Upload an Image</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+            	
+            </div>
+            
+            <div class="clear"></div>
+      <div class="cotacts_bottom">
+            	<a href="#" class="create_pswrd1">Back</a>
+                
+                <div class="cntcts_btn_right">
+                	<input type="button" value="Continue"  class="Continue">
+                    <div class="clear"></div>
+                  <a href="#">Skip this step</a>
+                </div>
+            </div>
+            
+            
+    </div>
+</div>
+
+</div>
+</body>
+</html>

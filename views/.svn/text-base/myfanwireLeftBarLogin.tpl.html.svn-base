@@ -1,0 +1,50 @@
+ 
+{literal}
+<script type="text/javascript">
+ 
+    function myOnCompleteLogin()
+    {
+        document.fan_login.submit();
+    }
+ 
+    $(document).ready(function() {
+        $("#fan_login").RSV({
+            onCompleteHandler: myOnCompleteLogin,
+            displayType: "display-html",
+            errorFieldClass: "errorFieldDemo2",
+            errorTargetElementId:"rsvErrorsLogin",
+            rules: [
+                "required,fan_email,Please enter your email address.",
+                "valid_email,fan_email,Please enter a valid email address.",
+                "required,fan_password,Please enter a password.",
+            ]
+        });
+    });
+    
+</script>
+
+{/literal}
+
+<div id="rsvErrorsLogin" ></div>
+<form name="fan_login" id ="fan_login" method="POST" action="{$smarty.const.SITE_URL}index/index">
+
+    <input type="hidden" name="fa_login" value="login"/>
+    <div class="loginsection"><div class="err">{$ermsg}</div>
+        <div class="mailsec">
+            <div class="maildetail">Email
+                <input name="fan_email" type="text" class="textfield" placeholder='Email Address'/></div>
+        </div>
+        <div class="passwordsec">
+            <div class="maildetail">Password
+                <input name="fan_password" type="password" class="textfield"placeholder='Password' /></div>
+        </div>
+
+        <div class="checkdetail"> <input name="fan_checked" type="checkbox" value="1" /> Keep me signed in<br />
+
+            <div class="forgot"><a href="{$smarty.const.SITE_URL}forgotpassword">Forgot password?</a></div>
+            <input name="submit" type="submit" class="btn" value="LOGIN" /></div>
+    </div>
+</form>
+</div>
+
+<!--Left Section End-->

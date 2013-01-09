@@ -1,0 +1,465 @@
+{include file="{$smarty.const.ADMIN}/header.tpl.html"}
+{literal}
+<style type="text/css">
+    legend{ font-weight: bold;}
+    body{ color: black!important;}
+    input[type="text"],input[type="url"]{ font-size: 11px; width: 200px; height: 18px;}
+    .hint{ color: #666;
+           font-size: 10px;}
+    .searchlist{
+        border: 1px #000;
+    }
+    h6 {
+        display: block;
+        font-size: 0.67em;
+        -webkit-margin-before: 2.33em;
+        -webkit-margin-after: 2.33em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        font-weight: bold;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 13px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+    }.-cx-PRIVATE-fbTimelineUnitActor__header {
+        font-size: 11px;
+        font-weight: normal;
+        margin-right: 15px;
+    }
+    .fbTimelineCapsule .timelineUnitContainer {
+        background: white;
+        border-left: 1px solid #C4CDE0;
+        border-right: 1px solid #C4CDE0;
+        padding: 13px 15px;
+    }.timelineUnitContainer {
+        position: relative;
+    }.fbTimelineCapsule {
+        list-style: none;
+    }body {
+        font-size: 13px;
+        font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+        color: #000;
+        line-height: 1.28;
+        text-align: left;
+        direction: ltr;
+    }
+    .-cx-PRIVATE-fbTimelineUnitActor__root {
+        border-bottom: 1px solid #E5E5E5;
+    }.-cx-PRIVATE-fbTimelineUnitActor__root + .aboveUnitContent {
+        margin-top: 15px;
+    }.fbTimelineUFI {
+        background: white;
+        margin-bottom: 0 !important;
+        margin-top: -12px;
+        position: relative;
+        top: 12px;
+    }.timelineUnitContainer .uiCommentContainer {
+        margin-bottom: -12px;
+        margin-left: -12px;
+        padding-top: 3px;
+        width: 403px;
+    }
+    .fbTimelineUnit {
+        display: block;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+    }
+    td,tr,table{ margin: 0px!Important;padding: 0px!important;}
+    label{
+        width: 250px!important;
+        margin:0px!important;
+        font-size: 12px;
+        color: black!important;
+        padding: 0px!important;
+        vertical-align: middle;
+
+    }
+    .content{
+        margin: 10px 0;
+        border: 1px solid #999;
+    }
+    .fbTimelineUnit {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+    }
+    input[type="submit"],input[type="button"]{
+        padding: 5px;
+        
+    }
+    .errormsg{
+        font-weight: bold;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+</style>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function (){
+        $("#DeleteWWWArticle").submit(function(e){
+            if (!confirm("should i really Delete?"))
+            {
+                e.preventDefault();
+                return;
+            } 
+        });
+    });
+    function SubmitforTest(){
+        $("#testResult").html("<img src='{/literal}{$smarty.const.SITE_URL}{literal}/views/images/103.gif' />")
+        var d = $("#crawlForm").serializeArray();
+        d.push({ name: "submit", value: "Test" });
+       
+        //alert($('#crawlForm').attr('action')) 
+        $.ajax({
+            type:"POST",
+            url:$('#crawlForm').attr('action'),
+            data:d,
+            success:function(data){
+                //alert(data)
+                $("#testResult").html(data);
+            
+            }
+        });
+        
+    }
+//    function SubmitforDelete(){
+//        if(confirm("Are you sure you want to delete?")){
+//            alert('in')
+//            $("#DeleteWWWArticle").submit();
+//            return true;
+//        }else{
+//            return false;
+//        }
+//        
+//    }
+    function New(){
+        
+        $("#NewForm").show();
+        $('#crawlForm input[type="text"]').val('');
+        $('#crawlForm input[type="url"]').val('');
+        $("#ManageDIv").hide();
+    }
+    function Manage(){
+        $("#NewForm").hide();
+        $("#ManageDIv").show();
+    }
+</script> {/literal}
+<div  class="fbTimelineUnit" style="padding: 10px">
+    <br/>
+
+    <input type="button" name="Addnew" onclick=New() value="Add New"/>
+    <input type="button" name="Manage" onclick=Manage() value="Manage"/>
+    <div id="NewForm" {if $act eq 'edit'}  style="display: block;" {else}style="display: none;"{/if} > 
+         <div style="float: left; width: 40%; padding-left: 20px;">   
+            <form id="crawlForm" method="post" action="">
+                <table width="80%" >
+
+                    <tr><td><br>
+                            <h3>Add Website Form</h3><br>
+                        </td>
+                        <td>
+
+                        </td></tr>
+                    <tr><td>
+                            <label class="name">Website URL </label>
+                        </td>
+                        <td>
+                            <input type="url" id="websitename" name="websitename" {if $editResult.source neq ""}value="{$editResult.source}{/if}" placeholder="http://www.website.com" required />
+                        </td></tr>
+                    <tr><td>
+                            <label class="name">Search Url </label>
+                        </td>
+                        <td>
+                            <input id="websitsearchurl" type="text" {if $editResult.search_url neq ""}value="{$editResult.search_url}{/if}"   name="search_url" placeholder="replace search keyword with ###" required/><br/>
+                            <span class="hint"> ex: http://www.website.com/search/?q=###</span>
+                        </td></tr>
+                    <tr><td>
+                            <label class="name">Select Fanwire for test </label>
+                        </td>
+                        <td>
+                                <select name="fanwirename" id="fanwireName" class="showdiv">
+                        <option value="">------select-----</option>
+                        {foreach from=$fanwires key=myId item=i}
+             <option value="{$i.url}" title="{$i.id}" {if $selectedfanwire eq $i.url|lower} selected="selected" {/if}>{$i.name}</option>
+                        {/foreach}
+                    </select>
+                        </td>
+                    </tr>
+                    <tr><td>
+                            <label class="name">Input Fanwire seperator symbol</label>
+                        </td>
+                        <td>
+                            <input type="text" {if $editResult.search_seperator neq ""}value="{$editResult.search_seperator}{/if}"  name="search_seperator" placeholder="?q=lady+gaga" /><br/>
+                            <span class="hint"> ex: +/-/_ or any</span>
+                        </td></tr>
+                    <tr><td colspan="2">
+                            <fieldset>
+                                <legend>First Level Crawl</legend>   <table width="100%"><tr><td>
+                                            <label class="name">Search results Repeat element </label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.search_list_repeat_element neq ""}value="{$editResult.search_list_repeat_element}{/if}" name="search_list_repeat_element" placeholder="div/p" required/><br/>
+                                            <span class="hint"> ex: div (or) p (or) li (or) ul etc..</span>
+                                        </td></tr>
+                                    <tr><td>
+                                            <label class="name">Search results Repeat element Class </label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.searchlist_repeat_element_class neq ""}value="{$editResult.searchlist_repeat_element_class}{/if}"  name="searchlist_repeat_element_class" placeholder="classname of searchresult list content" /><br/>
+                                            <span class="hint"> ex: tout for http://time.com</span>
+                                        </td></tr>
+                                    <tr><td>
+                                            <label class="name">Url tag for inner page crawl</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.searchlist_title_class neq ""} value="{$editResult.searchlist_title_class}" {/if}   name="searchlist_title_class" placeholder="h3 a/h2 a" /><br/>
+                                            <span class="hint"> ex: h3 a/h2 a</span>
+                                        </td></tr>
+                                    <!--tr><td>
+                                          <label class="name">Searchlist title headtag</label>
+                                      </td>
+                                      <td>
+                                          <input type="text" {if $editResult.searchlist_title_headtag neq ""}value={$editResult.searchlist_title_headtag}{/if}   name="searchlist_title_headtag" placeholder="h3 a/h2 a" /><br/>
+                                          <span class="hint"> ex: h3 a/h2 a</span>
+                                      </td></tr-->
+                                    <tr><td>
+                                            <label class="name">Author Identifier tag/class name</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.searchlist_author_class neq ""}value={$editResult.searchlist_author_class}{/if} name="searchlist_author_class" placeholder="span.classname/classname" /><br/>
+                                            <span class="hint"> ex: < html Tag >.classname/classname</span>
+                                        </td></tr>
+  <tr><td>
+                                            <label class="name">Publish Date Identifier Tag</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.search_list_date_element neq ""}value={$editResult.search_list_date_element}{/if} name="search_list_date_element" placeholder="div/p" /><br/>
+                                            <span class="hint"> ex: div/p</span>
+                                        </td>
+                                    </tr>
+                                    <tr><td>
+                                            <label class="name">Publish Date Identifier class name</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.search_list_date_class neq ""} value="{$editResult.search_list_date_class}"{/if} name="search_list_date_class" placeholder="classname" /><br/>
+                                            <span class="hint"> ex: classname</span>
+                                        </td>
+                                    </tr>
+                                  
+                                    <tr><td>
+                                            <label class="name">Publish Date Identifier class type</label>
+                                        </td>
+                                        <td>
+                                            <select id="selecttype" name="search_list_date_class_type" >
+                                                <option {if $editResult.search_list_date_class_type eq 0}selected{/if} value="0" title="class">Class</option>
+                                                <option {if $editResult.search_list_date_class_type eq 1}selected{/if} value="1" title="id">Id</option>
+                                            </select>
+                                            <span class="hint"> </span>
+                                        </td></tr>
+                                   
+                                    <tr><td>
+                                            <label class="name">Image Identifier Tag</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.searchlist_image_class_element neq ""}value={$editResult.searchlist_image_class_element}{/if} name="searchlist_image_class_element" placeholder="span.classname/classname" /><br/>
+                                            <span class="hint">ex: div/p</span>
+                                        </td>
+                                    </tr>
+                                     <tr><td>
+                                            <label class="name">Image Identifier class name</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.searchlist_image_class neq ""}value={$editResult.searchlist_image_class}{/if} name="searchlist_image_class" placeholder="span.classname/classname" /><br/>
+                                            <span class="hint"> ex: classname</span>
+                                        </td>
+                                    </tr>
+                                    <tr><td>
+                                            <label class="name">Image Identifier class type</label>
+                                        </td>
+                                        <td>
+                                            <select id="selecttype" name="searchlist_image_class_type" >
+                                                <option {if $editResult.searchlist_image_class_type eq 0}selected{/if} value="0" title="class">Class</option>
+                                                <option {if $editResult.searchlist_image_class_type eq 1}selected{/if} value="1" title="id">Id</option>
+                                            </select>
+                                            <span class="hint"> </span>
+                                        </td></tr>
+
+
+                                </table></fieldset></td></tr></tr>
+                    <tr >
+                        <td colspan="2"> <fieldset>
+                                <legend>Inner page Crawl</legend>
+                                <table width="100%">
+                                    <tr><td>
+                                            <label class="name">Inner page Main content Element</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.description_div_class_element neq ""} value="{$editResult.description_div_class_element}{/if}"  name="description_div_class_element" placeholder="div/p/section/" /><br/>
+                                            <span class="hint"> ex: div/p/section</span>
+                                        </td></tr>
+                                    <tr><td>
+                                            <label class="name">Inner page Main content element class</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.description_div_class neq ""}value="{$editResult.description_div_class}{/if}"  name="description_div_class" placeholder="classname"/><br/>
+                                            <span class="hint"> ex: classname</span>
+                                        </td></tr>
+                                    
+                                    <tr><td>
+                                            <label class="name">Inner page Main Content class type</label>
+                                        </td>
+                                        <td>
+                                            <select id="selecttype" name="description_content_class_type" >
+                                                <option {if $editResult.description_content_class_type eq 0}selected{/if} value="0" title="class">Class</option>
+                                                <option {if $editResult.description_content_class_type eq 1}selected{/if} value="1" title="id">Id</option>
+                                            </select>
+                                            <span class="hint"> </span>
+                                        </td></tr>
+                                    <tr><td>
+                                            <label class="name">Inner page Title Identifier class Name</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.description_title_class neq ""}value={$editResult.description_title_class}{/if} name="description_title_class" placeholder=" classname" /><br/>
+                                            <span class="hint"> ex: classname</span>
+                                        </td></tr>
+                                    <tr><td>
+                                            <label class="name">Inner page Author Identifier Class name</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.description_author_class neq ""}value={$editResult.description_author_class}{/if} name="description_author_class" placeholder="classname" /><br/>
+                                            <span class="hint"> ex: classname</span>
+                                        </td></tr>
+                                    <tr><td>
+                                            <label class="name">Inner page Publis Date Identifier class name</label>
+                                        </td> 
+                                        <td>
+                                            <input type="text" {if $editResult.description_date_class neq ""}value={$editResult.description_date_class}{/if} name="description_date_class" placeholder="classname" /><br/>
+                                            <span class="hint"> ex:  classname/classname</span>
+                                        </td></tr>
+                                    <tr><td>
+                                            <label class="name">Inner page Image Identifier class Name</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.description_image_class neq ""}value={$editResult.description_image_class}{/if} name="description_image_class" placeholder="classname" /><br/>
+                                            <span class="hint"> ex: classname</span>
+                                        </td></tr>
+                                    <tr><td>
+                                            <label class="name">Inner page Image Identified class type</label>
+                                        </td>
+                                        <td>
+                                            <select id="selecttype" name="description_image_class_type">
+                                                <option value="0" {if $editResult.description_image_class_type eq 0}selected{/if}  title="class">Class</option>
+                                                <option value="1" {if $editResult.description_image_class_type eq 1}selected{/if}  title="id">Id</option>
+                                            </select>
+                                            <span class="hint"> </span>
+                                        </td></tr>
+                                    <tr><td>
+                                            <label class="name">Inner page Content class</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.description_content_class neq ""}value={$editResult.description_content_class}{/if} name="description_content_class" placeholder="classname" /><br/>
+                                            <span class="hint"> ex: classname</span>
+                                        </td></tr>
+                                    <!--tr><td>
+                                            <label class="name">Blog Class</label>
+                                        </td>
+                                        <td>
+                                            <input type="text" {if $editResult.description_div_blog_class neq ""}value={$editResult.description_div_blog_class}{/if} name="description_blog_class" placeholder="classname" /><br/>
+                                            <span class="hint"> ex: span.classname/classname</span>
+                                        </td></tr>
+                                    <tr><td>
+                                            <label class="name">Blog Class Type</label>
+                                        </td>
+                                        <td>
+                                            <select id="selecttype" name="description_blog_class_type" >
+                                                <option value="0" {if $editResult.description_content_blog_class_type eq 0}selected{/if} title="class">Class</option>
+                                                <option value="1"{if $editResult.description_content_blog_class_type eq 1}selected{/if}  title="id">Id</option>
+                                            </select>
+                                        </td></tr-->
+                                    <tr><td>
+                                            <label class="name">Status</label>
+                                        </td>
+                                        <td>
+                                            <select id="selecttype" name="status" >
+                                                <option value="0" {if $editResult.status eq 0}selected{/if} title="class">Enable</option>
+                                                <option value="1" {if $editResult.status eq 1}selected{/if}  title="id">Disable</option>
+                                            </select>
+                                            <span class="hint"> </span>
+                                        </td></tr>
+   <tr><td>
+                                            <label class="name">Crawl Status Description</label>
+                                        </td>
+                                        <td>
+                                            <textarea name="description" rows="3" cols="25">{if $editResult.description neq ""}{$editResult.description}{/if}</textarea>
+                                            <span class="hint"> </span>
+                                        </td></tr>
+                                </table></fieldset></td></tr><tr><td>
+
+                        </td>
+                        <td>
+                            {if $act eq 'edit'} <input type="submit" name="submit" value="Update"/>
+                            <input type="hidden" name="action" value="update" />
+                            <input type="hidden" name="Wid" value="{$WId}" />
+                            {else}
+                            <input type="submit" name="submit" value="Save"/>
+                            <input type="hidden" name="action" value="new" />
+                            {/if} <input type="button" name="submit" onclick="SubmitforTest()" value="Test"/>
+
+                        </td></tr></table>
+            </form></div>
+        <div id="testResult" style="width: 50%; float: left; overflow: scroll; height: 800px;">
+
+        </div>
+    </div>
+    <div id="ManageDIv" {if $act eq 'edit'}  style="display: none;" {else}style="display: block;"{/if}>
+         {if $StatusMsg neq ""}<div >{$StatusMsg}</div>{/if}
+        {if  $loadclasses|@count gt 0}
+        <table style="border: 1px #000;"  class="searchlist" cellspacing="10">
+            <tr style="border: 1px;">
+                <th>id</th>
+                <th>SourceUrl</th>
+                <th>Search_url</th>
+                <th>Search_seperator</th>
+                <th>status</th>
+                 <th>Description</th>
+                <th>Edit/Delete</th>
+            </tr>
+
+            {foreach from=$loadclasses key=Id item=i}
+            <tr> 
+                <td> {$Id+1}</td>
+                <td> {$i.source}</td>
+                <td> {$i.search_url}</td>
+                <td align="center"> {$i.search_seperator}</td>
+                <td> {if $i.status eq 0}enabled{else}disabled{/if}</td>
+                <td width="100px"><b>{$i.description}</b></td>
+                <td width="150px">
+                    <table width="70%;"><tr><td>
+                                <form action="" method="post" style="float: left;">
+                                    <input type="submit" name="submit" value="Edit"/>
+                                    <input type="hidden" name="id" value="{$i.source_id}"/>
+                                    <input type="hidden" name="action" value="edit"/>
+                                </form></td><td>
+                                <form action="" method="post" style="float: left;" id="DeleteWWWArticle">
+                                    <!--input type="submit"  name="submit" value="Delete"/-->
+                                    <input type="submit" name="submit" value="Delete"/>
+                                    <input type="hidden" name="id" value="{$i.source_id}"/>
+                                    <input type="hidden" name="action" value="delete"/>
+                                </form></td></tr></table>
+                </td>
+            </tr>
+            {/foreach}
+        </table>
+        {else}
+
+        {/if}
+    </div>
+</div>
+</div>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Fanwire</title>
+        <link href="../../views/css/fanwire-css.css" rel="stylesheet" type="text/css">
+
+        <script src="../../views/scripts//place_holder/jquery.js"></script>
+        <script src="../../views/scripts/place_holder/modernizr.js"></script>
+        <script type="text/javascript">
+		
+            $(document).ready(function(){
+
+                if(!Modernizr.input.placeholder){
+
+                    $('[placeholder]').focus(function() {
+                        var input = $(this);
+                        if (input.val() == input.attr('placeholder')) {
+                            input.val('');
+                            input.removeClass('placeholder');
+                        }
+                    }).blur(function() {
+                        var input = $(this);
+                        if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                            input.addClass('placeholder');
+                            input.val(input.attr('placeholder'));
+                        }
+                    }).blur();
+                    $('[placeholder]').parents('form').submit(function() {
+                        $(this).find('[placeholder]').each(function() {
+                            var input = $(this);
+                            if (input.val() == input.attr('placeholder')) {
+                                input.val('');
+                            }
+                        })
+                    });
+
+                }
+
+            });
+		
+		
+        </script>
+
+
+    </head>
+
+    <body>
+        <div  class="wrapper">
+            <div class="left_section">
+                <div class="logo"><a href="#"><img src="../../views/images/logo.png" height="120" width="109" alt=""></a></div>
+                <div class="guest_user"><a href="login.html">Guest User</a></div>
+
+                <div class="search">
+                    <div class="search_input">
+                        <input type="text" class="search_text" placeholder="Search">
+                        <a href="#" class="search_icon"></a>
+                    </div>
+
+                </div>
+
+                <div class="left_menusec">
+                    <ul>
+                        <li><a href="my_fanwire.html">Top Fanwires</a></li>
+                        <li><a href="werecommended.html">Daily Trends</a></li>
+                        <li><a href="werecommended.html" class="active">My Fanwire</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+                <div class="popular"></div>
+
+
+            </div>
+
+            <div class="right_menusec">
+
+                <div class="login_section"><div class="login"><a href="#" class="login_check">Login</a></div></div>
+                <div class="login_menu">
+                    <ul>
+                        <li><a href="#">Customize</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#" style="border:none;">Help</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="main_section1">
+                <div class="fanwire_contact">
+                    <div class="contact_text">
+                        <p>Create Your Account</p>
+                        <div class="cya_box">
+                            <a href="" class="tw_acc"></a>
+
+                            <p> Connected as <span> Gary.</span></p>
+                        </div>
+                    </div>
+                    <div class="contacts">
+                        <div class="upload">
+                            <div class="upld_img">
+                                <div class="img_display"> <img src="../../views/images/me.png" height="183" width="181" alt=""></div>
+                            </div>
+                            <div class="upld_content">
+                                <input type="text" class="account_input" placeholder="yuannumber@gmail.commail.com">
+                                <input type="password" class="account_input_error" placeholder="Password">
+                                <input type="text" class="account_input" placeholder="Confirm Password">
+                                <div class="terms_conditions">
+                                    <span>By creating an account, I accept FanWire's <a href="#">Terms 
+                                            of Service </a> and <a href="#">Privacy Policy.</a></span>
+                                </div>
+                                <input type="button" class="contct_btn" value="Create Account">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,191 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests
+END
+testdatabases.inc.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/testdatabases.inc.php
+END
+testpear.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/testpear.php
+END
+pdo.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/pdo.php
+END
+test-datadict.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test-datadict.php
+END
+benchmark.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/benchmark.php
+END
+test-active-record.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test-active-record.php
+END
+test-xmlschema.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test-xmlschema.php
+END
+test-active-recs2.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test-active-recs2.php
+END
+test-perf.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test-perf.php
+END
+client.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/client.php
+END
+test-active-relations.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test-active-relations.php
+END
+test-active-relationsx.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test-active-relationsx.php
+END
+time.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/time.php
+END
+test.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test.php
+END
+testoci8.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/testoci8.php
+END
+testmssql.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/testmssql.php
+END
+xmlschema.xml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/xmlschema.xml
+END
+test-php5.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test-php5.php
+END
+testgenid.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/testgenid.php
+END
+testpaging.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/testpaging.php
+END
+test2.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test2.php
+END
+test3.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test3.php
+END
+test4.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test4.php
+END
+test5.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test5.php
+END
+test_rs_array.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test_rs_array.php
+END
+testoci8cursor.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/testoci8cursor.php
+END
+test-pgblob.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/test-pgblob.php
+END
+testsessions.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/testsessions.php
+END
+testcache.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/testcache.php
+END
+xmlschema-mssql.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/xmlschema-mssql.xml
+END
+tmssql.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/adodb/tests/tmssql.php
+END

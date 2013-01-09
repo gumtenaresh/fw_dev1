@@ -1,0 +1,20 @@
+<div class="data_leftsection">
+        <div class="glossymenu">
+            <a class="menuitem {if $menu eq 'addFanwire'}active{/if} " href="#">Information</a>
+            <a class="menuitem submenuheader {if $menu eq 'media'}active{/if}" href="#">Media</a>
+            <div class="submenu">
+                <ul>
+                    <li><a {if $item eq 'photos'}class="active"{/if}" href="{$smarty.const.ADMIN_URL}photos/addPhotos">Photo</a></li>
+                    <li><a {if $item eq 'videos'}class="active"{/if}" href="{$smarty.const.ADMIN_URL}videos/addVideos">Video</a></li>
+                    <li><a {if $item eq 'articles'}class="active"{/if}" href="{$smarty.const.ADMIN_URL}articles/addArticles">Articles</a></li>
+                    <li><a href="#">Incoming</a></li>
+                </ul>
+            </div>
+            <a class="menuitem {if $menu eq 'profile'}active{/if}" href="#">Profile</a>
+            <a class="menuitem" href="#">Contact</a>
+            <a class="menuitem" href="#" style="border-bottom-width: 0">Admin Log</a>		
+            <a class="menuitem" href="{$smarty.const.ADMIN_URL}footer/about" style="border-bottom-width: 0">About</a>		
+            <a class="menuitem" href="{$smarty.const.ADMIN_URL}footer/terms" style="border-bottom-width: 0">Terms & Conditions</a>		
+            <a class="menuitem" href="{$smarty.const.ADMIN_URL}footer/privacy" style="border-bottom-width: 0">Privacy Policy</a>		
+        </div>            
+</div>

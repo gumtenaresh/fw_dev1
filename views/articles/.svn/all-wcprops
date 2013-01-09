@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/purpletalk_fanwire/!svn/ver/1162/fanwire/views/articles
+END
+my_fanwire_new_article_more.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/purpletalk_fanwire/!svn/ver/197/fanwire/views/articles/my_fanwire_new_article_more.tpl.html
+END
+thumbArticlesGuest.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/articles/thumbArticlesGuest.tpl.html
+END
+my_fanwire_organise.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/purpletalk_fanwire/!svn/ver/197/fanwire/views/articles/my_fanwire_organise.tpl.html
+END
+my_fanwire_organise_public.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/purpletalk_fanwire/!svn/ver/197/fanwire/views/articles/my_fanwire_organise_public.tpl.html
+END
+my_fanwire_organise_publish.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/purpletalk_fanwire/!svn/ver/197/fanwire/views/articles/my_fanwire_organise_publish.tpl.html
+END
+thumbArticles.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/articles/thumbArticles.tpl.html
+END
+my_fanwire_new_article.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/purpletalk_fanwire/!svn/ver/227/fanwire/views/articles/my_fanwire_new_article.tpl.html
+END
+articleDetails.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/articles/articleDetails.tpl.html
+END
+articleDetailsGuest.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/purpletalk_fanwire/!svn/ver/1184/fanwire/views/articles/articleDetailsGuest.tpl.html
+END
+my_fanwire_add_new_wire.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/purpletalk_fanwire/!svn/ver/197/fanwire/views/articles/my_fanwire_add_new_wire.tpl.html
+END

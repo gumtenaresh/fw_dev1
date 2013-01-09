@@ -1,0 +1,91 @@
+{include file='header.tpl.html'}
+{include file ='zoom.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}<!-- this is left bar -->
+{literal}
+<script>
+    $(document).ready(function(){
+        //        $("#articlepublish").validate({
+        //           rules:{
+        //                    'myoptions[]':{required:true}
+        //                 }
+        //        });
+        //    });
+    
+        function tweet(referer,url)
+        {
+            if(document.getElementById("twitter").checked==true)
+            {
+                window.open('https://twitter.com/intent/tweet?original_referer='+referer+'/login.php'+'&url='+url+'/login.php','','width=400,height=300');
+            }
+        }
+    
+        function fbshare(url)
+        {
+            if(document.getElementById("facebook").checked==true)
+            {
+                window.open('http://www.facebook.com/sharer.php?u='+url+'/login.php','','width=400,height=300');
+                return true;
+            }
+        }
+</script>
+{/literal}
+<!--Right Section-->
+<div class="right_container">
+
+    <div id="rightsection">
+        <form action="" method="post" id="articlepublish" name="articlepublish" >
+            <div id="right_area">
+                <div class="connect_fans">
+
+                    <h2>Add a new item</h2>
+                    <br />
+
+                    <div class="settings_page">
+                        <div class="awards_active">
+                            <ul>
+                                <li><a href="#"><span><strong>Step 1. Content Type</strong></span></a></li>
+                                <li><a href="#"><span><strong>Step 2. Add Information</strong></span></a></li>
+                                <li><a href="#"><span><strong>Step 3. organize</strong></span></a></li>
+                                <li class="active"><a href="#"><span><strong>step 4. preview and publish</strong></span></a></li>
+                            </ul>
+
+                        </div></div>
+
+                    <div class="heading2">
+                        <h2>item summary</h2></div>
+
+                    <div class="summary">
+
+                        <table>
+                            {section name="id" loop= $list}
+                            <tr><td><b>{$list[id].title}</b></td></tr>
+                            <tr><td>{$list[id].description}</td></tr>
+                            {/section}
+                        </table>
+
+                    </div>
+                    <div class="summary_details">
+                        <div class="location">
+                            Location: <span>Britney Spears</span>
+                        </div>
+                        <div class="notifications">
+                            <h2>Notifications</h2>
+                            <div class="notification_details">
+
+                                <input name="myoptions[]" id="fab" type="checkbox" value="fan" /> Fan Network<br />
+                                <input name="myoptions[]" id="twitter" type="checkbox" value="twitter" /> Twitter Account<br />
+                                <input name="myoptions[]" id="facebook" type="checkbox" value="facebook" /> <span>Facebook Account <a href="#">add account</a></span> <br />
+                                <label for="myoptions[]" class="error" style="display:none;">Please choose one.</label>
+                                <!--                        <input name="" type="checkbox" value="" /> <span>Facebook Fan Page: Dogtwon Brewing</span><br />
+                                                            <input name="" type="checkbox" value="" /> <span>Facebook Fan Page: ABC Clothing</span>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <hr />
+                <input name="" type="button" class="back" value="back" onclick="window.location.href='{$smarty.const.SITE_URL}addItem';" />
+                <input onclick="tweet('{$smarty.const.SITE_URL}','{$smarty.const.SITE_URL}');fbshare('{$smarty.const.SITE_URL}');" name="submit" type="submit" class="next" value="publish"  />
+            </div>
+        </form>
+        {include file='footer.tpl.html'}

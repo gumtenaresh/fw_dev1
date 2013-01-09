@@ -1,0 +1,175 @@
+<?php
+
+/**
+ * This is class is for testing purpose
+ * * */
+class Test {
+
+    private $conn = null;
+    private $sql = null;
+    private $rs = null;
+    private $data = array();
+
+    /**
+     * creating dao object
+     */
+    function __construct() {
+        $this->conn =  Dao::getInstance();
+        $this->obj = new Users();
+    }
+
+    //destroying memory
+    function __destruct() {
+        unset($this->conn);
+        unset($this->rs);
+        unset($this->sql);
+        unset($this->data);
+    }
+
+    /**
+     * get all images and move to the server this is for moving the images into amazone server 
+     * 
+     */
+    public function moveImages($val = '') {
+        if ($val == 'photos') {
+            $this->sql = "(SELECT `thumbnail` as photo FROM `tbl_videos`) 
+                     union(SELECT `url` as photo FROM `tbl_timeline_photos`)
+                     union(SELECT `name` as photo FROM `tbl_photos`)
+                     union(SELECT `url` as photo FROM `tbl_avatar_photos`)
+                     union(SELECT `photo` as photo FROM `tbl_articles`)
+                     union(SELECT `album_url` as photo FROM `tbl_albums`)";
+        } else {
+            $this->sql = "SELECT profile_image as photo FROM `tbl_users` where profile_image!=''";
+        }
+        $this->rs = $this->conn->executeQuery($this->sql);
+        $i = 0;
+        foreach ($this->rs as $key => $value) {
+            $data[$i]['photo'] = $value['photo'];
+            $i++;
+        }
+        return $data;
+    }
+
+    /**
+     * testing purpose
+     */
+    public function getImagess($pageSize = 6) {
+        $data = array();
+
+        $where = "where photo !=''";
+
+        $i = 0;
+        $this->sql = "SELECT photo FROM `tbl_articles`" . $where;
+        $pageObject = new Pagination($pageSize, 9); //params: pagesize, scroll size
+        $navigation = $pageObject->showNavigationCustomize(sizeof($this->conn->executeQuery($this->sql)));
+        $this->sql .= $pageObject->getLimitQry();
+        $this->rs = $this->conn->executeQuery($this->sql);
+        foreach ($this->rs as $key => $value) {
+            $data[$i]['photo'] = $value['photo'];
+            $i++;
+        }
+        $data['list'] = $data;
+        $data['navigation'] = $navigation;
+        return $data;
+    }
+
+    /**
+     *
+     * @param type $aid
+     * @return type
+     */
+    public function getArticles($pageSize = 1) {
+        $this->sql = "SELECT * from tbl_articles where source in('3')";
+        $i = 0;
+        $objUser = new Users();
+        $obj = new Fanwires();
+        $pageObject = new Pagination($pageSize, 9); //params: pagesize, scroll size
+        $navigation = $pageObject->showNavigationCustomize2(sizeof($this->conn->executeQuery($this->sql)));
+        $this->sql .= $pageObject->getLimitQry();
+        $this->rs = $this->conn->executeQuery($this->sql);
+
+        foreach ($this->rs as $val) {
+            $this->data[$i]['id'] = $val['id'];
+            $this->data[$i]['user_id'] = $val['user_id'];
+            $this->data[$i]['title'] = ($val['title']);
+            $this->data[$i]['description'] = stripslashes($val['description']);
+            $this->data[$i]['photo'] = empty($val['photo']) ? 'logodef.png' : $val['photo'];
+            $this->data[$i]['published_date'] = $val['published_date'];
+            $this->data[$i]['article_source'] = $val['article_source'];
+            $this->data[$i]['article_link'] = $val['article_link'];
+            $sub = explode('.', $val['article_link']);
+            $this->data[$i]['article_sub_link'] = $sub['0'] . '.' . $sub['1'] . '.' . end(array_reverse(explode('/', $sub['2'])));
+            $this->data[$i]['type_source'] = $val['type_source'];
+            $this->data[$i]['article_from'] = $val['article_from'];
+            $this->data[$i]['cdate'] = DatePicker::getTimeStamp($val['cdate']);
+            $this->data[$i]['date'] = date(DATE_RFC822, strtotime($val['cdate']));
+            // $arr = explode(",", $objUser->getLikesCount($val['id'], ART_TYPE));
+            //  $this->data[$i]['like'] = $arr[0];
+            $this->data[$i]['source'] = $val['source'];
+            // $this->data[$i]['dislike'] = $arr[1];
+            $this->data[$i]['released_date'] = $val['released_date'];
+            //$this->data[$i]['artstatus'] = $obj->getCollectedStatus($val['id'], ART_TYPE);
+            // $this->data[$i]['keywords'] = $obj->getKeywords($val['id'], '3');
+            // $this->data[$i]['additional_fans'] = $obj->getAdditionalFans($val['id'], '1');
+            $i++;
+        }
+        $this->data['navigation'] = $navigation;
+
+        return $this->data;
+    }
+
+    /**
+     * getFanwireName
+     * @param integer $fanwire_id
+     * @return string  name
+     */
+    public function getFanwires() {
+        $this->sql = "SELECT * from tbl_fanwires";
+        $this->rs = $this->conn->executeQuery($this->sql);
+        $i = 0;
+        foreach ($this->rs as $val) {
+            $this->data[$i]['id'] = $val['id'];
+            $this->data[$i]['name'] = str_replace(" ", "_", ucfirst($val['name']));
+            $i++;
+        }
+        return $this->data;
+    }
+
+    public function insertBiography($data) {
+        extract($data);
+        $this->sql = "insert into  tbl_biography(`fanwire_id`,`fanwire_name`,`biography`,`bio_image`) values(?,?,?,?)";
+        $data = array($id,$name, str_replace("'", "", $bio), $image);
+        $this->rs = $this->conn->executePrepared($this->sql, $data);
+        return mysql_insert_id();
+    }
+
+    /**
+     * getBio
+     */
+    public function getBio($pageSize = 1) {
+        $this->sql = "SELECT * from tbl_biography";
+        $pageObject = new Pagination($pageSize, 9); //params: pagesize, scroll size
+        $navigation = $pageObject->showNavigationBiography(sizeof($this->conn->executeQuery($this->sql)));
+        $this->sql .= $pageObject->getLimitQry();
+        $this->rs = $this->conn->executeQuery($this->sql);
+        $i = 0;
+        foreach ($this->rs as $val) {
+            $bo = explode(":::", $val['biography']);
+            foreach ($bo as $value) {
+                $rr = explode("**", $value);
+                $this->list[$i][$rr[0]] = $rr[1];
+            }
+            $this->list[$i]['image'] = $val['bio_image'];
+            $this->list[$i]['name'] = $val['fanwire_name'];
+            $i++;
+        }
+
+        $this->list['navigation'] = $navigation;
+        //echo "<pre>";print_r($this->list);
+        // exit;
+        return $this->list;
+    }
+
+}
+
+?>

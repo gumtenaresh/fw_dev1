@@ -1,0 +1,467 @@
+{include file='header2.tpl.html'}
+<div class="plr_pts">
+    <div class="plr_pts1">
+        <P>Mariah Carey</P>
+        <span>Popular Photos</span>
+
+        <div class="plr_links">
+            <a href="#"><img src="{$smarty.const.SITE_URL}views/images/arrow_left.gif" height="13" width="5" alt=""></a>
+            <a href="#"><img src="{$smarty.const.SITE_URL}views/images/arrow_right.gif" height="13" width="5" alt=""></a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="plr_photos">
+        <img src="{$smarty.const.SITE_URL}views/images/plr_img.gif" height="79" width="120" alt="">
+        <img src="{$smarty.const.SITE_URL}views/images/plr_img1.gif" height="79" width="120" alt="">
+        <img src="{$smarty.const.SITE_URL}views/images/plr_img.gif" height="79" width="120" alt="">
+        <img src="{$smarty.const.SITE_URL}views/images/plr_img1.gif" height="79" width="120" alt="">
+        <img src="{$smarty.const.SITE_URL}views/images/plr_img1.gif" height="79" width="120" alt="">
+        <img src="{$smarty.const.SITE_URL}views/images/plr_img.gif" height="79" width="120" alt="">
+    </div>
+    <div class="clear"></div>
+    <div class="plr_twitter">
+        <div class="plr_twitter1">
+            <img src="{$smarty.const.SITE_URL}views/images/twitetr-icon.png" height="50" width="50" alt="" >
+            <div class="twitter_name"><p>Mariah Carey</p><span>Twitter</span></div>
+            <a href="#" class="twitter_icon"></a>
+        </div>
+        <div class="clear"></div>
+
+        <div class="twitter_comments_links">
+            <ul>
+                <li><a href="#">Hot!</a></li>
+                <li><a href="#">Celeb</a></li>
+                <li><a href="#">Music</a></li>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Custom</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+        <div class="twitter_comments">
+            <div class="spear_comment">
+                <div class="spr_cmt_img"><img src="{$smarty.const.SITE_URL}views/images/spear.gif" height="30" width="30" alt="" ></div>
+                <div class="spr_cmt_right">
+                    <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                    <div class="clear"></div>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                    <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="spear_comment">
+                <div class="spr_cmt_img"><img src="{$smarty.const.SITE_URL}views/images/spear.gif" height="30" width="30" alt="" ></div>
+                <div class="spr_cmt_right">
+                    <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                    <div class="clear"></div>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                    <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="spear_comment" style="border:none;">
+                <div class="spr_cmt_img"><img src="{$smarty.const.SITE_URL}views/images/spear.gif" height="30" width="30" alt="" ></div>
+                <div class="spr_cmt_right">
+                    <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                    <div class="clear"></div>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                    <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+
+
+            <div class="twitter_bottom">
+                <p style="float:left;"><a href="#">Share</a></p>
+                <p style="float:right";><a href="#">View More</a></p>
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+    <div class="clear"></div>
+
+    <div class="plr_twitter">
+        <div class="plr_twitter1">
+            <img src="{$smarty.const.SITE_URL}views/images/facebook-icon.png" height="50" width="50" alt="" >
+            <div class="twitter_name"><p>FACEBOOK TRENDS
+                </p><span>Today</span></div>
+            <a href="#" class="facebook_icon"></a>
+        </div>
+        <div class="clear"></div>
+
+        <div class="twitter_comments_links">
+            <ul>
+                <li><a href="#">Hot!</a></li>
+                <li><a href="#">Celeb</a></li>
+                <li><a href="#">Music</a></li>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Custom</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+        <div class="twitter_comments">
+
+
+
+
+
+
+            <div class="spear_comment">
+                <div class="spr_cmt_img"><img src="{$smarty.const.SITE_URL}views/images/spear.gif" height="30" width="30" alt="" ></div>
+                <div class="spr_cmt_right">
+                    <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                    <div class="clear"></div>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                    <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="spear_comment">
+                <div class="spr_cmt_img"><img src="{$smarty.const.SITE_URL}views/images/spear.gif" height="30" width="30" alt="" ></div>
+                <div class="spr_cmt_right">
+                    <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                    <div class="clear"></div>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                    <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="spear_comment"style="border:none;">
+                <div class="spr_cmt_img"><img src="{$smarty.const.SITE_URL}views/images/spear.gif" height="30" width="30" alt="" ></div>
+                <div class="spr_cmt_right">
+                    <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                    <div class="clear"></div>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                    <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+
+
+            <div class="twitter_bottom">
+                <p style="float:left;"><a href="#">Share</a></p>
+                <p style="float:right";><a href="#">View More</a></p>
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+    <div class="plr_twitter">
+        <div class="plr_twitter1">
+            <img src="{$smarty.const.SITE_URL}views/images/spear.png" height="50" width="50" alt="" >
+            <div class="twitter_name"><p>MUSIC TRENDS</p><span>Lil Wayne</span>
+            </div>
+            <a href="#" class="music_icon"></a>
+
+            <div class="buy_text">
+                <p>A Moment Isn’t ...</p> <a href="#" class="buy_text_buy">Buy</a>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+
+        <div class="twitter_comments_links">
+            <ul>
+                <li><a href="#">Hot!</a></li>
+                <li><a href="#">Celeb</a></li>
+                <li><a href="#">Music</a></li>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Custom</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+        <div class="video_playlist">
+
+            <div class="playlist">
+                <a href="#" class="play_list_active">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist"  style="border:none">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+
+
+
+
+
+            <div class="clear"></div>
+            <div class="twitter_bottom">
+                <p style="float:left;"><a href="#">Share</a></p>
+                <p style="float:right";><a href="#">View More</a></p>
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+    <div class="plr_twitter">
+        <div class="plr_twitter1">
+            <img src="{$smarty.const.SITE_URL}views/images/spear.png" height="50" width="50" alt="" >
+            <div class="twitter_name"><p>MUSIC TRENDS</p><span>Lil Wayne</span>
+            </div>
+            <a href="#" class="music_icon"></a>
+
+            <div class="buy_text">
+                <p>My Homies Still</p> <a href="#" class="buy_text_buy">Buy</a>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+
+        <div class="twitter_comments_links">
+            <ul>
+                <li><a href="#">Hot!</a></li>
+                <li><a href="#">Celeb</a></li>
+                <li><a href="#">Music</a></li>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Custom</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+        <div class="video_playlist">
+            <div>
+                <img src="{$smarty.const.SITE_URL}views/images/vedio_img.png" height="145" width="220" alt="" >
+            </div>
+            <div class="playlist">
+                <a href="#" class="play_list_active">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist"  style="border:none">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+
+
+
+
+
+            <div class="clear"></div>
+            <div class="twitter_bottom">
+                <p style="float:left;"><a href="#">Share</a></p>
+                <p style="float:right";><a href="#">View More</a></p>
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+    <div class="plr_twitter">
+        <div class="plr_twitter1">
+            <img src="{$smarty.const.SITE_URL}views/images/spear4.gif" height="65" width="50" alt="" >
+            <div class="twitter_name"><p>TOP MOVIE TRAILERS</p>
+            </div>
+            <a href="#" class="video1_icon"></a>
+
+            <div class="buy_text">
+                <p>The Dark Knight Rises</p>
+                <span>Lorem ipsum dolor sit amet, con
+                    sectetur adipisicing elit, sed do 
+                    eiusmod tempor incididunt ut la
+                    bore et dolore magna aliqua.</span>
+                <a href="#" class="buy_text_more">more</a>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+
+        <div class="twitter_comments_links">
+            <ul>
+                <li><a href="#">Hot!</a></li>
+                <li><a href="#">Celeb</a></li>
+                <li><a href="#">Music</a></li>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Custom</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+
+
+
+        <div class="video_playlist">
+            <div>
+                <img src="{$smarty.const.SITE_URL}views/images/vedio1_img.png" height="145" width="220" alt="" >
+            </div>
+
+            <div class="playlist">
+                <a href="#" class="play_list_active">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+            <div class="playlist" style="border:none;">
+                <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                <span>2:43</span></div>
+
+            <div class="clear"></div>
+            <div class="twitter_bottom">
+                <p style="float:left;"><a href="#">Share</a></p>
+                <p style="float:right";><a href="#">View More</a></p>
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+</div>
+</div>
+<div class="main_section">
+    <div class="main_content">
+        <div id="black" class="outClick" style="display: none;"></div>  
+        <div class="clear"></div>
+        {if $searchedfor}
+        <p style="padding-bottom:10px;">
+            <span style="font: 20px OswaldBook;">{$resultsfor}</span>
+            <span style="font: 20px OswaldBook;color: #02A0BF;">{$searchedfor}</span>
+            <br>
+            <span style="font: 20px OswaldBook;">{$didyoumean_lbl}</span>
+            <span style="font: 20px OswaldBook;color: #02A0BF;">{$didyoumean}</span>
+        </p>
+        <div style="padding-bottom:50px;padding-top:30px;">
+            <div class="menu">
+                <ul> 
+                    {$all_filter_lbl}{$profiles_filter_lbl}{$media_filter_lbl}{$social_filter_lbl}{$mycollection_filter_lbl}
+                </ul>
+            </div>
+        </div>
+        {else}
+        <div class="menu">
+            <ul>
+                <li class="active"><a href="#" class="active">What’s Hot</a></li>
+                <li><a href="#">Celebrity</a></li>
+                <li><a href="#">Music</a></li>
+                <li><a href="#">Sports</a></li>
+            </ul>
+        </div>
+        {/if}			
+
+        <div class="clear"></div>
+        <div class="whats_hot">
+            <div class=""></div>
+        </div>
+        <div class="other_news" >
+            {if $searchedfor}{else}
+            <p>Other News About <span>Mariah Carey</span></p>{/if}
+            <div class="news_elements" id='mainBlock'>
+                {section name=fanwire loop=$fanwiresguest} 
+                {assign var=fan value=$fanwiresguest[fanwire]}
+                <div class="element item block">
+                    <div class="element_content">
+                        <div class="element_content1">
+                            <p>{$fan.name}</p>
+
+                            <a href="#" class="{if $fan.source eq 1}small_icons_fb{else if $fan.source eq 2}small_icons_tw{else if $fan.source eq 3}small_icons_riview{/if}{if $fan.type eq 3}small_icons_vid{else if $fan.type eq 4}small_icons_cam{/if}"></a>
+                            <div class="clear"></div>
+                            <span id="spancontetnt">
+                                {if $fan.title_link neq '' && $fan.source neq 1 && $fan.source neq 2} 
+                                <a href='{$fan.title_link}' style="text-transform: none;color: #333333;text-decoration: none;font-size: 14px;font-weight: bold;">{$fan.title}</a>
+                                {else if $fan.source neq 1 && $fan.source neq 2}
+                                {$fan.title} 
+
+                                {/if}
+                            </span> 
+                        </div>
+                    
+                        <p>{$fan.time}</p>
+                        <div class="{if $fan.title_link neq '' && $fan.source neq 1 && $fan.source neq 2}video{else if $fan.photo eq ''}image{else}image{/if}"> 
+                            {if $fan.source eq 2}
+                            <img src="{$smarty.const.IMAGE_URL}{$fan.photo}"  width="75" height="75"/>
+                            {else if $fan.photo eq ''}
+                            <img src="{$smarty.const.IMAGE_URL}{$fan.fanwire_profile_img}" width="75" height="75"/>
+                            {else}
+
+                            <a {if $fan.type eq 0}href="{$fan.link}"{else}href="{$fan.title_link}"{/if}>
+                                <img src="{$smarty.const.IMAGE_URL}{$fan.photo}"  width="202" height="{202*$fan.height/$fan.width}"  alt="" >
+                            </a>
+                            {/if}
+
+                            <p>{if $fan.source eq 1}Facebook{else if $fan.source eq 2}Twitter{else if $fan.source eq 3}Article{/if}
+
+                                {if $fan.type eq 4}Instagram{else if $fan.type eq 3}Youtube{else if $fa.type eq 1}Photos{/if}
+                            </p>
+
+                        </div>
+                        <p class="more">   {if $fan.title_link neq '' && $fan.source neq 1 && $fan.source neq 2}
+                            {$fan.description|truncate:300}
+                            {else}
+                            {$fan.description}
+                            {/if}
+                        </p>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="twitter_bottom1">
+                        <p style="float:left"><a href="#">Share</a></p>
+                        <p style="float:right"><a href="#">View More</a></p>
+                    </div>
+                </div>
+                {/section}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {if $searchedfor}{else}
+    <div class="loading">
+        <input type="hidden" value="{$path}" id="path" name="path"/>
+        <input type="hidden" value="30" id="limit" name="limit"/>
+        <a  href="javascript:void(0)" class="load_more" id="load-more" onclick="loadMore();" >Load More</a>
+        <a href="#" class="loading" style="display: none" id="loadingImage"> 
+            <img src="{$smarty.const.SITE_URL}views/images/loading.gif" height="30" width="21" alt="" >
+        </a> 
+        <div class="clear"></div>
+        <!--<p>Loading</p>-->
+    </div>
+    {/if}
+
+
+
+</div>
+
+</div>
+</body>
+</html> 

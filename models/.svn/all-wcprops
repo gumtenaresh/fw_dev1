@@ -1,0 +1,87 @@
+K 26
+svn:wc:ra_dav:activity-url
+V 33
+/svn/purpletalk_fanwire/!svn/act/
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/purpletalk_fanwire/!svn/ver/1206/fanwire/models
+END
+Crawl.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/purpletalk_fanwire/!svn/ver/1136/fanwire/models/Crawl.php
+END
+Users.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/purpletalk_fanwire/!svn/ver/1208/fanwire/models/Users.php
+END
+Videos.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/purpletalk_fanwire/!svn/ver/1195/fanwire/models/Videos.php
+END
+pagination.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/purpletalk_fanwire/!svn/ver/192/fanwire/models/pagination.php
+END
+Fanwires.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/purpletalk_fanwire/!svn/ver/1208/fanwire/models/Fanwires.php
+END
+fannetwork.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/purpletalk_fanwire/!svn/ver/1136/fanwire/models/fannetwork.php
+END
+Categories.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/purpletalk_fanwire/!svn/ver/1150/fanwire/models/Categories.php
+END
+CombineFeatures.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/purpletalk_fanwire/!svn/ver/1204/fanwire/models/CombineFeatures.php
+END
+Articles.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/purpletalk_fanwire/!svn/ver/1180/fanwire/models/Articles.php
+END
+Social.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/purpletalk_fanwire/!svn/ver/1136/fanwire/models/Social.php
+END
+werecommend.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/purpletalk_fanwire/!svn/ver/1136/fanwire/models/werecommend.php
+END
+Photos.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/purpletalk_fanwire/!svn/ver/1180/fanwire/models/Photos.php
+END
+Collections.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/purpletalk_fanwire/!svn/ver/1136/fanwire/models/Collections.php
+END

@@ -1,0 +1,46 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-06 12:37:31
+         compiled from "/var/www/fanwire/views/footerww.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:1223287458501f6d33d3b4a5-72393534%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '1aa74c406fbf91e753f3c305c0e94f82e7c43961' => 
+    array (
+      0 => '/var/www/fanwire/views/footerww.tpl.html',
+      1 => 1344088422,
+    ),
+  ),
+  'nocache_hash' => '1223287458501f6d33d3b4a5-72393534',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+  
+
+<!--Right Section End--> 
+
+
+                </div> 
+                <div class="footer">
+<!--                     <div class="ftr_left">© FanWire, LLC. All rights reserved.</div> -->
+                    <div class="ftr_right"><a href="<?php echo @SITE_URL;?>
+footer/aboutus">About</a>  |  <a href="<?php echo @SITE_URL;?>
+footer/termsandconditions">Terms and Conditions  |  <a href="<?php echo @SITE_URL;?>
+footer/privacypolicy">Privacy Policy</a>  |  <a href="<?php echo @SITE_URL;?>
+footer/developers">Developers</a>  |  <a href="<?php echo @SITE_URL;?>
+footer/advertising">Advertising</a>  |  <a href="<?php echo @SITE_URL;?>
+footer/help">Help</a>  |  <a href="<?php echo @SITE_URL;?>
+footer/contact">Contact</a></div>
+                </div>
+
+                
+                          
+            </div>
+
+
+
+        </div>
+
+    </body>
+</html>

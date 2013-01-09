@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/purpletalk_fanwire/!svn/ver/1171/fanwire/views/admin/videos
+END
+videosList.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/purpletalk_fanwire/!svn/ver/1171/fanwire/views/admin/videos/videosList.tpl.html
+END
+editVideos.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/purpletalk_fanwire/!svn/ver/1092/fanwire/views/admin/videos/editVideos.tpl.html
+END
+addVideos.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/purpletalk_fanwire/!svn/ver/885/fanwire/views/admin/videos/addVideos.tpl.html
+END

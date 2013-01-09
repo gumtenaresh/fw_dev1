@@ -1,0 +1,135 @@
+<div id="fb-root"></div>
+<div class="koryguest">  <a href="{$smarty.const.SITE_URL}">Guest User</a> </div>
+
+
+<div>  
+<ul style="margin-top: 15px;margin-bottom: 1px;height: 44px;background: url(/views/images/left_top_bg.jpg) left top repeat-x;">
+<li>
+{include file='searchbox.html'}
+</li>
+</ul>
+</div>
+
+
+
+<!--
+<div class="icon_set" onClick="javascript:document.close()">  
+    {if $active eq article or $active eq message or $active eq settings or $active eq cam or $active eq group}<ul class='white'>{else}<ul>{/if}
+            <li {if $active eq article} class='active' {/if}><a onclick="Popup.show('left_icon_popup_id{$fan.id}');return false;"  href="javascript:void(0);" class="addicon1"></a></li>        
+            <li {if $active eq cam} class='active' {/if}><a onclick="Popup.show('left_icon_popup_id{$fan.id}');return false;" href="javascript:void(0);" class="camicon1"></a></li>                 
+            <li {if $active eq group} class="active" {/if}><a onclick="Popup.show('left_icon_popup_id{$fan.id}');return false;"  href="javascript:void(0);" class="profileicon1"></a></li>
+            <li {if $active eq message} class="active" {/if}><a onclick="Popup.show('left_icon_popup_id{$fan.id}');return false;" href="javascript:void(0);" class="msgicon1">{if $notifications}<sup style="color:black;float:right;font-size:9px;font-weight:bold;padding-top: 7px;padding-right: 5px;">{$notifications|@count}</sup>{/if}</a></li>
+            <li {if $active eq settings} class='active' {/if}><a  onclick="Popup.show('left_icon_popup_id{$fan.id}');return false;"  href="javascript:void(0);" class="settingicon1"></a></li>       
+            <div class="clear"></div>
+        </ul>
+</div>
+-->
+<div class="conect_popup closepopup" id="connect_popup_idadd" onclick='hidepop()'>
+    <div class="conect_popupimg"></div>
+    <div class="conect_popupcontent">
+        <a href="javascript:void(0);" style="float:right;" onclick="showConnect_popup_id('connect_popup_id{$fan.id}');"><img src="{$smarty.const.SITE_URL}views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+        <div class="clear"></div>
+        <p>Members never have to leave FanWire
+            by linking their social media accounts.
+            Sign up now to get full access.</p>
+        <div class="conect_popupcontent1"><div class="connect1"><a href="{$smarty.const.SITE_URL}signup" onclick="showConnect_popup_id('connect_popup_id{$fan.id}'); callSign();">Connect</a></div></div>
+    </div>
+</div>
+
+<div class="left_icon_popup" id="left_icon_popup_id{$fan.id}">
+    <div class="conect_popupimg"></div>
+    <div class="conect_popupcontent" id="conect_popupcontent">
+        <a href="javascript:void(0);" style="float:right;" onclick="Popup.hide('left_icon_popup_id{$fan.id}');"><img src="{$smarty.const.SITE_URL}views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+        <div class="clear"></div>
+        <p>Add content, import photos and chat
+            Fans and FanWire's by signing
+            up for free</p>
+        <div class="conect_popupcontent1"><div class="connect1"><a href="{$smarty.const.SITE_URL}signup" onclick="showConnect_popup_id('connect_popup_id{$fan.id}'); callSign();">Connect</a></div></div>
+
+
+    </div>
+</div>
+<!--<div class="search_fanwire">
+    <input name="" type="text" class="search_field" placeholder='search something'/> 
+    <input name="" type="button" class="goguest" onclick="document.getElementById('step1').style.display='block';document.getElementById('fade').style.display='block'"/>
+
+</div>-->
+
+<div class="left_menusec" style="padding-top:3px;padding-bottom:3px">
+    <ul>        
+        {if $fanwires.name}
+        <li {if $active eq fanwire} class="active" {/if}><a onclick="Popup.show('left_popup_id{$fan.id}');return false;"  href="#">{$fanwires.name}</a></li>        
+        {/if}
+        <li {if $active eq fanwire} {if $fanwires.name}{else}class="active"{/if}{/if}><a href="{$smarty.const.SITE_URL}">Top Fanwires</a></li>        
+
+
+        <!--        <li {if $active eq recommend} class='active' {/if}><a onclick="Popup.show('left_popup_id{$fan.id}');return false;"  href="#">We recommend</a></li>
+                <li {if $active eq fannetwork} class='active' {/if}><a onclick="Popup.show('left_popup_id{$fan.id}');return false;"  href="#">fan network</a></li>        -->
+        <!--<li {if $active eq collection} class='active' {/if}><a onclick="Popup.show('left_popup_id{$fan.id}');return false;" href="#">My collection</a></li>-->
+    </ul>                        
+</div>
+<div class="left_popup" id="left_popup_id{$fan.id}">
+    <div class="conect_popupimg"></div>
+    <div class="conect_popupcontent">
+        <a href="javascript:void(0);" style="float:right;" onclick="hideConnect_popup_id('left_popup_id{$fan.id}');"><img src="{$smarty.const.SITE_URL}views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+        <div class="clear"></div>
+        <p>See what other members are posting
+            and find friends from your Facebook
+            or Twitter accounts by signing up now.</p>
+
+        <div class="conect_popupcontent1"><div class="connect1"><a href="{$smarty.const.SITE_URL}signup" onclick="showConnect_popup_id('connect_popup_id{$fan.id}'); callSign();">Connect</a></div></div>
+
+
+    </div>
+</div>
+<div class="total_list">
+    <div class="fans">
+        <h2>&nbsp;Fan wires</h2>
+        <!--        <a href="#"><img src="{$smarty.const.SITE_URL}views/images/addd.png" width="13" height="13" hspace="5" vspace="3" align="right"/></a>-->
+    </div>
+    <div style="float: left;">
+        <div id="demo1" class="left_scroller"  style="height:450px;">
+            {assign var=i value=1}
+            {section name=fanwire loop=$fanwires_for_moreguest}
+            {assign var=j value=$i++}
+            {assign var=fan value=$fanwires_for_moreguest[fanwire]}
+            {if $fan.type eq 0 &&  $j lt 21}
+            <div class="fanslist">
+                <p><a href="{$smarty.const.SITE_URL}{$fan.url}" style="text-decoration: none;color: #424140">{$fan.name}</a></p>
+                <span>
+                    <!--(111)-->
+                </span> 
+                <!--<img src="{*$smarty.const.SITE_URL*}/views/images/star.png" width="12" height="12" />-->
+            </div>
+            {/if}
+            {/section}
+            <div class="fanslist_more" style="display: none">
+                {assign var=i value=1}
+                {section name=fanwire loop=$fanwires_for_moreguest}
+                {assign var=j value=$i++}
+
+                {assign var=fan value=$fanwires_for_moreguest[fanwire]}
+                {if $fan.type eq 0 && $j gt 20}
+                <div class="fanslist">
+                    <p>
+                        <a href="{$smarty.const.SITE_URL}{$fan.url}" style="text-decoration: none;color: #424140">{$fan.name}</a>
+                    </p>
+                    <span>
+                        <!--(111)-->
+                    </span>
+                </div>
+                {/if} 
+                {/section}
+            </div>
+        </div>
+        {if $fanwires_for_moreguest|count gt 20}
+        <div class="viewall">
+            <p style="background: #ededed; display: inline; padding: -20px 5px 0px 5px; color: #02a0bf;">
+                <a href='javascript:void(0)' class="view_all_fan" style="padding: 0px 5px 0 0">View all ({$fanwires_for_moreguest|count})</a>
+            </p>
+        </div>
+        {/if} 
+    </div>
+</div>
+</div>
+<!--Left Section End-->

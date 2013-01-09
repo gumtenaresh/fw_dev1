@@ -1,0 +1,92 @@
+{include file="header.tpl.html"}
+
+<style type="text/css">
+    #storyTextContainer {
+        margin-bottom: 5px;
+    }
+    #col1_content {
+        color: #202020;
+        font-size: 13px;
+        letter-spacing: 0.012em;
+        line-height: 1.37;
+    }
+    #col1_content {
+        color: #202020;
+        font-size: 13px;
+        letter-spacing: 0.012em;
+        line-height: 1.37;
+        padding: 0px 10px 24px 18px;
+    }
+    #contentInfo.withImage {
+        width: 287px;
+        float: right;
+    }#storyTextContainer .author, #storyTextContainer .author a {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: black;
+    } #storyTextContainer .date {
+        color: black;
+        display: block;
+        font-family: Tahoma, Geneva, sans-serif;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: normal;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+        margin-top: 5px;
+        padding: 0;
+        text-transform: uppercase;
+    }div.assetContainer {
+        float: left;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }#storyTextContainer p {
+        color: black;
+        font-size: 15px;
+    }
+    img{ float: left;}
+
+</style>
+</div>
+
+</div>
+<div style="width: 100%;float: left;">
+    <form action="" method="post">
+        <input type="text" name="fanwirename" value="" />
+        <input type="submit" value="Submit"/>
+    </form>
+    {if $user neq null}
+    </br></br><b>{$user} Twitter Results</b></br></br></br>
+    {/if}
+    {foreach from=$ret key=myId item=i}
+
+
+    <div class="copy" style="border: 1px solid #000; float: left">
+        <h2><a href="http://www.rollingstone.com/<?=$resu['url'];?>" title="Metallica">{$i.tit}</a></h2>
+       {$i.desc}
+    </div>  
+    <div id="storyTextContainer" style="border: 1px solid #000; float: left">
+        <div class="subcl">
+            <h2>{$i.tit}</h2>
+        </div>
+        {if $i.ItemDesc neq null}
+        <div id="contentInfo" class="withImage" style="float: left">
+            <div class="author"><span class="floatLt">By</span>&nbsp;<a href="#">{$i.getAuthor}</a></div>
+            <div class="date"> {$i.getDate}</div>
+        </div>
+
+        <div class="assetContainer imageStandard floatLt" class="withImage" style="float: left">
+            {if $i.getreviewImage neq null}
+            <div class="image-holder">
+                <img src="{$i.getreviewImage}" width="170" height="170" alt="Metallica">
+            </div>
+            {/if}
+            {$i.ItemDesc}
+        </div>	
+        {/if}
+    </div>
+    {/foreach} </div>

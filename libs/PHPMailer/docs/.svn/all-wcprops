@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/PHPMailer/docs
+END
+extending.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/PHPMailer/docs/extending.html
+END
+faq.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/PHPMailer/docs/faq.html
+END
+Callback_function_notes.txt
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/PHPMailer/docs/Callback_function_notes.txt
+END
+use_gmail.txt
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/PHPMailer/docs/use_gmail.txt
+END
+Note_for_SMTP_debugging.txt
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/PHPMailer/docs/Note_for_SMTP_debugging.txt
+END
+pop3_article.txt
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/PHPMailer/docs/pop3_article.txt
+END
+DomainKeys_notes.txt
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/PHPMailer/docs/DomainKeys_notes.txt
+END

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/videos
+END
+videoDetails.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/videos/videoDetails.tpl.html
+END
+my_fanwire_organise.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/videos/my_fanwire_organise.tpl.html
+END
+my_fanwire_organise_publish.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/purpletalk_fanwire/!svn/ver/134/fanwire/views/videos/my_fanwire_organise_publish.tpl.html
+END
+videoDetailsGuest.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/purpletalk_fanwire/!svn/ver/1184/fanwire/views/videos/videoDetailsGuest.tpl.html
+END
+my_fanwire_add_new_videos.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/purpletalk_fanwire/!svn/ver/221/fanwire/views/videos/my_fanwire_add_new_videos.tpl.html
+END
+my_fanwire_add_new_videos_july18.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/purpletalk_fanwire/!svn/ver/207/fanwire/views/videos/my_fanwire_add_new_videos_july18.tpl.html
+END
+thumbVideos.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/videos/thumbVideos.tpl.html
+END
+thumbVideosGuest.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/videos/thumbVideosGuest.tpl.html
+END

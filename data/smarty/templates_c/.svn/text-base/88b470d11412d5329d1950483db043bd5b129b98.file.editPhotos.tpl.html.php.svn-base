@@ -1,0 +1,326 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-16 15:21:09
+         compiled from "/var/www/fanwire/views/photos/editPhotos.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:520899828502cc28d0d87f0-85998925%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '88b470d11412d5329d1950483db043bd5b129b98' => 
+    array (
+      0 => '/var/www/fanwire/views/photos/editPhotos.tpl.html',
+      1 => 1345108663,
+    ),
+  ),
+  'nocache_hash' => '520899828502cc28d0d87f0-85998925',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('header.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+
+<?php $_template = new Smarty_Internal_Template('myfanwireLeftBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.tools.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="<?php echo @SITE_URL;?>
+views/css2/scrollable.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo @SITE_URL;?>
+views/css2/buttons.css" />
+
+ 
+
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $('#fanwirename').hide();
+        $('#photoimg').live('change', function()
+        {
+            $("#preview").html('');
+            $("#preview").html('<img src="loader.gif" alt="Uploading...."/>');
+            $("#imageform").ajaxForm({target: '#preview'}).submit();
+        });
+                    
+    });
+    function activateSlide(){
+        //alert('slide');
+
+        $("#messages").scrollable({size: 1});
+
+    }
+    
+    function validatealbum()
+    { 
+        var radios = document.getElementsByName('mainimage');
+        var value;
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].type === 'radio' && radios[i].checked) {
+                value = radios[i].value;
+            }
+        }
+        if(value){
+            document.getElementById("imagerror").innerHTML= "";
+            var coverImage=value;
+            var personal=document.getElementById('personal').checked;
+            var privacy=document.getElementById('privacy').checked;
+            var fanwirename=document.getElementById('fanwirename').value;
+            var dataString="coverImage="+coverImage+"&fanwireName="+fanwirename+"privacy="+privacy+"&personal="+personal;
+            $.ajax({
+                url:"<?php echo @SITE_URL;?>
+photos/organize",
+                data:dataString,
+                method:'post',
+                success:function(res){
+                    if(res==1){
+                        window.location.href='<?php echo @SITE_URL;?>
+mediaCenter';
+                    }
+                }
+            });
+            return true;
+        }else{
+            document.getElementById("imagerror").innerHTML= "Please select cover image";
+            return false;
+        }
+       
+
+        // document.albumfrm.submit();
+    }
+
+
+    
+    function changeStatus(n){
+        // document.getElementById("status").value = n;
+        if(n=="1")
+        {
+            document.getElementById("desktop").className += " active";
+            document.getElementById('yfanwire').classList.remove('active');
+            document.getElementById('facebook').classList.remove('active');
+            $('#filedrag').toggle();
+           
+
+        }
+        else if(n=="2")
+        {
+            $('#filedrag').hide();
+            document.getElementById("yfanwire").className += " active";
+            document.getElementById('desktop').classList.remove('active');
+            document.getElementById('facebook').classList.remove('active');
+
+        }
+        else if(n=="3")
+        {
+            $('#filedrag').hide();
+            document.getElementById("facebook").className += " active";
+            document.getElementById('yfanwire').classList.remove('active');
+            document.getElementById('desktop').classList.remove('active');
+            
+        }
+        else{
+            $('#filedrag').hide();
+            document.getElementById('desktop').classList.remove('active');
+        }
+    }
+    function cancelPic(filename){
+        var a=confirm("Do you really want to remove "+filename);
+        if(a){
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = newURL+'fanwire/views/scripts/jquery.tools.min.js';
+            head.appendChild(script);
+            $.ajax({
+                url:'<?php echo @SITE_URL;?>
+photos/ajaximage',
+                method:'post',
+                data:'flname='+filename+'&can=1',
+                success:function(res){
+                    $('#messages').html(res);
+                    activateSlide()
+               
+                }
+            });
+        }
+    }
+    function toggleText(){
+        var res=document.getElementById('personal').checked;
+        var res1=document.getElementById('personal1').checked;
+          
+        if(res1==true)
+            $('#fanwirename').show();
+        else $('#fanwirename').hide();
+    }
+
+    function caption(val){
+        document.getElementById(val).style.display="block";
+        
+    }
+    function addCaptionForImage(val,ext){
+        
+       
+        var caption=document.getElementById('tf*'+val).value;
+        var imageId=val;
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = newURL+'fanwire/views/scripts/jquery.tools.min.js';
+        head.appendChild(script);
+        
+        if(caption){
+            $.ajax({
+                url:'<?php echo @SITE_URL;?>
+photos/addCaptionAjax',
+                method:'post',
+                data:'captionName='+caption+'&imageId='+imageId+'&ext='+ext,
+                success:function(res){
+                    $('#messages').html(res);
+                    activateSlide()
+                }
+            });
+        }else{
+            alert('enter a caption for image');
+            return false
+        }
+ 
+    }
+    
+</script>
+
+
+
+
+<!--Right Section-->
+<div class="right_container">
+
+    <div id="rightsection">
+
+        <div id="right_area">
+            <div class="connect_fans">
+
+                <h2 class="edit_photo">Add a Photo</h2><br />
+
+
+                <!--popup start here-->
+
+                <!--popup end here-->
+                <!--this photos are section start here-->
+                <div class="this_photos">
+                    <h3>This Photos are :</h3>
+
+                    <div class="tp_options">
+                        <input type="radio" name="personal" value="personal" id="personal"  onclick=" return toggleText();" checked/> Personal<br />
+                        <input type="radio" name="personal"  value="forfanwire"  id="personal1" onclick=" return toggleText();"/> For a Fanwire<br />
+                        <input type="text" name="fanwirename" id="fanwirename" style="display: none"  />
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <!--this photos are section start here-->
+
+                <!--add phots from section start here-->
+                <div class="add_phots_from">
+                    <h3>Add Photos From :</h3>
+
+                    <!--btns section start here-->
+                    <div class="add_photos_form_btns_section">
+                        <div class="profile_photo_btns">
+                            <a href="javascript:void(0);" id="desktop" class="your_desktop active" onclick="return changeStatus('1');">Your Desktop</a>
+                            <a href="javascript:void(0);" id="yfanwire" class="your_fanwire_profile" onclick="return changeStatus('2');">Your fanwire profile</a>
+                            <a href="javascript:void(0);" id="facebook" class="your_facebook" onclick="return changeStatus('3');">facebook</a>
+                        </div>
+                    </div>
+                    <!--btns section end here-->
+
+                    <!--upload box section start here-->
+
+                    <form id="upload" action="<?php echo @SITE_URL;?>
+upload.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
+                        <div class="upload_box" id="filedrag" style="display: none;" >
+                            <div class="upload_box_close_btn" ><a href="javascript:void(0);" onclick="return changeStatus('4');">X</a></div>
+                            <img src="<?php echo @SITE_URL;?>
+views/images/upload_arrow.png" />
+                            <p class="fileinput-button">drag files here or click to upload
+                                <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+                                <!--                                <input type="file" id="files" name ="filesUpload[]" size="10" multiple="" onchange="imagesSelected(this.files)" /></p>-->
+
+                        </div>
+                    </form>
+                    <div class="clear"></div>
+
+                    <div class="Cover">
+                        <div class="up_right_arrow_article" >
+                            <a href="javascript:void(0);" class="prevPage" onclick="activateSlide();"  ><img src="<?php echo @SITE_URL;?>
+views/images/upload_image_R_arrow.png" /></a></div>
+                        <div  id="messages">
+
+                        </div>
+                        <div class="up_left_arrow_article" ><a href="javascript:void(0);" class="nextPage" onclick="activateSlide();" ><img src="<?php echo @SITE_URL;?>
+views/images/upload_image_L_arrow.png" /></a></div>
+                    </div>
+                    <!--popup start here-->
+                    <div id="edit_photo_popup" style="display: none" >
+                        <form>
+
+                            <h2>Edit Caption</h2><br />
+                            <input type="text" />
+                            <a href=""><img src="<?php echo @SITE_URL;?>
+views/images/right_mark.png" alt=""/></a>
+                            <a href = "javascript:void(0)" onclick = "document.getElementById('edit_photo_popup').style.display='none'"><img src="<?php echo @SITE_URL;?>
+views/images/closebtn.gif" alt="close"/></a>
+                        </form>
+                    </div>
+                    <!--popup end here-->
+
+
+
+                    <!--                    <input name="album" id="album" type="text" class="textfield" onkeyup="checkalbum();" style="padding: 0px 5px;background-color: #f8f8f8;border:0px;border-top: 1px solid #ccc;"/>-->
+                    <input type="hidden" id="cover_image" name="cover_image" value=""/>
+                    <span style="color:#F00;font-size: 12px;" id="albumerror"></span>
+                    <div style="color:#F00;float:right"><span id="imagerror"></span></div>
+
+                    <!--add phots from section start here-->
+                    <!--notification options section start here-->
+                    <div class="notifications_div">
+                        <h3>Notification</h3>
+
+                        <div class="n_options">
+                            <input type="checkbox" /> Twitter Account <span><a href="#">add account</a></span><br />
+                            <input type="checkbox" /> Facebook Account<br />
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <!--notification options section start here-->
+
+                    <!--privacy are section start here-->
+                    <div class="privacy">
+                        <h3>Privacy</h3>
+
+                        <div class="privacy_options">
+                            <input type="radio" name="privacy" id="privacy" value="private" checked /> This is a private post<br />
+                            <input type="radio" name="privacy" id="privacy" value="public"/> This is a public post<br />
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <!--privacy section start here-->
+
+
+                    <!--save, back btns sections start here-->
+                    <div class="bs_btns">
+                        <a href="<?php echo @SITE_URL;?>
+addItem" class="back_btn">back</a>
+                        <div id="submitbutton" >
+                            <input type="submit" class="save_btn" onclick="return validatealbum();" value="publish"/>
+                            <!--                        <button type="submit" class="save_btn" onclick="return validatealbum();">publish</button>-->
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    </form>
+                    <!--save, back btns sections end here-->
+
+                </div>
+            </div>
+        </div>
+        <script src="<?php echo @SITE_URL;?>
+views/scripts/filedrag.js"></script>
+        <?php $_template = new Smarty_Internal_Template('footer.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<errors>
+    <success>success</success>
+    <failed>failed</failed>
+    <emailEx>The email is already in use. Please enter another email.</emailEx>
+    <usernotavail>The Username or Password Incorrect.</usernotavail>
+    <notactive>Email address is not confirmed yet.</notactive>
+    <error5>'New Password' AND 'Re Enter New Password' Fields Must Be Equal.</error5>
+    <error6>An Unauthorised User.</error6>
+    <error7>Internal Error. Please Update Again.</error7>
+    <error8>Your Password Has Been Changed.</error8>
+    <error9>Incorrect username or password.</error9>
+    <error10>Please Enter Username.</error10>
+    <error11>Invalid User.</error11>
+    <error12>Your Password Has been Mailed To</error12>
+    <error13>Failed In Sending Mail, Please Try Again.</error13>
+    <error14>Either email or reset code was wrong.</error14>
+    <error15>Password has been reset.</error15>
+    <error16>Password was not reset, please do again.</error16>
+    <error17>Please write reviews and reserve it.</error17>
+    <error18>You have not filled your date of birth. Kindly update your profie.</error18>
+    <error19>You are less than 18 years old, you can not reserve/purchase it.</error19>
+    <activate>Your account is now activated,</activate>
+    <activated>You have already confirmed your account,</activated>
+    <confirmsent>Thank you for signing up to FanWire. You should be receiving a notification to confirm your email address. Please check your email and confirm your address to continue the registration process. If you did not receive an email please contact support.</confirmsent>
+    
+</errors>

@@ -1,0 +1,401 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-07-31 15:29:21
+         compiled from "/var/www/fanwire/views/admin/photos/addPhotos.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:13644985105017ac793b84e5-80787442%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '243d5e6a30be5b91f7cbedd9c7e1a862c53a9b10' => 
+    array (
+      0 => '/var/www/fanwire/views/admin/photos/addPhotos.tpl.html',
+      1 => 1343728740,
+    ),
+  ),
+  'nocache_hash' => '13644985105017ac793b84e5-80787442',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/header.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.validate.js"></script>
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/textLimit.js"></script>
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.tools.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo @SITE_URL;?>
+views/css2/scrollable.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo @SITE_URL;?>
+views/css2/buttons.css" />
+
+ 
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $('#fanwirename').hide();
+        $('#photoimg').live('change', function()
+        {
+            $("#preview").html('');
+            $("#preview").html('<img src="loader.gif" alt="Uploading...."/>');
+            $("#imageform").ajaxForm({target: '#preview'}).submit();
+        });
+                    
+    });
+    function activateSlide(){
+        //alert('slide');
+        $("#messages").scrollable({size: 1});
+    }
+    
+    function validatealbum()
+    { 
+        var radios = document.getElementsByName('mainimage');
+        var value;
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].type === 'radio' && radios[i].checked) {
+                value = radios[i].value;
+            }
+        }
+        if(value){
+            document.getElementById("imagerror").innerHTML= "";
+            var coverImage=value;
+            var personal=document.getElementById('personal').checked;
+            var privacy=document.getElementById('privacy').checked;
+            var fanwirename=document.getElementById('fanwirename').value;
+            var dataString="coverImage="+coverImage+"&fanwireName="+fanwirename+"privacy="+privacy+"&personal="+personal;
+            $.ajax({
+                url:"<?php echo @SITE_URL;?>
+photos/organize",
+                data:dataString,
+                method:'post',
+                success:function(res){
+                    if(res==1){
+                        window.location.href='<?php echo @SITE_URL;?>
+mediaCenter';
+                    }
+                }
+            });
+            return true;
+        }else{
+            document.getElementById("imagerror").innerHTML= "Please select cover image";
+            return false;
+        }
+       
+
+        // document.albumfrm.submit();
+    }
+
+
+    
+    function changeStatus(n){
+        // document.getElementById("status").value = n;
+        if(n=="1")
+        {
+            document.getElementById("desktop").className += " active";
+            document.getElementById('yfanwire').classList.remove('active');
+            document.getElementById('facebook').classList.remove('active');
+            $('#filedrag').toggle();
+           
+
+        }
+        else if(n=="2")
+        {
+            $('#filedrag').hide();
+            document.getElementById("yfanwire").className += " active";
+            document.getElementById('desktop').classList.remove('active');
+            document.getElementById('facebook').classList.remove('active');
+
+        }
+        else if(n=="3")
+        {
+            $('#filedrag').hide();
+            document.getElementById("facebook").className += " active";
+            document.getElementById('yfanwire').classList.remove('active');
+            document.getElementById('desktop').classList.remove('active');
+            
+        }
+        else{
+            $('#filedrag').hide();
+            document.getElementById('desktop').classList.remove('active');
+        }
+    }
+    function cancelPic(filename){
+        var a=confirm("Do you really want to remove "+filename);
+        if(a){
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = newURL+'fanwire/views/scripts/jquery.tools.min.js';
+            head.appendChild(script);
+            $.ajax({
+                url:'<?php echo @SITE_URL;?>
+photos/ajaximage',
+                method:'post',
+                data:'flname='+filename+'&can=1',
+                success:function(res){
+                    $('#messages').html(res);
+                    activateSlide()
+               
+                }
+            });
+        }
+    }
+    function toggleText(){
+        var res=document.getElementById('personal').checked;
+        var res1=document.getElementById('personal1').checked;
+          
+        if(res1==true)
+            $('#fanwirename').show();
+        else $('#fanwirename').hide();
+    }
+
+    function caption(val){
+        document.getElementById(val).style.display="block";
+        
+    }
+    function addCaptionForImage(val,ext){
+        
+       
+        var caption=document.getElementById('tf*'+val).value;
+        var imageId=val;
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = newURL+'fanwire/views/scripts/jquery.tools.min.js';
+        head.appendChild(script);
+        
+        if(caption){
+            $.ajax({
+                url:'<?php echo @SITE_URL;?>
+photos/addCaptionAjax',
+                method:'post',
+                data:'captionName='+caption+'&imageId='+imageId+'&ext='+ext,
+                success:function(res){
+                    $('#messages').html(res);
+                    activateSlide()
+                }
+            });
+        }else{
+            alert('enter a caption for image');
+            return false
+        }
+ 
+    }
+    
+
+    $(document).ready(function() { 	
+        $('#photoimg').live('change', function(){     
+            document.imageform.submit();         
+            uploadFile();
+        });        
+    }); 
+    function getkeywords()
+    {
+        var keywords =new Array(); var i=0;
+        $("div #albumkeywords span").each(function(){
+            keywords[i] = $(this).text(); i++;
+        });      
+        var keyword = keywords.join(",");
+        document.getElementById("keyword").value = keyword;
+    }
+     
+    function removespan(id)
+    {
+        $(id).remove();
+    } 
+    function addkeywords()
+    {
+        var val = $.trim(document.getElementById("keywords").value);
+        var key = val.replace(" ", "_");
+        key = key.replace(" ", "_");           
+        if(key!="")
+        {
+            $("#albumkeywords").append('&nbsp;<div class="keywords" id="'+key+'" onclick=removespan("#'+key+'")><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" height="11" width="8" alt="" /></a><p>'+val+'</p></div>');
+            document.getElementById("keywords").value="";
+        }
+    }
+      
+    function addfanwires()
+    {
+        var val = $.trim(document.getElementById("fanwires").value);
+        var key = val.replace(" ", "_");
+        key = key.replace(" ", "_");           
+        if(key!="")
+        {
+            $("#additional_fanwires").append('&nbsp;<div class="keywords" id="'+key+'" onclick=removespan("#'+key+'")><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" height="11" width="8" alt="" /></a><p>'+val+'</p></div>');
+            document.getElementById("fanwires").value="";
+        }
+    }
+        
+    $().ready(function(){ 
+        textlimit(300,'#remainingCharacters','#description'); 
+        jQuery.validator.addMethod("noSpace", function(value, element) { 
+            return value.indexOf(" ") < 0 && value != ""; 
+        }, "Space id not allowed");
+        $("#addphotos").validate({
+            rules: {
+                name: {
+                    required:true				
+                },
+                url: {
+                    required: true,
+                    noSpace:true
+                },
+                        
+                maincat: {
+                    required: true
+                },
+                description: {
+                    required: true
+                },
+                photo: {
+                    required: true
+                },
+                facebook: {
+                    required: true,
+                    url:true
+                },
+                twitter: {
+                    required: true,
+                    url:true
+                },
+                youtube: {
+                    required: true,
+                    url:true
+                }
+            }
+        });
+    }); 
+</script>
+                  
+<div id="data_sectionarea">
+    <div class="data_leftsection">
+
+        <div class="glossymenu">
+            <a class="menuitem active" href="#">Information</a>
+            <a class="menuitem submenuheader" href="#">Media</a>
+            <div class="submenu">
+                <ul>
+                    <li><a href="<?php echo @ADMIN_URL;?>
+photos/addPhotos">Photo</a></li>
+                    <li><a href="<?php echo @ADMIN_URL;?>
+videos/addVideos">Video</a></li>
+                    <li><a href="<?php echo @ADMIN_URL;?>
+articles/addArticles">Articles</a></li>
+                    <li><a href="#">Incoming</a></li>
+                </ul>
+            </div>
+            <a class="menuitem" href="#">Profile</a>
+            <a class="menuitem" href="#">Contact</a>
+            <a class="menuitem" href="#" style="border-bottom-width: 0">Admin Log</a>		
+        </div>            
+    </div>
+    <form action="" name="addphotos" id="addphotos">
+        <div class="data_rightsection">
+            <div class="rightcontent">
+                <div class="datatabsection">
+                    <div class="datatableftsection"><a href="#">Home</a> > <a href="#">FanWire Admin</a> > <a href="#" class="active">Add New FanWire</a></div>
+                    <div class="datatabrightsection"><a href="#">Step 1 of 4</a></div>
+                </div>
+                <div class="clear"></div>
+                <div class="menu_area">
+                    <div class="menu_area_list">
+                        <ul><li class="active"><a href="#"><span><strong>NEW</strong></span></a></li><li><a href="#"><span><strong>MANAGE</strong></span></a></li></ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+
+                <div class="datasettingarea">
+                    <div class="forms">
+
+                        <div class="dataforms">
+                            <label class="name">Group Name</label><input name="name" id="name" type="text" class="textfield" />
+                        </div>
+
+                        <div class="dataforms">
+                            <label class="name">Keywords</label>
+                            <input name="keywords" id="keywords" type="text" class="textfield" style="float:left;"/>
+                            <img src="<?php echo @SITE_URL;?>
+views/images/add.png" height="20" width="20" alt="" onclick="addkeywords();" style="cursor: pointer" />
+                        </div>
+                        <div class="add_keywords" id="albumkeywords"></div>
+
+
+                        <div class="dataforms">
+                            <label class="name">Additional Fanwires</label><input name="fanwires" id="fanwires" type="text" class="textfield" style="float:left;"/>
+                            <img src="<?php echo @SITE_URL;?>
+views/images/add.png" height="20" width="20" alt="" onclick="addfanwires();" style="cursor: pointer" />
+                        </div>
+
+                        <div class="add_keywords" id="additional_fanwires"></div>                                         
+
+                        <div class="dataforms">
+                            <label class="name">Description</label>
+                        </div>
+                        <div class="dataforms">
+                            <label class="name"></label><textarea name="description" id="description" cols="" rows="" class="text_area" style="float:left; padding:0 10px 0 0;"></textarea>
+                            <div class="Char_remaining"> 
+                                <p>Characters</p>
+                                <p>remaining</p>
+                                <b><span id="remainingCharacters"></span></b>
+                            </div>
+                        </div>
+                    </div>                                        
+                    <div class="clear"></div>
+                    <!--btns section start here-->                                           
+                    <!--btns section end here--> 
+
+ 
+                    <form id="upload" name="upload" action="<?php echo @SITE_URL;?>
+upload.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
+                        <div class="upload_box" id="filedrag" >
+                            <div class="upload_box_close_btn" ><a href="javascript:void(0);" onclick="return changeStatus('4');">X</a></div>
+                            <img src="<?php echo @SITE_URL;?>
+views/images/upload_arrow.png" />
+                            <p class="fileinput-button">drag files here or click to upload
+                                <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+                                <!--                                <input type="file" id="files" name ="filesUpload[]" size="10" multiple="" onchange="imagesSelected(this.files)" /></p>-->
+
+                        </div>
+                    </form>
+
+                    <div class="Cover">
+                        <div class="up_right_arrow_article" id="la"  ><a href="javascript:void(0);" class="prevPage" onclick="activateSlide();"  ><img src="<?php echo @SITE_URL;?>
+views/images/upload_image_R_arrow.png" /></a></div>
+
+                        <div  id="messages" style="display: none"    >
+
+
+                        </div>
+
+                        <div class="up_left_arrow_article" id="ra" ><a href="javascript:void(0);" class="nextPage" onclick="activateSlide();" ><img src="<?php echo @SITE_URL;?>
+views/images/upload_image_L_arrow.png" /></a></div>
+                    </div>          
+ 
+
+                    <!--upload box section end here-->                                        
+                                                         
+                    <div class="clear"></div> 
+                    <div class="bs_btns">
+                        <div class="back_btn">back</div>
+                        <div class="save_btn">Next</div>
+                        <div class="clear"></div>
+                    </div>      
+                </div>
+            </div>          
+        </div></form>            
+</div> 
+
+<?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/footer.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?> 
+ 
+
+ 
+ 
+ 
+
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/filedragAdmin.js"></script>

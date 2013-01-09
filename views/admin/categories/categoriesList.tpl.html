@@ -1,0 +1,53 @@
+ {include file="$ADMIN/header.tpl.html"}
+       <div id="data_sectionarea">
+        <div class="data_rightsection1">
+        <div class="rightcontent">
+        <div class="datatabsection">        
+        <div class="datatabrightsection"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="search_fanwire">
+        <div class="search"  style="float:right;">        
+            <div><div class="connect"><a href="{$smarty.const.ADMIN_URL}categories/addCategory">add category</a>  </div></div>
+        </div>
+        <div class="numbers">
+<!--        <div><p> First  <a href="#">&lt;</a>  1 Page of 2103 <a href="#"> &gt; </a> Last</p></div>-->
+        </div>
+        <div class="clear"></div>
+        </div>
+        <h1 style="color:#424140;text-transform:capitalize; padding: 5px 0 15px 20px; font-size: 20px; font-weight: bold;">Categories List</h1>
+                            <table class="table_01" cellpadding="5" cellspacing="5" align="center">      
+        
+                               
+                                <tr class="table_header">
+                                    <th style="padding-left: 15px;">ID</th>
+                                    <th style="padding-left: 15px;">Name</th>
+                                    <th style="padding-left: 15px;">Meta Title</th>
+                                    <th style="padding-left: 15px;">Edit</th>
+                                    {if $smarty.session.admintype eq '2'}<th style="padding-left: 15px;">Delete</th>{/if}
+                                </tr> 
+                                {section name="id" loop= $list}
+                                <tr {if $smarty.section.id.iteration % 2 eq '0'}class="color"{/if}>
+                                    <td align="left">{$list[id].id}</td>
+                                    <td align="left">{if $list[id].level eq 1}&nbsp;&nbsp;&nbsp;|____{elseif $list[id].level eq 2}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_____{/if}{$list[id].name}</td>
+                                    <td align="left">{$list[id].metatitle}</td>
+                                    <td align="left"><a href="{$smarty.const.ADMIN_URL}categories/editCategory?catid={$list[id].id}">edit</a></td>
+                                    {if $smarty.session.admintype eq '2'}<td align="left"><a onclick="return confirm('Delete Category?');" href="{$smarty.const.ADMIN_URL}categories/deleteCategory?catid={$list[id].id}">delete</a></td>{/if}
+                                </tr>
+                                {sectionelse}
+                                <tr><td colspan="4" align="center" height="100px" valign="middle">NO CATEGORIES</td></tr>
+                                {/section}
+                                {if !empty($navigation)}
+                                <tr>
+                                    <td colspan="4" align="right">
+                                        {$navigation}
+                                    </td></tr>
+                                {/if}
+                                <tr><td colspan="4">&nbsp;</td></tr>
+                            </table>
+                        </div>       
+                    </div>
+                </div> 
+         
+    {include file="$ADMIN/footer.tpl.html"}  
+    

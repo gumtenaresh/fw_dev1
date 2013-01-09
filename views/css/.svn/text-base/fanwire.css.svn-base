@@ -1,0 +1,198 @@
+/* 
+    Document   : fanwire
+    Created on : 25 Oct, 2012, 6:58:55 PM
+    Author     : naresh
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.chat{
+    width:240px;
+    left: 80%;
+    height:auto;
+    background-color:#fff;
+    border:1px solid #dbdbdb;
+    position: fixed;
+    bottom:0;
+    z-index:999999;
+}
+
+.chat_session{
+    position: relative;
+    width:230px;
+    height:auto;
+    background-color:#f4f5f5;
+    margin:0 auto 0 auto;
+    padding:2px;
+    z-index:999999;
+
+
+}
+.chat_heading{
+    width:230px;
+    text-align:center;
+    color:#fff;
+    height:27px;
+    line-height:27px;
+    background-color:#444243;
+    border:1px solid #444243;
+}
+.chat_heading1{
+    width:230px;
+    text-align:center;
+    color:#fff;
+    height:27px;
+    line-height:27px;
+    background-color:#02a0bf;
+    border:1px solid #02a0bf;
+}
+.left_close{
+    width:auto;
+    padding:0px 10px 0px 10px;
+    color:#444243;
+    background-color:#f4f5f5;
+    float:left;
+    cursor:pointer;
+    height:27px;
+}
+.left_close a{
+    color:#444243;
+    text-decoration:none;
+    cursor:pointer;
+
+}
+.left_close a:hover{
+    color:#444243;
+    text-decoration:none;
+    cursor:pointer;
+}
+.right_clear{
+    width:auto;
+    padding:0px 10px 0px 10px;
+    color:#444243;
+    background-color:#f4f5f5;
+    float:right;
+    height:27px;
+}
+.right_clear a{
+    color:#444243;
+    text-decoration:none;
+    cursor:pointer;
+
+}
+.right_clear a:hover{
+    color:#444243;
+    text-decoration:none;
+    cursor:pointer;
+}
+.chat_list{
+    width:222px;
+    height:auto;
+    border-bottom:1px dashed #02a0bf;
+    /*        margin:5px 0px;*/
+    padding:15px 0;
+}
+.chat_list img{margin-right:10px;}
+
+.collapse{
+    width:230px;
+    float:left; height:27px;
+    text-align:center;
+    color:#02a0bf;
+    line-height:27px;
+    font-weight:bold;
+}
+#footerSlideContent {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 0px;
+    font-size: 0.8em;
+    border: none;
+    font-family: DejaVuSansBook, Sans-Serif;
+}
+#footerSlideText {
+    padding: 15px 10px 25px 25px;
+}
+.imgCls {
+    display: block;
+    margin: 10px auto;
+    max-height: 500px;
+    max-width: 100%;
+}
+
+.fileinput-button {
+    position: absolute;
+    float: left;
+}
+
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    border: solid transparent;
+    border-width: 0 0 100px 200px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-transform: translate(-300px, 0) scale(4);
+    direction: ltr;
+    cursor: pointer;
+}
+
+.bstyle{           
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: 000;
+    z-index:1001;
+    -moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);
+}
+.wstyle {
+    display: none;
+    background-color: white;
+    border: 3px solid #CFCFCF;
+    height: auto;
+    left: 5%;
+    overflow: auto;
+    padding: 2px;
+    position: absolute;
+    top: 5%;
+    width: 90%;
+    z-index: 1002;
+}
+/**this is added for new version2*/
+.facebookModal {
+    background: url("../images/1_fanwire.png") no-repeat scroll 16px 0
+        #FFFFFF;
+    border: 1px solid black;
+    display: none;
+    font-size: 150%;
+    height: 110px;
+    left: 40%;
+    padding: 25px;
+    text-align: center;
+    top: 43%;
+    width: 351px;
+    background-position: center;
+}
+
+.facebookModal1 {
+    background: url("../images/1_fanwire.png") no-repeat scroll 16px 0
+        #FFFFFF;
+    border: 1px solid black;
+    display: none;
+    font-size: 150%;
+    height: 110px;
+    left: 40%;
+    padding: 25px;
+    text-align: center;
+    top: 43%;
+    width: 351px;
+    background-position: center;
+    position: fixed;
+    z-index: 99999;
+}

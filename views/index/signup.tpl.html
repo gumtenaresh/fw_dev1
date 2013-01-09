@@ -1,0 +1,299 @@
+{include file='header.tpl.html'}
+ 
+
+
+
+
+<div class="main_section1">
+    <div class="fanwire_contact">
+        <div class="contact_text">
+            <p>Join FanWire in 3 Easy Steps</p>
+            <span>Create an account to customize your profile and view  all of your favorite celebrities, <br> 
+                musicians, and sports athletes.  </span>
+        </div>
+        <div id="loader" style="  left:342px;  position:absolute;  top:159px;  z-index:2;display: none;"><img src="{$smarty.const.SITE_URL}views/images/loader.gif"  /></div>
+        <div style="color: #ff6009;text-align: center" id="error_message_login">{$ermsg}</div>
+        <div class="contacts">
+            <p style="color:#999999; font-size:12px; padding:15px 0 14px 156px;">Connect with</p>
+            <div class="signup_icons">
+                <a href="javascript:void(0);"  onclick="stat();"  class="signup_fb"></a>
+                <a href="{$smarty.const.SITE_URL}twitterLogin" class="signup_tw"></a>
+                <div class="clear"></div>     
+                <p style="font-size:12px; color:#999999;"><img src="{$smarty.const.SITE_URL}/views/images/line.png" height="7" width="376" alt="" ></p>           
+            </div>
+            <form  name="registerHere" id="registerHere" method="post" action="" onsubmit="return CalAge(this.months.value,this.days.value,this.years.value);" >
+                <div class="signup_error">
+                    <input type="text" name="firstname" id="firstname" value="{$values.firstname}"  class="signup_input1" style="margin:0 6px 0 0;" placeholder="First Name">
+
+                    <input type="text" name="lastname" id="lastname" value="{$values.lastname}"  class="signup_input1" placeholder="Last Name">
+                </div>
+                <div class="signup_error">
+                    <input  type="text" name="email" id ="email" class="signup_input" placeholder="Email Address"/>
+                </div>
+                <div class="signup_error">
+                    <input type="password"  name="password" id="password" value="{$values.password}"class="signup_input" placeholder="Password">
+                </div>
+                <div class="signup_error">
+                    <input type="password"  name="reenterpassword" id="reenterpassword" value="{$values.password}"  class="signup_input" placeholder="Confirm Password">
+                </div>
+                <div class="clear"></div>
+                <div class="signup_error">  
+                    <select name="sex"  class="selectyze1" id="sex"  >
+                        <option value="">Select Gender</option>
+                        <option {if $values.sex eq male}selected{/if} value="male">Male</option>
+                        <option  {if $values.sex eq female}selected{/if} value="female">Female</option>
+                    </select>
+                </div>
+                <div class="clr"></div>
+                <div class="signup_error">  
+                    <label>Birthday:</label>
+                    <select name="months" id="months" class="selectyze2" onchange="validateDate()" >
+                        <option value=""> Month </option>
+                        {foreach from=$months key=k item=v}
+                        <option {if $values.months eq $k}selected{/if} value="{$k}">{$v}</option>
+                        {/foreach}
+                    </select> 
+                    <select name="days"  id ="days" class="selectyze2" onchange="validateDate()"  style="width:67px;"  >
+                        <option value=""> Day </option>
+                        {foreach from=$days key=k item=v}
+                        <option {if $values.days eq $k}selected{/if} value="{$k}">{$v}</option>
+                        {/foreach}
+                    </select> 
+                    <select name="years" id="years" class="selectyze2" onchange="validateDate();" style="width:78px;" >
+                        <option value=""> Year </option>
+                        {foreach from=$years key=k item=v}
+                        <option  {if $values.years eq $k}selected{/if} value="{$k}">{$v}</option>
+                        {/foreach}
+                    </select>
+                    <div id="showError"></div>
+                </div>
+                <div id="datebirth" style="color: #FF6009;"></div>
+                <div class="clear"></div>
+                <input  name="submit"  type="submit"  class="contct_btn1" value="Connect"  >
+ 
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="fb-root"></div>
+{literal}
+
+<script type="text/javascript">
+    function stat(){
+        
+        FB.getLoginStatus(function(response) {
+            
+            if (response.status === 'connected') {
+               
+                login();
+                // the user is logged in and has authenticated your
+                // app, and response.authResponse supplies
+                // the user's ID, a valid access token, a signed
+                // request, and the time the access token 
+                // and signed request each expire
+                // var uid = response.authResponse.userID;
+                //  var accessToken = response.authResponse.accessToken;
+               
+            } else if (response.status === 'not_authorized') {
+                // FB.login(null,{scope:'email,user_birthday,status_update,publish_stream,user_about_me'});return false;
+                  
+                // the user is logged in to Facebook, 
+                // but has not authenticated your app
+            } else {
+                
+                FB.login(null,{scope:'email,user_birthday,status_update,publish_stream,user_about_me'});return false;
+                // alert('not asf');
+                // the user isn't logged in to Facebook.
+            }
+        });}
+    
+    window.fbAsyncInit = function() {
+        FB.init({appId: '{/literal}{$smarty.const.FB_APP_ID}{literal}', status: true, cookie: true, xfbml: true});
+
+        /* All the events registered */
+        FB.Event.subscribe('auth.login', function(response) {
+            // do something with response
+            // z console.log('user logged in in facebook');
+            // alert('maresh');
+                  
+            login();
+        });
+        FB.Event.subscribe('auth.logout', function(response) {
+            //  alert('naresh')
+            window.location.reload();
+            // do something with response
+            //  console.log('user loggedout  in facebook');
+            logout();
+        });
+
+        FB.getLoginStatus(function(response) {
+            if (response.session) {
+                login();
+            }
+        });
+    };
+    (function() {
+        var e = document.createElement('script');
+        e.type = 'text/javascript';
+        e.src = document.location.protocol +
+            '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+    }());
+
+    function login(){
+        // alert('hehhehehhehhhe');
+        FB.api('/me', function(response) {
+            //ajax registration form submission
+            var fname=response.first_name;
+            var lname=response.last_name;
+            var name=response.name;
+            var email=response.email;
+            var link=response.link
+            var fbid=response.id;
+            var birthday=response.birthday;
+            var sex=response.gender;
+                    
+ 
+            var dataStringd="firstname="+fname+"&lastname="+lname+"&username="+name+"&email="+email+"&fb_url_link="+link+"&dob="+birthday+"&sex="+sex+"&fbid="+fbid;
+                    
+            $.ajax({
+                type: "POST",
+                url:"{/literal}{$smarty.const.SITE_URL}{literal}fbregisterAjax",
+                data: dataStringd,
+                beforeSend: function(){
+                    $('#step6').show();
+                    $('#fade6').show();
+                },
+                complete: function(){
+                    $('#step6').hide();
+                    $('#fade6').hide();
+                },
+                success: function(resa) {
+                    if(resa == true){
+                        window.location.href='{/literal}{$smarty.const.SITE_URL}{literal}myFanwire';
+                              
+                    }else{
+                        window.location.href='{/literal}{$smarty.const.SITE_URL}{literal}addFanwires';
+                               
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        });
+                 
+    }
+    function logout(){
+        var dataStringd="destroy=yes";
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}manageSession",
+            data: dataStringd,
+                
+            success: function(resa) {
+                           
+                    
+            },
+            error:function(data){
+                console.log(data);
+            }
+        });
+        document.getElementById('login').style.display = "none";
+    }
+
+ 
+    function share(){
+        var share = {
+            method: 'stream.share',
+            u: 'http://202.136.65.24/fanwire'
+        };
+
+        FB.ui(share, function(response) { console.log(response); });
+    }
+
+    function graphStreamPublish(){
+        var body = 'Reading New Graph api & Javascript Base FBConnect Tutorial from Thinkdiff.net';
+        FB.api('/me/feed', 'post', { message: body }, function(response) {
+            if (!response || response.error) {
+                alert('Error occured');
+            } else {
+                alert('Post ID: ' + response.id);
+            }
+        });
+    }
+
+    function fqlQuery(){
+        FB.api('/me', function(response) {
+            var query = FB.Data.query('select name, hometown_location, sex, pic_square from user where uid={0}', response.id);
+            query.wait(function(rows) {
+                       
+                document.getElementById('name').innerHTML =
+                    'Your name: ' + rows[0].name + "<br />" +
+                    '<img src="' + rows[0].pic_square + '" alt="" />' + "<br />";
+            });
+        });
+    }
+
+    function setStatus(){
+        status1 = document.getElementById('status').value;
+        FB.api(
+        {
+            method: 'status.set',
+            status: status1
+        },
+        function(response) {
+            if (response == 0){
+                alert('Your facebook status not updated. Give Status Update Permission.');
+            }
+            else{
+                alert('Your facebook status updated');
+            }
+        }
+    );
+    }
+    
+   
+</script>
+
+
+{/literal}
+
+
+
+
+

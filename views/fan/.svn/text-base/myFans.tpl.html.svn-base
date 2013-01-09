@@ -1,0 +1,80 @@
+{include file='header.tpl.html'}
+{include file='zoom.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="right_area">
+            <div class="connect_fans">
+                <div class="awards_active">
+                    <ul>
+                        <li class="active"><a href="{$smarty.const.SITE_URL}fans"><span><strong>My Fans ({$commonFanwires|@count})</strong></span></a></li>
+                        <li><a href="{$smarty.const.SITE_URL}chooseFans"><span><strong>Find Fans</strong></span></a></li>
+                    </ul>
+                </div>
+                <div style="float:right; width:278px;">
+                    <div class="search">
+                        <input name="" type="text"  placeholder='Search fans'  class="search_field"  style="text-align: center;"  />
+                        <input  name=""  type="button"  class="go2"  />
+                    </div>
+                </div>
+                <!--                 <div class="fan_tabs"> -->
+                <!--                     <ul> -->
+                <!--                         <li><img src="{$smarty.const.SITE_URL}views/images/march.jpg" width="31" height="31" /><a href="#">James marchetti</a><a href="#"><img src="{$smarty.const.SITE_URL}views/images/close.png" width="13" height="13" hspace="2" vspace="9" border="0" /></a></li> -->
+                <!--                         <li><img src="{$smarty.const.SITE_URL}views/images/march.jpg" width="31" height="31" /><a href="#">James marchetti</a><a href="#"><img src="{$smarty.const.SITE_URL}views/images/close.png" width="13" height="13" hspace="2" vspace="9" border="0" /></a></li> -->
+                <!--                         <li><img src="{$smarty.const.SITE_URL}views/images/march.jpg" width="31" height="31" /><a href="#">James marchetti</a><a href="#"><img src="{$smarty.const.SITE_URL}views/images/close.png" width="13" height="13" hspace="2" vspace="9" border="0" /></a></li> -->
+                <!--                     </ul> -->
+                <!--                 </div> -->
+                <!--                 <div class="addpost"> -->
+                <!--                     <div class="post"> -->
+                <!--                         <div class="posts"> -->
+                <!--                             <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" /> -->
+                <!--                             <div class="data2">James marchetti</div></div> -->
+                <!--                     </div> -->
+                <!--                     <div class="post"> -->
+                <!--                         <div class="posts"> -->
+                <!--                             <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" /> -->
+                <!--                             <div class="data2">James marchetti</div></div> -->
+                <!--                     </div> -->
+                <!--                 </div> -->
+                <div class="addpost">
+                    {if $userFansDetails}
+                    {section name=nott loop=$userFansDetails}
+                    {assign var=notification  value=$userFansDetails[nott]}
+                    <div class="photo_list">
+                        <div class="photos_list">
+                            <img src="{$smarty.const.PROFILE_IMAGES_VIEW_PATH}{$notification.profile_image}" width="184" height="152" />
+                            <div class="data2">
+                                <a href="#"><img src="{$smarty.const.SITE_URL}views/images/social_icons.jpg" width="49" height="17" border="0" align="right" /></a>{$notification.fname} </div></div>
+                        <div class="photo_post">
+                            {$commonFanwires[$notification.id]|@count} FanWires in common
+                        </div>
+                    </div>
+                    {/section}
+                    {/if}
+                </div>
+                <!--                 <div class="addpost"> -->
+                <!-- 	                <div class="photo_list2"> -->
+                <!-- 	                    <div class="photos_list"> -->
+                <!-- 	                        <img src="{$smarty.const.SITE_URL}views/images/photo_big.jpg" width="246" height="203" /> -->
+                <!-- 	                        <div class="data2"> -->
+                <!-- 	                            <a href="#"><img src="{$smarty.const.SITE_URL}views/images/social_icons.jpg" width="49" height="17" border="0" align="right" /></a>Lil wayne </div></div> -->
+                <!-- 	                    <div class="photo_post"> -->
+                <!-- 	                        12 FanWires in common -->
+                <!-- 	                    </div> -->
+                <!-- 	                </div> -->
+                <!-- 	                <div class="photo_list2"> -->
+                <!-- 	                    <div class="photos_list"> -->
+                <!-- 	                        <img src="{$smarty.const.SITE_URL}views/images/photo_big.jpg" width="246" height="203" /> -->
+                <!-- 	                        <div class="data2"> -->
+                <!-- 	                            <a href="#"><img src="{$smarty.const.SITE_URL}views/images/social_icons.jpg" width="49" height="17" border="0" align="right" /></a>Lil wayne </div></div> -->
+                <!-- 	                    <div class="photo_post"> -->
+                <!-- 	                        12 FanWires in common -->
+                <!-- 	                    </div> -->
+                <!-- 	                </div> -->
+                <!--                 </div>      -->
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        {include file='footer.tpl.html'}

@@ -1,0 +1,45 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>FANWIRE</title>
+        <link href="{$smarty.const.SITE_URL}views/css/login_style.css" rel="stylesheet" type="text/css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Goole OAuth Gmail contacts import</title>
+        <meta content=' Goole OAuth Gmail contacts import.' name='description'/> 
+        <meta content='Google, Oauth, php, Gmail, Contacts,import' name='keywords'/> 
+        <link href="{$smarty.const.SITE_URL}views/css/fanwire-css.css" rel="stylesheet" type="text/css">
+            <script src="{$smarty.const.SITE_URL}views/scripts/place_holder/modernizr.js"></script>
+
+    </head>
+
+    <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.min.js"></script>
+
+    <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.validate.min.js"></script>
+    <!--<script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.min.js"></script>-->
+    <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.form.js"></script>
+    <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/sessionvars.js"></script>
+    <body>
+
+        <div id="wrapper">
+
+
+
+            <!--Left Section Start-->
+
+            <div id="leftsection">
+
+                <div class="logo"><a href="{$smart.const.SITE_URL}myFanwire"><img src="{$smarty.const.SITE_URL}views/images/logo.png" width="143" height="127" border="0" /></a>
+                </div>
+            </div>
+            <div class="kory"> 
+                {if $profile_image}
+                <a href="{$smarty.const.SITE_URL}changeProfilePic"><img src="{$profile_image}" width="82" height="82" /></a> <a href="#">{$smarty.session.name}</a> 
+                {else}
+                <a href="{$smarty.const.SITE_URL}changeProfilePic"><img src="{$smarty.const.SITE_URL}views/images/private_normal.png" width="82" height="82" /></a> <a href="#">{$smarty.session.name}</a> 
+                {/if}
+            </div>
+
+            <div class="logout"><a href="{$smarty.const.SITE_URL}logout">Logout</a></div>
+

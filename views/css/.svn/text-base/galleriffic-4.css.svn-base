@@ -1,0 +1,41 @@
+ 
+div.content a, div.navigation a {
+    /* text-decoration: none;
+     color: #777;*/
+}    
+ul.thumbs {/*
+    clear: both;
+    margin: 0;
+    padding: 0;
+    */
+}
+ul.thumbs li {
+    /* float: left;
+    padding: 0;
+   margin: 5px 10px 5px 0;*/
+    list-style: none;
+} 
+
+div.pagination {
+    clear: both;
+    position: absolute;
+    right: 17px;
+    top: 6%;
+     background:#FFF; 
+} 
+div.pagination a, div.pagination span.current, div.pagination span.ellipsis {
+    /* display: block;
+     float: left; border: 1px solid #ccc;
+     margin-right: 2px;
+     padding: 4px 7px 2px 7px;*/
+
+} 
+div.pagination span.current {
+    /*    font-weight: bold;
+        background-color: #000;
+        border-color: #000;
+        color: #fff;
+    */
+}
+
+

@@ -1,0 +1,750 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-16 15:39:35
+         compiled from "/var/www/fanwire/views/photos/albumDetails.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:1596254291502cc6df99c1f7-17396026%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '726801c8a26100261290f9d61274c5a27db6e7bc' => 
+    array (
+      0 => '/var/www/fanwire/views/photos/albumDetails.tpl.html',
+      1 => 1345111774,
+    ),
+  ),
+  'nocache_hash' => '1596254291502cc6df99c1f7-17396026',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('header.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?> <?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?> <?php $_template = new Smarty_Internal_Template('myfanwireLeftBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?> 
+
+<link type="text/css" rel="stylesheet" href="<?php echo @SITE_URL;?>
+views/css/tn3.css"></link>
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.tn3lite.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var tn1 = $('.mygallery').tn3({
+            skinDir:"<?php echo @SITE_URL;?>
+views/skins",
+            imageClick:"fullscreen",
+            image:{
+                maxZoom:1.5,
+                crop:true,
+                clickEvent:"dblclick",
+                transitions:[{
+                        type:"blinds"
+                    },{
+                        type:"grid"
+                    },{
+                        type:"grid",
+                        duration:460,
+                        easing:"easeInQuad",
+                        gridX:1,
+                        gridY:8,
+                        // flat, diagonal, circle, random
+                        sort:"random",
+                        sortReverse:false,
+                        diagonalStart:"bl",
+                        // fade, scale
+                        method:"scale",
+                        partDuration:360,
+                        partEasing:"easeOutSine",
+                        partDirection:"left"
+                    }]
+            }
+        });
+    });
+    
+    function addFan(id){
+        //	alert(id);
+        var dataString ='id='+id;
+
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+addFanwire",
+            data: dataString,
+            success: function(response) {
+                alert(response);
+                if(response==1){
+                    $('#n'+id).fadeOut('slow')
+                }else{
+                    $('#message').html(response)
+                    .hide()
+                    .fadeIn(1500)
+                    .fadeOut(1500)
+                }
+            }
+        });
+        return false;
+    }
+
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+	
+        $("#comment_box").toggle();
+        $("#top_comments").toggle();
+        $("#comment_container").toggle();
+
+	
+        $("#hidecomment").click(function(){
+		
+            $("#comment_box").toggle();
+            $("#top_comments").toggle();
+            //$("#comment_container").toggle();
+            //alert('Exec');
+        });
+	
+        $("#showmore2").click(function(){
+            //alert('EXec');
+            $("#comment_container").toggle();
+            //$("#viewallcmt").show();
+            //$("#showmore").toggle();
+            //alert('Exec');
+        });
+    });
+ 
+    function expandtext(textArea){
+        while (textArea.rows > 1 && textArea.scrollHeight < textArea.offsetHeight){
+            textArea.rows--;
+        }
+        while (textArea.scrollHeight > textArea.offsetHeight)
+        {
+            textArea.rows++;
+        }
+        textArea.rows++
+    }
+
+    function showSend(id){
+        $('#commentsToShow'+id).show();
+        // document.getElementById('commentsToShow').style.display='block' ;
+    }
+
+
+    function textlimits(re,te){
+        var characterLimit = 140;
+        var remainingchars=re;
+        var textarea =te;
+
+        textlimit(characterLimit,remainingchars,textarea);
+    }
+
+    function textlimit(characterLimit,remainingchars,textarea)
+
+    {
+        $(remainingchars).html(characterLimit+"characters remaining.");
+        $(textarea).bind('keyup', function(){
+            var charactersUsed = $(this).val().length;
+
+            if(charactersUsed > characterLimit){
+                charactersUsed = characterLimit;
+                $(this).val($(this).val().substr(0, characterLimit));
+                $(this).scrollTop($(this)[0].scrollHeight);
+            }
+            var charactersRemaining = characterLimit - charactersUsed;
+            //  alert(charactersRemaining);
+            $(remainingchars).html(charactersRemaining+"characters remaining.");
+        });
+    }
+
+
+    function fun1(likeid, foo){
+        //alert("div#showlike"+foo);
+        if(likeid){
+            $("div#showlike"+foo).html('(1)');
+        } else {
+            $("div#showdislike"+foo).html('(1)');
+        }
+    	
+        $("div#showlike"+foo).animate({opacity:0.4}, "slow");
+        $("div#showdislike"+foo).animate({opacity:0.4}, "slow");
+    }
+    foo=0;
+    function submitForm(fanwireid,url, aid, uname)
+    {
+        foo++;
+        var msg = document.getElementById("msg"+fanwireid).value;
+        var dataString = 'id='+aid+'&comment='+msg+'&type=2';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function() {
+                var url1 = '<?php echo @SITE_URL;?>
+fan/commentCount';
+                var params = 'id='+fanwireid+'&type=2';
+                $.ajax({
+                    type: "POST",
+                    url: url1,
+                    data: params,
+                    success: function(result) { 
+                        var rs=result.split('@@');
+                        $("div #showcomment"+fanwireid).html('('+rs[0]+')');
+                        $("#comm"+fanwireid).prepend(rs[1]);
+                    }
+                });
+             
+                document.getElementById("msg"+fanwireid).value="";
+                $("#tracy").prepend('<div class="tracy"><p>"'+msg+'"</p><br/><br/><img height="27" width="27" src="<?php echo $_smarty_tpl->getVariable('profile_image')->value;?>
+" />'+uname+'<div class="red" id="showdislike'+foo+'" onclick="fun1(0,'+foo+')";>(0)</div><div class="blue" id="showlike'+foo+'" onclick=fun1(1,'+foo+');>(0)</div></div>');
+                //alert("Exec");
+                // HideDialog(fanwireid);
+            }
+        });  
+       
+    }
+
+
+    function viewAllComments(artid,url)
+    {
+        /* var msg = document.getElementById("msg"+fanwireid).value;*/
+        //alert(artid);
+        //  alert(url);
+        var dataString = 'id='+artid;
+        //alert(dataString);
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function(result) {     
+                //alert(result);
+                // var rs=result.split('@@');
+                $("#comment_container").html(result);                 
+                //document.getElementById("#comm"+fanwireid).innerHTML=result;
+            
+            }
+    
+        });
+    }
+
+
+    //Like and Dislike Code By Rak
+
+    function onloadcall(fanwireid) {
+	
+        //alert('Exec on Onload');
+        //alert(fanwireid);
+        var params='fanwireid='+fanwireid;
+        var url = '<?php echo @SITE_URL;?>
+articles/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                
+                }
+            }
+        });
+    }
+
+    function likefanwire(fanwireid){
+        var params='like=1&dislike=0&fanwireid='+fanwireid;
+        var url = '<?php echo @SITE_URL;?>
+articles/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    // alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showlike"+fanwireid).html('('+res[0]+')');
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                
+                }
+            }
+        });
+    }
+    
+    function dislikefanwire(fanwireid){
+        var params='like=0&dislike=1&fanwireid='+fanwireid;
+        var url = '<?php echo @SITE_URL;?>
+articles/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    //alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showdislike"+fanwireid).html('('+res[1]+')');
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                }
+            }
+        });
+    }
+
+
+</script>
+
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="inner_right_area">
+            <div class="main_inner_data_area">
+
+                <div class="fan_wire_section">
+                    <div class="bredcrumbs"><a href="#">My Fanwire</a>  >  <a href="#">Lil Wayne</a>  >  <a href="#" class="active">Pics From Me </a>  </div>
+                    <div class="heading">
+
+                        <h2><?php echo $_smarty_tpl->getVariable('albumDetail')->value[0]['name'];?>
+<br /><span>Via FanWire 02/19/12</span></h2>
+
+                        <img src="<?php echo @SITE_URL;?>
+views/images/share.jpg" width="23" height="19" />
+                        <img src="<?php echo @SITE_URL;?>
+views/images/logo_r.png" width="23" height="21" />
+                        <img src="<?php echo @SITE_URL;?>
+views/images/logo_b.png" width="23" height="21" />
+                        <img src="<?php echo @SITE_URL;?>
+views/images/remove_btn.png" style="margin:2px 1px 0 0"/>
+                        <br /><br />
+                        <div class="edit_btn"><a href="<?php echo @SITE_URL;?>
+photos/editAlbum?aid=<?php echo $_smarty_tpl->getVariable('aid')->value;?>
+">Edit</a></div>
+                    </div>
+
+
+
+                    <div class="clear"></div>
+                    <h3>By: Me</h3><br>
+                    <div class="mygallery">
+                        <div class="tn3 album">
+                            <ul>
+                                <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['name'] = "id";
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'] = is_array($_loop=$_smarty_tpl->getVariable('albumDetail')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total']);
+?>
+                                <li><a href="<?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->getVariable('albumDetail')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['image_url'];?>
+"><img src="<?php echo @SITE_URL;?>
+photos/thumbs/<?php echo $_smarty_tpl->getVariable('albumDetail')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['image_url'];?>
+"  /> </a></li>
+                                <?php endfor; else: ?>
+                                No Photos
+                                <?php endif; ?>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <?php echo $_smarty_tpl->getVariable('albumDetail')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['name'];?>
+
+                    <div class="article">
+
+                        <div class="clear"></div></br>
+                        <div class="be_fan">
+                            <h2>You may also want to be a fan of the...</h2>
+                            <div class="be_fan" id="befan">
+
+                                <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['q']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['q']['name'] = 'q';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['q']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('fanwiresMore')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['q']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['q']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['q']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['q']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['q']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['q']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['q']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['q']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['q']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['q']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['q']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['q']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['q']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['q']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['q']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['q']['total']);
+?>
+                                <?php $_smarty_tpl->tpl_vars['k'] = new Smarty_variable($_smarty_tpl->getVariable('fanwiresMore')->value[$_smarty_tpl->getVariable('smarty')->value['section']['q']['index']], null, null);?>
+
+                                <div class="view fan_post" id="n<?php echo $_smarty_tpl->getVariable('k')->value['id'];?>
+">
+                                    <div class="mask">
+                                        <a href="JavaScript:void(0);" class="info" onclick="addFan(<?php echo $_smarty_tpl->getVariable('k')->value['id'];?>
+)" id="n<?php echo $_smarty_tpl->getVariable('k')->value['id'];?>
+" >+ fanwire</a>
+                                    </div>
+                                    <img src="<?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->getVariable('k')->value['photo'];?>
+" width="175" height="144" alt="Image" />
+                                    <div class="fan_post_data"><?php echo $_smarty_tpl->getVariable('k')->value['name'];?>
+</div>
+                                </div>
+
+                                <?php endfor; endif; ?>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+
+                <div class="fan_wire_right_section">
+                    <div class="fan_wire_right_section_data">
+
+                        <div class="fan_right_comments" id="fan_right_comments">
+                            <h2>
+						What I’ve Been Doing...<br /> <span></span>
+                            </h2>
+                            <div class="tracy" id="tracy">
+                                <!-- <p>“Great review! I can’t wait to get the album. Finally!”</p>
+
+						<div class="rating">
+							<img src="<?php echo @SITE_URL;?>
+views/images/logo_b.png"
+								width="23" height="21" align="right" /> 35
+						</div>
+						<img src="<?php echo @SITE_URL;?>
+views/images/tracy.jpg"
+							width="28" height="27" />Tracy Rayn
+					</div>
+
+					<p>“Great review! I can’t wait to get the album. Finally!”</p>
+
+
+					<div class="tracy1">
+						<div class="rating">
+							<img src="<?php echo @SITE_URL;?>
+views/images/logo_b.png"
+								width="23" height="21" align="right" /> 35
+						</div>
+						<img src="<?php echo @SITE_URL;?>
+views/images/tracy.jpg"
+							width="28" height="27" />Tracy Rayn
+					</div> -->
+
+                                <!-- <input name="" type="button" class="say_btn" value="say something!" />-->
+                                <div class="say_btn" id="hidecomment">say something!</div>
+
+                                <!--say something coent box start here-->
+                                <!--say something comment box start here code by Rak-->
+                                <div class="comment_box" id="comment_box">
+                                    <img height="27" width="27" src="<?php echo $_smarty_tpl->getVariable('profile_image')->value;?>
+" />
+                                    <textarea id="msg<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+" name="msg<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+"
+                                              onkeyup='expandtext(this)'
+                                              onclick="return showSend('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+');"
+                                              onfocus=" return textlimits('#remainingCharacters<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+','#msg<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+');"
+                                              onKeyPress="Javascript:if(event.keyCode==13) submitForm('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+','<?php echo @SITE_URL;?>
+fan/sendComment', '<?php echo $_smarty_tpl->getVariable('aid')->value;?>
+', '<?php echo $_smarty_tpl->getVariable('username')->value;?>
+');"
+                                              placeholder="say something..." title="say something..."
+                                              autocomplete="off" rows="1"></textarea>
+                                    <div id="commentsToShow<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+" style="display: none;">
+                                        <button type="button" class="sendComment"
+                                                onclick="submitForm('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+','<?php echo @SITE_URL;?>
+fan/sendComment', '<?php echo $_smarty_tpl->getVariable('aid')->value;?>
+', '<?php echo $_smarty_tpl->getVariable('username')->value;?>
+');">say
+									something</button>
+                                        <span class="characters" id="remainingCharacters<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+">140
+									Characters</span>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <!--say something comment box end here-->
+
+                                <!--top comments start here-->
+                                <div class="top_comments" id="top_comments">
+                                    <div class="btm_line2">
+                                        <div class="showmore2" id="showmore2">
+                                            <a href="#">Top comments</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="clear"></div>
+                                    <!--comments start here-->
+                                    <div class="comment_container" id="comment_container">
+
+                                        <!--comment 1-->
+								<?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['if']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['if']['name'] = 'if';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['if']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('list')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['if']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['if']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['if']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['if']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['if']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['if']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['if']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['if']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['if']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['if']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['if']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['if']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['if']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['if']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['if']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['if']['total']);
+?> <?php $_smarty_tpl->tpl_vars['t'] = new Smarty_variable($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['if']['index']], null, null);?>
+
+
+                                        <div class="comment">
+                                            <h5>2 hours ago</h5>
+                                            <div class="comment_img">
+                                                <img height="27" width="27"
+                                                     src="<?php echo @SITE_URL;?>
+profile_images/<?php echo $_smarty_tpl->getVariable('t')->value['photo'];?>
+" />
+                                            </div>
+                                            <div class="comment_text">
+                                                <h4><?php echo $_smarty_tpl->getVariable('t')->value['name'];?>
+</h4>
+                                                <p><?php echo $_smarty_tpl->getVariable('t')->value['description'];?>
+</p>
+                                            </div>
+                                            <script> window.onload=onloadcall('<?php echo $_smarty_tpl->getVariable('t')->value['id'];?>
+');</script>
+                                            <div class="comments_icons">
+                                                <!-- 	<span class="blue_comment"> <a href="#"><img
+											src="<?php echo @SITE_URL;?>
+views/images/comment_logo_blue.png" />
+									</a> <a href="#">()</a> </span> <span class="orange_comment"> <a
+										href="#"><img
+											src="<?php echo @SITE_URL;?>
+views/images/comment_logo_orange.png" />
+									</a> <a href="#">()</a></span> -->
+                                                <div id="showdislike<?php echo $_smarty_tpl->getVariable('t')->value['id'];?>
+" class="red"
+                                                     onclick="dislikefanwire('<?php echo $_smarty_tpl->getVariable('t')->value['id'];?>
+');">(<?php if ($_smarty_tpl->getVariable('t')->value['dislike']==''){?> 0<?php }else{ ?><?php echo $_smarty_tpl->getVariable('t')->value['dislike'];?>
+<?php }?>)</div>
+                                                <div id="showlike<?php echo $_smarty_tpl->getVariable('t')->value['id'];?>
+" class="blue"
+                                                     onclick="likefanwire('<?php echo $_smarty_tpl->getVariable('t')->value['id'];?>
+');">(<?php if ($_smarty_tpl->getVariable('t')->value['like']==''){?>
+											0<?php }else{ ?><?php echo $_smarty_tpl->getVariable('t')->value['like'];?>
+<?php }?>)</div>
+                                            </div>
+
+
+                                            <!-- Below two divs display like and unlike btns code by Rak -->
+
+
+
+
+
+
+                                            <div class="clear"></div>
+                                        </div>
+
+								<?php endfor; endif; ?>
+
+
+
+                                        <!--top comments end here-->
+
+                                        <div class="clear"></div>
+								<?php $_smarty_tpl->tpl_vars['t'] = new Smarty_variable($_smarty_tpl->getVariable('list')->value[1], null, null);?> <?php if ($_smarty_tpl->getVariable('list')->value[1]['commentcnt']>3){?> <a
+                                            href="javascript:void(0);"
+                                            onclick="viewAllComments('<?php echo $_smarty_tpl->getVariable('aid')->value;?>
+','<?php echo @SITE_URL;?>
+articles/viewAllComments')">view
+									<?php echo $_smarty_tpl->getVariable('list')->value[1]['commentcnt'];?>
+ comments</a><?php }else{ ?><a
+                                            href="javascript:void(0);">&nbsp;</a><?php }?>
+                                        <!-- <a href="javascript:void(0);" class="cross_btn" onclick="HideDialog('<?php echo $_smarty_tpl->getVariable('list')->value[1]['id'];?>
+');" >X</a> -->
+                                        <!-- <a href="#">Show me more</a> -->
+
+
+                                    </div>
+
+
+                                    <!--end-->
+
+                                </div>
+
+                                <div class="btm_line2" id="showmore"></div>
+                                <div class="related_fanwires">
+                                    <h2>related fanwires</h2>
+
+                                    <div class="related">
+                                        <div class="related_text">
+                                            <a href="#">add</a>
+                                        </div>
+                                        <div class="related_img"></div>
+								Jay-Z
+                                    </div>
+
+                                    <div class="related">
+                                        <div class="related_text">
+                                            <a href="#">add</a>
+                                        </div>
+                                        <div class="related_img"></div>
+								keyne west
+                                    </div>
+
+                                    <div class="related">
+                                        <div class="related_text">
+                                            <a href="#">add</a>
+                                        </div>
+                                        <div class="related_img"></div>
+								common
+                                    </div>
+
+
+                                    <div class="related">
+                                        <div class="related_text">
+                                            <a href="#">add</a>
+                                        </div>
+                                        <div class="related_img"></div>
+								rick ross
+                                    </div>
+
+
+                                    <div class="related">
+                                        <div class="related_text">
+                                            <a href="#">add</a>
+                                        </div>
+                                        <div class="related_img"></div>
+								Jay-Z
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="related_fanwires">
+                                    <h2>related media</h2>
+
+                                    <div class="related">
+                                        <div class="related_img"></div>
+								Jaz Z and Kayne West King of Thrones Review
+                                    </div>
+
+                                    <div class="related">
+                                        <div class="related_img"></div>
+								The Attic Ends coming out of nowhere?
+                                    </div>
+
+                                    <div class="related">
+                                        <div class="related_img"></div>
+								Common - The Album You Need to Buy.
+                                    </div>
+
+
+                                    <div class="related">
+                                        <div class="related_img"></div>
+								Lil Wayne - Released From Prison
+                                    </div>
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="clear"></div>
+
+
+        </div>
+        <div class="clear"></div>
+        <?php $_template = new Smarty_Internal_Template('footer.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?> 
+
+        <script>
+            function addFan(id){
+                //	alert(id);
+                var dataString ='id='+id;
+
+                $.ajax({
+                    type: "POST",
+                    url:"<?php echo @SITE_URL;?>
+addFanwire",
+                    data: dataString,
+                    success: function(response) {
+                        if(response==1){
+                            $('#n'+id).fadeOut('slow')
+                        }else{
+                            $('#message').html(response)
+                            .hide()
+                            .fadeIn(1500)
+                            .fadeOut(1500)
+                        }
+                    }
+                });
+                return false;
+            }
+        </script>
+        

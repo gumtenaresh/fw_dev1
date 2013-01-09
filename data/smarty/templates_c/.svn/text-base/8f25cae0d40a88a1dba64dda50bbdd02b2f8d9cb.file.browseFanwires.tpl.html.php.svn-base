@@ -1,0 +1,272 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-06 16:19:39
+         compiled from "/var/www/fanwire/views/fanwires/browseFanwires.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:1415846154501fa143850897-70578298%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '8f25cae0d40a88a1dba64dda50bbdd02b2f8d9cb' => 
+    array (
+      0 => '/var/www/fanwire/views/fanwires/browseFanwires.tpl.html',
+      1 => 1342677986,
+    ),
+  ),
+  'nocache_hash' => '1415846154501fa143850897-70578298',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('header.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('myfanwireLeftBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<!--Right Section-->
+<div class="right_container">
+	<div id="rightsection">
+		<div id="right_area">
+			<h2>
+				customize your profile: Add fanwires<br /> <span>A FanWire
+					is a collection of information for a particular subject.<br />
+					Select your favorite Band, Celebrity, News, or Sports. You can
+					always add or remove anytime.</span>
+			</h2>
+			<br />
+			<div class="add_fanwires">
+				<h2>our suggestions:</h2>
+				<div class="search"><!-- added new -->    
+						<table><tr><td>
+					<div class="minus">
+					<img src='<?php echo @SITE_URL;?>
+views/images/m.png'>
+					</div>
+					</td><td>
+					<div style="float:left;width:200px;"><a href="#" class="tt" >
+						<div class="zoom" id="slider_two" style='width: 100%;float:left;'>
+							<span class="tooltip" >
+							<b>Tip:</b> Drag the slider to
+								increase/decrease the size of Fanwires
+							</span>
+						</div> 
+					</a>
+					</div></td><td>
+					<div class="plus"  >
+					<img src='<?php echo @SITE_URL;?>
+views/images/p.png'>
+					</div></td></tr></table>
+<!--             <div id="slider_two" class="zoom" > -->
+<!--                 <a class="" href="#" style="left:12%; "> </a> -->
+<!--             </div> -->
+
+            <!-- added new end -->  
+             </div>
+			</div>
+	 <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['name'] = 'fanwire';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('fanwires_for_more')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total']);
+?>
+         <?php $_smarty_tpl->tpl_vars['fan'] = new Smarty_variable($_smarty_tpl->getVariable('fanwires_for_more')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']], null, null);?>
+       <?php endfor; endif; ?>
+			<div class="add_fanwires">
+				<div class="awards_active">
+					<ul>
+						<li ><a href="<?php echo @SITE_URL;?>
+addFan"><span><strong>My Fanwires(<?php echo $_smarty_tpl->getVariable('fan')->value['count'];?>
+)</strong>
+							</span>
+						</a>
+						</li>
+						<li class="active"><a href="<?php echo @SITE_URL;?>
+browseFans"><span><strong>Browse Fanwires</strong>
+							</span>
+						</a>
+						</li>
+<!-- 						<li ><a href="#"><span><strong>Fan Favorites</strong> -->
+<!-- 							</span> -->
+<!-- 						</a> -->
+<!-- 						</li> -->
+						 
+					</ul>
+				</div>
+				<div class="search">
+					<input
+						name=""
+						type="text"
+						
+						class="search_field"
+						placeholder='Search fanwire'
+						style="text-align: center;"
+					/> <input
+						name=""
+						type="button"
+						class="go2"
+					/>
+				</div>
+			</div>
+			
+			<div id="mainBlock">
+                        <?php if ($_smarty_tpl->getVariable('fanwires')->value){?>
+                        <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['name'] = 'fanwire';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('fanwires')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total']);
+?>
+                        <?php $_smarty_tpl->tpl_vars['fan'] = new Smarty_variable($_smarty_tpl->getVariable('fanwires')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']], null, null);?>
+                        <div class="post" id='one'>
+                            <div class="posts" id='two'>
+                                <a href='<?php echo @SITE_URL;?>
+profileInfo?fwrid=<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+' id='imm'><img src="<?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->getVariable('fan')->value['photo'];?>
+" width="114" height="105" /></a>
+                                <div class="data"><?php echo $_smarty_tpl->getVariable('fan')->value['name'];?>
+</div>
+                            </div>
+                            <!-- 	check the user is already a fan of the selected person then show him as selected one haveto implement the functionality -->
+
+							
+<!-- 	                            <div id="fanbtn"  <?php if ($_smarty_tpl->getVariable('fan')->value['user_id']==''||($_smarty_tpl->getVariable('fan')->value['user_id']==$_SESSION['id']&&$_smarty_tpl->getVariable('fan')->value['fan_status']==0)){?> style="display:block"<?php }else{ ?>style="display:none" <?php }?>> -->
+<!-- 	                                 <input name="add" id="n<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" type="button" class="fan" value="+ fan" onclick="addFan(<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+)" /> -->
+<!-- 	                            </div> -->
+	
+<!-- 	                            <div id="unfanbtn" <?php if ($_smarty_tpl->getVariable('fan')->value['user_id']==$_SESSION['id']&&$_smarty_tpl->getVariable('fan')->value['fan_status']==1){?> style="display:block"<?php }else{ ?>style="display:none" <?php }?>> -->
+<!-- 	                                 <input name="unfan" id="n<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" type="button" class="unfan" value="- unfan" onclick="unFan(<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+)" /> -->
+<!-- 	                            </div> -->
+									 <div>
+									 <input  id="n<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" type="button" <?php if ($_smarty_tpl->getVariable('fan')->value['user_id']==''||($_smarty_tpl->getVariable('fan')->value['user_id']==$_SESSION['id']&&$_smarty_tpl->getVariable('fan')->value['fan_status']==0)){?>name="add" class="fan" value="+ fan"  onclick="addFan(<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+)" <?php }elseif($_smarty_tpl->getVariable('fan')->value['user_id']==$_SESSION['id']&&$_smarty_tpl->getVariable('fan')->value['fan_status']==1){?>name="unfan" class="unfan" value="- unfan" onclick="unFan(<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+)" <?php }?>/>
+										</div>
+                        </div>
+
+                        <?php endfor; endif; ?>
+                        <?php }else{ ?>No Records found........<?php }?>
+
+
+
+
+                    </div>
+			<div class="clear"></div>
+<!-- 			<div class="btm_line"> -->
+<!-- 				<div class="showmore"> -->
+<!-- 					<a href="#">show more</a> -->
+<!-- 				</div> -->
+				 
+<!-- 			</div> -->
+			 
+			<div class="clear"></div>
+		</div>
+		<!--Right Section End-->
+		 
+
+        <script>
+        function addFan(id){
+            //	alert(id);
+            var dataString ='id='+id;
+    
+            $.ajax({
+                type: "POST",
+                url:"<?php echo @SITE_URL;?>
+addFanwire",
+                data: dataString,
+                success: function(response) {
+                    if(response==1){
+                        /*location.reload();		
+                        $('#message').html(response)
+                        .hide()
+                        .fadeIn(1500)
+                        .fadeOut(1500)*/
+                        //alert($("#n"+id).val());
+                        $("#n"+id).removeClass('fan');
+                    	$("#n"+id).addClass('unfan');
+						$("#n"+id).val('- unfan');
+						$("#n"+id).removeAttr( 'onClick');
+						$("#n"+id).attr( 'onClick', 'unFan("'+id+'")');
+                    }else{
+                        $('#message').html(response)
+                        .hide()
+                        .fadeIn(1500)
+                        .fadeOut(1500)
+                    }
+                }
+            });
+            return false;
+        }
+        function unFan(id){
+	
+            var dataString ='id='+id;
+    
+            $.ajax({
+                type: "POST",
+                url:"<?php echo @SITE_URL;?>
+unFanwire",
+                data: dataString,
+                success: function(response) {
+                    if(response==1){
+                        $("#n"+id).removeClass('unfan');
+                    	$("#n"+id).addClass('fan');
+                    	$("#n"+id).val('+ fan');
+                    	$("#n"+id).removeAttr( 'onClick');
+						$("#n"+id).attr( 'onClick', 'addFan("'+id+'")');
+				
+                    }else{
+                        $('#message').html(response)
+                        .hide()
+                        .fadeIn(1500)
+                        .fadeOut(1500)
+                    }
+                }
+            });
+            return false;
+        }
+        
+            
+        </script>
+        
+		<?php $_template = new Smarty_Internal_Template('footer.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>

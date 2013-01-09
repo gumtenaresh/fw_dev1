@@ -1,0 +1,1214 @@
+{include file='headerguest.tpl.html'}
+<link rel="stylesheet" type="text/css" href="{$smarty.const.SITE_URL}css/jquery.Jcrop.css" />
+<!-- Bootstrap CSS Toolkit styles -->
+
+<link rel="stylesheet" href="{$smarty.const.SITE_URL}views/css/style.css">
+
+<link rel="stylesheet" href="{$smarty.const.SITE_URL}views/css/jquery.fileupload-ui.css">
+<div id="fb-root"></div>
+{literal}
+<style type="text/css">
+
+    .fileinput-button {
+        position: absolute;
+        float: left;
+    }
+
+    .fileinput-button input {
+        -moz-border-bottom-colors: none;
+        -moz-border-image: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        -moz-transform: translate(-300px, 0pt) scale(4);
+        border-color: transparent;
+        border-style: solid;
+        border-width: 0 0 100px 200px;
+        cursor: pointer;
+        direction: ltr;
+        left: 191%;
+        margin: 0;
+        opacity: 0;
+        position: absolute;
+        top: 33%;
+        width: 37px;
+
+    }
+
+    .bstyle{           
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: 000;
+        z-index:1001;
+        -moz-opacity: 0.8;
+        opacity:.80;
+        filter: alpha(opacity=80);
+    }
+    .wstyle {
+        display: none;
+        background-color: whitesmoke;
+        border: 3px solid #CFCFCF;
+        left: 5%;
+        padding: 2px;
+        position: absolute;
+        top: 5%;
+        width: 90%;
+        z-index: 1002;
+        min-height: 600px;
+
+    }
+
+</style> 
+{/literal}
+
+<div class="koryguest">  <a href="#">Guest User</a> </div>    
+<div class="icon_set">  
+    {if $active eq article or $active eq message or $active eq settings or $active eq cam or $active eq group}<ul class='white'>{else}<ul>{/if}
+            <li {if $active eq article} class='active' {/if}><a href="{$smarty.const.SITE_URL}addItem" class="addicon"></a></li>        
+            <li {if $active eq cam} class='active' {/if}><a href="{$smarty.const.SITE_URL}mediaCenter" class="camicon"></a></li>                 
+            <li {if $active eq group} class="active" {/if}><a href="{$smarty.const.SITE_URL}fans" class="profileicon"></a></li>
+            <li {if $active eq message} class="active" {/if}><a href="{$smarty.const.SITE_URL}messageCenter" class="msgicon">{if $notifications}<sup style="color:black;float:right;font-size:9px;font-weight:bold;padding-top: 7px;padding-right: 5px;">{$notifications|@count}</sup>{/if}</a></li>
+            <li {if $active eq settings} class='active' {/if}><a  href="{$smarty.const.SITE_URL}settings" class="settingicon"></a></li>       
+            <div class="clear"></div>
+        </ul>
+</div>
+<div class="search_fanwire">
+    <input name="" type="text" class="search_field" placeholder='search something'/> 
+    <input name="" type="button" class="goguest" onclick="document.getElementById('step1').style.display='block';document.getElementById('fade').style.display='block'"/>
+
+</div>
+
+<div class="left_menusec">
+    <ul>        
+        <li {if $active eq fanwire} class="active" {/if}><a href="{$smarty.const.SITE_URL}TopFanwires">Top Fanwires</a></li>        
+        <li {if $active eq recommend} class='active' {/if}><a href="{$smarty.const.SITE_URL}werecommend">We recommend</a></li>
+        <li {if $active eq fannetwork} class='active' {/if}><a href="{$smarty.const.SITE_URL}fannetwork">fan network</a></li>        
+        <li {if $active eq collection} class='active' {/if}><a href="{$smarty.const.SITE_URL}mycollection">My collection</a></li>
+    </ul>
+</div>
+<div class="total_list">
+
+
+    <form name="fan_login" id ="fan_login" method="POST">
+
+        <input type="hidden" name="fa_login" value="login"/>
+        <div class="loginsection1"><div class="err">{$ermsg}</div>
+            <p >Already Member?</p>
+            <a href="javascript:void(0);" style="margin:20px 0 0 50px;" onclick="return call();"><img src="{$smarty.const.SITE_URL}views/images/facebook-icon.png" height="" width="69" alt="" /></a>
+            <p>Or Login using your email:</p>
+            <div class="mailsec">
+                <div class="maildetail">Email
+                    <input name="fan_email"  id="fan_email" type="text" class="textfield" placeholder='Email Address'/></div>
+            </div>
+            <div class="passwordsec">
+                <div class="maildetail">Password
+                    <input name="fan_password" id="fan_password" type="password" class="textfield"placeholder='Password' /></div>
+            </div>
+
+            <div class="checkdetail"> <input name="fan_checked" type="checkbox" value="1" /> Keep me signed in<br />
+
+                <div class="forgot"><a href="{$smarty.const.SITE_URL}forgotpassword">Forgot password?</a></div>
+                <input name="submit" type="submit" class="btn" value="LOGIN" /></div>
+        </div>
+    </form>
+</div>
+</div>
+
+
+
+
+<!--Left Section End-->
+<!--Right Section-->
+
+<div class="right_container">
+
+    <div id="rightsection">
+
+        <div id="right_area">
+            <div class="search" >
+                <table><tr><td>
+                            <div class="minus">
+                                <img src='{$smarty.const.SITE_URL}views/images/m.png'>
+                            </div>
+                        </td><td>
+                            <div style="float:left;width:131px;  ">
+                                <a href="javascript:void(0);" class="tt" >
+                                    <div class="zoom" id="slider"  style='width: 100%;float:left; '>
+                                        <span class="tooltip" >
+                                            <b>Tip:</b> Drag the slider to
+                                            increase/decrease the size of Fanwires
+                                        </span>
+                                    </div> 
+                                </a>
+                            </div></td><td>
+                            <div class="plus"  >
+                                <img src='{$smarty.const.SITE_URL}views/images/p.png'>
+                            </div></td></tr></table>
+                <!-- added new end -->
+            </div>
+
+            <div class="collection_page" id='mainBlock'>
+                <!-- ****************************************collection stats here***********************-->
+                {section name=fanwire loop=$fanwiresguest} 
+                {assign var=fan value=$fanwiresguest[fanwire]}
+                <div
+                    id="mydiv"
+                    class="view collect_photo"
+                    {if $zoomValues.0.width}style="width:{$zoomValues.0.width}px;height:{$zoomValues.0.height}+80px;"{/if}>
+                    <div class="image_share_popup" id="image_share_popup">
+                        <img
+                            src="{$smarty.const.IMAGE_URL}{$fan.photo}"
+                            {if $zoomValues.0.height}height="{$zoomValues.0.height}" width='{$zoomValues.0.width}'{else}height="151" width='246'{/if}
+                            />
+                            <div class="red_links" >
+                            <div id="fanid{$fan.id}">
+                                <a class="share_img_btn" name ='share' onclick = "getFanwireFans('{$fan.id}');document.getElementById('light1{$fan.id}').style.display='block';document.getElementById('fade1{$fan.id}').style.display='block'" href="#">
+                                    <img src="{$smarty.const.SITE_URL}views/images/share_icon.png"/>{if $zoomValues.0.width gt 280}<span>Share</span>{/if}
+                                </a> 
+                            </div>
+                            <div id="collect{$fan.id}">
+                                <a class="collect_img_btn" href="#" onclick="showConnect_popup_id('connect_popup_id{$fan.id}');">{if $fan.status eq 1}
+                                    <img src="{$smarty.const.SITE_URL}views/images/collected_icon.png"/>{if $zoomValues.0.width gt 280}<span style="background: none repeat scroll 0 0 green;">collected</span>{/if}
+                                    {else}<img src="{$smarty.const.SITE_URL}views/images/collect_icon.png"/>{if $zoomValues.0.width gt 280} <span class="collec">collect</span>{/if}{/if}
+                                </a>
+                            </div>
+                            <a href="javascript:void(0)" class="close"  onClick="setVisibility('sub{$fan.id}', 'inline');"  >
+                            </a>
+                            <!-- close popup -->
+
+                            <div id="sub{$fan.id}" class="sub3"  >
+                                <ul class="facebook_dd">
+                                    <li><a href="#">Hide Element</a></li>
+                                    <li><a href="#" onclick="return tog('tog{$fan.id}');">Report element or spam</a> 
+                                        <div id="tog{$fan.id}" style="display:none;">
+                                            <span><a class="selected" href="#">Inappropriate content</a></span>
+                                            <span><a href="#">Sapm</a></span>
+                                            <span><a href="#">Miscategorized</a></span>
+                                            <span><a href="#">Other</a></span>
+                                        </div>
+                                    </li>
+                                    <li><a href="#">Unsubscribe source from my profile</a></li>
+                                    <li><a href="{$smarty.const.SITE_URL}remove?fwrid={$fan.id}">Remove {$fan.name}'s FanWire permanently</a></li>
+                                </ul>
+                            </div>
+                            <!-- close popup end -->
+                            <div class="conect_popup" id="connect_popup_id{$fan.id}">
+                                <div class="conect_popupimg"></div>
+                                <div class="conect_popupcontent">
+                                    <a href="javascript:void(0);" style="float:right;" onclick="showConnect_popup_id('connect_popup_id{$fan.id}');"><img src="{$smarty.const.SITE_URL}views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+                                    <div class="clear"></div>
+                                    <p>Members never have to leave FanWire
+                                        by linking their social media accounts.
+                                        Sign up now to get full access.</p>
+
+
+
+                                    <div class="conect_popupcontent1"><div class="connect1"><a href="javascript:void(0);" onclick="showConnect_popup_id('connect_popup_id{$fan.id}'); callSign();">Conect</a></div></div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="data " style="min-height: 80px;" >
+                        <a href='{$smarty.const.SITE_URL}profileInfo?fwrid={$fan.id}&ac=1'>{$fan.name}</a> <br /> <span class='more'>{$fan.description}.</span>
+                    </div>
+                    <div class="photo_post">
+                        <div class="message" id="showcomment{$fan.id}" style="opacity: 0.50;" onClick="ShowDialog('true','{$fan.id}');">({$fan.commentcnt})</div>
+                        <div>
+                            <div id="showdislike{$fan.id}" class="red" style="opacity: 0.50;" onclick="dislikefanwire('{$fan.id}');">({if $fan.dislike eq ''}0{else}{$fan.dislike}{/if})</div>
+                            <div id="showlike{$fan.id}" class="blue"  style="opacity: 0.50;" onclick="likefanwire('{$fan.id}');">({if $fan.like eq ''}0{else}{$fan.like}{/if})</div>
+                        </div>
+                        <div id="overlay" class="web_dialog_overlay"></div>
+                        <div id="dialog{$fan.id}" class="web_dialog" >
+                            <div class="comments"    >
+                                <ul>  
+                                    <li class="view_comments">
+                                        {if $fan.comments_for_this_post|@count gt 3} <a href="javascript:void(0);" >view all comments</a>{else}<a href="javascript:void(0);" >&nbsp;</a>{/if}
+                                        <a href="javascript:void(0);" class="cross_btn" onclick="HideDialog('{$fan.id}');" >X</a>
+                                    </li>
+                                    {section name=tem loop=$fan.comments_for_this_post}
+                                    {assign var=t value=$fan.comments_for_this_post[tem]}
+                                    <li>
+                                        <img src="{$smaty.const.SITE_URL}profile_images/{$t.profile_image}">
+                                        <span><strong>{$t.name}</strong>&nbsp;{$t.comment}</span>
+                                        <div class="clear"></div>
+                                    </li>
+                                    {/section}
+                                    <div id='comm{$fan.id}'></div>
+                                    <li>
+                                        <img src="{$smaty.const.SITE_URL}profile_images/{$t.profile_image}">
+                                        <textarea id="msg{$fan.id}" name="msg{$fan.id}" onfocus=" return textlimits('#remainingCharacters{$fan.id}','#msg{$fan.id}');" onKeyPress="Javascript:if(event.keyCode==13) submitForm('{$fan.id}','{$smarty.const.SITE_URL}fan/sendComment');" placeholder="say something..."></textarea>
+                                        <button type="button" class="sendComment" onclick="submitForm('{$fan.id}','{$smarty.const.SITE_URL}fan/sendComment');">send</button>
+                                        <span class="characters" id="remainingCharacters{$fan.id}">140 Characters</span>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <input type="hidden" id="id" name="id" value="{$fan.id}" />
+                                    <input type="hidden" name="type" id="type" value="0" />
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {/section}
+                <!-- ****************************************collection end here***********************-->
+
+            </div>
+            <!--            <div class="btm_line">
+                            <div class="showmore"><a href="#">show more</a></div>
+                        </div>-->
+            <div class="clear"></div> 
+        </div>
+        {include file="footerww.tpl.html"}
+        <div id="step1" class="wstyle" >
+            <a href = "javascript:void(0)" onclick = "document.getElementById('step1').style.display='none';document.getElementById('fade').style.display='none'" style="float: right;"><img src="{$smarty.const.SITE_URL}views/images/close.png"></a> 
+            <!--popup statrs here-->
+            {include file='header2.tpl.html'}
+            <div class="left_menu_guest">
+                <ul>
+                    <li class="active"><a href="#" ">1- FIND your fans</a></li>
+                    <li><a href="#">2- profile photo</a></li>
+                    <li  ><a href="#">3- add fanwires</a></li>
+                    <li><a href="#">4- social media connect</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="right_container_guest">
+            <div id="index_rightsection_guest"  >
+                <div id="mailList">
+                    <div id="loader3" style="  left:551px;  position:absolute;  top:159px;  z-index:2;display: none;"><img src="{$smarty.const.SITE_URL}views/images/loader.gif"  /></div>
+                </div>
+                <div id="right_area_guest" >
+                    <h2>
+                        Connect with fans you already know<br /> <span>We call all
+                            of our friends ‘fans’ in these community. Everyone is a fan of
+                            something, so why not connect with them? We made this step easy
+                            for you.</span>
+                    </h2>
+                    <div class="connect_fans">
+                        <div class="account_details">
+                            <div class="acc_detail2">
+                                <img src="{$smarty.const.SITE_URL}views/images/mail.png" width="39" height="32" align="left"/> People in Your Email Accounts
+                            </div>
+                            <div class="acc_detail">
+                                <img src="{$smarty.const.SITE_URL}views/images/FB.png" width="37" height="39" align="left" /> Facebook Account
+                            </div>
+                            <div class="acc_detail">
+                                <img src="{$smarty.const.SITE_URL}views/images/TW.png" width="37" height="39" align="left"/> Twitter Account
+                            </div>
+                        </div>
+                        <div id="loader2" style="  left:551px;  position:absolute;  top:159px;  z-index:2;display: none;"><img src="{$smarty.const.SITE_URL}views/images/loader.gif"  /></div>
+                        <div class="mail_details">
+
+                            <form name="openinviter" id="openinviter" method="POST" action="" >
+                                Email:<br /> <input type="text" name="email_box" id="email_box" class="textfield" value="" /><br /> 
+                                Password:<br /><input type="password" name="password_box" id="password_box" class="textfield" value="" /><br /> 
+                                <input type='hidden' name='step' id="step" value='get_contacts' >
+                                <input name='import' value='Import Contacts' type="submit" class="email_btn"/>
+                            </form>
+
+                        </div>
+                        <div class="info_details">
+                            <div class="info_box">
+                                <p>
+                                    Your information is safe with us. <br /> <br /> We don’t store
+                                    your email and password. Your address book is only used to find
+                                    people you know on FanWire.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mail_links">
+                        <h6>FanWire supports:</h6>
+                        <img src="{$smarty.const.SITE_URL}views/images/links.png" width="404" height="44" />
+                    </div>
+                    <div class="clear"></div>
+                    <hr />
+                    <br />
+                    <div class="skip">
+                        <input name="continue" type="submit" class="continue_btn" value="Continue" onclick="document.getElementById('step1').style.display='none';document.getElementById('fade').style.display='none';document.getElementById('step2').style.display='block';document.getElementById('fade2').style.display='block'"/><br />
+                        <br /><br /> <br /> <a href="javascript:void(0);" onclick="document.getElementById('step1').style.display='none';document.getElementById('fade').style.display='none';document.getElementById('step2').style.display='block';document.getElementById('fade2').style.display='block'">
+                            <i>Skip this step</i>
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+            </div> 
+            <div class="footer">
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<!--Left Section End-->
+<!--Right Section-->
+
+<!--end here-->
+
+
+<div id="fade" class="bstyle"></div> 
+<!--step 2 starts here-->
+<div id="step2" class="wstyle" >
+    <a href = "javascript:void(0)" onclick = "document.getElementById('step2').style.display='none';document.getElementById('fade2').style.display='none'" style="float: right;"><img src="{$smarty.const.SITE_URL}views/images/close.png"></a> 
+
+    <!--popup statrs here-->
+    {include file='header2.tpl.html'}
+    <div class="left_menu_guest">
+        <ul>
+            <li ><a href="#">1- FIND your fans</a></li>
+            <li class="active"><a href="#">2- profile photo</a></li>
+            <li  ><a href="#">3- add fanwires</a></li>
+            <li><a href="#">4- social media connect</a></li>
+        </ul>
+    </div>
+</div>
+<div class="right_container_guest">
+    <div id="index_rightsection_guest"  >
+        <div id="mailList"></div>
+        <div id="right_area_guest" >
+            <h2>
+                add a profile photo<br /> <span>Just a couple more steps
+                    left. The more you complete, the more we will reward you.</span>
+            </h2>
+            <div class="connect_fans">
+                <div class="account_details">
+                    <h3>Preview</h3>
+
+                    <div class="add_photo" id="preview" >{$image}</div>
+
+                </div>
+                <div class="profile_photo_btns_section">
+                    <div class="profile_photo_btns">
+
+                        <div id="showPicCrop"></div>
+                        <a class="your_desktop fileinput-button">Your Desktop
+                            <form id="imageform" name="imageform" method="POST" enctype="multipart/form-data"action='{$smarty.const.SITE_URL}StepFurther?uPic=drG'>
+                                <input type="file" name="photoimg" id="photoimg" > 
+                                <input type="hidden" name='upload' value="upload"  />
+                            </form>
+                        </a>
+                        <a href="#" class="your_fanwire_profile">Your fanwire profile</a>
+                        <a href="#" class="your_facebook">facebook</a>
+                    </div>
+                </div>
+                <div style="padding-top:166px;">
+                </div>
+            </div>
+            <!-- newlu added start-->
+            <div
+                id="thumbs"
+                style="padding: 5px; width: 600px"
+                ></div>
+            <!-- newly added  end -->
+            <div class="clear"></div>
+            <hr />
+            <br />
+            <div class="skip">
+                <form id="changePhoto" name="changePhoto" method="POST" enctype="multipart/form-data" action=''>                
+                    <input type="hidden" name="x1" id="x1" value="" />
+                    <input type="hidden" name="x2" id="x2" value="" />
+                    <input type="hidden" name="y1" id="y1" value="" />
+                    <input type="hidden" name="y2" id="y2" value="" />
+                    <input type="hidden" name="w" id="w" value="" />
+                    <input type="hidden" name="h" id="h" value="" />                    
+                    <input type="hidden" name="actual_image_name" id='actual_image_name' value="" /> 
+                    <input name="submitData" id="submitData" type="button" class="continue_btn" value="Continue" onclick="return changeImage1();" />
+                </form>                                    
+                <br /><br /><br /> <br />
+                <a href="javascript:void(0);" onclick="document.getElementById('step2').style.display='none';document.getElementById('fade2').style.display='none';document.getElementById('step3').style.display='block';document.getElementById('fade3').style.display='block'"><i>Skip this
+                        step</i>
+                </a>
+            </div>
+            {literal}
+            <script type="text/javascript">
+                function changeImage1()
+                {
+                    // document.getElementById("actual_image_name").value = $("#photo").attr("src");
+                    var actual_image_name=document.getElementById("actual_image_name").value = $("#photo").attr("src");
+                    var x_axis =  document.getElementById("x1").value;
+                    var x2_axis = document.getElementById("x2").value;
+                    var y_axis = document.getElementById("y1").value;
+                    var y2_axis = document.getElementById("y2").value;
+                    var thumb_width = document.getElementById("w").value;
+                    var thumb_height = document.getElementById("h").value;
+                   
+                    $.ajax({
+                        type:"GET",
+                        url:"{/literal}{$smarty.const.SITE_URL}{literal}ajaxImageCrop?t=ajax&img="+$("#photo").attr("src")+"&w="+thumb_width+"&h="+thumb_height+"&x="+x_axis+"&y="+y_axis+"&x2="+x2_axis+"&y2="+y2_axis+'&actual_image_name='+actual_image_name,
+                        cache:false,
+                        success:function(response)
+                        {       
+                          
+                            $('#step2').hide();
+                            $('#fade2').hide();
+                            $('#step3').show();
+                            $('#fade3').show();
+                            // $('#showPicCrop').html(response);
+                            // document.changePhoto.submit();
+                        }
+                    }); 
+        
+                }
+            </script>
+            {/literal}
+            <div class="clear"></div>
+        </div>
+
+    </div> 
+    <div class="footer">
+    </div>
+</div>
+</div>
+<!--Left Section End-->
+<!--Right Section-->
+<!--end here-->
+</div>
+<div id="fade2" class="bstyle"></div> 
+<!--step 2 ends here-->
+<!--step 3 starts here-->
+<div id="step3" class="wstyle" >
+    <a href = "javascript:void(0)" onclick = "document.getElementById('step3').style.display='none';document.getElementById('fade3').style.display='none'" style="float: right;"><img src="{$smarty.const.SITE_URL}views/images/close.png"></a> 
+    <!--popup statrs here-->
+    {include file='header2.tpl.html'}
+    <div class="left_menu_guest">
+        <ul>
+            <li ><a href="#">1- FIND your fans</a></li>
+            <li ><a href="#">2- profile photo</a></li>
+            <li  class="active"><a href="#">3- add fanwires</a></li>
+            <li><a href="#">4- social media connect</a></li>
+        </ul>
+    </div>
+</div>
+
+<!--Left Section End-->
+<!--Right Section-->
+
+<div class="right_container_guest">
+    <div id="index_rightsection_guest"  >
+        <div id="mailList"></div>
+        <div id="right_area_guest" >
+            <h2>customize your profile: Add fanwires<br />
+                <span>A FanWire is a collection of information for a particular subject.<br />
+                    Select your favorite Band, Celebrity, News, or Sports. You can always add or remove anytime.</span></h2>
+            <br />
+            <div class="add_fanwires">
+                <h2>our suggestions:</h2>
+            </div>
+            <div id="message"></div>
+            <div id="fanwiresShowing">
+                <div class="add_fanwires">
+                    <div class="awards_active">
+                        <ul>
+                            <li class="active"><a href="javascript:void(0);"  onclick="nextPage('celebrity')" id="celebrityPopup"><span><strong>Celebrity</strong></span></a></li>
+                            <li ><a href="javascript:void(0);" onclick="nextPage('fashion')" id="fashionPopup"><span><strong>Fashion</strong></span></a></li>
+                            <li><a href="javascript:void(0);"  onclick="nextPage('news')" id="newsPopup"><span><strong>News</strong></span></a></li>
+                            <li><a href="javascript:void(0);"  onclick="nextPage('sports')" id="sportsPopup"><span><strong>Sports</strong></span></a></li>
+                            <li><a href="javascript:void(0);"  onclick="nextPage('music')" id="musicPopup"><span><strong>Music</strong></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="addpost">
+                    <div style="width: 100%;text-align: center;">
+                        <div id="mainBlock">
+
+                            {if $fanwiresCelebrity} 
+                            {section name=fanwire loop=$fanwiresCelebrity}
+                            {assign var=fan value=$fanwiresCelebrity[fanwire]}
+
+                            <div class="post" id='one'>
+                                <div class="posts" id='two' >
+                                    <img src="{$smarty.const.IMAGE_URL}{$fan.photo}" width="114" height="105"  />
+                                    <div class="data" >{$fan.name} </div>
+                                </div>
+                                <div>
+                                    <input  id="n{$fan.id}" type="button" {if $fan.userStatus neq 1}name="add" class="fan" value="+ fan"  onclick="addFan({$fan.id})" {else}name="unfan" class="unfan" value="- unfan" onclick="unFan({$fan.id})"{/if}/>
+                                </div>
+                            </div> 
+
+                            {/section}
+                            {else}No Records found........{/if}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="skip"><input name="" type="button" class="continue_btn" value="continue"  onclick='checkMinThreeFan();'/><br /><br /><br />
+                <br />
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div> 
+    <div class="footer">
+    </div>
+</div>
+<!--end here-->
+</div>
+<div id="fade3" class="bstyle"></div> 
+<!--step 3 ends here-->
+<!--step 4 starts here-->
+<div id="step4" class="wstyle" >
+    <a href = "javascript:void(0)" onclick = "document.getElementById('step4').style.display='none';document.getElementById('fade4').style.display='none'" style="float: right;"><img src="{$smarty.const.SITE_URL}views/images/close.png"></a> 
+
+
+
+
+    <!--popup statrs here-->
+    {include file='header2.tpl.html'}
+    <div class="left_menu_guest">
+        <ul>
+            <li ><a href="#">1- FIND your fans</a></li>
+            <li ><a href="#">2- profile photo</a></li>
+            <li  ><a href="#">3- add fanwires</a></li>
+            <li class="active"><a href="#">4- social media connect</a></li>
+        </ul>
+    </div>
+</div>
+
+<!--Left Section End-->
+<!--Right Section-->
+
+<div class="right_container_guest">
+    <div id="index_rightsection_guest"  >
+        <div id="mailList"></div>
+        <div id="right_area_guest" >
+            <h2>
+                Connect your social media<br /> <span>You’ll never have to go to more than one website again! Connect all of your accounts here, and we’ll do the rest. FanWire gives you all of the features you need to keep your accounts active. You can disconnect or add multiple accounts at anytime.</span>
+            </h2>
+            <br />
+            <div id="fb-root"></div>
+            <div id="user-info"></div>
+            <div class="addpost">
+                <div class="connecting">
+                    <div class="connect">
+
+
+                        <a href="javascript:void(0);" id="disconnectfacebook" style="display:none" {literal} onclick=" FB.logout(function (response) {});"{/literal}>Disconnect facebook</a>
+
+                        <a href="javascript:void(0);" id="connectfacebook" {literal} onclick="FB.login(null,{perms:'email,user_birthday,status_update,publish_stream,user_about_me'});return false;"{/literal}>connect facebook</a> 
+	                    <div class="connected" id="connectedfacebook" style="display:none">
+	                    	<img  src="{$smarty.const.SITE_URL}views/images/connected.png"  width="21" height="20" />  Connected! 
+	                	</div>
+                    </div>
+                    
+                    <div class="connect">
+
+                        <a href="{$t_login_url}" id="disconnecttwitter" style="display:none">connected twitter</a>
+
+                        <a href="{$t_login_url}" id="connecttwitter">connect twitter</a>
+                        
+                        <div class="connected" id="connectedtwitter" style="display:none"> 
+		                    <img  src="{$smarty.const.SITE_URL}views/images/connected.png"  width="21" height="20" />  Connected! 
+		                </div>
+
+                    </div>
+                    
+                    <div class="connect">
+                        <a href="#" id="connectyoutube">connect youtube</a>
+                        <div class="connected" id="connectedyoutube" style="display:none"> 
+		                    <img  src="{$smarty.const.SITE_URL}views/images/connected.png"  width="21" height="20"  /> Connected!  
+		                </div> 
+                    </div>
+                </div>
+
+                
+
+
+                
+
+
+                
+
+            </div>
+
+            <div class="clear"></div>
+            <hr />
+            <br />
+            <div style="padding-left: 10px;">
+                <a href='javascript:void(0);'onclick="document.getElementById('step4').style.display='none';document.getElementById('fade4').style.display='none';document.getElementById('step3').style.display='block';document.getElementById('fade3').style.display='block'">
+                    <input name="" type="button" class="back_btn" value="BACK"/> </a>
+            </div>
+            <div class="skip">
+                <input name="" type="button" class="continue_btn" value="finished" onclick="window.location.href='{$smarty.const.SITE_URL}myFanwire'"/>
+            </div>
+        </div>
+        <div class="footer">
+        </div>
+    </div></div>
+<!--end here-->
+</div>
+
+<div id="fade4" class="bstyle"></div> 
+<!--step 4 ends here-->
+
+{literal}
+<script type="text/javascript" >
+    function call(){
+        $('#fanwirepopupbox').slideToggle("slow")
+    }
+            
+    function callSign(){
+        document.getElementById('fanwirepopupbox').style.display='none';
+        $('#fanwirepopupbox1').slideToggle("slow")
+    }
+       
+    function uploadFile() {
+        var fd = new FormData();
+        fd.append("photoimg", document.getElementById('photoimg').files[0]);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", uploadProgress, false);
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.open("POST", "");
+        xhr.send(fd);    
+    }
+ 
+    jQuery(function($) {
+        $('img#photo').Jcrop({
+            onSelect: showCoords,
+            onChange: showCoords,
+            bgColor:     'black',
+            bgOpacity:   .4,            
+            aspectRatio: 9 / 9
+        });
+    });
+    
+    function showCoords(obj)
+    {
+        var x_axis = obj.x;
+        var x2_axis = obj.x2;
+        var y_axis = obj.y;
+        var y2_axis = obj.y2;
+        var thumb_width = obj.w;
+        var thumb_height = obj.h;
+        document.getElementById("x1").value =obj.x;
+        document.getElementById("x2").value =obj.x2;
+        document.getElementById("y1").value =obj.y;
+        document.getElementById("y2").value =obj.y2;
+        document.getElementById("w").value =obj.w;
+        document.getElementById("h").value =obj.h;
+    };
+   
+    $(document).ready(function() { 	
+        $('#photoimg').live('change', function(){     
+            document.imageform.submit();         
+            uploadFile();
+        });        
+    }); 
+      
+          
+    
+  
+    function validateDate(){
+        var selectedDay = $("#days").val();
+        var numDays;
+        if($("#months").val() == 2){
+            if($("#years").val() == ""){
+                setDaysString(29);
+                // if day is less than 29 pre slecting it
+                if((selectedDay !="") && selectedDay<=29){
+                    preSelectingValue(selectedDay);
+                }
+            }else{
+                numDays = daysInMonth($("#months").val(), $("#years").val());
+                setDaysString(numDays);
+                // if day is less than numDays pre slecting it
+                if((selectedDay !="") && selectedDay<=numDays){
+                    preSelectingValue(selectedDay);
+                }
+            }
+
+        }else if(($("#months").val() == 4) ||($("#months").val() == 6)||($("#months").val() == 9)||($("#months").val() == 11)){
+            setDaysString(30)
+            // if day is less than 30 pre slecting it
+            if((selectedDay !="") && selectedDay<=30){
+                preSelectingValue(selectedDay);
+            }
+        }else{
+            setDaysString(31);
+            // if day is less than 31 pre slecting it
+            if((selectedDay !="") && selectedDay<=31){
+                preSelectingValue(selectedDay);
+            }
+        }
+        // setting dob value to hidden field//
+        $("#dob").val($("#years").val()+"-"+$("#months").val()+"-"+$("#days").val());
+        //document.getElementById("dob").value=5;
+    }
+    function daysInMonth(month, year){
+        var dd = new Date(year, month, 0);
+        return dd.getDate();
+    }
+    function setDaysString(days){
+        var i=1;
+        var s="01";
+        var string = "<option value=\"\">Day</option>";
+
+        for(i;i<=days;i++){
+            if(i<10)
+                s='0'+i;
+            else
+                s=i;
+            string +="<option value=\""+s+"\">"+s+"</option>";
+        }
+        //alert(string);
+        $("#days").html(string);
+    }
+    function preSelectingValue(day){
+        var day =day;
+        $("#days option").each(function(){
+            if($(this).val() == day){
+                $("#days option[value="+day+"]").attr('selected', 'selected');
+            }
+        });
+    }
+     
+
+     
+  
+    function addFan(id){
+        //	alert(id);
+        var dataStringa ='id='+id;
+    
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}addFanwire",
+            data: dataStringa,
+            success: function(response) {
+                   
+                if(response==1){
+                    $("#n"+id).removeClass('fan');
+                    $("#n"+id).addClass('unfan');
+                    $("#n"+id).val('- unfan');
+                    $("#n"+id).removeAttr( 'onClick');
+                    $("#n"+id).attr( 'onClick', 'unFan("'+id+'")');
+                }else{
+                    $('#message').html(response)
+                    .hide()
+                    .fadeIn(1500)
+                    .fadeOut(1500)
+                }
+            }
+        });
+        return false;
+    }
+    function unFan(id){
+	
+        var dataStringb ='id='+id;
+    
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}unFanwire",
+            data: dataStringb,
+            success: function(response) {
+                if(response==1){
+             
+                    $("#n"+id).removeClass('unfan');
+                    $("#n"+id).addClass('fan');
+                    $("#n"+id).val('+ fan');
+                    $("#n"+id).removeAttr( 'onClick');
+                    $("#n"+id).attr( 'onClick', 'addFan("'+id+'")');
+				
+                }else{
+                    $('#message').html(response)
+                    .hide()
+                    .fadeIn(1500)
+                    .fadeOut(1500)
+                }
+            }
+        });
+        return false;
+    }
+    function checkMinThreeFan(){
+        	
+        var dataStringc ='session_id='+'{/literal}{$smarty.session.id}{literal}';
+     
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}checkMinThreeFan",
+            data: dataStringc,
+            success: function(response) {
+                if(response>=3){
+                    $('#step3').hide();
+                    $('#fade3').hide();
+                    $('#step4').show();
+                    $('#fade4').show();
+                }else{
+                    $('#message').html( "<h2>Must be fan of three fanwires</h2>")
+                    .hide()
+                    .fadeIn(3000)
+                    .fadeOut(3000)
+                }
+            }
+        });
+        return false;
+    }
+    
+       
+            
+            
+            
+    //validations for feilds 
+ 
+    jQuery(function(){
+        jQuery("#fan_email").validate({
+            expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
+            message: "Please enter a valid Email ID"
+        });
+        jQuery("#fan_password").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "Please enter the Required field"
+        });
+                
+        jQuery('#fan_login').validated(function(){
+            document.fan_login.submit();
+        }); 
+    });    
+    
+   
+    jQuery(function(){
+        jQuery("#firstname").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "Please enter the Required field"
+        });
+        jQuery("#lastname").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "Please enter the Required field"
+        });
+        jQuery("#email").validate({
+            expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
+            message: "Please enter a valid Email ID"
+        });
+        jQuery("#password").validate({
+            expression: "if (VAL.length > 5 && VAL) return true; else return false;",
+            message: "Please enter a valid Password"
+        });
+        jQuery("#reenterpassword").validate({
+            expression: "if ((VAL == jQuery('#password').val()) && VAL) return true; else return false;",
+            message: "Confirm password field doesn't match the password field"
+        });
+        jQuery("#sex").validate({
+            expression: "if (VAL != '0') return true; else return false;",
+            message: "Please select gender"
+        });
+             
+        jQuery("#months").validate({
+            expression:"if (VAL != '0') return true; else return false;",
+            message: "Please Select Month."
+        });
+        jQuery("#days").validate({
+            expression:"if (VAL != '0') return true; else return false;",
+            message: "Please Select Date."
+        });
+        jQuery("#years").validate({
+            expression:"if (VAL != '0') return true; else return false;",
+            message: "Please Select Year."
+        });
+            
+        jQuery('#fan_register').validated(function(){
+            //ajax registration form submission
+            var fname=document.getElementById('firstname').value;
+            var lname=document.getElementById('lastname').value;
+            var email=document.getElementById('email').value;
+            var password=document.getElementById('password').value;
+            var sex=document.getElementById('sex').value;
+            var months=document.getElementById('months').value;
+            var years=document.getElementById('years').value;
+            var days=document.getElementById('days').value;
+                    
+            var dataStringd="firstname="+fname+"&lastname="+lname+"&email="+email+"&password="+password+"&sex="+sex+"&years="+years+"&months="+months+"&days="+days;
+            $.ajax({
+                type: "POST",
+                url:"{/literal}{$smarty.const.SITE_URL}{literal}registerAjax",
+                data: dataStringd,
+                beforeSend: function(){
+                    $('#loader').show();
+                },
+						
+                complete: function(){
+                    $('#loader').hide();
+                },
+                success: function(resa) {
+                      
+                    $('#mss').html('<span    style="color: MediumSpringGreen;float: left;font: 15px OpenSansRegular;margin: 20px 0 0;"> '+resa+'</span><div class="conect_to_fb1"><a href="#"><img src="{/literal}{$smarty.const.SITE_URL}{literal}views/images/conect-facebook.png" height="" width="233" alt="" /></a><div class="clear"></div></div>');
+                }
+            });
+                    
+        }); 
+    });    
+    jQuery(function(){
+        jQuery("#email_box").validate({
+            expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
+            message: "Please enter a valid Email ID"
+        });
+        jQuery("#password_box").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "Please enter the Required field"
+        });
+                
+        jQuery('#openinviter').validated(function(){
+            //ajax registration form submission
+            var email_box=document.getElementById('email_box').value;
+            var password_box=document.getElementById('password_box').value;
+            var hiddenVal=document.getElementById('step').value;
+                    
+            var dataStringd="email_box="+email_box+"&password_box="+password_box+"&step="+hiddenVal;
+            $.ajax({
+                type: "POST",
+                url:"{/literal}{$smarty.const.SITE_URL}{literal}multiMailContacts",
+                data: dataStringd,
+                beforeSend: function(){
+                   
+                    $('#loader2').show();
+                },
+						
+                complete: function(){
+                     
+                    $('#loader2').hide();
+                },
+                success: function(resM) {
+                    
+                    $('#right_area_guest').html(resM);
+                     
+                    // $('#mailList').html(resM);
+                }
+            });
+        }); 
+    }); 
+      
+    function showConnect_popup_id(id){
+        $('#'+id).toggle();
+    }
+    
+    function checkAll(){
+        
+        $(function(){
+            // add multiple select / deselect functionality
+            $("#allbox").click(function () {
+                $('.case').attr('checked', this.checked);
+            });
+            // if all checkbox are selected, check the selectall checkbox
+            // and viceversa
+            $(".case").click(function(){
+
+                if($(".case").length == $(".case").length) {
+                    $("#allbox").attr("checked", "checked");
+                } else {
+                    $("#allbox").removeAttr("checked");
+                }
+
+            });
+        });
+    }
+    function inviteFriends(){
+        var arr = $("input[name='contacts[]']:checked").map(function() { 
+            return this.value; 
+        }).get();
+        var dataStringd="det="+arr;
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}invite",
+            data: dataStringd,
+            beforeSend: function(){
+                $('#loader3').show();
+            },
+            complete: function(){
+                $('#loader3').hide();
+            },
+            success: function(resa) {
+                if(resa){
+                    $('#step1').hide();
+                    $('#fade').hide();
+                    $('#step2').show();
+                    $('#fade2').show();
+                } else{
+                    $('#loader3').html('There is something problem');
+                }    
+            }
+        });
+       
+ 
+    }
+    function nextPage(id){
+        var dataStringd='val='+id;
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}ajaxFashionCategoryFanwires",
+            data: dataStringd,
+            beforeSend: function(){
+            },
+            complete: function(){
+            },
+            success: function(response) {
+                $('#fanwiresShowing').html(response);
+            }
+        });
+    }
+        
+</script>
+
+
+{/literal}
+
+{if $smarty.request.Axt eq Itt}
+
+<script type="text/javascript">
+ 
+    document.getElementById('step1').style.display='block';document.getElementById('fade').style.display='block'; 
+</script>
+
+{/if}
+
+{if $smarty.request.uPic eq drG}
+
+<script type="text/javascript">
+ 
+    document.getElementById('step1').style.display='none';document.getElementById('fade').style.display='none'; 
+    document.getElementById('step2').style.display='block';document.getElementById('fade2').style.display='block'; 
+</script>
+
+{/if}
+
+<script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.Jcrop.js"></script>
+{literal}
+<script type="text/javascript">
+    window.fbAsyncInit = function() {
+        FB.init({appId: '{/literal}{$smarty.const.FB_APP_ID}{literal}', status: true, cookie: true, xfbml: true});
+
+        /* All the events registered */
+        FB.Event.subscribe('auth.login', function(response) {
+            // do something with response
+           
+            document.getElementById('disconnectfacebook').style.display = "block";
+            document.getElementById('connectfacebook').style.display = "none";
+            document.getElementById('connectedfacebook').style.display = "block"
+            
+            login();
+        });
+        FB.Event.subscribe('auth.logout', function(response) {
+            // do something with response
+            document.getElementById('disconnectfacebook').style.display = "none";
+            document.getElementById('connectfacebook').style.display = "block";
+            document.getElementById('connectedfacebook').style.display = "none"
+            logout();
+            
+        });
+
+        FB.getLoginStatus(function(response) {
+            if (response.session) {
+                // logged in and connected user, someone you know
+                login();
+            }
+        });
+    };
+    (function() {
+        var e = document.createElement('script');
+        e.type = 'text/javascript';
+        e.src = document.location.protocol +
+            '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+    }());
+
+    function login(){
+        FB.api('/me', function(response) {
+            //  alert('hi');
+            document.getElementById('disconnectfacebook').style.display = "block";
+            document.getElementById('connectfacebook').style.display = "none";
+            document.getElementById('connectedfacebook').style.display = "block"
+            // document.getElementById('login').innerHTML = response.name + " succsessfully logged in!";
+        });
+    }
+    function logout(){
+        //document.getElementById('login').style.display = "none";
+    }
+
+    //stream publish method
+    function streamPublish(name, description, hrefTitle, hrefLink, userPrompt){
+        FB.ui(
+        {
+            method: 'stream.publish',
+            message: '',
+            attachment: {
+                name: name,
+                caption: '',
+                description: (description),
+                href: hrefLink
+            },
+            action_links: [
+                { text: hrefTitle, href: hrefLink }
+            ],
+            user_prompt_message: userPrompt
+        },
+        function(response) {
+
+        });
+
+    }
+    function showStream(){
+        FB.api('/me', function(response) {
+            //console.log(response.id);
+            streamPublish(response.name, 'Thinkdiff.net contains geeky stuff', 'hrefTitle', 'http://thinkdiff.net', "Share thinkdiff.net");
+        });
+    }
+
+    function share(){
+        var share = {
+            method: 'stream.share',
+            u: 'http://thinkdiff.net/'
+        };
+
+        FB.ui(share, function(response) { console.log(response); });
+    }
+
+    function graphStreamPublish(){
+        var body = 'Reading New Graph api & Javascript Base FBConnect Tutorial from Thinkdiff.net';
+        FB.api('/me/feed', 'post', { message: body }, function(response) {
+            if (!response || response.error) {
+                alert('Error occured');
+            } else {
+                alert('Post ID: ' + response.id);
+            }
+        });
+    }
+
+    function fqlQuery(){
+        FB.api('/me', function(response) {
+            var query = FB.Data.query('select name, hometown_location, sex, pic_square from user where uid={0}', response.id);
+            query.wait(function(rows) {
+                       
+                document.getElementById('name').innerHTML =
+                    'Your name: ' + rows[0].name + "<br />" +
+                    '<img src="' + rows[0].pic_square + '" alt="" />' + "<br />";
+            });
+        });
+    }
+
+    function setStatus(){
+        status1 = document.getElementById('status').value;
+        FB.api(
+        {
+            method: 'status.set',
+            status: status1
+        },
+        function(response) {
+            if (response == 0){
+                alert('Your facebook status not updated. Give Status Update Permission.');
+            }
+            else{
+                alert('Your facebook status updated');
+            }
+        }
+    );
+    }
+</script>
+{/literal}

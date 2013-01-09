@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{if $pagetitle}{$pagetitle}{else}Fanwire{/if}</title>
+        <meta name='description' content="{$metadescription}"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!--css-->
+        <link rel="shortcut icon" href="{$smarty.const.SITE_URL}views/images/favicon-icon.ico"/>
+        <link href="{$smarty.const.SITE_URL}views/css/fanwire-css.css" rel="stylesheet" type="text/css"/>
+        <link href="{$smarty.const.SITE_URL}views/css/demo.css" rel="stylesheet" type="text/css"/>
+        <link href="{$smarty.const.SITE_URL}views/css/Selectyze.jquery.css" rel="stylesheet" type="text/css"/>
+        <!--css end-->
+        <!--scripts-->
+        <script type="text/javascript">
+            var siteurl="{$smarty.const.SITE_URL}"
+        </script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.min.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/modernizr.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/Selectyze.jquery.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.validate.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.form.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/sessionvars.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.validation.functions.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.mCustomScrollbar.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/popup.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.masonry.min.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.gpCarousel.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/div_alignment.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/scrolltop.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/bubble-tooltip.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/zoom.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.ui.slider.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/ui.min.js" ></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.ui.touch-punch.min.js"></script>
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/facescroll.js"></script> 
+        <script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/fanwire.js"></script>   
+        <!--scripts end-->
+    </head>
+    <body>
+        {literal}
+        <script type="text/javascript">
+            setTimeout(function(){var a=document.createElement("script");
+                var b=document.getElementsByTagName("script")[0];
+                a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0013/5671.js?"+Math.floor(new Date().getTime()/3600000);
+                a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+        </script>
+        {/literal}	
+        <div class="wrapper">
+            <!--Left Section Start-->
+            <div class="left_section" id="left_section">
+                <div class="logo">
+                    <a href="{if $path eq 'getEmailPassword'}javascript:void(0);{else}{$smarty.const.SITE_URL}myFanwire{/if}">
+                        <img src="{$smarty.const.SITE_URL}views/images/logo.png" height="120" width="109" alt="" />
+                    </a>
+                </div>
+                <div class="guest_user">
+                    <a href="#">
+                        {if $smarty.session.name}{$smarty.session.name}{else}Guest User{/if}
+                    </a></div>
+                {include file='searchbox.html'}
+                {include file='leftmenu.tpl.html'}                
+                <div class="clear"></div>
+            </div>
+            <div class="right_menusec">
+                <div class="login_section">
+                    <div class="login">
+                        {if $smarty.session.id}
+                        <a href="{$smarty.const.SITE_URL}logout" class="login_check">Logout</a>
+                        {else}
+                        <a href="javascript:void(0);" onclick="Popup.show('login_popup');"  class="login_check">Login</a>
+
+                        <div class="login_popup" id="login_popup" style="display: none;">
+
+                            <div class="login_popup_content" style="display: ">
+                                <div class="popup_arrow"></div>
+
+                                <div class="popup_icons">
+                                    <a  href="javascript:void(0);" onclick="stat();" class="fb_icon1"></a>
+                                    <a  href="{$smarty.const.SITE_URL}twitterLogin"  class="tw_icon1"></a>
+                                    <span class="loginSpanImage"><img src="{$smarty.const.SITE_URL}views/images/line1.png" height="7" width="242" alt="" ></span>
+                                    <form name="fan_login" id ="fan_login" method="post" action="">
+                                        <input type="text" name="fan_email"  id="fan_email"  class="login_input" placeholder="Your Email Address">
+                                            <input type="password" name="fan_password" id="fan_password"  class="login_input"placeholder="Password">
+                                                <div class="clear"></div>
+                                                <input type="submit" name="submit" class="login_check_btn" value="Login">
+                                                    <div class="forget_pass"><a href="{$smarty.const.SITE_URL}forgotpassword"> Forgot your password?</a></div>
+                                                    </form>
+                                                    </div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                    <div class="popup_bottom">
+                                                        <p>Not a Member yet? <a href="{$smarty.const.SITE_URL}signup">Sign up.</a></p>
+                                                    </div>
+                                                    </div>
+                                                    {/if}
+                                                    </div>
+                                                    </div>
+                                                    <div class="login_menu">
+                                                        <ul id="navigation">
+                                                            <li class="dropdown"style="border-right:#bfbcbd solid 1px;border-left:#bfbcbd solid 1px;"><a href="#" >About <span></span></a>
+                                                                <ul class="sub_navigation">
+                                                                    <li><a href="{$smarty.const.SITE_URL}footer/help">Help</a></li>
+                                                                    <li><a href="{$smarty.const.SITE_URL}contactUs">Contact</a></li>
+                                                                    <li><a href="{$smarty.const.SITE_URL}footer/terms">Terms and Conditions</a></li>
+                                                                    <li><a href="{$smarty.const.SITE_URL}footer/privacy">Privacy Policy</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="dropdown" style="border-right:#bfbcbd solid 1px; "><a href="#">Customize <span></span></a>
+                                                                <ul class="sub_navigation" style="right:20px; ">
+                                                                    <li><a href="#">Add / Remove Profiles</a></li>
+                                                                    <li style="border-top:#bfbcbd solid 1px;"><a href="#">Account Settings</a></li>
+                                                                    <li><a href="#">Log Out</a></li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                    </div>

@@ -1,0 +1,239 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-17 16:27:56
+         compiled from "/var/www/fanwire/views/guest_left_section.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:965842466502e23b4a72db2-27239054%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'c6226d555bc3e71b06bc8e36139c4dc5516a5ac2' => 
+    array (
+      0 => '/var/www/fanwire/views/guest_left_section.tpl.html',
+      1 => 1345201012,
+    ),
+  ),
+  'nocache_hash' => '965842466502e23b4a72db2-27239054',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<div id="fb-root"></div>
+
+<style type="text/css">
+
+    .fileinput-button {
+        position: absolute;
+        float: left;
+    }
+
+    .fileinput-button input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        border: solid transparent;
+        border-width: 0 0 100px 200px;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        -moz-transform: translate(-300px, 0) scale(4);
+        direction: ltr;
+        cursor: pointer;
+    }
+
+    .bstyle{           
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: 000;
+        z-index:1001;
+        -moz-opacity: 0.8;
+        opacity:.80;
+        filter: alpha(opacity=80);
+    }
+    .wstyle {
+        display: none;
+        background-color: white;
+        border: 3px solid #CFCFCF;
+        height: auto;
+        left: 5%;
+        overflow: auto;
+        padding: 2px;
+        position: absolute;
+        top: 5%;
+        width: 90%;
+        z-index: 1002;
+    }
+
+</style> 
+<script type='text/javascript'>
+    function showConnect_popup_id(id){
+        $('#'+id).toggle();
+    }
+            
+    function hideConnect_popup_id(id){
+        $('#'+id).hide();
+    }
+       
+    function toggThisPop(id){
+        $('#'+id).toggle();
+              
+    }
+</script>
+
+
+<div class="koryguest">  <a href="#">Guest User</a> </div>    
+<div class="icon_set">  
+    <?php if ($_smarty_tpl->getVariable('active')->value=='article'||$_smarty_tpl->getVariable('active')->value=='message'||$_smarty_tpl->getVariable('active')->value=='settings'||$_smarty_tpl->getVariable('active')->value=='cam'||$_smarty_tpl->getVariable('active')->value=='group'){?><ul class='white'><?php }else{ ?><ul><?php }?>
+            <li <?php if ($_smarty_tpl->getVariable('active')->value=='article'){?> class='active' <?php }?>><a onclick="showConnect_popup_id('left_icon_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" href="javascript:void(0);" class="addicon1"></a></li>        
+            <li <?php if ($_smarty_tpl->getVariable('active')->value=='cam'){?> class='active' <?php }?>><a onclick="showConnect_popup_id('left_icon_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" href="javascript:void(0);" class="camicon1"></a></li>                 
+            <li <?php if ($_smarty_tpl->getVariable('active')->value=='group'){?> class="active" <?php }?>><a onclick="showConnect_popup_id('left_icon_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" href="javascript:void(0);" class="profileicon1"></a></li>
+            <li <?php if ($_smarty_tpl->getVariable('active')->value=='message'){?> class="active" <?php }?>><a onclick="showConnect_popup_id('left_icon_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" href="javascript:void(0);" class="msgicon1"><?php if ($_smarty_tpl->getVariable('notifications')->value){?><sup style="color:black;float:right;font-size:9px;font-weight:bold;padding-top: 7px;padding-right: 5px;"><?php echo count($_smarty_tpl->getVariable('notifications')->value);?>
+</sup><?php }?></a></li>
+            <li <?php if ($_smarty_tpl->getVariable('active')->value=='settings'){?> class='active' <?php }?>><a  onclick="showConnect_popup_id('left_icon_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" href="javascript:void(0);" class="settingicon1"></a></li>       
+            <div class="clear"></div>
+        </ul>
+</div>
+<div class="conect_popup" id="connect_popup_idadd">
+    <div class="conect_popupimg"></div>
+    <div class="conect_popupcontent">
+        <a href="javascript:void(0);" style="float:right;" onclick="showConnect_popup_id('connect_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');"><img src="<?php echo @SITE_URL;?>
+views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+        <div class="clear"></div>
+        <p>Members never have to leave FanWire
+            by linking their social media accounts.
+            Sign up now to get full access.</p>
+
+
+
+        <div class="conect_popupcontent1"><div class="connect1"><a href="javascript:void(0);" onclick="showConnect_popup_id('connect_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+'); callSign();">Connect</a></div></div>
+
+
+    </div>
+</div>
+<div class="left_icon_popup" id="left_icon_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+">
+    <div class="conect_popupimg"></div>
+    <div class="conect_popupcontent">
+        <a href="javascript:void(0);" style="float:right;" onclick="hideConnect_popup_id('left_icon_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');"><img src="<?php echo @SITE_URL;?>
+views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+        <div class="clear"></div>
+        <p>Add content, import photos and chat
+            Fans and FanWire's by signing
+            up for free</p>
+
+        <div class="conect_popupcontent1"><div class="connect1"><a href="javascript:void(0);" onclick="showConnect_popup_id('connect_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+'); callSign();">Connect</a></div></div>
+
+
+    </div>
+</div>
+<div class="search_fanwire">
+    <input name="" type="text" class="search_field" placeholder='search something'/> 
+    <input name="" type="button" class="goguest" onclick="document.getElementById('step1').style.display='block';document.getElementById('fade').style.display='block'"/>
+
+</div>
+
+<div class="left_menusecguest">
+    <ul>        
+        <?php if ($_smarty_tpl->getVariable('fanwires')->value['name']){?>
+        <li <?php if ($_smarty_tpl->getVariable('active')->value=='fanwire'){?> class="active" <?php }?>><a onclick="showConnect_popup_id('left_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" href="#"><?php echo $_smarty_tpl->getVariable('fanwires')->value['name'];?>
+</a></li>        
+          <?php }?>
+        <li <?php if ($_smarty_tpl->getVariable('active')->value=='fanwire'){?> <?php if ($_smarty_tpl->getVariable('fanwires')->value['name']){?><?php }else{ ?>class="active"<?php }?><?php }?>><a onclick="showConnect_popup_id('left_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" href="#">Top Fanwires</a></li>        
+     
+
+        <li <?php if ($_smarty_tpl->getVariable('active')->value=='recommend'){?> class='active' <?php }?>><a onclick="showConnect_popup_id('left_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" href="#">We recommend</a></li>
+        <li <?php if ($_smarty_tpl->getVariable('active')->value=='fannetwork'){?> class='active' <?php }?>><a onclick="showConnect_popup_id('left_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" href="#">fan network</a></li>        
+        <li <?php if ($_smarty_tpl->getVariable('active')->value=='collection'){?> class='active' <?php }?>><a onclick="showConnect_popup_id('left_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" href="#">My collection</a></li>
+    </ul>                        
+</div>
+<div class="left_popup" id="left_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+">
+    <div class="conect_popupimg"></div>
+    <div class="conect_popupcontent">
+        <a href="javascript:void(0);" style="float:right;" onclick="hideConnect_popup_id('left_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');"><img src="<?php echo @SITE_URL;?>
+views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+        <div class="clear"></div>
+        <p>See what other members are posting
+            and find friends from your Facebook
+            or Twitter accounts by signing up now.</p>
+
+        <div class="conect_popupcontent1"><div class="connect1"><a href="javascript:void(0);" onclick="showConnect_popup_id('connect_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+'); callSign();">Connect</a></div></div>
+
+
+    </div>
+</div>
+<div class="total_list">
+    <div class="fans">
+        <h2>&nbsp;Fan wires</h2>
+        <a href="<?php echo @SITE_URL;?>
+addFan"><img src="<?php echo @SITE_URL;?>
+views/images/addd.png" width="13" height="13" hspace="5" vspace="3" align="right"/></a>
+    </div>
+    <div style="float: left;">
+        <div id="demo1" class="left_scroller">
+            <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['name'] = 'fanwire';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('fanwires_for_moreguest')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total']);
+?>
+            <?php $_smarty_tpl->tpl_vars['fan'] = new Smarty_variable($_smarty_tpl->getVariable('fanwires_for_moreguest')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']], null, null);?>
+            <div class="fanslist"">
+                <p><a href="<?php echo @SITE_URL;?>
+profileInfo?fwrid=<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+&ac=1" style="text-decoration: none;color: #424140"><?php echo $_smarty_tpl->getVariable('fan')->value['name'];?>
+</a></p>
+                <span>(111) </span> 
+                <!--<img src="/views/images/star.png" width="12" height="12" />-->
+            </div>
+            <?php endfor; endif; ?>
+        </div>
+        <div class="viewall">
+        </div>
+
+    </div>
+
+
+</div>
+</div>
+
+
+
+
+<!--Left Section End-->

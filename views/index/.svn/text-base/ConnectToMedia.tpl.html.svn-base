@@ -1,0 +1,280 @@
+{include file='header2.tpl.html'}
+<div id="fb-root"></div>
+
+
+
+<div class="left_menu">
+    <ul>
+        <!--                     <li><a href="{$smarty.const.SITE_URL}findFans">1- FIND your fans</a></li> -->
+        <!--                     <li><a href="{$smarty.const.SITE_URL}uploadProfilePic">2- profile photo</a></li> -->
+        <!--                     <li><a href="{$smarty.const.SITE_URL}addFanwires">3- add fanwires</a></li> -->
+        <!--                     <li class="active"><a href="{$smarty.const.SITE_URL}socialMedia">4- social media connect</a></li> -->
+        <li><a href="#"">1- FIND your fans</a>
+        </li>
+        <li><a href="#">2- profile photo</a>
+        </li>
+        <li><a href="#">3- add fanwires</a>
+        </li>
+        <li class="active"><a href="#">4- social media connect</a>
+        </li>
+    </ul>
+</div>
+</div>
+<!--Left Section End-->
+<!--Right Section-->
+<div class="right_container">
+    <div id="index_rightsection">
+        <div id="right_area">
+            <h2>
+                Connect your social media<br /> <span>You’ll never have to
+                    go to more than one website again! Connect all of your accounts
+                    here, and we’ll do the rest. FanWire gives you all of the features
+                    you need to keep your accounts active. You can disconnect or add
+                    multiple accounts at anytime.</span>
+            </h2>
+            <br />
+            <div id="fb-root"></div>
+
+            <div id="user-info"></div>
+            <div class="addpost">
+                <div class="connecting">
+                    <div class="connect">
+
+
+                        <a href="javascript:void(0);" id="disconnectfacebook" {if $smarty.session.fbid}style="display:block"{else}style="display:none"{/if} {literal} onclick="logout();"{/literal}>Disconnect facebook</a>
+
+                        <a href="javascript:void(0);" id="connectfacebook" {if $smarty.session.fbid}style="display:none"{else}style="display:block"{/if} {literal} onclick="stat();"{/literal}>connect facebook</a> 
+                        <div class="connected" id="connectedfacebook" {if $smarty.session.fbid}style="display:block"{else}style="display:none"{/if}>
+                             <img  src="{$smarty.const.SITE_URL}views/images/connected.png"  width="21" height="20" />  Connected! 
+                        </div>
+                    </div>
+
+                    <div class="connect">
+
+                        <a href="{$t_login_url}" id="disconnecttwitter" style="display:none">connected twitter</a>
+
+                        <a href=""  id="connecttwitter">connect twitter</a>
+
+                        <div class="connected" id="connectedtwitter" style="display:none"> 
+                            <img  src="{$smarty.const.SITE_URL}views/images/connected.png"  width="21" height="20" />  Connected! 
+                        </div>
+
+                    </div>
+
+                    <div class="connect">
+                        <a href="#" id="connectyoutube">connect youtube</a>
+                        <div class="connected" id="connectedyoutube" style="display:none"> 
+                            <img  src="{$smarty.const.SITE_URL}views/images/connected.png"  width="21" height="20"  /> Connected!  
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <hr />
+            <br />
+            <div style="padding-left: 10px;">
+                <a href='{$smarty.const.SITE_URL}uploadProfilePic'><input name="" type="button" class="back_btn" value="BACK" /> </a>
+            </div>
+            <div class="skip">
+                <input name="" type="button"class="continue_btn" value="finished" onclick="window.location.href='{$smarty.const.SITE_URL}myFanwire'"/>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        {literal}
+        <script>
+            function stat(){
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        login();
+                        // the user is logged in and has authenticated your
+                        // app, and response.authResponse supplies
+                        // the user's ID, a valid access token, a signed
+                        // request, and the time the access token 
+                        // and signed request each expire
+                        // var uid = response.authResponse.userID;
+                        //  var accessToken = response.authResponse.accessToken;
+               
+                    } else if (response.status === 'not_authorized') {
+                        // FB.login(null,{scope:'email,user_birthday,status_update,publish_stream,user_about_me'});return false;
+                        //   alert('not authorized');
+                        // the user is logged in to Facebook, 
+                        // but has not authenticated your app
+                    } else {
+                        FB.login(null,{scope:'email,user_birthday,status_update,publish_stream,user_about_me'});return false;
+                        // alert('not asf');
+                        // the user isn't logged in to Facebook.
+                    }
+                });}
+            window.fbAsyncInit = function() {
+                FB.init({appId: '{/literal}{$smarty.const.FB_APP_ID}{literal}', status: true, cookie: true, xfbml: true});
+
+                /* All the events registered */
+                FB.Event.subscribe('auth.login', function(response) {
+                  
+                    login();
+                });
+                FB.Event.subscribe('auth.logout', function(response) {
+                   
+                    logout();
+            
+                });
+
+                FB.getLoginStatus(function(response) {
+                    if (response.session) {
+                        // logged in and connected user, someone you know
+                        login();
+                    }
+                });
+            };
+            (function() {
+                var e = document.createElement('script');
+                e.type = 'text/javascript';
+                e.src = document.location.protocol +
+                    '//connect.facebook.net/en_US/all.js';
+                e.async = true;
+                document.getElementById('fb-root').appendChild(e);
+            }());
+
+            function login(){
+                FB.api('/me', function(response) {
+                    //  alert('hi');
+                    document.getElementById('disconnectfacebook').style.display = "block";
+                    document.getElementById('connectfacebook').style.display = "none";
+                    document.getElementById('connectedfacebook').style.display = "block"
+                    // document.getElementById('login').innerHTML = response.name + " succsessfully logged in!";
+                    //ajax registration form submission
+                    var fname=response.first_name;
+                    var lname=response.last_name;
+                    var name=response.name;
+                    var email=response.email;
+                    var link=response.link
+                    var fbid=response.id;
+                    var birthday=response.birthday;
+                    var sex=response.gender;
+                    
+ 
+                    var dataStringd="firstname="+fname+"&lastname="+lname+"&username="+name+"&email="+email+"&fb_url_link="+link+"&dob="+birthday+"&sex="+sex+"&fbid="+fbid;
+                    
+                    $.ajax({
+                        type: "POST",
+                        url:"{/literal}{$smarty.const.SITE_URL}{literal}manageSession",
+                        data: dataStringd,
+                
+                        success: function(resa) {
+                            location.reload(); 
+                        },
+                        error:function(data){
+                            console.log(data);
+                        }
+                    });
+            
+                });
+            }
+            function logout(){
+                if(confirm('Are you sure you want to disconnect your account?')){
+                   
+                    var dataStringd="destroy=yes";
+                    $.ajax({
+                        type: "POST",
+                        url:"{/literal}{$smarty.const.SITE_URL}{literal}manageSession",
+                        data: dataStringd,
+                
+                        success: function(resa) {
+                            // FB.logout(function (response) {});
+                            location.reload();
+                    
+                        },
+                        error:function(data){
+                            console.log(data);
+                        }
+                    });
+                }
+                
+                //document.getElementById('login').style.display = "none";
+            }
+
+            //stream publish method
+            function streamPublish(name, description, hrefTitle, hrefLink, userPrompt){
+                FB.ui(
+                {
+                    method: 'stream.publish',
+                    message: '',
+                    attachment: {
+                        name: name,
+                        caption: '',
+                        description: (description),
+                        href: hrefLink
+                    },
+                    action_links: [
+                        { text: hrefTitle, href: hrefLink }
+                    ],
+                    user_prompt_message: userPrompt
+                },
+                function(response) {
+
+                });
+
+            }
+            function showStream(){
+                FB.api('/me', function(response) {
+                    //console.log(response.id);
+                    streamPublish(response.name, 'Thinkdiff.net contains geeky stuff', 'hrefTitle', 'http://thinkdiff.net', "Share thinkdiff.net");
+                });
+            }
+
+            function share(){
+                var share = {
+                    method: 'stream.share',
+                    u: 'http://thinkdiff.net/'
+                };
+
+                FB.ui(share, function(response) { console.log(response); });
+            }
+
+            function graphStreamPublish(){
+                var body = 'Reading New Graph api & Javascript Base FBConnect Tutorial from Thinkdiff.net';
+                FB.api('/me/feed', 'post', { message: body }, function(response) {
+                    if (!response || response.error) {
+                        alert('Error occured');
+                    } else {
+                        alert('Post ID: ' + response.id);
+                    }
+                });
+            }
+
+            function fqlQuery(){
+                FB.api('/me', function(response) {
+                    var query = FB.Data.query('select name, hometown_location, sex, pic_square from user where uid={0}', response.id);
+                    query.wait(function(rows) {
+                       
+                        document.getElementById('name').innerHTML =
+                            'Your name: ' + rows[0].name + "<br />" +
+                            '<img src="' + rows[0].pic_square + '" alt="" />' + "<br />";
+                    });
+                });
+            }
+
+            function setStatus(){
+                status1 = document.getElementById('status').value;
+                FB.api(
+                {
+                    method: 'status.set',
+                    status: status1
+                },
+                function(response) {
+                    if (response == 0){
+                        alert('Your facebook status not updated. Give Status Update Permission.');
+                    }
+                    else{
+                        alert('Your facebook status updated');
+                    }
+                }
+            );
+            }
+
+        </script>
+
+        {/literal}
+
+        {include file='footerww.tpl.html'} 

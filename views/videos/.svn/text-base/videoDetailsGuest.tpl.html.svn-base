@@ -1,0 +1,272 @@
+
+
+{include file="header2.tpl.html"}
+
+<div class="plr_pts">
+
+    <div class="plr_pts1">
+        <P class="para">{$fanwires.name}</P>
+        <span>Popular Videos</span>
+        <div class="plr_links" id="photoslinks">
+            {$popularVideos.navigation}
+            <a href="#"> </a>
+            <a href="#"> </a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="plr_photos">
+        <a href="{$popularVideos.list.0.title_link}"><img src="{$smarty.const.IMAGE_URL}{$popularVideos.list.0.photo}" height="79" width="120" alt=""></a>
+        <a href="{$popularVideos.list.1.title_link}"><img src="{$smarty.const.IMAGE_URL}{$popularVideos.list.1.photo}" height="79" width="120" alt=""></a>
+        <a href="{$popularVideos.list.2.title_link}"><img src="{$smarty.const.IMAGE_URL}{$popularVideos.list.2.photo}" height="79" width="120" alt=""></a>
+        <a href="{$popularVideos.list.3.title_link}"><img src="{$smarty.const.IMAGE_URL}{$popularVideos.list.3.photo}" height="79" width="120" alt=""></a>
+        <a href="{$popularVideos.list.4.title_link}"><img src="{$smarty.const.IMAGE_URL}{$popularVideos.list.4.photo}" height="79" width="120" alt=""></a>
+        <a href="{$popularVideos.list.5.title_link}"><img src="{$smarty.const.IMAGE_URL}{$popularVideos.list.5.photo}" height="79" width="120" alt=""></a>
+
+    </div>
+    <div class="clear"></div>
+    <div class="plr_pts1">
+        <P id="fanwireBioName" class="para">{$boigraphy.name}</P>
+        <span>Biography</span>
+        <div class="plr_links" id="plr_links_bio">
+            {$boigraphy.navigation}
+            <a href="#" ></a>
+            <a href="#"></a>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+
+    <div class="plr_about" id="plr_about">
+        <div class="plr_about_left">
+
+            <img src="{$smarty.const.IMAGE_URL}{$boigraphy.0.image}" {$boigraphy.heightwidth} alt=""></div>
+        <div class="plr_about_right"> 
+
+            <p>{$boigraphy.name}</p> 
+            <span>{$boigraphy.0.description|truncate:160}</span>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="plr_about_center" >
+            {foreach from=$boigraphy[0] key=k item=v}
+            {if $k eq 'image'}
+
+            {/if}
+            {if $k eq 'description'}{else}
+            <p>{$k}:<span>{$v|substr:0:45}</span></p>
+            {/if}
+
+            {/foreach}           
+        </div>
+
+    </div>
+
+    <div class="plr_twitter">
+        <div class="plr_twitter1"> <img src="{$smarty.const.IMAGE_URL}{$twitterPosts.list.0.photo}" height="50" width="50" alt="" >
+            <div class="twitter_name">
+                <p>{$fanwires.name}</p>
+                <span>Twitter</span></div>
+            <div class="twitter_icon"> <a href="#" class="small_icons_tw"></a></div>
+        </div>
+        <div class="clear"></div>
+        <div class="twitter_comments">
+            <div style="overflow: auto;height: 300px;">
+                {section name=twit loop=$twitterPosts.list}
+                {assign var=r value=$twitterPosts.list[twit]}
+                <div class="twitter_comment">
+                    <p>{$r.description|truncate:60}</p>
+                    <p>{$r.cdate}</p>
+                </div>
+                {/section}
+            </div>
+            <div class="twitter_bottom">
+                <p style="float:left"><a href="#">Share</a></p>
+                <p style="float:right"><a href="#">View More</a></p>
+            </div>
+
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="media">
+        <p>Related Media</p>
+        {section name=s loop=$relatedVediosNames}
+        {assign var=k value=$relatedVediosNames[s]}
+        <div class="spear2">
+            <div class="spear2_left">
+                {if $k.photo}
+                <img src="{$smarty.const.IMAGE_URL}{$k.photo}" width="80" height="80*({$k.height}/{$k.width})" />
+                {else}
+                <img src="{$smarty.const.SITE_URL}views/images/logodef.png" height="53" width="80" alt="" />
+                {/if}
+
+            </div>
+            <div class="spear2_right">
+                <p>{$k.fanwirename}</p>
+                <span>{$k.title|truncate:40} </span> <span></span> </div>
+            <div class="clear"></div>
+        </div>
+
+        {/section}
+
+
+        <div class="see"> <a href="#">See all</a> </div>
+    </div>
+
+</div>
+
+
+
+</div>
+
+
+<div class="main_section">
+    <div class="main_content">
+        <div class="fan_links"><a href="#">Top FanWires</a>  &gt;<a href="{$smarty.const.SITE_URL}{$fanwires.url}">{$fanwires.name}</a></div>
+        {section name=arDet loop=$videoDetail}
+        {assign var=p value=$videoDetail[arDet]}
+        <h1 style="width:596px;">{$p.title}</h1>
+        <div class="main_content_inner">
+
+
+            <div class="mail_details">
+                <p>{$p.cdate}</p> 
+                <p>via <span>{if $p.source eq 0}fanwire{else if $p.source eq 1}Twitter{else if $p.source eq 2}Facebook{else}Youtube{/if}</span></p>
+                <p>By:<span>{if $p.source eq 0}FANWIRE{else if $p.source eq 1}twitter{else if $p.source eq 2}facebook{else}FanWire{/if}</span></p>
+            </div>
+
+            <div class="video_fw">
+                <iframe width="628" height="349" src="{$videoNew}" frameborder="0" ></iframe>
+                <!--                <div class="play_btn"></div>-->
+            </div>
+
+            <div class="video_fw_icons">
+                <!-- AddThis Button BEGIN -->
+                <div class="video_left_icons addthis_toolbox addthis_default_style " >
+                    <a  href="javascript:fnSelect('xhtml-code');"  class="embed"><span></span>Embed</a>
+                    <a class="addthis_button_preferred_1"></a>
+                    <a class="addthis_button_preferred_2"></a>
+                    <a class="addthis_button_preferred_3"></a>
+                    <a class="addthis_button_preferred_4"></a>
+                    <a class="addthis_button_compact"></a>
+
+                    <!--                    <a href="#" class="email"><span></span>Email</a>
+                                        <a href="#" class="share"><span></span>Share</a>-->
+
+                </div>
+
+                <!-- AddThis Button END -->
+                <div class="video_right_icons">
+                    <a href="#" class="tweet_icon"><span>Tweet</span></a>
+                </div>
+            </div>
+
+            <div class="embed_input"  style="display: none;">
+                <div class="embed_text" id="xhtml-code">&lt;iframe width=&quot;628&quot; height=&quot;349&quot; src=&quot;{$videoNew}&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</div>
+            </div>
+
+
+
+
+        </div>
+        {/section}
+
+
+
+        <div class="photopage_time">
+
+            <span>{$p.cdate|date_format}</span>
+            <p>{$p.description} </p>
+
+        </div>
+
+        <div class="clear"></div>
+        <div class="photopage_similar">
+            <p>Similar Photos</p>
+            {section name="id" loop= $similarphotos}
+            <a href="{$similarphotos[id].title_link}">
+                <img src="{$smarty.const.IMAGE_URL}{$similarphotos[id].photo}" height="{$similarphotos[id].height}" width="{$similarphotos[id].width}" alt="" /> 
+            </a>
+            {sectionelse}
+            No Photos
+            {/section}
+
+        </div>
+        <div class="clear"></div>
+
+
+    </div>
+
+
+
+    <div class="other_news">
+        <p>Other News About <span>{$fanwires.name}</span></p>
+        <div class="news_elements" id="mainBlock">
+            {section name=fanwire loop=$otherNewsAboutFanwire} 
+            {assign var=fan value=$otherNewsAboutFanwire[fanwire]}
+
+            <div class="element item block">
+                <div class="element_content">
+                    <div class="element_content1">
+                        <p>{$fan.name}</p>
+
+                        <a href="#" class="{if $fan.source eq 1}small_icons_fb{else if $fan.source eq 2}small_icons_tw{else if $fan.source eq 3}small_icons_riview{/if}{if $fan.type eq 3}small_icons_vid{else if $fan.type eq 4}small_icons_cam{/if}"></a>
+                        <div class="clear"></div>
+                        <span id="spancontetnt">
+                            {if $fan.title_link neq '' && $fan.source neq 1 && $fan.source neq 2} 
+                            <a href='{$fan.title_link}' style="text-transform: none;color: #333333;text-decoration: none;font-size: 14px;font-weight: bold;">{$fan.title}</a>
+                            {else if $fan.source neq 1 && $fan.source neq 2}
+                            {$fan.title} 
+
+                            {/if}
+
+                        </span> 
+
+                    </div>
+                    <p>{$fan.time}</p>
+                    <div class="{if $fan.title_link neq '' && $fan.source neq 1 && $fan.source neq 2}video{else if $fan.photo eq ''}image{else}image{/if}"> 
+                        {if $fan.source eq 2}
+                        <img src="{$smarty.const.IMAGE_URL}{$fan.photo}"  width="75" height="75"/>
+                        {else if $fan.photo eq ''}
+                        <img src="{$smarty.const.IMAGE_URL}{$fan.fanwire_profile_img}" width="75" height="75"/>
+                        {else}
+
+                        <a {if $fan.type eq 0}href="{$fan.link}"{else}href="{$fan.title_link}"{/if}>
+                            <img src="{$smarty.const.IMAGE_URL}{$fan.photo}"  width="202" height="{202*$fan.height/$fan.width}"  alt="" >
+                        </a>
+                        {/if}
+                        <p>{if $fan.source eq 1}Facebook{else if $fan.source eq 2}Twitter{else if $fan.source eq 3}Article{/if}
+
+                            {if $fan.type eq 4}Instagram{else if $fan.type eq 3}Youtube{else if $fa.type eq 1}Photos{/if}
+
+                        </p>
+
+                    </div>
+                    <p class="more">   {if $fan.title_link neq '' && $fan.source neq 1 && $fan.source neq 2}
+                        {$fan.description|truncate:300}
+                        {else}
+                        {$fan.description}
+                        {/if}
+                    </p>
+                </div>
+                <div class="clear"></div>
+                <div class="twitter_bottom1">
+                    <p style="float:left"><a href="#">Share</a></p>
+                    <p style="float:right"><a href="#">View More</a></p>
+                </div>
+            </div>
+
+
+
+            {/section}
+
+
+
+        </div>
+    </div>
+
+</div>
+<div class="clear">&nbsp;</div>
+</div>
+{include file="footer.tpl.html"}
+ 

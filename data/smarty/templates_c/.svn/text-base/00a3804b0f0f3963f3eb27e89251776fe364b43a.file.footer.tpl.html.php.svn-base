@@ -1,0 +1,321 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-14 10:23:16
+         compiled from "/var/www/fanwire/views/footer.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:318861665029d9bc08fe60-60772830%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '00a3804b0f0f3963f3eb27e89251776fe364b43a' => 
+    array (
+      0 => '/var/www/fanwire/views/footer.tpl.html',
+      1 => 1344841686,
+    ),
+  ),
+  'nocache_hash' => '318861665029d9bc08fe60-60772830',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+ 
+
+</div> 
+<div class="footer">
+    <!--                    <div class="ftr_left">© FanWire, LLC. All rights reserved.</div>-->
+    <div class="ftr_right" style="padding-left: 10px;"><a href="#">About</a>  |  <a href="#">Terms and Conditions  |  <a href="#">Privacy Policy</a>  |  <a href="#">Developers</a>  |  <a href="#">Advertising</a>  |  <a href="#">Help</a>  |  <a href="#">Contact</a></div>
+</div>
+
+
+
+<!--<?php if ($_SESSION['name']){?>  
+<div id="footerSlideContainer" class="chat">    
+    <div id="footerinnerdiv" class="chat_session">
+        <div id="footerSlideButton" class="chat_heading" style="display: none;">HISTORY
+            <div class="left_close"><a href="#">X</a></div>
+            <div id="clearHistory" class="right_clear"><a href="#">CLEAR</a></div>
+        </div>
+
+        <div id="footerSlideButton1" class="chat_heading1" >HISTORY
+            <div id="right_clear" class="right_clear"><a href="#" style="color: #02a0bf">+</a></div>
+        </div>
+
+        <div id="footerSlideContent" >
+            <?php if (count($_smarty_tpl->getVariable('history')->value)>0){?> 
+            <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable;
+ $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->getVariable('history')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+if (count($_from) > 0){
+    foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value){
+ $_smarty_tpl->tpl_vars['key']->value = $_smarty_tpl->tpl_vars['val']->key;
+?>
+            <div class="chat_list"><img src="<?php echo $_smarty_tpl->getVariable('profile_image')->value;?>
+" width="28" height="27" /> <a href="<?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['key']->value;?>
+</a> </div>
+            <?php }} ?> <?php }?>
+            <div class="chat_list left_close" align="center" style="color:#02a0bf"> collapse </div>
+        </div>
+    </div>
+</div><?php }?>-->
+
+</div>
+
+
+
+</div>
+
+<!--guest login first popup-->
+<?php if ($_SESSION['id']){?>
+
+<?php }else{ ?>
+<div class="fanwirepopup"  id="fanwirepopupbox">
+
+    <div class="popupicon"><img src="<?php echo @SITE_URL;?>
+views/images/popuo_ICON.png" height="150" width="170"/></div>
+    <div class="fanwirepopupcontent">
+        <div class="popupcontent">
+            <p>FanWire is 100% Free!</p>
+            <p>Sign up now to get full access to FanWire's Athletes, Celebrities, </p><p>Musicians and Sport Teams.</p>
+            <span style="margin:10px 0 0 0;"><img src="<?php echo @SITE_URL;?>
+views/images/popup_dash.png" height="2" width="576" alt="" /></span>
+
+            <div class="clear"></div>
+            <div class="conect_to_fb">
+                <a  href="javascript:void(0);"  onclick="FB.login(null,{perms:'email,user_birthday,status_update,publish_stream,user_about_me'});return false;"><img src="<?php echo @SITE_URL;?>
+views/images/conect-facebook.png" height="" width="233" alt="" /></a>
+                <p>or click <a href="javascript:void(0);" onclick="callSign();" >here</a> to sign up with an email</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<?php }?>
+<!--guest login first popup end-->
+
+<div class="fanwirepopup1" style="" id="fanwirepopupbox1">
+    <a href="javascript:void(0);" onclick="callSign();" style="float: right;"><img src="<?php echo @SITE_URL;?>
+views/images/close.png"/></a>
+    <div class="fanwirepopupcontent1">
+        <?php if ($_smarty_tpl->getVariable('activatedmsg')->value){?>
+        <div style="text-align: center;padding-top: 10px;color: #02A0BF;">
+            <h3><?php echo $_smarty_tpl->getVariable('activatedmsg')->value;?>
+please login and continue.</h3>
+        </div>
+        <?php }?>
+        <div id="loader" style="  left:342px;  position:absolute;  top:159px;  z-index:2;display: none;"><img src="<?php echo @SITE_URL;?>
+views/images/loader.gif"  /></div>
+        <div class="popupcontent1" id="mss">
+            <p>FanWire is 100% Free!</p>
+            <span >Sign up now to get full access to FanWire's Athletes, Celebrities,Musicians and Sport Teams.</span> 
+
+
+
+            <div style="margin:5px 0 0 0 "> <img src="<?php echo @SITE_URL;?>
+views/images/0_popupimg2.png" height="2" width="738" alt="" /></div>
+            <div class="clear"></div>
+            <div class="conect_to_fb1">
+                <a  href="javascript:void(0);"  onclick="FB.login(null,{perms:'email,user_birthday,status_update,publish_stream,user_about_me'});return false;"><img src="<?php echo @SITE_URL;?>
+views/images/conect-facebook.png" height="" width="233" alt="" /></a>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+
+
+        <div class="fealds_popup">
+            <form  name="fan_register" id="fan_register" method="post" action="">
+                <input type="hidden" name="fa_register" value="register"/>
+                <div class="fealds_popup_left">
+                    <div>
+                        <label style="font-family: 'OpenSansRegular'; color:#FFF; font-size:12px; "class="fealds_popup_leftl">First Name</label>
+                        <input type="text" name="firstname" id="firstname" class="popuptextfield"  />
+                    </div>
+                    <div>
+                        <label style="font-family: 'OpenSansRegular'; color:#FFF; font-size:12px; "class="fealds_popup_leftl">Last Name</label>
+                        <input type="text" name="lastname" id="lastname" class="popuptextfield" />
+                    </div>
+                    <div>
+                        <label style="font-family: 'OpenSansRegular'; color:#FFF; font-size:12px; "class="fealds_popup_leftl">Email</label>
+                        <input type="text" name="email" id ="email" class="popuptextfield" />
+                    </div>
+                    <div>
+                        <label style="font-family: 'OpenSansRegular'; color:#FFF; font-size:12px; "class="fealds_popup_leftl">Password</label>
+                        <input type="password"  name="password" id="password" class="popuptextfield" />
+                    </div>
+
+
+                </div>
+
+
+                <div class="fealds_popup_right">
+                    <div>
+                        <label style="font-family: 'OpenSansRegular'; color:#FFF; font-size:12px; " class="fealds_popup_leftl">Re Enter Password</label>
+                        <input type="password"  name="reenterpassword" id="reenterpassword" class="popuptextfield" />
+
+                    </div>
+                    <div>
+                        <label style="font-family: 'OpenSansRegular'; color:#FFF; font-size:12px; display:block;"class="fealds_popup_leftl">I am:</label>
+
+                        <label class="custom-select">
+                            <select name="sex"  class="fieldlist" id="sex">
+                                <option value="0">&nbsp;&nbsp;&nbsp;&nbsp;Select Sex&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label style="font-family: 'OpenSansRegular'; color:#FFF; font-size:12px; display:block;"class="fealds_popup_leftl">Birthday:</label>
+                        <div id="dob">
+                            <label class="custom-select" style="float:left !important; margin:0 5px 0 0;">
+                                <select name="months" id="months" class="fieldlist" onchange="validateDate()" >
+                                    <option value="0"> Month </option>
+                                    <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->getVariable('months')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+if (count($_from) > 0){
+    foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value){
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+                                    <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+                                    <?php }} ?>
+                                </select> 
+                            </label>
+
+                            <label class="custom-select" style="float:left !important;margin:0 5px 0 0;">
+                                <select name="days"  id ="days" class="fieldlist" onchange="validateDate()" >
+                                    <option value="0"> Day </option>
+                                    <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->getVariable('days')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+if (count($_from) > 0){
+    foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value){
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+                                    <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+                                    <?php }} ?>
+                                </select> 
+                            </label>
+                            <label class="custom-select" style="float:left !important;">
+                                <select name="years" id="years" class="fieldlist" onchange="validateDate();" >
+                                    <option value="0"> Year </option>
+                                    <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->getVariable('years')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+if (count($_from) > 0){
+    foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value){
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+                                    <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+                                    <?php }} ?>
+                                </select>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="clear"></div>
+                    <div>
+                        <label style="font-family: 'OpenSansRegular'; color:#FFF; font-size:12px; "class="fealds_popup_leftl"></label>
+
+                        <div> <input name="submit"  type="submit" class="button1" value="signup!"/></div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </form>
+        </div> 
+
+    </div>
+
+
+</div>
+<!-- Login pop up start-->
+
+<div class="login_popup" id="loginFaceBookPopup" style="display: none">
+    <div class="login_popup1">
+        <div class="login_text">
+            <div class="login_textleft">
+                <p>Login through Facebook</p>
+
+                <p style="margin:12px 0 20px 0"><a  href="javascript:void(0);"  onclick="FB.login(null,{perms:'email,user_birthday,status_update,publish_stream,user_about_me'});return false;"><img src="<?php echo @SITE_URL;?>
+views/images/loginpopup_facebook.png" height="22" width="150" alt="" />
+                    </a></p>
+                <span ><img src="<?php echo @SITE_URL;?>
+views/images/loginpopup_line.png" height="2" width="259" alt="" /></span>
+
+                <p style="font-size:14px;margin:11px 0 0px 0">OR login with your FanWire account:</p>
+            </div>
+
+
+            <div class="login_textright">
+                <div class="connect_close">
+                    <a href="javascript:void(0);" onclick="loginPop();"><img src="<?php echo @SITE_URL;?>
+views/images/_loginclose.png" height="12" width="8" alt="" /></a>
+                </div>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+
+        <div class="login_forms">
+            <div class="login_forms_left">
+                <form name="fan_login" id ="fan_login" method="POST">
+                    <input type="hidden" name="fa_login" value="login"/>
+                    <div class="fealdpopup"><div class="err"><?php echo $_smarty_tpl->getVariable('ermsg')->value;?>
+</div>
+                        <label style="font-family: 'OpenSansRegular'; color:#FFF; font-size:12px;">Email</label>
+                        <input type="text" name="fan_email"  id="fan_email"  class="popuptextfield1" />
+                    </div>
+                    <div class="clear"></div>
+                    <div class="fealdpopup">
+                        <label style="font-family: 'OpenSansRegular'; color:#FFF; font-size:12px;">Password</label>
+                        <input type="text" name="fan_password" id="fan_password"  class="popuptextfield1" />
+                    </div>
+                    <div class="clear"></div>
+
+                    <span><input type="checkbox" style="float:left;"/></span><p style="line-height:20px;">Keep me signed in </p>
+                    <p style="line-height:20px; padding:0 0 0 20px;"><a href="<?php echo @SITE_URL;?>
+forgotpassword">Forgot password?</a> </p>
+                    <div class="clear">
+
+                        <!--<input name="submit" type="submit" class="connect_login1" value="LOGIN" />-->
+                        <div><input type="submit"  class="connect_login10" value="LOGIN"/></div>
+                        <!--<div class="connect_login1"> <a href="#">Log in</a> </div>-->
+                    </div> 
+
+                    <p style="line-height:20px; padding:15px 0 0 0;">Not a Member? <a href="javascript:void(0);" onclick=" loginPop(); callSign();">SIGN UP</a> it’s free!</p>
+
+
+
+
+                </form>
+
+            </div>
+
+
+        </div>        
+
+
+
+    </div>
+</div>
+
+
+
+
+
+<!-- Login pop up close-->
+
+
+
+</body>
+
+</html>

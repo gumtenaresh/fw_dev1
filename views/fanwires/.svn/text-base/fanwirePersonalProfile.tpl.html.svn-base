@@ -1,0 +1,58 @@
+{include file='header.tpl.html'}
+{include file='zoom.tpl.html'}
+
+{if $name neq ''}
+{include file='myfanwireLeftBar.tpl.html'}
+{else}
+{include file='guest_left_section.tpl.html'}
+{/if} 
+
+<!--Right Section-->
+
+<div class="right_container">
+    <!--     <div class="more_posts"><a href="#">More Posts</a></div> -->
+    <div id="inner_rightsection">
+        <div id="right_area">
+            {if isset($smarty.request.fwrid)}
+            {include file='fanwireshalfRightBar.tpl.html'}
+            {/if}
+            {if isset($smarty.request.uid)}
+            {include file='fanshalfRightBar.tpl.html'}
+            {/if}
+            <!-- fanwireshalfRightBar -->
+            {section name=art loop=$albums}
+            {assign var=p value=$albums[art]}
+
+            <div class="collection_page">
+                <div class="collect_photo">
+                    <a href="{$smarty.const.SITE_URL}viewAlbum?aid={$p.id}"  ><img src="{$smarty.const.IMAGE_URL}{$p.album_url}" width="246" height="151" /></a>
+                    <div class="data">{$p.name} <br />
+
+
+                        <span>{$p.photoscnt} photos in this album.</span>
+
+                    </div>
+
+                    <div class="photo_post">
+                        <div class="message">(3)</div>
+                        <div class="blue">(11)</div>
+                        <div class="red">(19)</div>
+                    </div>
+                    <!--          {*$fanwires.description*}uncomment to display the description of the fanwire -->
+                </div>
+            </div>
+
+
+            {sectionelse}<div class="collection_page"></div>{/section}
+ 
+            <div class="clear"></div>
+        </div>
+
+        {if $name neq ''}
+        {include file='footer.tpl.html'}
+
+        {else}
+        {include file='footerGuest.tpl.html'}
+        {/if} 
+
+

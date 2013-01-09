@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/photos
+END
+thumbPhotos.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/photos/thumbPhotos.tpl.html
+END
+albumDetailsGuest.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/purpletalk_fanwire/!svn/ver/1184/fanwire/views/photos/albumDetailsGuest.tpl.html
+END
+my_photos_organise.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/purpletalk_fanwire/!svn/ver/132/fanwire/views/photos/my_photos_organise.tpl.html
+END
+my_photos_publish.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/photos/my_photos_publish.tpl.html
+END
+albumDetails.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/photos/albumDetails.tpl.html
+END
+addPhotos.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/purpletalk_fanwire/!svn/ver/727/fanwire/views/photos/addPhotos.tpl.html
+END
+thumbPhotosGuest.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/photos/thumbPhotosGuest.tpl.html
+END
+edit_photo.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/purpletalk_fanwire/!svn/ver/377/fanwire/views/photos/edit_photo.tpl.html
+END

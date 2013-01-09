@@ -1,0 +1,836 @@
+{include file='header.tpl.html'}
+{include file='zoom.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}<!-- this is left bar -->
+<div id="fb-root"></div>
+
+{literal} 
+<script type="text/javascript" language="javascript">
+    $(document).keyup(function(e) {
+
+        if (e.keyCode == 27) { 
+            $('.web_dialog').hide();
+            $('.sub3').hide();	
+        }   // esc
+    });
+    (function($){
+        $(window).load(function(){
+            $(".comments").mCustomScrollbar();
+        });
+    })(jQuery);
+    window.fbAsyncInit = function() {
+        FB.init({appId: '{/literal}{$smarty.const.FB_APP_ID}{literal}', status: true, cookie: true, xfbml: true});
+
+        /* All the events registered */
+        FB.Event.subscribe('auth.login', function(response) {
+            // do something with response
+      
+            login();
+        });
+        FB.Event.subscribe('auth.logout', function(response) {
+            // do something with response
+      
+            logout();
+        });
+
+        FB.getLoginStatus(function(response) {
+            if (response.session) {
+                // logged in and connected user, someone you know
+                login();
+            }
+        });
+    };
+    (function() {
+        var e = document.createElement('script');
+        e.type = 'text/javascript';
+        e.src = document.location.protocol +
+            '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+    }());
+
+    function login(){
+   
+        FB.api('/me', function(response) {
+            //ajax registration form submission
+            var fname=response.first_name;
+            var lname=response.last_name;
+            var name=response.name;
+            var email=response.email;
+            var link=response.link
+            var fbid=response.id;
+            var birthday=response.birthday;
+            var sex=response.gender;
+        
+
+            var dataStringd="firstname="+fname+"&lastname="+lname+"&username="+name+"&email="+email+"&fb_url_link="+link+"&dob="+birthday+"&sex="+sex+"&fbid="+fbid;
+        
+            $.ajax({
+                type: "POST",
+                url:"{/literal}{$smarty.const.SITE_URL}{literal}fbregisterAjax",
+                data: dataStringd,
+                beforeSend: function(){
+                    $('#step6').show();
+                    $('#fade6').show();
+                },
+                complete: function(){
+                    $('#step6').hide();
+                    $('#fade6').hide();
+                },
+                success: function(resa) {
+                
+                    if(resa){
+                    
+                        window.location.href='{/literal}{$smarty.const.SITE_URL}{literal}StepFurther?Axt=Itt';
+                    }else{
+                    
+                        window.location.href='{/literal}{$smarty.const.SITE_URL}{literal}myFanwire';
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        });
+         
+    }
+    function logout(){
+        document.getElementById('login').style.display = "none";
+    }
+
+
+    function share(){
+        var share = {
+            method: 'stream.share',
+            u: 'http://202.136.65.24/fanwire'
+        };
+
+        FB.ui(share, function(response) { console.log(response); });
+    }
+
+    function graphStreamPublish(){
+        var body = 'Reading New Graph api & Javascript Base FBConnect Tutorial from Thinkdiff.net';
+        FB.api('/me/feed', 'post', { message: body }, function(response) {
+            if (!response || response.error) {
+                alert('Error occured');
+            } else {
+                alert('Post ID: ' + response.id);
+            }
+        });
+    }
+
+    function fqlQuery(){
+        FB.api('/me', function(response) {
+            var query = FB.Data.query('select name, hometown_location, sex, pic_square from user where uid={0}', response.id);
+            query.wait(function(rows) {
+           
+                document.getElementById('name').innerHTML =
+                    'Your name: ' + rows[0].name + "<br />" +
+                    '<img src="' + rows[0].pic_square + '" alt="" />' + "<br />";
+            });
+        });
+    }
+
+    function setStatus(){
+        status1 = document.getElementById('status').value;
+        FB.api(
+        {
+            method: 'status.set',
+            status: status1
+        },
+        function(response) {
+            if (response == 0){
+                alert('Your facebook status not updated. Give Status Update Permission.');
+            }
+            else{
+                alert('Your facebook status updated');
+            }
+        }
+    );
+    }
+    function textlimits(re,te){
+        var characterLimit = 140;
+        var remainingchars=re;
+        var textarea =te;
+
+        textlimit(characterLimit,remainingchars,textarea);
+    } 
+    function textlimit(characterLimit,remainingchars,textarea)
+
+    {
+        
+        $(remainingchars).html(characterLimit+" characters remaining.");
+        $(textarea).bind('keyup', function(){
+            var charactersUsed = $(this).val().length;
+
+            if(charactersUsed > characterLimit){
+                
+                charactersUsed = characterLimit;
+                $(this).val($(this).val().substr(0, characterLimit));
+                $(this).scrollTop($(this)[0].scrollHeight);
+            }
+            var charactersRemaining = characterLimit - charactersUsed;
+            //  alert(charactersRemaining);
+            $(remainingchars).html(charactersRemaining+" characters remaining.");
+        });
+    }
+
+</script>
+<SCRIPT>
+    function setVisibility(id, visibility) {
+        
+         
+        if(document.getElementById(id).style.display=="inline"){
+            document.getElementById(id).style.display ='none';
+            //document.getElementById(id).style.display =visibility;
+        }else{
+            document.getElementById(id).style.display ='inline';
+        }
+    }
+ 
+</SCRIPT>
+<script type="text/javascript">
+   
+    function collect(fanid,type){
+        var dataString ='fwrid='+fanid+'&type='+type; 
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}collect",
+            data: dataString,
+            success: function(response) {
+            
+                if(response ==1 || response ==2){
+                
+                    $('#collect'+fanid+type).html('<a class="collect_img_btn" href="javascript:void(0);" onclick="collect(\''+fanid+'\',\''+type+'\');"><span class="icon" style="background: none repeat scroll 0 0 green;"><img src="{/literal}{$smarty.const.SITE_URL}views/images/collected_icon.png"/></span><span style="background: none repeat scroll 0 0 green;">collected</span>{literal}</a>');	
+                }       
+                else{
+                	 
+                    $('#collect'+fanid+type).html('<a class="collect_img_btn" href="javascript:void(0);" onclick="collect(\''+fanid+'\',\''+type+'\');"><span class="icon"><img src="{/literal}{$smarty.const.SITE_URL}views/images/collect_icon.png"/></span> <span>collect</span> {literal}</a>');
+                }
+            }
+        });
+        return false;
+    }
+  
+    $(function() {
+        //More Button
+        $('.mor')
+        .live(
+        "click",
+        function() {
+            var ID = $(this).attr("id");
+            // alert(ID);
+            if (ID) {
+                $("#more" + ID)
+                .html(
+                '<img src="{/literal}{$smarty.const.SITE_URL}{literal}views/images/moreajax.gif" />');
+
+                $.ajax({
+                    type : "POST",
+                    url : "{/literal}{$smarty.const.SITE_URL}ajaxMore{literal}",
+                    data : "lastmsg=" + ID,
+                    cache : false,
+                    success : function(html) {
+                      
+
+                        var data = html.split("::");
+                        $(".collection_page").append(
+                        data[0]);
+
+                        $("#more" + ID).hide();
+                        $("#more").html(data[1]);
+                
+                        //more start    
+                        // alert('naresh');
+                        var showChar = 150;
+                        var ellipsestext = "...";
+                        var moretext = "more";
+                        var lesstext = "less";
+                      
+                        $('.more'+ID).each(function() {
+                            var content = $(this).html();
+
+                            if(content.length > showChar) {
+
+                                var c = content.substr(0, showChar);
+                                var h = content.substr(showChar-1, content.length - showChar);
+
+                                var html = c + '<span >'+ellipsestext+'</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink'+ID+'">'+moretext+'</a></span>';
+
+                                $(this).html(html);
+                            }
+
+                        });
+
+                        $(".morelink"+ID).click(function(){
+                            if($(this).hasClass("less")) {
+                                $(this).removeClass("less");
+                                $(this).html(moretext);
+                            } else {
+                                $(this).addClass("less");
+                                $(this).html(lesstext);
+                            }
+                            $(this).parent().prev().toggle();
+                            $(this).prev().toggle();
+                            return false;
+                        });
+                     
+                        
+                        //more end
+                         
+                        
+                    }
+                    
+                });
+            } else {
+                $(".showmore").html('end');
+            }
+            return false;
+        });
+    });
+    $().ready(function() {
+        var showChar = 150;
+        var ellipsestext = "...";
+        var moretext = "more";
+        var lesstext = "less";
+        $('.more').each(function() {
+             
+            var content = $(this).html();
+            if(content.length > showChar) {
+                var c = content.substr(0, showChar);
+                var h = content.substr(showChar-1, content.length - showChar);
+                var html = c + '<span >'+ellipsestext+'</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">'+moretext+'</a></span>';
+                $(this).html(html);
+            }
+        });
+        $(".morelink").click(function(){
+            if($(this).hasClass("less")) {
+                $(this).removeClass("less");
+                $(this).html(moretext);
+            } else {
+                $(this).addClass("less");
+                $(this).html(lesstext);
+            }
+            $(this).parent().prev().toggle();
+            $(this).prev().toggle();
+            return false;
+        });
+    });
+    function getFanwireFans(fanid){
+        var dataString ='fwrid='+fanid;
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}getFanwireFans",
+            data: dataString,
+            success: function(response) {
+                $('#fanwire_fans'+fanid).html(response);
+
+            }
+        });
+        return false;
+    }
+    //to share the content to FB or twitter
+    function Share(fanid){
+   
+          
+        if(document.getElementById('facebook'+fanid).checked ==true){
+           
+            window.open('http://www.facebook.com/sharer.php?u={/literal}{$fan.link}{literal}','','width=400,height=300');
+        }
+        if(document.getElementById('twitter'+fanid).checked==true){
+            
+            window.open('https://twitter.com/intent/tweet?original_referer={/literal}{$fan.link}{literal}&url={/literal}{$fan.link}{literal}','','width=400,height=300');
+        }
+    }
+    //this function for select all /disselect all
+    function checkAll(){
+        $(function(){
+            // add multiple select / deselect functionality
+            $(".allbox").click(function () {
+                $('.case').attr('checked', this.checked);
+            });
+            // if all checkbox are selected, check the selectall checkbox
+            // and viceversa
+            $(".case").click(function(){
+                if($(".case").length == $(".case").length) {
+                    $(".allbox").attr("checked", "checked");
+                } else {
+                    $(".allbox").removeAttr("checked");
+                }
+
+            });
+        });
+    }
+    function shareTheContentToRespectNetworks(fanid){
+        var arr = $("input[name='contacts[]']:checked").map(function() { 
+            return this.value; 
+        }).get();
+        var email_share=document.getElementById('email_share'+fanid).checked;
+        var email_addresses='';
+        var emailMessage=document.getElementById('personalmessage'+fanid).value;
+         
+        if(email_share){
+            email_addresses=document.getElementById('email_addresses'+fanid).value;
+        }else{
+            email_addresses='nareshgumte412@gmail.com';
+        }
+        var dataStringd="det="+arr+"&fwrid="+fanid+"&email_addresses="+email_addresses+"&emailMessage="+emailMessage+"&email_share="+email_share;
+        
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}shareContent",
+            data: dataStringd,
+            beforeSend: function(){
+                $('#shareLoader'+fanid).show();
+            },
+            complete: function(){
+                $('#shareLoader'+fanid).hide();
+                // $('#light1'+fanid).hide(); 
+            },
+            success: function(resa) {
+                
+                $('#errorShare'+fanid).html(resa);
+                if(resa==101){
+                      
+                    //     $('#errorShare'+fanid).html(resa);
+                
+                    $('#light1'+fanid).hide();
+                    $('#sharePopBlock').hide();
+                } 
+               
+            },
+            error:function(data){
+                console.log(data);
+            }
+        });
+       
+ 
+    }
+     
+    function ShowDialog(modal,id,type)
+    {
+        document.getElementById("type").value = type;
+        $("#dialog"+id+type).toggle();
+        $('#commentsToShow'+id+type).hide();
+    }
+    
+    function HideDialog(id,type)    
+    {
+        $('#commentsToShow'+id+type).hide();
+        $("#dialog"+id+type).hide();
+    }
+    function showSend(id){
+        var type = document.getElementById("type").value;
+        $("#comm"+id+type).show();
+        $('#commentsToShow'+id+type).show();
+        // document.getElementById('commentsToShow').style.display='block' ;
+    }
+    function expandtext(textArea){
+        while (textArea.rows > 1 && textArea.scrollHeight < textArea.offsetHeight){
+            textArea.rows--;
+        }
+        while (textArea.scrollHeight > textArea.offsetHeight)
+        {
+            textArea.rows++;
+        }
+        textArea.rows++
+    }
+    //comments are inserted from here
+    function submitForm(fanwireid,type,url)
+    {        
+        var msg = document.getElementById("msg"+fanwireid+type).value;
+        if($.trim(msg)!=""){
+            var dataString = 'id='+fanwireid+'&comment='+msg+'&type='+type;
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: dataString,
+                success: function(result) {
+                    //alert($.trim(result))
+                    if($.trim(result)=='1'){
+                        alert("You can post only two comments at a time.")
+                        document.getElementById("msg"+fanwireid+type).value="";
+                        document.getElementById("msg"+fanwireid+type).rows=1;
+                        return false;
+                    }
+                    else{ 
+                        var url1 = '{/literal}{$smarty.const.SITE_URL}{literal}fan/commentCount';
+                        var params = 'id='+fanwireid+'&type='+type;
+                        $.ajax({
+                            type: "POST",
+                            url: url1,
+                            data: params,
+                            success: function(result) {                        
+                                var rs=result.split('@@');
+                                $("div #showcomment"+fanwireid+type).html('('+$.trim(rs[0])+')');
+                                $("#comm"+fanwireid+type).append(rs[1]);    
+                            }
+                        });
+                        document.getElementById("msg"+fanwireid+type).value="";
+                        document.getElementById("msg"+fanwireid+type).rows=1;
+                        // HideDialog(fanwireid);
+                    }
+                }
+            });
+        }
+        else{
+            alert("Please enter comment.")
+            document.getElementById("msg"+fanwireid+type).value="";
+            document.getElementById("msg"+fanwireid+type).rows=1;            
+            return false;
+        }
+    }
+        
+    //view all comments are shown here.SAI SUDHEER
+    function viewAllComments(fanwireid,type,url)
+    {        
+        var dataString = 'id='+fanwireid+'&type='+type;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function(result) {                
+                // var rs=result.split('@@');
+                $("#all_comments"+fanwireid+type).html(result);                 
+                $("#view_all_link"+fanwireid+type).html("&nbsp;");//document.getElementById("#comm"+fanwireid).innerHTML=result;
+                $("#comm"+fanwireid+type).hide();
+                
+                
+            }
+        });
+    }
+   
+    
+    function onloadcall(fanwireid) {
+    	
+        //alert('Exec on Onload');
+        //alert(fanwireid);
+        var params='fanwireid='+fanwireid;
+        var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                    
+                }
+            }
+        });
+    }
+    
+    function likefanwire(fanwireid,type){
+        var params='like=1&dislike=0&fanwireid='+fanwireid+'&type='+type;
+        var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    // alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showlike"+fanwireid+type).html('('+$.trim(res[0])+')');
+                    $("div #showlike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                    
+                }
+            }
+        });
+    }
+        
+    function dislikefanwire(fanwireid,type){
+        var params='like=0&dislike=1&fanwireid='+fanwireid+'&type='+type;
+        var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    // alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showdislike"+fanwireid+type).html('('+$.trim(res[1])+')');
+                  
+                    $("div #showlike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                }
+            }
+        });
+    }
+    function tog(id){
+    	 
+        $('#'+id).toggle();
+    }
+    function shareTogg(id){
+        
+        $('#sharePopBlock').toggle();
+        $('#'+id).toggle();
+       
+        //document.getElementById('light1{$fan.id}').style.display='block';
+    }
+    //for background popup conetent
+    function displayBlock(id){
+ 
+        document.getElementById(id).style.display='block';
+    }
+    function addPerMes(id,key){//adding personal message
+        if(key=='mail'){
+            $('#addPmesg'+id).toggle();
+        }
+        else{
+            $('#addPmesgFace'+id).toggle();
+        }
+    }
+    
+    
+</script>
+
+
+{/literal} 
+
+<!--Right Section-->
+<div class="right_container"conect>
+
+    <div class="more_posts">
+        <!--        <a href="#">More Posts</a>-->
+    </div>
+
+    <div id="inner_rightsection">
+        <div  class="sharePopBlock" id="sharePopBlock"style="display: none;"> </div>
+        <div id="right_area">
+            {if $smarty.request.su eq '0'}Failed the sharing{/if}
+            {if $smarty.request.su eq 1}Shared the content to respective network{/if}
+            <div class="search"  >
+                <table><tr><td>
+                            <div class="minus">
+                                <img src='{$smarty.const.SITE_URL}views/images/m.png'>
+                            </div>
+                        </td><td>
+                            <div style="float:left;width:130px;  ">
+                                <a href="javascript:void(0);" class="tt" >
+                                    <div class="zoom" id="slider"  style='width: 100%;float:left; '>
+                                        <span class="tooltip" >
+                                            <b>Tip:</b> Drag the slider to
+                                            increase/decrease the size of Fanwires
+                                        </span>
+                                    </div> 
+                                </a>
+                            </div></td><td>
+                            <div class="plus"  >
+                                <img src='{$smarty.const.SITE_URL}views/images/p.png'>
+                            </div></td></tr></table>
+                <!-- added new end -->
+            </div> 
+            <div id="black" class="outClick" style="display: none;"></div>       
+
+            <div class="collection_page" id='mainBlock'>
+
+
+                <!-- ****************************************collection stats here***********************-->                
+                {section name=fanwire  loop=$fanwires} 
+                {assign var=fan value=$fanwires[fanwire]}
+
+                <!--class="view collect_photo"-->
+                <div class="collect_photo item block" {if $zoomValues.0.width}style="width:{$zoomValues.0.width}px;height:{$zoomValues.0.height}+80px;"{/if}>
+                     <div class="image_share_popup" id="image_share_popup" {if $fan.source eq 2 || $fan.photo eq ''}style="float:left;width:79px;"{/if}>
+                     {if $fan.source eq 2}
+                     <img src="{$smarty.const.IMAGE_URL}{$fan.photo}"  width="75" height="75"/>
+                        {else if $fan.photo eq ''}
+                        <img src="{$smarty.const.IMAGE_URL}{$fan.fanwire_profile_img}" width="75" height="75"/>
+                        {else}
+                        <input type="hidden" name="image_width{$c}" id="image_width{$fanwire}"  value="{$fan.width}" />
+                        <input type="hidden" name="image_height{$c}" id="image_height{$fanwire}" value="{$fan.height}" />
+                        <img id="image" src="{$smarty.const.IMAGE_URL}{$fan.photo}"  width="{if $zoomValues.0.width gt 0}{$zoomValues.0.width}{else}246{/if}" height="{if $zoomValues.0.width gt 0}{$zoomValues.0.width*$fan.height/$fan.width}{else}{246*$fan.height/$fan.width}{/if}" />                             
+                        {/if}
+
+
+                        <div class="red_links" >
+                            <!--                            <div id="fanid{$fan.id}" class="share_n_colletc">
+                                                            <a class="share_img_btn" name ='share' onclick = "getFanwireFans('{$fan.id}'); shareTogg('light1{$fan.id}');displayBlock('black'); " href="javascript:void(0);">
+                                                                <span class="icon"><img src="{$smarty.const.SITE_URL}views/images/share_icon.png"/></span> <span>Share</span> 
+                                                            </a> 
+                                                        </div>-->
+                            <div id="collect{$fan.id}{$fan.type}" class="share_n_colletc">
+                                <a class="collect_img_btn" href="javascript:void(0);" onclick="collect('{$fan.id}','{$fan.type}');">{if $fan.status eq 1}
+                                    <span class="icon" ><img src="{$smarty.const.SITE_URL}views/images/collected_icon.png"/></span><span style="background: none repeat scroll 0 0 green;" >collected</span>
+                                    {else}<span class="icon"><img src="{$smarty.const.SITE_URL}views/images/collect_icon.png"/></span> <span>collect</span>{/if}
+                                </a>
+                            </div>
+                            <a href="javascript:void(0)" class="close"  onClick="Popup.show('sub{$fan.id}{$fan.type}');" >
+                            </a>
+                            <!-- close popup -->
+                            <div id="sub{$fan.id}{$fan.type}" class="sub3"  >
+                                <ul class="facebook_dd">
+                                    <li><a href="#">Hide Element</a></li>
+                                    <!--                                    <li><a href="#" onclick="return tog('tog{$fan.id}');">Report element or spam</a> 
+                                                                            <div id="tog{$fan.id}" style="display:none;"><span><a class="selected" href="#">Inappropriate content</a></span>
+                                                                                <span><a href="#">Sapm</a></span>
+                                                                                <span><a href="#">Miscategorized</a></span>
+                                                                                <span><a href="#">Other</a></span></div>
+                                                                        </li>-->
+                                    <li><a href="#">Unsubscribe source from my profile</a></li>
+                                    <li><a href="{$smarty.const.SITE_URL}remove?fwrid={$fan.id}">Remove {$fan.name} permanently</a></li>
+                                </ul>
+                            </div>
+                            <!-- close popup end -->
+                            <!--sharing thindg starts here--> 
+                        </div>
+                        <!--sharing thing ends here-->
+                    </div>
+                    <div class="data" {if $fan.source eq 2 || $fan.photo eq ''}style="float: left;width: 60%;"{/if}>
+                         <a href='{$fan.link}' style="color: #F04F2C;font-size: 14px;font-family: OswaldBook;text-decoration: float:left; none;text-transform: uppercase;">{$fan.name}</a>
+                        <span style="float:right;padding:0 3px 0 0;">{$fan.time}</span>
+                        <div style="clear:both;"></div>
+                        {if $fan.title_link neq '' && $fan.source neq 1 && $fan.source neq 2} 
+                        <a href='{$fan.title_link}' style="color:#20A0BF;text-transform: none;text-decoration: none;font-size: 12px;">{$fan.title}</a><br />                         
+                        {else if $fan.source neq 1 && $fan.source neq 2}
+                        <span style="color:#20A0BF;text-transform: none;text-decoration: none;font-size: 12px;">{$fan.title}</span>
+                        {/if}
+
+                        {if $fan.source eq 2}<div style=" display: block; clear: both;"><span style="float:left;padding: 5px 0 0 0px;">via</span><span style="float:left;padding: 0 5px;"> <img src="{$smarty.const.SITE_URL}views/images/twt.png" width="25" height="21" align="left" /></span><span style="float:left;padding: 5px 0 0 0px;"><b>Twitter</b></span></div> {/if}
+                        {if $fan.source eq 1 && $fan.photo eq ''}<div style=" display: block; clear: both;"><span style="float:left;padding: 5px 3px 0 0;">via</span><span style="float:left;padding: 5px"> <img src="{$smarty.const.SITE_URL}views/images/facebook.png" align="left" /></span><span style="float:left;padding: 5px 0 0 3px;"><b>Facebook</b></span></div>{/if}
+                        <div class="clear"></div>
+                    </div>
+                    <div class="data" style="clear:both;padding: 8px 0 8px 0;">
+                        <span style="clear:both;"  class='more1'>
+                            {if $fan.title_link neq '' && $fan.source neq 1 && $fan.source neq 2}
+                            <a onclick="return javascript:void(0);" href="{$fan.title_link}" style="text-decoration: none;color:#424140;">{$fan.description|truncate:300}</a>
+                            {else}
+                            {$fan.description|truncate:300}
+                            {/if}
+                        </span>
+                        <br /><span style="line-height:25px;margin-bottom: 5px; ">
+                            {if $fan.source eq 1 && $fan.photo neq ''}<div style=" display: block; clear: both;"><span style="float:left;padding: 5px 3px 0 0;">via</span><span style="float:left;padding: 5px"> <img src="{$smarty.const.SITE_URL}views/images/facebook.png" align="left" /></span><span style="float:left;padding: 5px 0 0 3px;"><b>Facebook</b></span></div>{/if}</span>
+                    </div>
+
+                    <div class="photo_post">
+                        <div class="message" id="showcomment{$fan.id}{$fan.type}" onClick="ShowDialog('true','{$fan.id}','{$fan.type}');">{if $fan.commentcnt gt 0}({$fan.commentcnt}){/if}</div>
+
+                        <script type="text/javascript"> window.onload=onloadcall('{$fan.id}');</script>
+                        <div id="showdislike{$fan.id}{$fan.type}" class="red" onclick="dislikefanwire('{$fan.id}','{$fan.type}');">{if $fan.dislike gt 0}({$fan.dislike}){else}&nbsp;{/if}</div>
+                        <div id="showlike{$fan.id}{$fan.type}" class="blue" onclick="likefanwire('{$fan.id}','{$fan.type}');">{if $fan.like gt 0}({$fan.like}){else}&nbsp;{/if}</div>
+
+
+                        <div id="dialog{$fan.id}{$fan.type}" class="web_dialog" >
+
+                            <div class="comments" >
+                                <div> <ul >  
+                                        <li class="view_comments">
+                                            {if $fan.commentcnt gt 5} <a id="view_all_link{$fan.id}{$fan.type}" href="javascript:void(0);" onclick="viewAllComments('{$fan.id}','{$fan.type}', '{$smarty.const.SITE_URL}fan/viewAllComments')" >view all comments</a>{else}<a href="javascript:void(0);" >&nbsp;</a>{/if}
+                                            <a href="javascript:void(0);" class="cross_btn" onclick="HideDialog('{$fan.id}','{$fan.type}');" >X</a>
+                                        </li>
+                                    </ul>
+                                </div>     
+                                {assign var=height value=$fan.commentcnt*42}
+                                <div {if $fan.commentcnt gt 5}class="staticUL"{/if}{if $fan.commentcnt lt 5}  style="max-height:{$height}px;"{/if}>
+                                    <ul id="all_comments{$fan.id}{$fan.type}"  >
+
+                                        {section name=tem loop=$fan.comments_for_this_post}
+                                        {assign var=t value=$fan.comments_for_this_post[tem]}
+
+                                        <li >
+                                            <img src="{$t.profile_image}">
+                                            <span style="float: left;"><strong>{$t.name}</strong> <h5 style="float: right; text-decoration: none;" > {$t.stamp}</h5>&nbsp;</span>
+                                            <span>{$t.comment}</span>
+
+                                            <div class="clear"></div>
+                                        </li >
+
+                                        {/section}
+
+                                    </ul>
+
+                                </div> 
+                                <div id='comm{$fan.id}{$fan.type}'></div>
+
+                                <div>
+                                    <ul>
+                                        <li >
+                                            <img src="{$profile_image}" style="float: left;">
+                                            <textarea  id="msg{$fan.id}{$fan.type}"  style="float: left;" name="msg{$fan.id}{$fan.type}"  onkeyup='expandtext(this)' onclick="return showSend('{$fan.id}');"onfocus=" return textlimits('#remainingCharacters{$fan.id}{$fan.type}','#msg{$fan.id}{$fan.type}');" onKeyPress="Javascript:if(event.keyCode==13) submitForm('{$fan.id}','{$fan.type}','{$smarty.const.SITE_URL}fan/sendComment');" placeholder="say something..." title="say something..."   autocomplete="off" rows="1" ></textarea>
+                                            <div id="commentsToShow{$fan.id}{$fan.type}" style="display: none;">
+                                                <button type="button" class="sendComment" onclick="submitForm('{$fan.id}','{$fan.type}','{$smarty.const.SITE_URL}fan/sendComment');">send</button>
+                                                <span class="characters" id="remainingCharacters{$fan.id}{$fan.type}">140 Characters</span>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <input type="hidden" id="id" name="id" value="{$fan.id}" />
+                                        <input type="hidden" name="type" id="type" value="{$fan.type}" />
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clr"></div>
+                </div>
+                <div id="shareLoader{$fan.id}" style=" display: none; top: 38%;position: absolute;left: 45%;z-index: 9999;"><img src="{$smarty.const.SITE_URL}views/images/loaderBlack.gif"></div>
+                <div id="light1{$fan.id}" class="share_fanwire" style="display: none;">
+                    <div style="padding:0 0 0 15px;"><img src="{$smarty.const.SITE_URL}views/images/1.png" height="13" width="22"  alt=""/></div>
+                    <div class="share_fanwire_content">
+                        <a href="javascript:void(0);" style="position: absolute;bottom: 0px;right: 0px;" onclick="shareTogg('light1{$fan.id}');"><img src="{$smarty.const.SITE_URL}views/images/closebtn.gif"></a>
+                        <div class="share_fanwire_content1">
+                            <form action="{*$smarty.const.SITE_URL*}shareContent" name='share' method="GET">
+                                <div style="float:left;"><p>SHARE THIS FANWIRE<span id="errorShare{$fan.id}" style="color: orangered;padding: 0 0 0 10px;font-size: 14px; font-family: OpenSansRegular;"></span></p></div>
+                                <div class="connect10"><a href="#"  onclick="Share('{$fan.id}');shareTheContentToRespectNetworks('{$fan.id}');">send message</a></div>
+                                <div class="clear"></div>
+                        </div>
+                        <div class="share_fanwire_left">
+                            <input type="hidden" name ='fanid' value='{$fan.link}'/>
+                            <p><input type="checkbox" name='email_share' id="email_share{$fan.id}"  /><label>Email</label></p>
+                            <p style="padding:18px 0 3px 18px;">To (Email Address)</p>
+                            <div class="clear"></div>
+                            <input type="text" name='email_addresses' id="email_addresses{$fan.id}"   class="textfieldshare"/>
+                            <div class="share_fanwire_lefta">
+                                <p><a href="javascript:void(0);" onclick="addPerMes('{$fan.id}','mail')">+ Add Personal message</a></p>
+                                <div id="addPmesg{$fan.id}" style="display: none;"><textarea name="personalmessage" id="personalmessage{$fan.id}">hello</textarea></div>
+                                <p><a href="#">+Preview email</a></p>
+                            </div>
+
+                            <p style="padding:10px 0 0 0"><input type="checkbox" name='facebook_share' id='facebook{$fan.id}' value=""/><label>Facebook</label></p>
+                            <div class="share_fanwire_lefta">
+                                <p><a href="javascript:void(0);" onclick="addPerMes('{$fan.id}','face')">+ Add Personal message</a></p>
+                                <div id="addPmesgFace{$fan.id}" style="display: none;"><textarea name="personalmessageface" id="personalmessageface{$fan.id}">hello</textarea></div>
+                            </div>
+                            <p style="padding:24px 0 0 0"><input type="checkbox"  name='twitter_share'id='twitter{$fan.id}'value="" /><label style="color:#a8a8a8">Twitter<a href="#">&nbsp;connect</a></label></p>
+                        </div>
+                        <div class="share_fanwire_right">
+                            <p>
+                                <input type="checkbox" />
+                                <label>Fanwire Fans</label></p>
+                            <p style="padding:18px 0 3px 18px;">Share This to:</p>
+                            <div class="clear"></div>
+
+                            <div class="clear"></div>
+                            <div class="share_fanwire_checkbox" >
+                                <input  type='checkbox' value='on' name='allbox' id='allbox{$fan.id}' class="allbox" onclick='checkAll();' >Select/Deselect All<br>
+                                <div class='' id='fanwire_fans{$fan.id}'></div> 
+                            </div>
+                        </div>
+                        </form>
+                        <div class="clear">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                {/section}
+                <!-- ****************************************collection end here***********************-->
+            </div>
+
+            <div class="clear"></div>
+        </div>     
+
+
+        {include file='footer.tpl.html'}
+

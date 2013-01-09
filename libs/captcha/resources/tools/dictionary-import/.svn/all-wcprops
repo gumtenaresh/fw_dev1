@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/captcha/resources/tools/dictionary-import
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/captcha/resources/tools/dictionary-import/README.txt
+END
+sample-words-en.txt
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/captcha/resources/tools/dictionary-import/sample-words-en.txt
+END
+sample-words-es.txt
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/captcha/resources/tools/dictionary-import/sample-words-es.txt
+END
+importwords.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/captcha/resources/tools/dictionary-import/importwords.php
+END

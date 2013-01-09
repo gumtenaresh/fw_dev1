@@ -1,0 +1,54 @@
+<div class="be_fan">
+    <h2>You may also want to be a fan of...</h2>
+    <div class="clear"></div>
+    <div class="be_fan" id="befan">
+        <div  id='mainBlock'>
+            {assign var=i value=1}
+            {section name=fanwire loop=$fanwiresMore}
+            {assign var=fan value=$fanwiresMore[fanwire]}
+            {assign var=j value=$i++}
+            {if $j lt 5}
+            <div class="photo_list item block" id='one{$fan.id}'  >
+                <div class="photos_list" id='two'>
+                    <div class="data " style="min-height: 80px;" >
+                        <input type="hidden" name="image_width{$c}" id="image_width{$fanwire}"  value="{$fan.width}" />
+                        <input type="hidden" name="image_height{$c}" id="image_height{$fanwire}" value="{$fan.height}" />
+                        <a href='{$smarty.const.SITE_URL}phots?fwrid={$fan.id}' id='imm'>
+                            <img  style="margin: -12px -8px 10px 0px" src="{$smarty.const.IMAGE_URL}{$fan.photo}"  width="175" height="{175*$fan.height/$fan.width}"/>
+                        </a>
+                        <br/><a href='{$smarty.const.SITE_URL}phots?fwrid={$fan.id}' style="color: #F04E2C;text-decoration: none;">{$fan.name}</a> <br /> <span class='more'>{$fan.description}.</span>
+                    </div>
+                </div>
+                <div class="photo_post">
+                    <div class="setimg" style="padding-left: 5px;">
+                        <div id="fan{$fan.id}" style="opacity: 0.2"><a onclick="Popup.show('connect_popup_id{$fan.id}');"><img src="{$smarty.const.SITE_URL}views/images/plus_icon.png"></a></div>
+                        <div id="unfan{$fan.id}" style="display: none;" style="opacity: 0.2"><a onclick="Popup.show('connect_popup_id{$fan.id}')"><img src="{$smarty.const.SITE_URL}views/images/minus.png"></a></div>
+                    </div>
+                    <div class="red" style="opacity: 0.2">{if $fan.like gt 0}({$fan.like}){else}&nbsp;{/if}</div>
+                    <div class="blue" style="opacity: 0.2">{if $fan.dislike gt 0}({$fan.dislike}){else}&nbsp;{/if}</div>
+                </div>
+                <div class="conect_popup_bottom" id="connect_popup_id{$fan.id}" >
+
+                    <div class="conect_popupcontent_bottom">
+                        <div class="clear"></div>
+                        <p>Join fanwire to customize your profile with what you want to see.</p>
+                        <div class="conect_popupcontent1"><div class="connect1"><a href="{$smarty.const.SITE_URL}signup" onclick="showConnect_popup_id('connect_popup_id{$fan.id}{$fan.type}'); callSign();">Connect</a></div></div>
+                        <div class="clear"></div>
+                        <div class="conect_popupimg_bottom"></div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+            {/if}
+
+            {/section}
+            <div class="clear"></div>
+        </div>
+
+    </div>
+</div>

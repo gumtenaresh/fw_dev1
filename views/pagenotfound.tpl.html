@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>FanWire-404 page</title>
+        {literal}
+        <style>
+            body{marg:0; padding:0;background:url({/literal}{$smarty.const.SITE_URL}{literal}views/images/logo_fanwire.png) no-repeat 50% 100px; 
+            margin:0 auto; clear:both; 
+            font-family:"Arial"; height:600px;}
+            .clear{ clear:both; display:block; width:240px; margin:0 auto;margin:600px auto;}
+
+            a.home, a.contact{ 
+
+                width:108px; 
+                height:32px; 
+                display:block; 
+                float:left; 
+                text-decoration:none; 
+            }
+            a.home{background:url({/literal}{$smarty.const.SITE_URL}{literal}views/images/home.png) no-repeat; margin:0 20px 0 0; }
+            a.contact{background:url({/literal}{$smarty.const.SITE_URL}{literal}views/images/contact.png) no-repeat; }
+
+        </style>
+        {/literal}
+    </head>
+
+    <body>
+        <div class="clear">
+            <a href="{$smarty.const.SITE_URL}" class="home">&nbsp;</a>
+
+            <a href="{$smarty.const.SITE_URL}footer/contact" class="contact">&nbsp;</a>
+
+        </div>
+    </body>
+</html>

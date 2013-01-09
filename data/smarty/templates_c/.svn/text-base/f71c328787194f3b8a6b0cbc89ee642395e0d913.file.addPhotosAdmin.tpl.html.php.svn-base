@@ -1,0 +1,455 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-14 19:01:03
+         compiled from "/var/www/fanwire/views/admin/photos/addPhotosAdmin.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:332038863502a5317cc2833-05866993%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'f71c328787194f3b8a6b0cbc89ee642395e0d913' => 
+    array (
+      0 => '/var/www/fanwire/views/admin/photos/addPhotosAdmin.tpl.html',
+      1 => 1344950650,
+    ),
+  ),
+  'nocache_hash' => '332038863502a5317cc2833-05866993',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/header.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.validate.js"></script>
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/textLimit.js"></script>
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.tools.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo @SITE_URL;?>
+views/css2/scrollable.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo @SITE_URL;?>
+views/css2/buttons.css" />
+
+ 
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $('#fanwirename').hide();
+        $('#photoimg').live('change', function()
+        {
+            $("#preview").html('');
+            $("#preview").html('<img src="loader.gif" alt="Uploading...."/>');
+            $("#imageform").ajaxForm({target: '#preview'}).submit();
+        });
+        var characterLimit = 300;
+        var remainingchars='#remainingCharacters';
+        var textarea = '#description';
+        textlimit(characterLimit,remainingchars,textarea);              
+    });
+    function activateSlide(){
+        //alert('slide');
+        $("#messages").scrollable({size: 1});
+    }
+    
+    function validatealbum()
+    { 
+        
+        var status = true;
+        if(document.getElementById("fanwireName").value=="")
+        {
+            document.getElementById("fanwire_error").innerHTML= "Please select fanwire";
+            status = false;
+        }
+        else
+        {
+            document.getElementById("fanwire_error").innerHTML= "";            
+        }
+        
+        if(document.getElementById("name").value.trim()=="")
+        {
+            document.getElementById("name_error").innerHTML= "Please group name";
+            status = false;
+        }
+        else
+        {
+            document.getElementById("name_error").innerHTML= "";
+        }
+        
+        
+        if(document.getElementById("description").value.trim()=="")
+        {
+            document.getElementById("description_error").innerHTML= "Please enter description";
+            status = false;
+        }
+        else
+        {
+            document.getElementById("description_error").innerHTML= "";
+        }
+        
+        var radios = document.getElementsByName('mainimage');
+        var value;
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].type === 'radio' && radios[i].checked) {
+                value = radios[i].value;
+            }
+        }
+        if(value){ 
+            document.getElementById("imagerror").innerHTML= "";
+            document.getElementById("cover_image").value = value;            
+            
+        }else{
+            document.getElementById("imagerror").innerHTML= "Please select cover image";
+            status = false;
+        }
+        if(status == true)
+             $("#addphotos").submit();
+        else
+            return status;
+    }
+
+    function validatefanwirename()
+    {
+        document.getElementById("fanwire_error").innerHTML= "";
+    }
+    
+    function validatename()
+    {
+        document.getElementById("name_error").innerHTML= "";
+    }
+    
+    function validatedescription()
+    {
+        document.getElementById("description_error").innerHTML= "";
+    }
+
+    
+    function changeStatus(n){
+        // document.getElementById("status").value = n;
+        if(n=="1")
+        {
+            document.getElementById("desktop").className += " active";
+            document.getElementById('yfanwire').classList.remove('active');
+            document.getElementById('facebook').classList.remove('active');
+            $('#filedrag').toggle();
+           
+
+        }
+        else if(n=="2")
+        {
+            $('#filedrag').hide();
+            document.getElementById("yfanwire").className += " active";
+            document.getElementById('desktop').classList.remove('active');
+            document.getElementById('facebook').classList.remove('active');
+
+        }
+        else if(n=="3")
+        {
+            $('#filedrag').hide();
+            document.getElementById("facebook").className += " active";
+            document.getElementById('yfanwire').classList.remove('active');
+            document.getElementById('desktop').classList.remove('active');
+            
+        }
+        else{
+            $('#filedrag').hide();
+            document.getElementById('desktop').classList.remove('active');
+        }
+    }
+    function cancelPic(filename){
+        var a=confirm("Do you really want to remove "+filename);
+        if(a){
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = newURL+'fanwire/views/scripts/jquery.tools.min.js';
+            head.appendChild(script);
+            $.ajax({
+                url:'<?php echo @ADMIN_URL;?>
+photos/ajaxImage',
+                method:'post',
+                data:'flname='+filename+'&can=1',
+                success:function(res){ 
+                    $('#messages').html(res);
+                    activateSlide()
+               
+                }
+            });
+        }
+    }
+    function toggleText(){
+        var res=document.getElementById('personal').checked;
+        var res1=document.getElementById('personal1').checked;
+          
+        if(res1==true)
+            $('#fanwirename').show();
+        else $('#fanwirename').hide();
+    }
+
+    function caption(val){
+        document.getElementById(val).style.display="block";
+        
+    }
+    function addCaptionForImage(val,ext){      
+       
+        var caption=document.getElementById('tf*'+val).value;
+        var imageId=val;
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = newURL+'fanwire/views/scripts/jquery.tools.min.js';
+        head.appendChild(script);
+        
+        if(caption){
+            $.ajax({
+                url:'<?php echo @ADMIN_URL;?>
+photos/addCaptionAjax',
+                method:'post',
+                data:'captionName='+caption+'&imageId='+imageId+'&ext='+ext,
+                success:function(res){
+                    $('#messages').html(res);
+                    activateSlide()
+                }
+            });
+        }else{
+            alert('enter a caption for image');
+            return false
+        }
+ 
+    }
+    
+
+    $(document).ready(function() { 	
+        $('#photoimg').live('change', function(){     
+            document.imageform.submit();         
+            uploadFile();
+        });        
+    }); 
+    function getkeywords()
+    {
+        var keywords =new Array(); var i=0;
+        $("div #albumkeywords span").each(function(){
+            keywords[i] = $(this).text(); i++;
+        });      
+        var keyword = keywords.join(",");
+        document.getElementById("keyword").value = keyword;
+     
+        var fanwires =new Array(); var i=0;
+        $("div #additional_fanwires span").each(function(){
+            fanwires[i] = $(this).text(); i++;
+        });      
+        var fanwire = fanwires.join(",");
+        document.getElementById("fanwire").value = fanwire;
+        
+    }
+     
+    function removespan(id)
+    {
+        $(id).remove();
+    } 
+    function addkeywords()
+    {
+        var val = $.trim(document.getElementById("keywords").value);
+        val = val.replace (/,/g, "");//removing the , from the content
+        var key = val.replace(" ", "_");
+        key = key.replace(" ", "_");           
+        if(key!="")
+        {
+            $("#albumkeywords").append('&nbsp;<span class="keywords" id="'+key+'" onclick=removespan("#'+key+'")><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" height="11" width="8" alt="" /></a>'+val+'</span>');
+            //$("#albumkeywords").append('&nbsp;<div class="keywords" id="'+key+'" onclick=removespan("#'+key+'")><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" height="11" width="8" alt="" /></a><p>'+val+'</p></div>');
+            document.getElementById("keywords").value="";
+        }
+    }
+      
+    function addfanwires()
+    {
+        var val = $.trim(document.getElementById("fanwires").value);
+        val = val.replace (/,/g, "");//removing the , from the content
+        var key = val.replace(" ", "_");
+        key = key.replace(" ", "_");           
+        if(key!="")
+        {
+            $("#additional_fanwires").append('&nbsp;<span class="keywords" id="'+key+'" onclick=removespan("#'+key+'")><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" height="11" width="8" alt="" /></a>'+val+'</span>');
+            //$("#additional_fanwires").append('&nbsp;<div class="keywords" id="'+key+'" onclick=removespan("#'+key+'")><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" height="11" width="8" alt="" /></a><p>'+val+'</p></div>');
+            document.getElementById("fanwires").value="";
+        }
+    }
+    
+function ajaxFileUpload(upload_field)
+{
+var re_text = /\.jpg|\.gif|\.jpeg|\.png/i;
+var filename = upload_field.value;
+if (filename.search(re_text) == -1) {
+        alert("File should be either jpg or gif or jpeg or png");
+        upload_field.form.reset();
+        return false;
+        }
+//document.getElementById('picture_preview').innerHTML = '<div></div>';
+upload_field.form.action = "<?php echo @ADMIN_URL;?>
+photos/ajaxUploadImage";
+upload_field.form.target = 'upload_iframe';
+upload_field.form.submit();
+upload_field.form.action = '';
+upload_field.form.target = '';
+return true;
+}
+</script>
+                
+<div id="data_sectionarea">
+   <?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/fanwires_left_section.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+     
+        <div class="data_rightsection">
+            <div class="rightcontent">
+                <div class="datatabsection">
+                    <div class="datatableftsection"><a href="<?php echo @ADMIN_URL;?>
+">Home</a> > <a href="<?php echo @ADMIN_URL;?>
+fanwires/fanwiresList/">FanWire Admin</a> > <a href="<?php echo @ADMIN_URL;?>
+photos/addPhotos/">Add New Photos</a></div>
+<!--                    <div class="datatabrightsection"><a href="#">Step 1 of 4</a></div>-->
+                </div>
+                <div class="clear"></div>
+                <div class="menu_area">
+                    <div class="menu_area_list">
+                        <ul><li class="active"><a href="#"><span><strong>NEW</strong></span></a></li><li><a href="#"><span><strong>MANAGE</strong></span></a></li></ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+
+                <div class="datasettingarea">
+                    <form id="addphotos" name="addphotos" action="" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" id="add" name="add" value="submit"/>
+                    <div class="forms">
+
+                        <div class="dataforms">
+                            <label class="name">Fanwire Name</label>
+                            <select name="fanwireName" id="fanwireName" onchange="validatefanwirename();">
+                                <option value="">select</option>
+                                <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['id']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['name'] = 'id';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('fanwires')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['total']);
+?>
+                                <option value="<?php echo $_smarty_tpl->getVariable('fanwires')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+"><?php echo $_smarty_tpl->getVariable('fanwires')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['name'];?>
+</option>
+                                <?php endfor; endif; ?>
+                            </select>
+                            <label class="error" id="fanwire_error"></label>
+                        </div>
+                        
+                        <div class="dataforms">
+                            <label class="name">Group Name</label><input name="name" id="name" type="text" class="textfield" onkeyup="validatename();" />
+                            <label class="error" id="name_error"></label>
+                        </div>
+ 
+
+                        <div class="dataforms">
+                            <label class="name">Keywords</label>
+                            <input name="keywords" id="keywords" type="text" class="textfield" style="float:left;" onkeyup="Javascript:if(event.keyCode==188) addkeywords();"/>
+                            <img src="<?php echo @SITE_URL;?>
+views/images/add.png" height="28" width="25" alt="" onclick="addkeywords();" style="cursor: pointer" />
+                        </div>
+
+                        <div class="add_keywords" id="albumkeywords"><input type="hidden" name="keyword" id="keyword" /></div>
+                        
+                        
+                        <div class="dataforms">
+                            <label class="name">Additional Fanwires</label>
+                            <input name="fanwires" id="fanwires" type="text" class="textfield" style="float:left;" onkeyup="Javascript:if(event.keyCode==188) addfanwires();"/>
+                            <img src="<?php echo @SITE_URL;?>
+views/images/add.png" height="28" width="25" alt="" onclick="addfanwires();" style="cursor: pointer" />
+                        </div>
+
+                        <div class="remove_keywords" id="additional_fanwires"><input type="hidden" name="fanwire" id="fanwire" /></div>
+                        
+                        
+                        
+
+                        <div class="dataforms">
+                            <label class="name">Description</label>
+                        </div>
+                        <div class="dataforms">
+                            <label class="name"></label><textarea name="description" id="description" onkeyup="validatedescription();"  cols="" rows="" class="text_area" style="float:left; padding:0 10px 0 0;"></textarea>
+                            <div class="Char_remaining"> 
+                                <p>Characters</p>
+                                <p>remaining</p>
+                                <b><span id="remainingCharacters"></span></b>
+                            </div>
+                            <label class="error" id="description_error"></label>
+                        </div>
+                    </div>
+                        <input type="hidden" name="cover_image" id="cover_image" />
+                    </form>
+                    <div class="clear"></div>
+            
+                    <?php if ($_smarty_tpl->getVariable('browser')->value=='Safari'){?>
+                    <iframe name="upload_iframe" id="upload_iframe" style="display:none;"></iframe>
+                    <form id="upload1" name="upload1" action="" method="POST" enctype="multipart/form-data">
+                        <div align="center" style="padding: 20px 0 20px 0">
+                            <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />                        
+                            <input type="file" id="fileselect" name="fileselect" onchange="return ajaxFileUpload(this);" />                        
+                        </div>
+                    </form>
+                    <?php }else{ ?>
+                    <form id="upload" name="upload" action="<?php echo @SITE_URL;?>
+uploadAdmin.php" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
+                        <div id="filedrag" >
+                            <div class="upload_box_close_btn" ><a href="javascript:void(0);" onclick="return changeStatus('4');">X</a></div>
+                            <img src="<?php echo @SITE_URL;?>
+views/images/upload_arrow.png" />
+                            <p class="fileinput-button">drag files here or click to upload
+                                <input type="file" id="fileselect" name="fileselect[]" multiple="multiple"  />
+                        </div>
+                    </form>
+                    <?php }?>
+                    <div class="Cover">
+                        <div class="up_right_arrow_article" id="la"  ><a href="javascript:void(0);" class="prevPage" onclick="activateSlide();"  ><img src="<?php echo @SITE_URL;?>
+views/images/upload_image_R_arrow.png" /></a></div>
+
+                        <div  id="messages" style="display: none"></div>
+
+                        <div class="up_left_arrow_article" id="ra" ><a href="javascript:void(0);" class="nextPage" onclick="activateSlide();" ><img src="<?php echo @SITE_URL;?>
+views/images/upload_image_L_arrow.png" /></a></div>
+                    </div>          
+
+
+                    <!--upload box section end here-->                                        
+
+                    <div class="clear"></div>
+                    <div style="color:#F00" id="imagerror"></div>
+                    <div class="bs_btns">
+                        <div class="back_btn">back</div>
+                        <div class="save_btn" id="next" onclick="getkeywords();validatealbum();">Next</div>
+                        <div class="clear"></div>
+                    </div>      
+                </div>
+            </div>          
+        </div>       
+</div> 
+<?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/footer.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?> 
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/filedragAdmin.js"></script>

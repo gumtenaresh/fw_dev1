@@ -1,0 +1,320 @@
+{include file='headerguest.tpl.html'}
+{include file='guest_left_section.tpl.html'}
+{literal}
+<script>
+  $(document).ready(function(){
+      jQuery('iframe').remove();
+  });
+    $(window).scroll(function(){
+        if  ($(window).scrollTop() == $(document).height() - $(window).height()){
+            var path=$('#path').val();
+            var limit=$('#limit').val();
+            var facebook=$("#Ffacebook").val();
+            var twitter=$("#Ftwitter").val();
+            var article=$("#Farticle").val();
+            var photo=$("#Fphoto").val();
+            var video=$("#Fvideo").val();
+            var instagram=$("#Finstagram").val();
+            var dataString="strlimit="+limit+"&path="+path+"&facebook="+facebook+"&twitter="+twitter+"&article="+article+"&video="+video+"&photo="+photo+"&instagram="+instagram;
+                    
+            $.ajax({
+                type: "POST",
+                url:"{/literal}{$smarty.const.SITE_URL}{literal}fanwires/ajaxMore",
+                data: dataString,
+                beforeSend: function(){
+                    $('#showmoreLoader').show();
+                },complete:function(){
+                    $('#showmoreLoader').hide();
+                },
+                success: function(response) {
+                    // alert(response);
+                    var rees=response.split("##");
+                    $('#mainBlock').append(rees[0]);
+                    $('#limit').val(rees[1]);
+                    $(window).trigger("load");
+                    jQuery('iframe').remove();
+                }
+            });
+            return false;
+        }
+    }); 
+    $(function() {
+        $( "#slider" ).slider(
+        {
+            value:{/literal}{if $zoomValues.0.value}{$zoomValues.0.value}{else}68{/if}{literal},
+            min: 45,
+            max: 100,
+            step: 1,
+            stop: function(event, ui) {
+                zoomTheContent(ui.value,'{/literal}{$smarty.const.SITE_URL}{literal}zoomPositions',"#mainBlock > .collect_photo  > #image_share_popup > .rolloverd > #image","#mainBlock > .collect_photo  > #image_share_popup > #image_height","#mainBlock > .collect_photo  > #image_share_popup > #image_width");
+            }
+        });
+    });   
+</script>
+{/literal}
+
+<div id="fb-root"></div>
+<!--Right Section-->
+
+<div class="right_container" onClick="hidepop()" >
+
+    <div id="rightsection" style="margin-top: 41px!important;">
+
+        <div id="right_area" style="margin-top: 25px;">
+
+            <div class="filters">
+
+                <form action="" method="post" id="filtersForm">
+                    <input type="hidden" name="instagram" value="{if $filters.instagram eq ''}1{else}{$filters.instagram}{/if}" id="Finstagram">
+                    <input type="hidden" name="facebook" value="{if $filters.facebook eq ''}1{else}{$filters.facebook}{/if}" id="Ffacebook">
+                    <input type="hidden" name="twitter" value="{if $filters.twitter eq ''}1{else}{$filters.twitter}{/if}" id="Ftwitter">
+                    <input type="hidden" name="photo" value="{if $filters.photo eq ''}1{else}{$filters.photo}{/if}" id="Fphoto">
+                    <input type="hidden" name="video" value="{if $filters.video eq ''}1{else}{$filters.video}{/if}" id="Fvideo">
+                    <input type="hidden" name="article" value="{if $filters.article eq ''}1{else}{$filters.article}{/if}" id="Farticle">
+                </form>
+                <h2>filter by:</h2>
+
+                <div class="fW_btns">
+                    <ul >
+                        <li class="instagram"  style="margin: 0 0 0 8px"><a href="#" id="instagram" {if $filters.instagram eq 1}class="active"{else}{/if} title='instagram'></a></li>
+                        <li class="facebook"><a href="#" id="facebook" {if $filters.facebook eq 1}class="active"{else}{/if} title='facebook'></a></li>
+                        <li class="twiiter" ><a href="#" id="twitter"  {if $filters.twitter eq 1}class="active"{else}{/if} title='twitter'></a></li>
+                        <li><img src="{$smarty.const.SITE_URL}views/images/Line _ List.png" height="19" width="2" alt="" style="margin: 0 5px"/></li>
+                        <li class="chat_box"><a href="#" id="photo"  {if $filters.photo eq 1}class="active"{else}{/if} title='photos'></a></li>
+                        <li class="vedio"><a href="#" id="video"  {if $filters.video eq 1}class="active"{else}{/if} title='videos'></a></li>
+                        <li class="mail_box"><a href="#" id="article"  {if $filters.article eq 1}class="active"{else}{/if} title='articles'></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="search" >
+                <table>
+                    <tr>
+                        <td><div class="minus"><img src='{$smarty.const.SITE_URL}views/images/m.png'></div></td>
+                        <td><div style="float:left;width:131px;  ">
+                                <a href="javascript:void(0);" class="tt" >
+                                    <div class="zoom" id="slider"  style='width: 98%;float:left; '>
+                                        <span class="tooltip" ><b>Tip:</b> Drag the slider to increase/decrease the size of Fanwires </span>
+                                    </div> 
+                                </a>
+                            </div>
+                        </td>
+                        <td><div class="plus"  ><img src='{$smarty.const.SITE_URL}views/images/p.png'></div></td>
+                    </tr>
+                </table>
+                <!-- added new end -->
+            </div>
+            <div class="collection_page" id='mainBlock' style="width: 100%;">
+                <!-- ****************************************collection stats here***********************-->
+                {section name=fanwire loop=$fanwiresguest} 
+                {assign var=fan value=$fanwiresguest[fanwire]}
+                <div  class="collect_photo item block" {if $zoomValues.0.width}style="width:{$zoomValues.0.width}px;height:{$zoomValues.0.height}+80px;"{/if}>
+                      <div class="image_share_popup" id="image_share_popup" {if $fan.source eq 2 || $fan.photo eq ''}style="float:left;width:79px;"{/if}>
+                        {if $fan.source eq 2}
+                        <img src="{$smarty.const.IMAGE_URL}{$fan.photo}"  width="75" height="75"/>
+                        {else if $fan.photo eq ''}
+                        <img src="{$smarty.const.IMAGE_URL}{$fan.fanwire_profile_img}" width="75" height="75"/>
+                        {else}
+                        <input type="hidden" name="image_width" id="image_width"  value="{$fan.width}" />
+                        <input type="hidden" name="image_height" id="image_height" value="{$fan.height}" />
+                        <a {if $fan.type eq 0}href="{$fan.link}"{else}href="{$fan.title_link}"{/if} class="rolloverd" >
+                            <img id="image" src="{$smarty.const.IMAGE_URL}{$fan.photo}" width="{$zoomValues.0.width}" height="{$zoomValues.0.width*$fan.height/$fan.width}"  />                             
+                        </a>
+                        {/if}
+                    </div>
+                    <div class="red_links">
+                        <!--                            <div id="fanid{$fan.id}{$fan.type}" class="share_n_colletc">
+                                                        <a class="share_img_btn" name ='share'   onclick="Popup.show('share_popup_id{$fan.id}{$fan.type}');return false;"  href="javascript:vooid(0);">
+                                                            <span class="icon"><img src="{$smarty.const.SITE_URL}views/images/share_iconguest.png"/></span><span style="background: none repeat scroll 0 0 #d5d5d5;">Share</span>
+                                                        </a> 
+                                                    </div>-->
+                        <div class="share_popup" id="share_popup_id{$fan.id}{$fan.type}">
+                            <div class="conect_popupimg"></div>
+                            <div class="conect_popupcontent">
+                                <a href="javascript:void(0);" style="float:right;" onclick="hideConnect_popup_id('share_popup_id{$fan.id}{$fan.type}');"><img src="{$smarty.const.SITE_URL}views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+                                <div class="clear"></div>
+                                <p>Share FanWire's content with your
+                                    Facebook or Twitter accounts instantly.
+                                    Sign up now to get full access.</p>
+                                <div class="conect_popupcontent1"><div class="connect1"><a href="{$smarty.const.SITE_URL}signup" onclick="showConnect_popup_id('connect_popup_id{$fan.id}{$fan.type}'); callSign();">Connect</a></div></div>
+                            </div>
+                        </div>
+                        <!--                        <div id="collect{$fan.id}{$fan.type}" class="share_n_colletc">
+                                                    <a class="collect_img_btn" href="javascript:void(0);"   onclick="Popup.show('connect_popup_id{$fan.id}{$fan.type}');return false;">{if $fan.status eq 1}
+                                                        <span class="icon"><img src="{$smarty.const.SITE_URL}views/images/collected_icon.png"/></span><span style="background: none repeat scroll 0 0 green;">collected</span>
+                                                        {else}<span class="icon"><img src="{$smarty.const.SITE_URL}views/images/collect_iconguest.png"/></span><span style="background: none repeat scroll 0 0 #d5d5d5;">collect</span>{/if}
+                                                    </a>
+                                                </div>-->
+                        {if $smarty.const.ACTIVATE eq 1}<a href="javascript:void(0)" class="close"  onClick="Popup.show('like_popup_id_new{$fan.id}{$fan.type}');"  >
+                        </a>{/if}
+                        <!-- close popup -->
+                        <div id="sub{$fan.id}{$fan.type}" class="sub3"  >
+                            <ul class="facebook_dd">
+                                <li><a href="#">Hide Element</a></li>
+                                <li><a href="#" onclick="return tog('tog{$fan.id}{$fan.type}');">Report element or spam</a> 
+                                    <div id="tog{$fan.id}{$fan.type}" style="display:none;">
+                                        <span><a class="selected" href="#">Inappropriate content</a></span>
+                                        <span><a href="#">Sapm</a></span>
+                                        <span><a href="#">Miscategorized</a></span>
+                                        <span><a href="#">Other</a></span>
+                                    </div>
+                                </li>
+                                <li><a href="#">Unsubscribe source from my profile</a></li>
+                                <li><a href="{$smarty.const.SITE_URL}remove?fwrid={$fan.id}{$fan.type}">Remove {$fan.name}'s FanWire permanently</a></li>
+                            </ul>
+                        </div>
+                        <!-- close popup end -->
+                        <div class="conect_popup" id="connect_popup_id{$fan.id}{$fan.type}">
+                            <div class="conect_popupimg"></div>
+                            <div class="conect_popupcontent">
+                                <a href="javascript:void(0);" style="float:right;" onclick="Popup.hide('connect_popup_id{$fan.id}{$fan.type}');"><img src="{$smarty.const.SITE_URL}views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+                                <div class="clear"></div>
+                                <p>Members never have to leave FanWire
+                                    by linking their social media accounts.
+                                    Sign up now to get full access.</p>
+                                <div class="conect_popupcontent1"><div class="connect1"><a href="{$smarty.const.SITE_URL}signup" onclick="showConnect_popup_id('connect_popup_id{$fan.id}{$fan.type}'); callSign();">Connect</a></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="data" {if $fan.source eq 2 || $fan.photo eq ''}style="float: left;{if $zoomValues.0.width lt 215}width: 51%;{else}width: 66%;{/if}"{/if}>
+                         <a href='{$fan.link}' style="color: #F04F2C;font-size: 14px;font-family: OswaldBook;text-decoration: float:left; none;text-transform: uppercase;">{$fan.name}</a>
+                        <span style="float:right;padding:0 3px 0 ;">
+                            {$fan.time}
+                        </span>
+                        <div style="clear:both;"></div>
+                        {if $fan.title_link neq '' && $fan.source neq 1 && $fan.source neq 2} 
+                        <div style=" display: block; float: right;width: 100%;">
+                            <span class="displayIamages">
+                                <a href='{$fan.title_link}' style="color:#20A0BF;text-transform: none;text-decoration: none;font-size: 12px;">{$fan.title}</a>
+                            </span>
+                            {if $fan.source neq 2 && $fan.source neq 1} 
+                            {if $fan.type neq 4}
+                            <span class="displayIamages2" > 
+                                <img src="{$smarty.const.SITE_URL}views/images/display{$fan.type}.png" width="25" height="14" align="left" />
+                            </span>
+                            {/if}{/if}
+                        </div>
+
+                        <br />                         
+                        {else if $fan.source neq 1 && $fan.source neq 2}
+                        <span style="color:#20A0BF;text-transform: none;text-decoration: none;font-size: 12px;">{$fan.title}</span>
+
+                        {/if}
+
+                        {if $fan.source eq 2}<div style=" display: block; clear: both;"><span style="float:left;padding: 5px 5px 0 0px;">via</span><span style="float:left"> <img src="{$smarty.const.SITE_URL}views/images/twt.png" width="25" height="21" align="left" /></span><span style="float:left;padding: 5px 0 0 0px;"><b>Twitter</b></span></div> {/if}
+                        {if $fan.source eq 1 && $fan.photo eq ''}<div style=" display: block; clear: both;"><span style="float:left;padding: 5px 3px 0 0;">via</span><span style="float:left;padding: 5px"> <img src="{$smarty.const.SITE_URL}views/images/facebook.png" align="left" /></span><span style="float:left;padding: 5px 0 0 3px;"><b>Facebook</b></span></div>{/if}
+                        {if $fan.type eq 4}<div style=" display: block; clear: both;"><span style="float:left;padding: 5px 5px 0 0px;">via</span><span style="float:left"> <img src="{$smarty.const.SITE_URL}views/images/display4.png" width="19" height="19" align="left" /></span><span style="float:left;padding: 5px 0 0 0px;"><b> &nbsp;Instagram</b></span></div> {/if}
+
+                        <div class="clear"></div>
+
+                    </div>
+                    <div class="data" style="clear:both;padding: 8px 0 8px 0;">
+                        <span style="clear:both;"  class='more'>
+                            {if $fan.title_link neq '' && $fan.source neq 1 && $fan.source neq 2}
+                            <a onclick="return javascript:void(0);" href="{$fan.title_link}" style="text-decoration: none;color:#424140;">{$fan.description|truncate:300}</a>
+                            {else}
+                            {$fan.description|truncate:300}
+                            {/if}
+                        </span>
+
+                        <br /><span style="line-height:25px;margin-bottom: 5px; ">
+                            {if $fan.source eq 1 && $fan.photo neq ''}<div style=" display: block; clear: both;"><span style="float:left;padding: 5px 3px 0 0;">via</span><span style="float:left;padding: 5px"> <img src="{$smarty.const.SITE_URL}views/images/facebook.png" align="left" /></span><span style="float:left;padding: 5px 0 0 3px;"><b>Facebook</b></span></div>{/if}</span>
+                    </div>
+                    <div class="photo_post">
+                        <div class="message" id="showcomment{$fan.id}{$fan.type}" style="opacity: 0.50;"   >{if $fan.commentcnt gt 0}({$fan.commentcnt}){/if}</div>
+                        <div>
+                            <div id="showdislike{$fan.id}{$fan.type}" class="red" style="opacity: 0.50;"  >{if $fan.dislike gt 0}({$fan.dislike}){else}&nbsp;{/if}</div>
+                            <div id="showlike{$fan.id}{$fan.type}" class="blue"  style="opacity: 0.50;"  >{if $fan.like gt 0}({$fan.like}){else}&nbsp;{/if}</div>
+                        </div>
+                        <div id="overlay" class="web_dialog_overlay"></div>
+                        <div id="dialog{$fan.id}{$fan.type}" class="web_dialog" >
+                            <div class="comments"    >
+                                <ul>  
+                                    <li class="view_comments">
+                                        {if $fan.comments_for_this_post|@count gt 3} <a href="javascript:void(0);" >view all comments</a>{else}<a href="javascript:void(0);" >&nbsp;</a>{/if}
+                                        <a href="javascript:void(0);" class="cross_btn" onclick="HideDialog('{$fan.id}{$fan.type}');" >X</a>
+                                    </li>
+                                    {section name=tem loop=$fan.comments_for_this_post}
+                                    {assign var=t value=$fan.comments_for_this_post[tem]}
+                                    <li>
+                                        <img src="{$smaty.const.SITE_URL}profile_images/{$t.profile_image}">
+                                        <span><strong>{$t.name}</strong>&nbsp;{$t.comment}</span>
+                                        <div class="clear"></div>
+                                    </li>
+                                    {/section}
+                                    <div id='comm{$fan.id}{$fan.type}'></div>
+                                    <li>
+                                        <img src="{$smaty.const.SITE_URL}profile_images/{$t.profile_image}">
+                                        <textarea id="msg{$fan.id}{$fan.type}" name="msg{$fan.id}{$fan.type}" onfocus=" return textlimits('#remainingCharacters{$fan.id}{$fan.type}','#msg{$fan.id}{$fan.type}');" onKeyPress="Javascript:if(event.keyCode==13) submitForm('{$fan.id}{$fan.type}','{$smarty.const.SITE_URL}fan/sendComment');" placeholder="say something..."></textarea>
+                                        <button type="button" class="sendComment" onclick="submitForm('{$fan.id}{$fan.type}','{$smarty.const.SITE_URL}fan/sendComment');">send</button>
+                                        <span class="characters" id="remainingCharacters{$fan.id}{$fan.type}">140 Characters</span>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <input type="hidden" id="id" name="id" value="{$fan.id}{$fan.type}" />
+                                    <input type="hidden" name="type" id="type" value="0" />
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment_popup" id="comment_popup_id{$fan.id}{$fan.type}">
+                        <div class="conect_popupimg"></div>
+                        <div class="conect_popupcontent">
+                            <a href="javascript:void(0);" style="float:right;" onclick="hideConnect_popup_id('comment_popup_id{$fan.id}{$fan.type}');"><img src="{$smarty.const.SITE_URL}views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+                            <div class="clear"></div>
+                            <p>Members can chat with other members
+                                about their favorite FanWire's media.</p>
+
+                            <div class="conect_popupcontent1"><div class="connect1"><a href="{$smarty.const.SITE_URL}signup" onclick="showConnect_popup_id('connect_popup_id{$fan.id}{$fan.type}'); callSign();">Connect</a></div></div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="like_popup_new" id="like_popup_id_new{$fan.id}{$fan.type}" style="z-index: 999">
+                        <div class="conect_popupimg_new"></div>
+                        <div class="conect_popupcontent">
+                            <a href="javascript:void(0);" style="float:right;" onclick="hideConnect_popup_id('like_popup_id_new{$fan.id}{$fan.type}');"><img src="{$smarty.const.SITE_URL}views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+                            <div class="clear"></div>
+                            <p>Share FanWire's content with your
+                                Facebook or Twitter accounts instantly.
+                                Sign up now to get full access.</p>
+
+                            <div class="conect_popupcontent1"><div class="connect1"><a href="{$smarty.const.SITE_URL}signup" onclick="showConnect_popup_id('connect_popup_id{$fan.id}{$fan.type}'); callSign();">Connect</a></div></div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="dislike_popup" id="like_popup_id{$fan.id}{$fan.type}">
+                        <div class="conect_popupimg_new"></div>
+                        <div class="conect_popupcontent">
+                            <a href="javascript:void(0);" style="float:right;" onclick="hideConnect_popup_id('like_popup_id{$fan.id}{$fan.type}');"><img src="{$smarty.const.SITE_URL}views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+                            <div class="clear"></div>
+                            <p>Sign up to be an active part of the 
+                                FanWire community by choosing to
+                                Like/Dislike a particular media post.</p>
+
+                            <div class="conect_popupcontent1"><div class="connect1"><a href="{$smarty.const.SITE_URL}signup" onclick="showConnect_popup_id('connect_popup_id{$fan.id}{$fan.type}'); callSign();">Connect</a></div></div>
+                        </div>
+                    </div>
+                </div>
+                {/section}
+                <!-- ****************************************collection end here***********************-->
+            </div>
+            <div class="btm_line">
+                <div class="show    more"> 
+                    <input type="hidden" value="{$path}" id="path" name="path"/>
+                    <input type="hidden" value="30" id="limit" name="limit"/>
+                    <div id="showmoreLoader" style="display: none;"><img src="{$smarty.const.SITE_URL}views/images/103.gif"/></div>
+                </div>
+            </div>
+            <div class="clear"></div> 
+        </div>       
+        {include file="footerGuest.tpl.html"}
+        <!--loader statrs-->
+        <div id="step6" class="wstyle" style="background: none repeat scroll 0 50% transparent;border: medium none; left: 46%;top: 41%;width:12%;height: 34%;display:none;">
+            <img src="{$smarty.const.SITE_URL}views/images/LoaderBlue.gif" style="margin-left: 10px;margin-top: 10px;" /> 
+        </div>
+        <div id="fade6" class="bstyle" style="display: none"></div> 
+        <!--loader end-->

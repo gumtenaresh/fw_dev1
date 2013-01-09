@@ -1,0 +1,177 @@
+/* Component containers
+----------------------------------*/
+.ui-widget {
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	font-size: 1.1em;
+}
+
+.ui-widget .ui-widget {
+	font-size: 1em;
+}
+
+.ui-widget input,.ui-widget select,.ui-widget textarea,.ui-widget button
+	{
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	font-size: 1em;
+}
+
+.ui-widget-content {
+	border: 1px solid #ccc;
+	/*background: #eeeeee
+		url(images/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x;*/
+	color: #333333;
+	background-color: #f1f1f1;
+	height: 3px;
+}
+
+.ui-widget-content a {
+	color: skyblue;
+}
+
+.ui-widget-header {
+	
+	
+	color: #ffffff;
+	font-weight: bold;
+}
+
+.ui-widget-header a {
+	color: skyblue;
+}
+
+/* Interaction states
+----------------------------------*/
+.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default
+	{
+	border: 1px solid skyblue;
+	-webkit-border-radius: 5em; -moz-border-radius: 5em; border-radius:5em;
+	font-weight: bold;
+	color: #1c94c4;
+}
+
+.ui-state-default a,.ui-state-default a:link,.ui-state-default a:visited
+	{
+	/*color: skyblue;*/
+	text-decoration: none;
+	-webkit-border-radius: 5em; -moz-border-radius: 5em; border-radius:5em;
+}
+
+.ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus
+	{
+	border: 1px solid #02a0bf;
+	/*background: #fdf5ce url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50%
+		repeat-x;*/
+	font-weight: bold;
+	color: #c77405;
+	-webkit-border-radius: 5em; -moz-border-radius: 5em; border-radius:5em;
+}
+
+.ui-state-hover a,.ui-state-hover a:hover {
+	color: skyblue;
+	text-decoration: none;
+}
+
+.ui-state-active,.ui-widget-content .ui-state-active,.ui-widget-header .ui-state-active
+	{
+	/*border: 1px solid skyblue;
+	background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50%
+		repeat-x;*/
+	font-weight: bold;
+	color: #eb8f00;
+	
+}
+
+.ui-state-active a,.ui-state-active a:link,.ui-state-active a:visited {
+	/*color: skyblue;*/
+	text-decoration: none;
+}
+
+.ui-widget :active {
+	outline: none;
+}
+
+/*
+ * jQuery UI Slider 1.8.18
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Slider#theming
+ */
+.ui-slider {
+	position: relative;
+	text-align: left;
+	
+}
+
+.ui-slider .ui-slider-handle {
+	position: absolute;
+	z-index: 2;
+	width: 0.9em;
+	height: 0.9em;
+	cursor: default;
+	
+}
+
+.ui-slider .ui-slider-range {
+	position: absolute;
+	z-index: 1;
+	font-size: .7em;
+	display: block;
+	border: 0;
+	
+	background-position: 0 0;
+}
+
+.ui-slider-horizontal {
+	height: .1em;
+	width: 50%;
+	margin-top: 10px;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+	top: -.5em;
+	margin-left: 0em;
+	-webkit-border-radius: 5em; -moz-border-radius: 5em; border-radius:5em;/* Safari and Chrome */
+	background-color:#02a0bf;
+	
+}
+
+.ui-slider-horizontal .ui-slider-range {
+	top: 0;
+	height: 100%;
+}
+
+.ui-slider-horizontal .ui-slider-range-min {
+	left: 0;
+}
+
+.ui-slider-horizontal .ui-slider-range-max {
+	right: 0;
+}
+
+.ui-slider-vertical {
+	width: .8em;
+	height: 100px;
+}
+
+.ui-slider-vertical .ui-slider-handle {
+	left: -.3em;
+	margin-left: 0;
+	margin-bottom: -.6em;
+}
+
+.ui-slider-vertical .ui-slider-range {
+	left: 0;
+	width: 100%;
+}
+
+.ui-slider-vertical .ui-slider-range-min {
+	bottom: 0;
+}
+
+.ui-slider-vertical .ui-slider-range-max {
+	top: 0;
+}
+ 

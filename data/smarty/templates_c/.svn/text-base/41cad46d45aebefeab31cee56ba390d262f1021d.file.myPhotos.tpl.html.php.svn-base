@@ -1,0 +1,412 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-16 15:37:35
+         compiled from "/var/www/fanwire/views/mediamanager/myPhotos.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:235517953502cc667c6bca9-04797326%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '41cad46d45aebefeab31cee56ba390d262f1021d' => 
+    array (
+      0 => '/var/www/fanwire/views/mediamanager/myPhotos.tpl.html',
+      1 => 1345111651,
+    ),
+  ),
+  'nocache_hash' => '235517953502cc667c6bca9-04797326',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+
+<?php $_template = new Smarty_Internal_Template('header.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('myfanwireLeftBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+
+<script>
+
+ function showSend(id){
+        $('#commentsToShow'+id).show();
+        // document.getElementById('commentsToShow').style.display='block' ;
+    }
+    function expandtext(textArea){
+        while (textArea.rows > 1 && textArea.scrollHeight < textArea.offsetHeight){
+            textArea.rows--;
+        }
+        while (textArea.scrollHeight > textArea.offsetHeight)
+        {
+            textArea.rows++;
+        }
+        textArea.rows++
+    }
+    function textlimits(re,te){
+        var characterLimit = 140;
+        var remainingchars=re;
+        var textarea =te;
+
+        textlimit(characterLimit,remainingchars,textarea);
+    } 
+    function textlimit(characterLimit,remainingchars,textarea)
+
+    {
+        $(remainingchars).html(characterLimit+"characters remaining.");
+        $(textarea).bind('keyup', function(){
+            var charactersUsed = $(this).val().length;
+
+            if(charactersUsed > characterLimit){
+                charactersUsed = characterLimit;
+                $(this).val($(this).val().substr(0, characterLimit));
+                $(this).scrollTop($(this)[0].scrollHeight);
+            }
+            var charactersRemaining = characterLimit - charactersUsed;
+            //  alert(charactersRemaining);
+            $(remainingchars).html(charactersRemaining+"characters remaining.");
+        });
+    }
+
+    function deleteAlbum(id)
+    {
+        var dataString='id='+id;
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+mediamanager/deleteAlbum",
+            data: dataString,
+            success: function(response) {
+                $(response).hide('slow', function() {
+                });
+            }
+        });
+    }
+
+    //code by Rak
+    
+    //comments are inserted from here
+    function submitForm(fanwireid,url)
+    {
+        var msg = document.getElementById("msg"+fanwireid).value;
+        var dataString = 'id='+fanwireid+'&comment='+msg+'&type=1';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function() {
+                var url1 = '<?php echo @SITE_URL;?>
+fan/commentCount';
+                var params = 'id='+fanwireid+'&type=1';
+                $.ajax({
+                    type: "POST",
+                    url: url1,
+                    data: params,
+                    success: function(result) { 
+                        var rs=result.split('@@');
+                        $("div #showcomment"+fanwireid).html('('+rs[0]+')');
+                        $("#comm"+fanwireid).append(rs[1]);
+                    }
+                });
+                document.getElementById("msg"+fanwireid).value="";
+                // HideDialog(fanwireid);
+            }
+        });
+    }
+     //view all comments are shown here.SAI SUDHEER
+    function viewAllComments(fanwireid,url)
+    {
+       /* var msg = document.getElementById("msg"+fanwireid).value;*/
+        var dataString = 'id='+fanwireid+'&type=1';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function(result) {                
+               // var rs=result.split('@@');
+                $("#all_comments_photos"+fanwireid).html(result);                 
+                $("#view_all_link"+fanwireid).html("&nbsp;");//document.getElementById("#comm"+fanwireid).innerHTML=result;
+                
+            }
+        });
+    }
+	
+ function ShowDialog(modal,id)
+    {
+        $("#dialog"+id).toggle();
+        $('#commentsToShow'+id).hide();
+    }
+
+    function HideDialog(vid)
+   
+    {
+	   
+	  
+        $("#dialog"+vid).hide();
+    
+    }
+
+    
+    //Like and Dislike Code By Rak
+    
+    function onloadcall(fanwireid) {
+    	
+        //alert('Exec on Onload');
+        //alert(fanwireid);
+        var params='fanwireid='+fanwireid;
+        var url = '<?php echo @SITE_URL;?>
+fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                    
+                }
+            }
+        });
+    }
+    
+    function likefanwire(fanwireid){
+        var params='like=1&dislike=0&fanwireid='+fanwireid;
+        var url = '<?php echo @SITE_URL;?>
+fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    // alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showlike"+fanwireid).html('('+res[0]+')');
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                    
+                }
+            }
+        });
+    }
+        
+    function dislikefanwire(fanwireid){
+        var params='like=0&dislike=1&fanwireid='+fanwireid;
+        var url = '<?php echo @SITE_URL;?>
+fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    //alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showdislike"+fanwireid).html('('+res[1]+')');
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                }
+            }
+        });
+    }
+
+</script>
+
+<?php $_template = new Smarty_Internal_Template('mediaManagerhalfRightBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?><!-- media manager half right bar -->
+<?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['name'] = "id";
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'] = is_array($_loop=$_smarty_tpl->getVariable('list')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total']);
+?> 
+<div class="photo_list2" id="div<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+">
+
+    <div class="orange_arrow"><img src="<?php echo @SITE_URL;?>
+views/images/orange_arrow.jpg" />
+        <!--popup window start here-->
+        <div class="photo_popup">
+            <ul>
+                <li><a href="<?php echo @SITE_URL;?>
+photos/editAlbum?id=<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+">Edit Group</a></li>
+                <li><a href="#">Rename</a></li>
+                <li><a href="#">This Group is</a>
+
+                    <span><a href="#" <?php if ($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['status']==0){?>class="selected"<?php }?>>Private</a></span>
+                    <span><a href="#" <?php if ($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['status']==1){?>class="selected"<?php }?>>Public</a></span>
+                </li>
+                <li><a onclick="return confirm('Delete Photos?');" href="<?php echo @SITE_URL;?>
+mediamanager/deleteAlbum?id=<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+">Delete Group</a></li>
+            </ul>
+        </div>
+        <!--popup window end here-->
+    </div>
+    <div class="photos_list">
+        <a href="<?php echo @SITE_URL;?>
+viewAlbum?aid=<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+">
+            <img src="<?php echo @SITE_URL;?>
+photos/thumbs/<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['album_url'];?>
+"  height="151"  width="246" /></a>
+
+        <div class="data" onclick=""><img src="images/minus.png" width="19" height="19" onclick="return deleteAlbum('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+');" /> <?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['name'];?>
+ <br />
+            <span><?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['photoscnt'];?>
+ Photos</span></div></div>
+
+    <div class="photo_post">
+        <div class="message" id="showcomment<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+" onClick="ShowDialog('true','<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+');">(<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['commentcnt'];?>
+)</div>
+
+        <!-- Below two divs display like and unlike btns code by Rak -->
+        <script> window.onload=onloadcall('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+');</script>
+
+
+
+        <div id="showdislike<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+" class="red" onclick="dislikefanwire('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+');">(<?php if ($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['dislike']==''){?> 0<?php }else{ ?><?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['dislike'];?>
+<?php }?>)</div>
+        <div id="showlike<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+" class="blue" onclick="likefanwire('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+');">(<?php if ($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['like']==''){?> 0<?php }else{ ?><?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['like'];?>
+<?php }?>)</div>
+    </div>
+
+ 
+
+    <div id="dialog<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+" class="web_dialogphotos" >
+
+        <div class="comments"    >
+            <ul >  
+                <li class="view_comments">
+                    <?php if ($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['commentcnt']>5){?> <a id="view_all_link<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+" href="javascript:void(0);" onclick="viewAllComments('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+', '<?php echo @SITE_URL;?>
+fan/viewAllComments')" >view all comments</a><?php }else{ ?><a href="javascript:void(0);" >&nbsp;</a><?php }?>
+                    <a href="javascript:void(0);" class="cross_btn" onclick="HideDialog('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+');" >X</a>
+                </li>
+				</ul>
+                <ul id="all_comments_photos<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+">
+                <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['name'] = 'tem';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['comments_for_this_post']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total']);
+?>
+                <?php $_smarty_tpl->tpl_vars['t'] = new Smarty_variable($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['comments_for_this_post'][$_smarty_tpl->getVariable('smarty')->value['section']['tem']['index']], null, null);?>
+                <li >
+                    <img src="<?php echo @SITE_URL;?>
+profile_images/<?php echo $_smarty_tpl->getVariable('t')->value['profile_image'];?>
+">
+                    <span><strong><?php echo $_smarty_tpl->getVariable('t')->value['name'];?>
+</strong>&nbsp;<?php echo $_smarty_tpl->getVariable('t')->value['comment'];?>
+</span>
+                    <div class="clear"></div>
+                </li >
+				<ul>
+                <?php endfor; endif; ?>
+                <div id='comm<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+'></div>
+				<ul>
+                <li > 
+                    <img src="<?php echo $_smarty_tpl->getVariable('profile_image')->value;?>
+">
+                    <textarea  id="msg<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+" name="msg<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+"  onkeyup='expandtext(this)' onclick="return showSend('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+');"onfocus=" return textlimits('#remainingCharacters<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+','#msg<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+');" onKeyPress="Javascript:if(event.keyCode==13) submitForm('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+','<?php echo @SITE_URL;?>
+fan/sendComment');" placeholder="say something..." title="say something..."   autocomplete="off" rows="1" ></textarea>
+                    <div id="commentsToShow<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+" style="display: none;">
+                        <button type="button" class="sendComment" onclick="submitForm('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+','<?php echo @SITE_URL;?>
+fan/sendComment');">say something</button>
+                        <span class="characters" id="remainingCharacters<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+">140 Characters</span>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+                <input type="hidden" id="id" name="id" value="<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+" />
+                <input type="hidden" name="type" id="type" value="0" />
+            </ul>
+        </div>
+    </div>
+
+</div>
+<?php endfor; else: ?>
+<div align="center" style="line-height: 40px;">No Photos</div>
+<?php endif; ?>
+
+
+</div>
+
+<div class="clear"></div>
+
+<!--    <div class="btm_line">
+        <div class="showmore"><a href="#">show more</a></div>
+    </div>-->
+
+
+</div>
+
+
+<?php $_template = new Smarty_Internal_Template('footerww.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>

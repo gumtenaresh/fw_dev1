@@ -1,0 +1,203 @@
+{include file='header2.tpl.html'} {literal}
+<script type="text/javascript">
+    function myOnCompleteLogin() {
+        document.fan_login.submit();
+
+    }
+    $(document)
+    .ready(
+    function() {
+        $("#openinviter")
+        .RSV(
+        {
+            onCompleteHandler : myOnCompleteLogin,
+            displayType : "display-html",
+            errorFieldClass : "errorFieldDemo2",
+            errorTargetElementId : "rsvErrorsOpen",
+            rules : [
+                "required,email_box,Please enter your email address.",
+                "valid_email,email_box,Please enter a valid email address.",
+                "required,password_box,Please enter a password."
+            ]
+        });
+    });
+    /*
+        $().ready(function() {
+	        
+               // validate signup form on keyup and submit
+               $("#openinviter").validate({
+                   rules: {
+                       email_box:{ 
+                           required: true,
+                           email:true
+                       },
+                       password_box: {
+                           required: true 
+                       }
+	                       
+                   } ,
+                   messages:{
+                       email_box:{
+                           email:'Provide valid email'
+                       }
+                   }
+	       
+               })
+           });
+     */
+</script>
+<style type="text/css">
+
+    /*  #openinviter label.error {
+    
+            display: block;  
+            color: #ff6009;
+    
+        }*/
+</style>
+{/literal}
+<div class="left_menu">
+    <ul>
+        <!-- 		<li class="active"><a href="{$smarty.const.SITE_URL}findFans">1- -->
+        <!-- 				FIND your fans</a> -->
+        <!-- 		</li> -->
+        <!-- 		<li><a href="{$smarty.const.SITE_URL}uploadProfilePic">2- -->
+        <!-- 				profile photo</a> -->
+        <!-- 		</li> -->
+        <!-- 		<li><a href="{$smarty.const.SITE_URL}add_fanwires">3- add -->
+        <!-- 				fanwires</a> -->
+        <!-- 		</li> -->
+        <!-- 		<li><a href="{$smarty.const.SITE_URL}socialMedia">4- social -->
+        <!-- 				media connect</a> -->
+        <!-- 		</li> -->
+        <li class="active"><a href="#" ">1- FIND your fans</a></li>
+        <li><a href="#">2- profile photo</a></li>
+        <li  ><a href="#">3- add fanwires</a></li>
+        <li><a href="#">4- social media connect</a></li>
+    </ul>
+</div>
+</div>
+<!--Left Section End-->
+<!--Right Section-->
+<div class="right_container">
+    <div id="index_rightsection"  >
+        <div id="right_area">
+            <h2>
+                Connect with fans you already know<br /> <span>We call all
+                    of our friends ‘fans’ in these community. Everyone is a fan of
+                    something, so why not connect with them? We made this step easy
+                    for you.</span>
+            </h2>
+            <div class="connect_fans">
+                <div class="account_details">
+                    <div class="acc_detail2">
+                        <img
+                            src="{$smarty.const.SITE_URL}views/images/mail.png"
+                            width="39"
+                            height="32"
+                            align="left"
+                            /> People in Your Email Accounts
+                    </div>
+                    <div class="acc_detail">
+                        <img
+                            src="{$smarty.const.SITE_URL}views/images/FB.png"
+                            width="37"
+                            height="39"
+                            align="left"
+                            /> Facebook Account
+                    </div>
+                    <div class="acc_detail">
+                        <img
+                            src="{$smarty.const.SITE_URL}views/images/TW.png"
+                            width="37"
+                            height="39"
+                            align="left"
+                            /> Twitter Account
+                    </div>
+                </div>
+                <div class="mail_details">
+                    <div id="rsvErrorsOpen"></div>
+                    <form
+                        name="openinviter"
+                        id="openinviter"
+                        method="POST"
+                        action="{$smarty.const.SITE_URL}multiMailContacts"
+                        >
+                        Email:<br /> <input
+                            type="text"
+                            name="email_box"
+                            class="textfield"
+                            value=""
+                            /><br /> Password:<br /> <input
+                            type="password"
+                            name="password_box"
+                            class="textfield"
+                            value=""
+                            /><br /> <input
+                            type='hidden'
+                            name='step'
+                            value='get_contacts'
+                            > <input
+                            name='import'
+                            value='Import Contacts'
+                            type="submit"
+                            class="email_btn"
+                            />
+                    </form>
+                    <!--			<a href="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_token={$link}"> 
+                                        <img	src='{$smarty.const.SITE_URL}views/images/images.jpg' alt="Google Oauth Connect" border='0'/> 
+                                </a> -->
+                </div>
+                <div class="info_details">
+                    <div class="info_box">
+                        <p>
+                            Your information is safe with us. <br /> <br /> We don’t store
+                            your email and password. Your address book is only used to find
+                            people you know on FanWire.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="mail_links">
+                <h6>FanWire supports:</h6>
+                <img
+                    src="{$smarty.const.SITE_URL}views/images/links.png"
+                    width="404"
+                    height="44"
+                    />
+            </div>
+            <div class="clear"></div>
+            <hr />
+            <br />
+            <div class="skip">
+                <input
+                    name="continue"
+                    type="submit"
+                    class="continue_btn"
+                    value="Continue"
+                    onclick="alert('Not yet implemented');"
+                    /><br />
+                <br />
+                <br /> <br /> <a href="{$smarty.const.SITE_URL}uploadProfilePic"><i>Skip
+                        this step</i>
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div> 
+    <div class="footer">
+        <!--                     <div class="ftr_left">© FanWire, LLC. All rights reserved.</div> -->
+        <div class="ftr_right"><a href="{$smarty.const.SITE_URL}footer/aboutus">About</a>  |  <a href="{$smarty.const.SITE_URL}footer/termsandconditions">Terms and Conditions  |  <a href="{$smarty.const.SITE_URL}footer/privacypolicy">Privacy Policy</a>  |  <a href="{$smarty.const.SITE_URL}footer/developers">Developers</a>  |  <a href="{$smarty.const.SITE_URL}footer/advertising">Advertising</a>  |  <a href="{$smarty.const.SITE_URL}footer/help">Help</a>  |  <a href="{$smarty.const.SITE_URL}footer/contact">Contact</a></div>
+    </div>
+
+
+
+</div>
+
+
+
+</div>
+
+</body>
+</html>

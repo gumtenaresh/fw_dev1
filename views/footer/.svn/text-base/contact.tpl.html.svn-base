@@ -1,0 +1,87 @@
+{include file='header.tpl.html'}
+<div class="main_section1">
+
+    <div class="fanwire_contact">
+        <div class="contact_text">
+            <p>Email Us</p>
+            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut  <br >
+                labore et dolore magna aliqua. Ut enim ad minim veniam quis.</span></div>
+
+
+        <div class="contacts">
+
+
+            <form>
+               	<p>Your Name<span>*</span></p>
+                <input type="text" class="contact_input">
+                <p>Your Email Address<span>*</span></p>
+                <input type="text" class="contact_input">
+                <p>Subject<span>*</span></p>
+                <input type="text" class="contact_input">
+                <p>Message<span>*</span></p>
+                <textarea  class="contact_textarea"> &nbsp;</textarea>
+                <div class="clear"></div>
+                <input type="submit" class="contct_btn" value="Send Message" style="float:left;"><p style="color:#999999; font-size:12px; text-align:right; padding:15px 55px 0 0 ;"><span>*</span>required</p>
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+</div>
+
+
+<div class="main_section1">
+
+    <div class="fanwire_contact">
+        <div class="contact_text">
+            <p>Email Us</p>
+            <span></span>
+        </div>
+        <div class="sideheading" style="color:#02A0BF;padding: 0 0 20px 0;font-size: 16px;" id="msg">{$msg}</div>
+
+        <div class="contacts">
+             
+
+            <form action="" method="post" id="contactfrm" name="contactfrm"> 
+                <div class="errorContact">
+                    <p>Your Name<span>*</span></p>
+                    <input type="text" name="name" id="name" class="contact_input" />
+
+                </div>
+                <div class="errorContact">
+                    <p>Your Email Address<span>*</span></p>
+                    <input type="text" name="email" id="email" class="contact_input" {if $userdetails.0.email}value="{$userdetails.0.email}"{/if} />
+                </div>
+                <div class="errorContact">
+                    <p>Subject<span>*</span></p>
+                    <input type="text" name="subject" id="subject" class="contact_input" />
+                </div>
+                <div class="errorContact">
+                    <p>Message<span>*</span></p>
+                    <textarea name="message" id="message" class="contact_textarea"></textarea>
+                </div>
+                <div class="clear"></div>
+                <input type="submit" class="contct_btn" value="Send Message" style="float:left;"><p style="color:#999999; font-size:12px; text-align:right; padding:15px 55px 0 0 ;"><span>*</span>required</p>
+
+            </form>
+        </div>
+
+    </div>
+
+
+
+
+
+</div>
+
+</div>
+</body>
+</html>
+

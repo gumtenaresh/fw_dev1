@@ -1,0 +1,158 @@
+{include file='header.tpl.html'}
+ 
+{include file='myfanwireLeftBar.tpl.html'}
+<script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts//jquery.min.js"></script>
+<script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/imagepanner.js"></script>
+{literal}
+<script type="text/javascript">
+    //zoom feature for user profile page
+    $(function() {
+        $( "#slider_userProfile").slider(
+        {
+            value:{/literal}{if $zoomValues.0.value}{$zoomValues.0.value}{else}40{/if}{literal},
+            min: 50,
+            max: 100,
+            step: 1,
+            stop: function(event, ui) {
+                zoomTheContent(ui.value,'{/literal}{$smarty.const.SITE_URL}{literal}zoomPositions',"#mainBlock > .collect_photo > #image_share_popup > .userProf > img","#mainBlock > .photo_list > #two >  .data > #image_height","#mainBlock > .photo_list > #two >  .data >#image_width");
+            }
+        });
+    });
+   
+</script>
+{/literal}
+<!--Right Section-->
+<div class="right_container">
+
+    <div class="more_posts"><a href="#">More Posts</a></div>
+    <div id="inner_rightsection">
+        <div id="right_area">
+            {include file='fanshalfRightBar.tpl.html'}
+            <!-- fanwireshalfRightBar -->
+            <div style="clear: both;"></div>
+
+            <div id="mainBlock">
+                {section name=list loop=$fansFanwiresDeetails}
+
+                <div id="mydiv" class="collect_photo item block" style="{if $zoomValues.0.height} width:{$zoomValues.0.width}px{/if}">
+                    <div class="image_share_popup" id="image_share_popup" style="float:left;{if $zoomValues.0.height} width:{$zoomValues.0.width}px{/if}">         
+                        <input type="hidden" name="image_width{$c}" id="image_width{$fanwire}"  value="{$fansFanwiresDeetails[list].width}" />
+                        <input type="hidden" name="image_height{$c}" id="image_height{$fanwire}" value="{$fansFanwiresDeetails[list].height}" />
+                        <a href="{$fansFanwiresDeetails[list].link}" class="userProf">
+                            <img src="{$smarty.const.IMAGE_URL}{$fansFanwiresDeetails[list].photo}" width="{if $zoomValues.0.width gt 0}{$zoomValues.0.width}{else}246{/if}" height="{if $zoomValues.0.width gt 0}{$zoomValues.0.width*$fansFanwiresDeetails[list].height/$fansFanwiresDeetails[list].width}{else}{246*$fansFanwiresDeetails[list].height/$fansFanwiresDeetails[list].width}{/if}" />
+                        </a>
+                        <div class="red_links" >
+                            <!--                             <div id="fanid{$fansFanwiresDeetails[list].id}" class="share_n_colletc"> -->
+                            <!--                                 <a class="share_img_btn" name ='share' onclick = "getFanwireFans('{$fansFanwiresDeetails[list].id}'); shareTogg('light1{$fansFanwiresDeetails[list].id}');displayBlock('black'); " href="javascript:void(0);"> -->
+                            <!--                                     <span class="icon"><img src="{$smarty.const.SITE_URL}views/images/share_icon.png"/></span><span>Share</span> -->
+                            <!--                                 </a>  -->
+                            <!--                             </div> -->
+                            <div id="collect{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}" class="share_n_colletc">
+                                <a class="collect_img_btn" href="javascript:void(0);" onclick="collect('{$fansFanwiresDeetails[list].id}','{$fansFanwiresDeetails[list].type}','{$smarty.const.SITE_URL}collect','{$smarty.const.SITE_URL}');">
+
+                                    {if $fansFanwiresDeetails[list].status eq 1}
+                                    <span class="icon" >
+                                        <img src="{$smarty.const.SITE_URL}views/images/collected_icon.png"/>
+                                    </span> 
+                                    <span style="background: none repeat scroll 0 0 green;">collected</span>            
+                                    {else}
+                                    <span class="icon">
+                                        <img src="{$smarty.const.SITE_URL}views/images/collect_icon.png"/>
+                                    </span> 
+                                    <span>collect</span>
+                                    {/if}
+                                </a>
+                            </div>
+                            {if $smarty.const.ACTIVATE eq 1} <a href="javascript:void(0)" class="close"  onClick="Popup.show('sub{$fansFanwiresDeetails[list].id}');" ></a>{/if}
+                            </a>
+                            <!-- close popup -->
+
+                            <div id="sub{$fansFanwiresDeetails[list].id}" class="sub3"  >
+                                <ul class="facebook_dd">
+                                    <li><a href="{$smarty.const.SITE_URL}remove?id={$fansFanwiresDeetails[list].id}&type={$fansFanwiresDeetails[list].type}">Hide Element</a></li>
+                                    <li><a href="javascript:void(0);" onclick="return tog('tog{$fansFanwiresDeetails[list].id}');">Report element or spam</a> 
+                                        <div id="tog{$fansFanwiresDeetails[list].id}" style="display:none;"><span><a class="selected" href="#">Inappropriate content</a></span>
+                                            <span><a href="#">Sapm</a></span>
+                                            <span><a href="#">Miscategorized</a></span>
+                                            <span><a href="#">Other</a></span></div>
+                                    </li>
+                                    <li><a href="#">Unsubscribe source from my profile</a></li>
+                                    <li><a href="{$smarty.const.SITE_URL}remove?id={$fansFanwiresDeetails[list].id}&type={$fansFanwiresDeetails[list].type}">Remove {$fansFanwiresDeetails[list].name}'s FanWire permanently</a></li>
+                                </ul>
+                            </div>
+                            <!-- close popup end -->
+                            <!--sharing thindg starts here--> 
+                        </div>
+                        <!--sharing thing ends here-->
+                    </div>
+
+                    <div class="data"><a href="{$fansFanwiresDeetails[list].link}" style="color:#F04F2C;text-decoration:none;">{$fansFanwiresDeetails[list].name}</a> <br />
+                        <span class='more'>{$fansFanwiresDeetails[list].description}</span>
+                    </div>
+                    <div class="photo_post">
+                        <div class="message" id="showcomment{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}" onClick="ShowDialog('true','{$fansFanwiresDeetails[list].id}','{$fansFanwiresDeetails[list].type}');">{if $fansFanwiresDeetails[list].commentcnt gt 0}({$fansFanwiresDeetails[list].commentcnt}){/if}</div>
+
+                        <script type="text/javascript"> window.onload=onloadcall('{$fansFanwiresDeetails[list].id}','{$smarty.const.SITE_URL}fan/fanwirelikes');</script>
+                        <div id="showdislike{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}" class="red" onclick="dislikefanwire('{$fansFanwiresDeetails[list].id}','{$fansFanwiresDeetails[list].type}','{$smarty.const.SITE_URL}fan/fanwirelikes');">{if $fansFanwiresDeetails[list].dislike eq ''}&nbsp;{else}({$fansFanwiresDeetails[list].dislike}){/if}</div>
+                        <div id="showlike{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}" class="blue" onclick="likefanwire('{$fansFanwiresDeetails[list].id}','{$fansFanwiresDeetails[list].type}','{$smarty.const.SITE_URL}fan/fanwirelikes');">{if $fansFanwiresDeetails[list].like eq ''}&nbsp;{else}({$fansFanwiresDeetails[list].like}){/if}</div>
+
+
+                        <div id="dialog{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}" class="web_dialog" >
+
+                            <div class="comments" >
+                                <div> <ul >  
+                                        <li class="view_comments">
+                                            {if $fansFanwiresDeetails[list].commentcnt gt 5} <a id="view_all_link{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}" href="javascript:void(0);" onclick="viewAllComments('{$fansFanwiresDeetails[list].id}','{$fansFanwiresDeetails[list].type}', '{$smarty.const.SITE_URL}fan/viewAllComments')" >view all comments</a>{else}<a href="javascript:void(0);" >&nbsp;</a>{/if}
+                                            <a href="javascript:void(0);" class="cross_btn" onclick="HideDialog('{$fansFanwiresDeetails[list].id}','{$fansFanwiresDeetails[list].type}');" >X</a>
+                                        </li>
+                                    </ul>
+                                </div>     
+                                {assign var=height value=$fansFanwiresDeetails[list].commentcnt*42}
+                                <div {if $fansFanwiresDeetails[list].commentcnt gt 5}class="staticUL"{/if}{if $fansFanwiresDeetails[list].commentcnt lt 5}  style="max-height:{$height}px;"{/if}>
+                                    <ul id="all_comments{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}"  >
+
+                                        {section name=tem loop=$fansFanwiresDeetails[list].comments_for_this_post}
+                                        {assign var=t value=$fansFanwiresDeetails[list].comments_for_this_post[tem]}
+
+                                        <li >
+                                            <img src="{$t.profile_image}">
+                                            <span style="float: left;"><strong>{$t.name}</strong> <h5 style="float: right; text-decoration: none;" > {$t.stamp}</h5>&nbsp;</span>
+                                            <span>{$t.comment}</span>
+
+                                            <div class="clear"></div>
+                                        </li >
+
+                                        {/section}
+
+                                    </ul>
+
+                                </div> 
+                                <div id='comm{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}'></div>
+
+                                <div>
+                                    <ul>
+                                        <li >
+                                            <img src="{$profile_image}" style="float: left;">
+                                            <textarea  id="msg{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}"  style="float: left;" name="msg{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}"  onkeyup='expandtext(this)' onclick="return showSend('{$fansFanwiresDeetails[list].id}');"onfocus=" return textlimits('#remainingCharacters{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}','#msg{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}');" onKeyPress="Javascript:if(event.keyCode==13) submitForm('{$fansFanwiresDeetails[list].id}','{$fansFanwiresDeetails[list].type}','{$smarty.const.SITE_URL}fan/sendComment','{$smarty.const.SITE_URL}fan/commentCount');" placeholder="say something..." title="say something..."   autocomplete="off" rows="1" ></textarea>
+                                            <div id="commentsToShow{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}" style="display: none;">
+                                                <button type="button" class="sendComment" onclick="submitForm('{$fansFanwiresDeetails[list].id}','{$fansFanwiresDeetails[list].type}','{$smarty.const.SITE_URL}fan/sendComment','{$smarty.const.SITE_URL}fan/commentCount');">send</button>
+                                                <span class="characters" id="remainingCharacters{$fansFanwiresDeetails[list].id}{$fansFanwiresDeetails[list].type}">140 Characters</span>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <input type="hidden" id="id" name="id" value="{$fansFanwiresDeetails[list].id}" />
+                                        <input type="hidden" name="type" id="type" value="{$fansFanwiresDeetails[list].type}" />
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                {/section}
+            </div>
+            
+            <div class="clear"></div>
+        </div>
+        {include file='footer.tpl.html'}
+

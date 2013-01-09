@@ -1,0 +1,212 @@
+{include file="$ADMIN/header.tpl.html"}
+{literal}
+<script type="text/javascript">    
+    $().ready(function() {
+       $("#search").autocomplete("{/literal}{$smarty.const.ADMIN_URL}fanwires/getFanwires{literal}", {
+        width: 260,
+        matchContains: true,
+        selectFirst: false
+    });
+}); 
+
+function updateReleasedDate(frm)
+{ 
+    $(frm).submit();
+}
+
+function DeleteFanwires()
+{
+     var arr = new Array();
+     var i = 0;
+     var fans;
+     
+    $("input[type=checkbox]").each(function(){
+       if(this.checked)
+           {
+               arr[i] = $(this).val();
+               i++;
+           } 
+    });
+     fans = arr.join(", ");
+     document.getElementById('fan_ids').value = fans;
+     $("#deletefans").submit();
+}
+</script>
+<style>
+    .list{
+        text-decoration: non;
+        color:#000;
+        font-family: arial;
+        font-size: px;
+        line-height: 20px;
+    }
+    
+    .list a{
+        text-decoration: non;
+        color:#000;
+        font-family: arial;
+        font-size: px;
+        line-height: 20px;
+    }
+</style>
+{/literal}
+<div id="data_sectionarea">
+        <div class="data_rightsection1">
+        <div class="rightcontent">
+        <div class="datatabsection">
+        <div class="datatableftsection"><a href="{$smarty.const.ADMIN_URL}">Home</a> > <a href="{$smarty.const.ADMIN_URL}fanwires/fanwiresList/">FanWire Admin</a> > <a href="{$smarty.const.ADMIN_URL}fanwires/fanwiresList/">FanWire List</a></div>
+        <div class="datatabrightsection"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="search_fanwire">
+            <div class="search" style="width:250px;">
+            <form action="">
+        <input name="search" id="search" type="text" class="search_field" />
+        <input name="" type="submit" value="" class="go"/></form>
+        
+        </div>
+        <form action="" method="post" id="deletefans" name="deletefans">
+            <input type="hidden" name="fan_ids" id="fan_ids" />
+            <input type="hidden" name="delete" value="Delete Selected" />
+        </form>
+            <div class="import1"><div class="connect1"><a href="{$smarty.const.ADMIN_URL}fanwires/addFanwires">Add a fanwire</a></div></div>
+            {if $smarty.session.admintype eq '2'}<div class="import1"><div><input class="deletebtn" type="button" name="delete" value="Delete Selected" onclick="DeleteFanwires();" /></div></div>{/if}
+        <div class="clear"></div>
+        </div>
+        
+    <table class="table_01" cellpadding="5" cellspacing="5" align="center">      
+        <tr class="table_header">
+            <td>&nbsp;</td>
+            <td>ID<!--{if $id eq 'sort'}&nbsp;<img src="{$smarty.const.SITE_URL}views/images/dn_arr.png"/>{/if}--></td>
+            <td><a href="{$smarty.const.ADMIN_URL}fanwires/fanwiresList?sort={$sort}&column=name">FANWIRE&nbsp;
+                    {if $sort eq 'asc' && $column eq 'name'}<img src="{$smarty.const.SITE_URL}views/images/0popup_downarrow.png"/>
+                    {else if  $sort eq 'desc' && $column eq 'name'}<img src="{$smarty.const.SITE_URL}views/images/0popup_uparrow.png"/>{/if}</a></td>
+        <td>CATEGORY1</td>
+        <td>CATEGORY2</td>        
+        <td>KEYWORDS</td>
+        <td>ADDED BY</td>
+        <td>STATUS</td>        
+        <td>RELEASE</td>
+        <td><a href="{$smarty.const.ADMIN_URL}fanwires/fanwiresList?sort={$sort}&column=date">ADDED DATE&nbsp;
+                    {if $sort eq 'asc' && $column eq 'date'}<img src="{$smarty.const.SITE_URL}views/images/0popup_downarrow.png"/>
+                    {else if  $sort eq 'desc' && $column eq 'date'}<img src="{$smarty.const.SITE_URL}views/images/0popup_uparrow.png"/>{/if}</a></td>
+        <td>RELEASED DATE</td>   
+        <td>LIST</td>
+        <td colspan="3">MODIFY</td>
+        
+    </tr> 
+    {section name="id" loop= $list}
+    <tr {if $smarty.section.id.iteration % 2 eq '0'}class="color"{/if}>
+        <td align="center"><input type="checkbox" id="fanwires{$list[id].id}" name="fanwires[]" value="{$list[id].id}" /></td>
+         <td align="left">{$list[id].id}</td>
+         <td align="left"><a href="{$smarty.const.ADMIN_URL}fanwires/profile?id={$list[id].id}">{$list[id].name}</a></td>
+         <td align="left">{$list[id].category1}</td>
+         <td align="left">{$list[id].category2}</td>         
+         <td align="left">{section name="key" loop = $list[id].keywords}{$list[id].keywords[key].keyword} {/section}</td>
+         <td align="left">{$list[id].addedby}</td>
+         <td align="left">{$list[id].status}</td>
+         <td align="left">{if $list[id].released_date lt $date}Released{else}
+             <form action="" method="post" name="autorelease{$list[id].id}"  id="autorelease{$list[id].id}">
+                 <input type="hidden" name="release" value="Update"/>                                            
+                 <input type="hidden" name="id" id="id" value="{$list[id].id}" />
+                 <input type="hidden" id="released_date{$list[id].id}" name="released_date"  value="{$date}">
+             </form>               
+             <a href="javascript:void(0);" onclick="updateReleasedDate('#autorelease{$list[id].id}');">Release Now</a>
+             {/if}</td>
+         <td align="left">{$list[id].last_updated|date_format:'%m-%d-%y %I:%M %p'} &nbsp;&nbsp;
+             <a href="javascript:void(0);" onclick="showpopup('{$list[id].id}');">
+                {if $list[id].released_date lt $date}
+                <img src="{$smarty.const.SITE_URL}views/images/calendar.png" width="15" height="20" />
+                {else}
+                <img src="{$smarty.const.SITE_URL}views/images/cale_1.png" />
+                {/if}
+             </a>
+                                <div id="update_date{$list[id].id}" class="update_date" style="display: none;">
+                                    <span style="float:right" onclick="closepopup('{$list[id].id}');" class="close_popup">X</span>
+                                    <div style="line-height: 50px;font-weight: bold;" align="center">Update Date</div>
+                                    <div>
+                                        <form  action="" method="post" name="{$list[id].id}cal">                                            
+                                                <input type="hidden" name="id" id="id" value="{$list[id].id}" />
+                                                <input type="text" id="cdate{$list[id].id}" name="cdate" maxlength="25" size="25" class="input_text" style="width:170px;"  value="{$list[id].last_updated|date_format:'%Y-%m-%d %I:%M %p'}" readonly>&nbsp;
+                                                <!--<a href="javascript: void(0);" onclick="javascript: NewCssCal('cdate{$list[id].id}','yyyyMMdd','arrow',true,12,false)"> 
+                                                {if $list[id].released_date lt $date}
+                                                <img src="{$smarty.const.SITE_URL}views/images/calendar.png" width="15" height="20" />
+                                                {else}
+                                                    <img src="{$smarty.const.SITE_URL}views/images/cale_1.png" width="18" height="18" border="0" alt="cal">
+                                                {/if}
+                                                </a>-->
+                                                <input type="submit" name="submit" value="Update"/>                                            
+                                        </form>       
+{literal}
+<script type="text/javascript" >
+$('#cdate{/literal}{$list[id].id}{literal}').datetimepicker({
+	timeFormat: "hh:mm tt"
+});
+</script>
+{/literal} 
+                                    </div>
+                               </div>
+         </td>
+         <td align="left">{$list[id].released_date|date_format:'%m-%d-%y %I:%M %p'}&nbsp;&nbsp;
+             <a href="javascript:void(0);" onclick="showpopup('{$list[id].id}_release');">
+             {if $list[id].released_date lt $date}
+                <img src="{$smarty.const.SITE_URL}views/images/calendar.png" width="15" height="20" />
+                {else}
+                <img src="{$smarty.const.SITE_URL}views/images/cale_1.png" />
+                {/if}
+             </a>
+                                <div id="update_date{$list[id].id}_release" class="update_date" style="display: none;">
+                                    <span style="float:right" onclick="closepopup('{$list[id].id}_release');" class="close_popup">X</span>
+                                    <div style="line-height: 50px;font-weight: bold;" align="center">Update Released Date</div>
+                                    <div>
+                                        <form  action="" method="post" name="{$list[id].id}cal">                                            
+                                                <input type="hidden" name="id" id="id" value="{$list[id].id}" />
+                                                <input type="text" id="released_date_{$list[id].id}" name="released_date" maxlength="25" size="25" class="input_text" style="width:170px;"  value="{$list[id].released_date|date_format:'%Y-%m-%d %I:%M %p'}" readonly>&nbsp;
+                                                <!--<a href="javascript: void(0);" onclick="javascript: NewCssCal('released_date_{$list[id].id}','yyyyMMdd','arrow',true,12,false)"> 
+                                                {if $list[id].released_date lt $date}
+                                                <img src="{$smarty.const.SITE_URL}views/images/calendar.png" width="15" height="20" />
+                                                {else}
+                                                    <img src="{$smarty.const.SITE_URL}views/images/cale_1.png" width="18" height="18" border="0" alt="cal">                                                
+                                                {/if}</a>-->
+                                                <input type="submit" name="release" value="Update"/>                                            
+                                        </form>    
+{literal}
+<script type="text/javascript" >
+$('#released_date_{/literal}{$list[id].id}{literal}').datetimepicker({
+	timeFormat: "hh:mm tt"
+});
+</script>
+{/literal} 
+                                    </div>
+                               </div></td>
+         <td align="left">
+             <span class="list"><a href="{$smarty.const.ADMIN_URL}photos/photosList?id={$list[id].id}">Photos</a></span><br />
+             <span class="list"><a href="{$smarty.const.ADMIN_URL}articles/articlesList?id={$list[id].id}">Articles</a></span><br />
+             <span class="list"><a href="{$smarty.const.ADMIN_URL}videos/videosList?id={$list[id].id}">Videos</a></span><br />
+             <span class="list"><a href="{$smarty.const.ADMIN_URL}fanwires/commentsList?id={$list[id].id}&type=0">Comments</a></span><br />
+             <span class="list"><a href="{$smarty.const.ADMIN_URL}fanwires/facebookList?id={$list[id].id}">Facebook</a></span><br />
+             <span class="list"><a href="{$smarty.const.ADMIN_URL}fanwires/twitterList?id={$list[id].id}">Twitter</a></span>
+         </td>
+<!--         <td align="left"><img src="{$IMAGE_URL}{$list[id].photo}" height="100" width="100" /></td>                  -->
+<!--         <td align="left"><a {if $list[id].view_status eq 1} onclick="return confirm('Change fanwire to private?');" {else} onclick="return confirm('Change fanwire to public?');" {/if}  href ="{$smarty.const.ADMIN_URL}fanwires/viewFanwire?id={$list[id].id}&view_status={$list[id].view_status}"> {if $list[id].view_status eq 1} public {else}private{/if}</a></td>
+         <td align="left"><a {if $list[id].status eq 1} onclick="return confirm('Change fanwire to inactive?');" {else} onclick="return confirm('Change fanwire to active?');" {/if}  href ="{$smarty.const.ADMIN_URL}fanwires/deleteFanwire?id={$list[id].id}&status={$list[id].status}"> {if $list[id].status eq 1} active{else}inactive{/if}</a></td>-->
+        <td align="left"><a href="{$smarty.const.ADMIN_URL}fanwires/editFanwires?id={$list[id].id}">Edit</a></td>
+        <td align="left">
+  {if $smarty.session.admintype eq '2'}          <div class="import2"><div class="connect2"><a onclick="return confirm('Delete Fanwire?')" href="{$smarty.const.ADMIN_URL}fanwires/deleteFanwire?id={$list[id].id}&status=2"><img src="{$smarty.const.SITE_URL}views/images/close.png" height="12" width="8" alt="" /></a></div></div>          {/if}
+        </td>
+    </tr>
+    {sectionelse}
+    <tr><td colspan="13" style="text-align: center;vertical-align: middle;height: 100px;">NO FANWIRES</td></tr>
+    {/section}
+    {if !empty($navigation)}
+    <tr>
+    <td colspan="13" align="right">
+    {$navigation}
+    </td></tr>
+    {/if}
+    <tr><td colspan="13">&nbsp;</td></tr>
+    </table>
+    </div>
+    </div>
+    </div>
+{include file="$ADMIN/footer.tpl.html"}

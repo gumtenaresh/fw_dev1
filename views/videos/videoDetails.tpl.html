@@ -1,0 +1,222 @@
+{include file='header.tpl.html'} 
+{include file='myfanwireLeftBar.tpl.html'}  
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="inner_right_area">
+            <div class="main_inner_data_area">
+
+                <div class="fan_wire_section">
+                    <div class="bredcrumbs"><a href="{$smarty.const.SITE_URL}myFanwire">My Fanwire</a>  >  <a href="{$smarty.const.SITE_URL}phots?fwrid={$fanwires.id}&ac=1">{$fanwires.name}</a></div>
+                    {section name=arDet loop=$videoDetail}
+                    {assign var=p value=$videoDetail[arDet]}
+                    <div class="heading">
+                        <h2>{$p.title}<br /><span>via {if $p.source eq 0}fanwire{else if $p.source eq 1}twitter{else if $p.source eq 2}facebook{else}youtube{/if}</span></h2>
+
+                        {if $albumDetail.0.user_id eq $smarty.session.id}
+                        <img src="{$smarty.const.SITE_URL}views/images/share.jpg" width="23" height="19" />
+                        {/if}
+                        {if $albumDetail.0.user_id eq $smarty.session.id}
+                        <div class="edit_btn">
+                            <a href="{$smarty.const.SITE_URL}articles/editArticles?aid={$smarty.request.aid}">Edit</a>
+                        </div>
+                        {/if}
+                    </div>
+                    <div class="article">
+                        <h3>By: {if $p.source eq 0}FANWIRE{else if $p.source eq 1}twitter{else if $p.source eq 2}facebook{else}FanWire{/if} <br/>  {$p.cdate}</h3>
+                        <div class="rihana">
+                            <div id="showdislike{$p.id}{$smarty.const.VDO_TYPE}" class="red" onclick="dislikefanwire('{$p.id}','{$smarty.const.VDO_TYPE}','{$smarty.const.SITE_URL}articles/fanwirelikes');">{if $p.dislike gt 0}({$p.dislike}){else}&nbsp;{/if}</div> 
+                            <div id="showlike{$p.id}{$smarty.const.VDO_TYPE}" class="blue" onclick="likefanwire('{$p.id}','{$smarty.const.VDO_TYPE}','{$smarty.const.SITE_URL}articles/fanwirelikes');" >{if $p.like}({$p.like}){else}&nbsp;{/if}</div> 
+                        </div>
+                        <!--<div id="collect{$p.id}{$smarty.const.VDO_TYPE}" {if $p.artstatus eq 0}class="collectred"{else}class="collectgreen"{/if} onclick="collect('{$p.id}','{$smarty.const.VDO_TYPE}');" >&nbsp;</div>-->
+
+                        <div class="clear"></div>
+                        <div class="video">
+
+                            <iframe width="640" height="360" src="{$videoNew}" frameborder="0" allowfullscreen></iframe>
+                        </div>     <div class="clear"></div>
+
+                        <p>
+                            {$p.description} 
+                        </p>
+
+                        {/section}
+                        {include file='bottom_fanwires.tpl.html'}
+                    </div>
+                </div>
+
+                <div class="fan_wire_right_section">
+                    <div class="fan_wire_right_section_data">
+
+                        <div class="fan_right_comments" id="fan_right_comments">
+                            {if $list}
+                            <h2>
+                                What I’ve Been Doing...<br /> <span></span>
+                            </h2>
+                            {else}
+                            <h2>
+                                Be the first to comment<br /> <span></span>
+                            </h2>
+                            {/if}
+                            <div class="tracy" id="tracy">
+
+                                <!--                                <div class="say_btn" id="hidecomment">say something!</div>-->
+
+                                <!--say something coent box start here-->
+                                <!--say something comment box start here code by Rak-->
+                                <div class="comment_box" id="comment_box">
+                                    {if $profile_image}
+                                    <img height="29" width="29" src="{$profile_image}" />
+                                    {else}
+                                    <img height="29" width="29" src="{$smarty.const.SITE_URL}views/images/logodef.png" />
+                                    {/if}
+                                    <!--<img height="27" width="27" src="{$profile_image}" />-->
+                                    <textarea id="msg{$list[id].id}" name="msg{$list[id].id}"
+                                              onkeyup='expandtext(this)'
+                                              onclick="return showSendp('{$list[id].id}');"
+                                              onfocus=" return textlimits('#remainingCharacters{$list[id].id}','#msg{$list[id].id}');"
+                                              onKeyPress="Javascript:if(event.keyCode==13) submitForm('{$list[id].id}','{$smarty.const.SITE_URL}fan/sendComment', '{$aid}', '{$username}','{$smarty.const.VDO_TYPE}','{$smarty.const.SITE_URL}fan/commentCount','{$profile_image}');"
+                                              placeholder="say something..." title="say something..."
+                                              autocomplete="off" rows="1"></textarea>
+                                    <div id="commentsToShow{$list[id].id}" style="display: none;">
+                                        <button type="button" class="sendComment"
+                                                onclick="submitForm('{$list[id].id}','{$smarty.const.SITE_URL}fan/sendComment', '{$aid}', '{$username}','{$smarty.const.VDO_TYPE}','{$smarty.const.SITE_URL}fan/commentCount','{$profile_image}');">send</button>
+                                        <span class="characters" id="remainingCharacters{$list[id].id}">140
+                                            Characters</span>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <!--say something comment box end here-->
+
+                                <!--top comments start here-->
+                                {if $list}
+                                <div class="top_comments" id="top_comments">
+                                    {if $list@count gt 3}
+                                    <div class="btm_line2">
+                                        <div class="showmore2" id="showmore2">
+                                            <a href="#">Top comments</a>
+                                        </div>
+                                    </div>
+                                    {/if}
+                                    <div class="clear"></div>
+                                    <!--comments start here-->
+                                    <div class="comment_container" id="comment_container">
+                                        <div id="articlesScroll">
+                                            <!--comment 1-->
+                                            {section name=if loop=$list} {assign var=t value=$list[if]}
+
+
+                                            <div class="comment">
+                                                <h5>{$t.stamp}</h5>
+                                                <div class="comment_img">
+                                                    {if $t.photo} 
+                                                    <img src="{$smarty.const.PROFILE_IMAGES_VIEW_PATH}{$t.photo}" height="27" width="27"  /> <!--width="336" height="253"-->
+                                                    {else}
+                                                    <img src="{$smarty.const.SITE_URL}views/images/logodef.png"  height="27" width="27" /> <!--width="336" height="253"-->
+                                                    {/if} 
+                                                    <!--                                                    
+                                                                                                        <img height="27" width="27"
+                                                                                                             src="{$smarty.const.PROFILE_IMAGES_VIEW_PATH}{$t.photo}" />-->
+                                                </div>
+                                                <div class="comment_text">
+                                                    <h4>{$t.name}</h4>
+                                                    <p>{$t.description}</p>
+                                                </div>
+                                                <script> window.onload=onloadcall('{$t.id}','{$smarty.const.SITE_URL}articles/fanwirelikes');</script>
+                                                <!--                                                <div class="comments_icons">
+                                                
+                                                                                                    <div id="showdislike{$t.id}{$smarty.const.VDO_TYPE}" class="red" onclick="dislikefanwire('{$t.id}','{$smarty.const.VDO_TYPE}');">{if $t.dislike eq ''}&nbsp;{else}({$t.dislike}){/if}</div>
+                                                                                                    <div id="showlike{$t.id}{$smarty.const.VDO_TYPE}" class="blue" onclick="likefanwire('{$t.id}','{$smarty.const.VDO_TYPE}');">{if $t.like eq ''}&nbsp;{else}({$t.like}){/if}</div>
+                                                                                                </div>-->
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            {/section}
+
+                                        </div>
+
+                                        <!--top comments end here-->
+
+                                        <div class="clear"></div>
+                                        <div id="viewAllLink">
+                                            {assign var=t value=$list[1]} 
+                                            {if $list[1].commentcnt gt 3} 
+                                            <a href="javascript:void(0);" onclick="viewAllComments('{$aid}','{$smarty.const.SITE_URL}articles/viewAllComments','{$smarty.const.VDO_TYPE}')">view {$list[1].commentcnt} comments</a>
+                                            {else}
+                                            <a href="javascript:void(0);">&nbsp;</a>
+                                            {/if}
+                                        </div>
+
+                                    </div>
+
+
+                                    <!--end-->
+
+                                </div>
+                                {/if}
+
+                                <div class="btm_line2" id="showmore"></div>
+                                <div class="related_fanwires">
+                                    <h2>related fanwires</h2>
+
+                                    {assign var=i value=1}
+                                    {section name=q loop=$fanwiresMore}
+                                    {assign var=k value=$fanwiresMore[q]}
+                                    {assign var=j value=$i++}
+                                    {if $j gt 4 and $j lt 10}
+                                    <div class="related" id='related{$k.id}'>
+                                        <div class="related_text">
+                                            <a href="JavaScript:void(0);"  onclick="addRelatedFan('$k.id','{$smarty.const.SITE_URL}addFanwire')" id="n{$k.id}"><img src='{$smarty.const.SITE_URL}views/images/plus_icon.png'/></a>
+                                        </div>
+                                        <div class="related_img">
+
+                                            <img src="{$smarty.const.IMAGE_URL}{$k.photo}"  height='30' width='40' alt="{$k.name}" />
+                                        </div>
+                                        <div class="catagiry_names">
+                                            <a href="{$smarty.const.SITE_URL}{$k.url}" style="color:#666462">{$k.name}</a><br>
+                                            <p >  {$k.category}</p> 
+                                        </div>
+                                    </div>
+
+                                    {/if}
+                                    {/section}
+
+
+                                </div>
+
+
+                                <div class="related_fanwires">
+                                    <h2>related media</h2>
+
+                                    {section name=s loop=$relatedVediosNames}
+                                    {assign var=k value=$relatedVediosNames[s]}
+
+                                    <div class="related">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td class="related_img" valign="middle">
+                                                    <a href="{$k.title_link}">
+                                                        {if $k.photo}
+                                                        <img src="{$smarty.const.IMAGE_URL}{$k.photo}" width="40" height="40*({$k.height}/{$k.width})" />
+                                                        {else}
+                                                        <img src="{$smarty.const.SITE_URL}views/images/logodef.png" height="30" width="40" />
+                                                        {/if}
+                                                    </a>
+                                                </td>
+                                                <td class="articleRelated" valign="middle">
+                                                    <a href="{$k.title_link}">{$k.title}</a>
+                                                </td>                                                    
+                                            </tr>                                            
+                                        </table>                                                                               
+                                    </div>
+                                    {/section}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div> 
+        </div>
+        <div class="clear"></div>
+        {include file='footer.tpl.html'} 

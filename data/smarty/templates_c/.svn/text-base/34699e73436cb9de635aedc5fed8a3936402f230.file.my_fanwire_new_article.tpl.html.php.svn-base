@@ -1,0 +1,382 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-03 12:26:18
+         compiled from "/var/www/fanwire/views/articles/my_fanwire_new_article.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:502722139501b76124b0655-01833236%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '34699e73436cb9de635aedc5fed8a3936402f230' => 
+    array (
+      0 => '/var/www/fanwire/views/articles/my_fanwire_new_article.tpl.html',
+      1 => 1343111252,
+    ),
+  ),
+  'nocache_hash' => '502722139501b76124b0655-01833236',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('header.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+ 
+<?php $_template = new Smarty_Internal_Template('myfanwireLeftBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?><!-- this is left bar -->
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.tools.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="<?php echo @SITE_URL;?>
+views/css2/scrollable.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo @SITE_URL;?>
+views/css2/buttons.css" />
+
+
+
+<script type="text/javascript">
+ 
+    function activateSlide(){
+        //alert('slide');
+        
+        $("#messages").scrollable({size: 1});
+        
+    }
+    
+    function changeStatus(n){
+        // document.getElementById("status").value = n;
+        if(n=="1")
+        {
+            document.getElementById("desktop").className += " active";
+            document.getElementById('yfanwire').classList.remove('active');
+            document.getElementById('facebook').classList.remove('active');
+            $('#filedrag').toggle();
+
+
+        }
+        else if(n=="2")
+        {
+            $('#filedrag').hide();
+            document.getElementById("yfanwire").className += " active";
+            document.getElementById('desktop').classList.remove('active');
+            document.getElementById('facebook').classList.remove('active');
+
+        }
+        else if(n=="3")
+        {
+            $('#filedrag').hide();
+            document.getElementById("facebook").className += " active";
+            document.getElementById('yfanwire').classList.remove('active');
+            document.getElementById('desktop').classList.remove('active');
+
+        }
+        else{
+            $('#filedrag').hide();
+            document.getElementById('desktop').classList.remove('active');
+        }
+    }
+ 
+    function toggleText(){
+        var res=document.getElementById('writtenbyme').checked;
+        var res1=document.getElementById('writtenbyme1').checked;
+
+        if(res1==true)
+            $('#fromsite').show();
+        else $('#fromsite').hide();
+    }
+    function validateFeilds(){
+        var writtenFor;
+        var privacy;
+        var value;
+
+        var feilderror1=document.getElementById('writtenbyme').checked;
+        var feilderror6=document.getElementById('writtenbyme1').checked;
+        var writtenForSite=document.getElementById('fromsite').value;
+       
+        var feilderror2=document.getElementById('title').value;
+        var feilderror3=tinyMCE.get('elm1').getContent();
+        var feilderror4=document.getElementById('privacy1').checked;
+        var feilderror5=document.getElementById('privacy2').checked;
+         
+        var radios = document.getElementsByName('mainimage');
+        if(feilderror1==false){
+            if(feilderror6==false){
+                document.getElementById('feilderror1').style.display="block";
+            }else{
+                document.getElementById('feilderror1').style.display="none";
+            }
+        }else{
+            document.getElementById('feilderror1').style.display="none";
+        }
+        	
+        if(feilderror4==false){
+            if(feilderror5==false){
+
+                document.getElementById('feilderror4').style.display="block";
+            }else{
+                 
+                privacy='public';
+                document.getElementById('feilderror4').style.display="none";
+            }
+        }else{
+
+            privacy='private';
+            document.getElementById('feilderror4').style.display="none";
+        }
+        if(feilderror2=="")  document.getElementById('feilderror2').style.display="block";else document.getElementById('feilderror2').style.display="none";
+        if(feilderror3=="")  document.getElementById('feilderror3').style.display="block";else document.getElementById('feilderror3').style.display="none";
+        if(feilderror6 != false && writtenForSite!=''){writtenFor=writtenForSite;}else if(feilderror1 != false) {writtenFor='personal';}else{writtenFor='';}
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].type === 'radio' && radios[i].checked) {
+                value = radios[i].value;
+            }
+        }
+        if(value){
+            document.getElementById("imagerror").innerHTML= "";
+            var coverImage=value;
+             
+            var dataString="coverImage="+coverImage+"&writtenFor="+writtenFor+"&privacy="+privacy+"&textAreaContent="+feilderror3+'&title='+feilderror2;
+         
+            $.ajax({
+                url:"<?php echo @SITE_URL;?>
+articles/organize",
+                data:dataString,
+                method:'post',
+                success:function(res){
+                	 
+                    if(res==1){
+                        window.location.href='<?php echo @SITE_URL;?>
+myArticles';
+                    }else{
+                        alert(res);
+                    }
+                }
+            });
+            return true;
+            document.getElementById("imagerror").innerHTML= "";
+        }else{
+            document.getElementById("imagerror").innerHTML= "Please select cover image";
+            return false;
+        }
+       
+      
+
+    }
+    function cancelPic(filename){
+        var a=confirm("Do you really want to remove "+filename);
+        if(a){
+            //appending javascript file dynamically
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = newURL+'fanwire/views/scripts/jquery.tools.min.js';
+            head.appendChild(script);
+            //appending end
+            $.ajax({
+                url:'<?php echo @SITE_URL;?>
+photos/ajaximage',
+                method:'post',
+                data:'flname='+filename+'&can=1',
+                success:function(res){
+                    $('#messages').html(res);
+               
+                }
+            });
+        }
+    }
+    function caption(val){
+        document.getElementById(val).style.display="block";
+        
+    }
+    function addCaptionForImage(val,ext){
+        
+        
+        var caption=document.getElementById('tf*'+val).value;
+        var imageId=val;
+        //appending javascript file dynamically
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = newURL+'fanwire/views/scripts/jquery.tools.min.js';
+        head.appendChild(script);
+        //appending end
+        
+        if(caption){
+            $.ajax({
+                url:'<?php echo @SITE_URL;?>
+photos/addCaptionAjax',
+                method:'post',
+                data:'captionName='+caption+'&imageId='+imageId+'&ext='+ext,
+                success:function(res){
+                    $('#messages').html(res);
+
+                }
+            });
+        }else{
+            alert('enter a caption for image');
+            return false
+        }
+ 
+    }
+</script>
+<script type="text/javascript">
+    tinyMCE.init({
+        
+        mode : "textareas",
+        theme : "advanced",
+        plugins : "advlist",
+
+       
+        theme_advanced_buttons1 : "bold,italic,underline,fontselect",
+	 
+        theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left",
+    
+        theme_advanced_resizing : true,
+
+       
+        template_replace_values : {
+            username : "Naresh",
+            staffid : "159"
+        }
+    });
+</script>
+
+
+
+<!--Right Section-->
+<div class="right_container">
+
+    <div id="rightsection">
+
+        <div id="right_area">
+            <div class="connect_fans">
+
+                <h2 class="new_article">add a new article</h2>
+
+                <!--this photos are section start here-->
+                <div class="this_photos">
+                    <h3>This article is :</h3>
+                    <!--                    <form action="" name="article" id="article">-->
+                    <div class="tp_options">
+                        <input type="radio" name="writtenbyme" id="writtenbyme" onclick=" return toggleText();"  checked="checked"/> This is written by me<br />
+                        <input type="radio" name="writtenbyme" id="writtenbyme1" onclick=" return toggleText();"  /> From another website<br />
+                        <input type="text" name="fromsite" id="fromsite" style="display: none"/>
+                        <p style="color: red;display:none;position:absolute; " id="feilderror1" >This feild is required.</p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <!--this photos are section start here-->
+
+                <!--article section start here-->
+                <div class="adding_article">
+                    <div style="width:50%">
+                        <div class="settings_details">
+                            <div class="name">Name</div>
+                            <div class="field_details">
+                                <input name="title" type="text"  id='title' class="textfield" placeholder="article title " />
+                                <p style="color: red;display:none ;text-transform:none;" id="feilderror2" >This feild is required.</p>
+                            </div>
+                        </div>
+                        <input type="hidden" name="article" value='article'/>
+                        <input type="hidden" name="user_id" value='<?php echo $_SESSION['id'];?>
+'/>
+                        <div class="clear"></div>
+                        <textarea id="elm1" name="elm1"  class="text_area" > </textarea>
+                        <p style="color: red;display:none ;text-transform:none; ;" id="feilderror3" >This feild is required.</p>
+                    </div>
+                </div>
+
+                <!--article section start here-->
+
+
+
+                <!--add phots from section start here-->
+                <div class="add_phots_from">
+                    <h3>Add Photos From :</h3>
+
+                    <!--btns section start here-->
+                    <div class="add_photos_form_btns_section">
+                        <div class="profile_photo_btns">
+                            <a href="javascript:void(0);" id="desktop" class="your_desktop active" onclick="return changeStatus('1');">Your Desktop</a>
+                            <a href="javascript:void(0);" id="yfanwire" class="your_fanwire_profile" onclick="return changeStatus('2');">Your fanwire profile</a>
+                            <a href="javascript:void(0);" id="facebook" class="your_facebook" onclick="return changeStatus('3');">facebook</a>
+                        </div>
+                    </div>
+                    <!--btns section end here-->
+                </div>
+                <!--add phots from section start here-->
+
+                <form id="upload"  action="<?php echo @SITE_URL;?>
+upload.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
+                    <div class="upload_box" id="filedrag" style="display: none;" >
+                        <div class="upload_box_close_btn" ><a href="javascript:void(0);" onclick="return changeStatus('4');">X</a></div>
+                        <img src="<?php echo @SITE_URL;?>
+views/images/upload_arrow.png" />
+                        <p class="fileinput-button">drag files here or click to upload
+                            <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+                            <!-- if articles contains multiple images then uncomment this                             <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />-->
+                            <!--                                <input type="file" id="files" name ="filesUpload[]" size="10" multiple="" onchange="imagesSelected(this.files)" /></p>-->
+
+                    </div>
+                </form>
+                <div class="clear"></div>
+
+                <div class="Cover">
+                    <div class="up_right_arrow_article " id="la"  ><a href="javascript:void(0);" class="prevPage" onclick="activateSlide();"  ><img src="<?php echo @SITE_URL;?>
+views/images/upload_image_R_arrow.png" /></a></div>
+
+                    <div  id="messages" style="display: none"    >
+
+
+                    </div>
+
+                    <div class="up_left_arrow_article " id="ra" ><a href="javascript:void(0);" class="nextPage" onclick="activateSlide();" ><img src="<?php echo @SITE_URL;?>
+views/images/upload_image_L_arrow.png" /></a></div>
+                </div>
+                <span style="color:#F00;font-size: 12px;" id="albumerror"></span>
+                <div style="color:#F00;float:right"><span id="imagerror"></span></div>
+                <!--notification options section start here-->
+                <div class="notifications_div">
+                    <h3>Notification</h3>
+
+                    <div class="n_options">
+                        <input type="checkbox" /> Twitter Account <span><a href="#">add account</a></span><br />
+                        <input type="checkbox" /> Facebook Account<br />
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <!--notification options section start here-->
+
+                <!--privacy are section start here-->
+                <div class="privacy">
+                    <h3>Privacy</h3>
+
+                    <div class="privacy_options">
+                        <input type="radio" name="privacy" id="privacy1" value="private" checked="checked" /> This is a private post<br />
+                        <input type="radio" name="privacy" id="privacy2" value="public"  /> This is a public post<br />
+                        <p style="color: red;display: none" id="feilderror4" >This feild is required.</p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <!--privacy section start here-->
+
+                <!--save, back btns sections start here-->
+                <div class="bs_btns">
+                    <a href="<?php echo @SITE_URL;?>
+addItem" class="back_btn">back</a>
+                    <div id="submitbutton"></div>
+                    <button type="submit" class="save_btn" name="submit"  onclick="return validateFeilds();">publish</button>
+                    <div class="clear"></div>
+                </div>
+
+                <!--save, back btns sections end here-->
+                <!--                </form>-->
+            </div>
+       
+
+        </div>
+        <?php $_template = new Smarty_Internal_Template('footer.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+        <script src="<?php echo @SITE_URL;?>
+views/scripts/filedragArticles.js"></script>

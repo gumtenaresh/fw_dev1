@@ -1,0 +1,105 @@
+{include file ='header.tpl.html'}
+{include file ='zoom.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}<!-- this is left bar -->
+<!--Right Section-->
+<div class="right_container">
+
+    <div id="rightsection">
+
+        <div id="right_area">
+            <div class="connect_fans">
+
+                <h2>Add a new item</h2>
+                <br />
+
+                <div class="settings_page">
+                    <div class="awards_active">
+                        <ul>
+                            <li><a href="#"><span><strong>Step 1. Content Type</strong></span></a></li>
+                            <li class="active"><a href="#"><span><strong>Step 2. Add Information</strong></span></a></li>
+                            <li><a href="#"><span><strong>Step 3. organize</strong></span></a></li>
+                            <li><a href="#"><span><strong>step 4. preview and publish</strong></span></a></li>
+                        </ul>
+
+                    </div></div>
+
+                <div class="heading2">
+                    <h2>add a new wire</h2></div>
+                <div class="settings_details">
+                    <div class="name">Title of wire</div>
+                    <div class="field_details"><input name="" type="text" class="textfield" /> </div>
+
+                </div>
+
+                <div class="build_wire">
+
+                    <h3>build your wire  add anything to your Wire <span>(only 10 to start a wire. You can add more later)</span></h3>
+
+                    <div class="wire_list">
+                        <h3>add media</h3><br />
+
+
+                        <p>upload photos or videos</p>
+
+
+                        <input name="" type="button" class="browse_btn" value="browse" /><br />
+                        <br /><br /><br />
+
+
+
+                        <div class="add_more"><a href="#">+ addmore</a></div><br />
+                        <br /><br /><br /><br />
+
+
+
+
+                        <p>Import from your Profile</p>
+
+
+                        <input name="" type="button" class="browse_btn" value="Media Manager" />
+
+                    </div>
+                    <div class="wire_list2">
+                        <br />
+                        <br />
+
+
+                        <p>upload photos or videos</p>
+
+
+                        <input name="" type="button" class="browse_btn" value="browse" /><br />
+                        <br /><br /><br /><br />
+
+
+
+
+                        Add From YouTube (Paste YouTube URL below)<br />
+                        <br />
+
+
+
+                        <div class="add_manager"><input name="" type="text" class="textfield" /> <input name="" type="button" class="browse_btn" value="Media Manager" /></div>
+
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+            <div class="clear"></div>
+
+            <hr />
+
+            <input name="" type="button" class="back" value="back" onclick="window.location.href='{$smarty.const.SITE_URL}addItem';" />
+            <div class="elements">elements in you wire:  8</div>
+            <input name="" type="submit" class="next" value="next"  />
+
+        </div>
+
+
+
+
+{include file ='footer.tpl.html'}

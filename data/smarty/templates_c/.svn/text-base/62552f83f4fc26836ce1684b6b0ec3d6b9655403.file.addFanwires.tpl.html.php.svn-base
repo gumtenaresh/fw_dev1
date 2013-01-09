@@ -1,0 +1,429 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-17 15:31:46
+         compiled from "/var/www/fanwire/views/admin/fanwires/addFanwires.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:60330016502e168a16a353-88697349%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '62552f83f4fc26836ce1684b6b0ec3d6b9655403' => 
+    array (
+      0 => '/var/www/fanwire/views/admin/fanwires/addFanwires.tpl.html',
+      1 => 1345197682,
+    ),
+  ),
+  'nocache_hash' => '60330016502e168a16a353-88697349',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/header.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/textLimit.js"></script>
+
+
+<script type="text/javascript">
+     function RemoveDiv(divid)
+    {        
+        $(divid).hide(); 
+    }
+function ajaxFileUpload(upload_field)
+{
+
+// Checking file type
+var re_text = /\.jpg|\.gif|\.jpeg|\.png/i;
+var filename = upload_field.value;
+if (filename.search(re_text) == -1) {
+alert("File should be either jpg or gif or jpeg or png");
+upload_field.form.reset();
+return false;
+}
+
+document.getElementById('picture_preview').innerHTML = '<div></div>';
+upload_field.form.action = "<?php echo @ADMIN_URL;?>
+fanwires/ajaxUploadImage";
+//upload_field.form.action = "http://test.mobiledevelopersdirectory.com/fanwire/admin/fanwires/ajaxUploadImage";
+upload_field.form.target = 'upload_iframe';
+upload_field.form.submit();
+upload_field.form.action = '';
+upload_field.form.target = '';
+return true;
+}
+
+
+    /*$(document).ready(function() {
+       $('#photo').live('change', function(){
+           $("#imageform").submit(function(){
+               $.ajax({
+                   url:"<?php echo @ADMIN_URL;?>
+fanwire/uploadImage",
+                   data:dataString,
+                   method:'post',
+                   success:function(res){
+                      alert(res);
+                   }
+               });
+           });
+       });
+   }); */
+    function getkeywords()
+    {
+        var keywords =new Array(); var i=0;
+        $("div #fankeywords span").each(function(){
+            keywords[i] = $(this).text(); i++;
+        });
+        var keyword = keywords.join(",");
+        document.getElementById("keyword").value = keyword;
+    }
+
+    function removespan(id)
+    {
+        $(id).remove();
+    }
+    function addkeywords()
+    {
+        var val = $.trim(document.getElementById("keywords").value);
+        val = val.replace (/,/g, "");//removing the , from the content
+        var key = val.replace(" ", "_");
+        key = key.replace(" ", "_");
+        if(key!="")
+        {
+            $("#fankeywords").append('&nbsp;<span class="keywords" id="'+key+'" onclick=removespan("#'+key+'")><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" height="11" width="8" alt="" /></a>'+val+'</span>');
+            //$("#fankeywords").append('&nbsp;<div class="keywords" id="'+key+'" onclick=removespan("#'+key+'")><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" height="11" width="8" alt="" /></a><p>'+val+'</p></div>');
+            document.getElementById("keywords").value="";
+        }
+    }
+
+    $(document).ready(function(){
+        $("#facebookphotos").click(function(){
+            $('#picture_preview').html('<img height="206" width="209" src="<?php echo @SITE_URL;?>
+views/images/loader.gif">');
+            var fburl = document.getElementById("facebook").value;
+            var dataString = "fburl="+fburl+"&fanwire_id=<?php echo $_smarty_tpl->getVariable('fanwire_id')->value;?>
+";
+            $.ajax({
+                   url:"<?php echo @ADMIN_URL;?>
+fanwires/fbProfileImages",
+                   data:dataString,
+                   method:'post',
+                   success:function(res){
+                      var result = res.split("##");                      
+                      $('#picture_preview').html('<input type="hidden" name="photo" id="photo" value="'+result[0]+'"/><img height="206" width="209" src="<?php echo @SITE_URL;?>
+photos/thumbs/'+result[0]+'">');
+                      //alert(result[1]);
+                   }
+               });
+        });
+        $("#addfanwire").validate({
+            rules: {
+                name: {
+                    required:true
+                },
+                url: {
+                    required: true
+                    //noSpace:true
+                } /*,
+
+                maincat: {
+                    required: true
+                },
+                description: {
+                    required: true
+                },
+                photo: {
+                    required: true
+                },
+                facebook: {
+                    required: true,
+                    url:true
+                },
+                twitter: {
+                    required: true,
+                    url:true
+                },
+                youtube: {
+                    required: true,
+                    url:true
+                }*/
+            }
+
+        }); 
+
+        textlimit(300,'#remainingCharacters','#description');
+    });
+    function getSubCategories(catid,divid,url)
+    {
+        var dataString = "parentid="+catid;
+        $.ajax({
+            url:url,
+            method:'POST',
+            data:dataString,
+            success:function(result){
+                $(divid).html(result);
+            }
+        });
+    }
+     function getFields(){
+        $('#fieldPopup').toggle();
+    }
+</script>
+
+
+<div id="data_sectionarea">
+    <?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/fanwires_left_section.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+    <div class="data_rightsection">
+        <div class="rightcontent">
+            <div class="datatabsection">
+                <div class="datatableftsection"><a href="<?php echo @ADMIN_URL;?>
+">Home</a> > <a href="<?php echo @ADMIN_URL;?>
+fanwires/fanwiresList/">FanWire Admin</a> > <a href="<?php echo @ADMIN_URL;?>
+fanwires/addFanwires/">Add New FanWire</a></div>
+                <!--                    <div class="datatabrightsection"><a href="#">Step 1 of 4</a></div>-->
+            </div>
+            <div class="clear"></div>
+            <div class="menu_area">
+                <div class="menu_area_list">
+                    <ul><li class="active"><a href="#"><span><strong>NEW</strong></span></a></li>
+                        <li><a href="#"><span><strong>MANAGE</strong></span></a></li></ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <iframe name="upload_iframe" id="upload_iframe" style="display:none;"></iframe>
+            <form action="" method="post" id="addfanwire" name="addfanwire" enctype="multipart/form-data">
+                <div class="datasettingarea">
+                    <div class="forms">
+
+                        <div class="dataforms">
+                            <label class="name">ID</label><label style="float:left; height:auto; margin-right:15px; color:#424140; padding-top:5px;"><?php echo $_smarty_tpl->getVariable('fanwire_id')->value;?>
+</label>
+                        </div>
+
+                        <div class="dataforms">
+                            <label class="name">FanWire Name</label><input name="name" id="name" type="text" class="textfield" style="float:left;"/>
+                        </div>
+
+                        <div class="dataforms">
+                            <label class="name">FanWire URL</label><h1>fanwire.com/</h1><input name="url" id="url" type="text" class="textfield2" style="float:left;"/>
+                        </div>
+
+
+                        <div class="dataforms">
+                            <label class="name">Main Category</label><label class="custom-select">
+                                <select id="maincat" name="maincat" onchange="getSubCategories(this.value,'#categories2','<?php echo @ADMIN_URL;?>
+fanwires/subCategories')">
+                                    <option value="">Select</option>
+                                    <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['name'] = "id";
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'] = is_array($_loop=$_smarty_tpl->getVariable('cat')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total']);
+?>
+                                    <option value="<?php echo $_smarty_tpl->getVariable('cat')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+"><?php echo $_smarty_tpl->getVariable('cat')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['name'];?>
+</option>
+                                    <?php endfor; endif; ?>
+                                </select>
+                            </label><span style="padding:0 5px 0 15px;">Category2</span> <label class="custom-select">
+                                <div id="categories2">
+                                    <select id="cat2" name="cat2">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                            </label><span style="padding:0 5px 0 15px;">Category3</span><label class="custom-select">
+                                <div id="categories3">
+                                    <select id="cat3" name="cat3">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="dataforms">
+                            <label class="name">Keywords</label>
+                            <input name="keywords" id="keywords" type="text" class="textfield" style="float:left;" onkeyup="Javascript:if(event.keyCode==188) addkeywords();"/>
+                            <img src="<?php echo @SITE_URL;?>
+views/images/add.png" height="28" width="25" alt="" onclick="addkeywords();" style="cursor: pointer" />
+                        </div>
+
+                        <!--                                        <div class="add_keywords" id="fankeywords"></div>-->
+                        <div class="add_keywords" style="float: left" id="fankeywords">
+                            <input type="hidden" name="keyword" id="keyword" />
+                        </div>
+                        <div class="clear"></div>
+
+                        <div class="dataforms">
+                            <label class="name">Description</label><textarea name="description" id="description" cols="" rows="" class="text_area" style="float:left; padding:0 10px 0 0;"></textarea>
+                            <div class="Char_remaining">
+                                <p>Characters</p>
+                                <p>remaining</p>
+                                <b><span id="remainingCharacters"></span></b>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="dataforms" style="margin:10px 0 0 0;">
+                            <label class="name">facebook</label><input name="facebook" id="facebook" type="text" class="textfield" />
+                            <div class="import"><div id="facebookphotos" class="connect"><a href="#">import profile photos</a></div></div>
+                        </div>
+
+                        <div class="dataforms">
+                            <label class="name">twitter</label><input name="twitter" id="twitter" type="text" class="textfield" />
+                            <div class="import"><div id="twitterphotos" class="connect"><a href="#">import profile photos</a></div></div>
+                        </div>
+
+                        <div class="dataforms">
+                            <label class="name">youtube</label><input name="youtube" id="youtube" type="text" class="textfield" />
+                        </div>
+
+                         <div class="dataforms">
+                            <div id="p_scents"></div>
+                        </div>
+                        
+                        <div class="dataforms" style="margin:15px 0 0 0;">
+<div id="fieldPopup" style="display: none; position:absolute;margin-left: 270px;"  >
+    <input type="text" name="labelName" id="labelName" class="textfield" value="">
+    <input type="button" name="add" value="add" id="addFields" class="connect">
+</div>
+                            <label class="name"></label><a href="#" style="float:left;" onclick="getFields();"><img src="<?php echo @SITE_URL;?>
+views/images/add.png" height="28" width="25" alt="" /></a> 
+                            <b style="color:#424140; font-size:12px; padding:5px 0px 0 10px; float:left; font-family:OpenSansRegular; font-weight:normal; color:#424140;">Add New Data Field</b>
+                        </div>
+                        
+                       
+                        
+                        <div class="forms1">
+                <div id="picture_preview" class="picture_preview"><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/image_upload.png" height="206" width="209" alt="" /></a></div>
+                <div class="upload_btns">
+                    
+                        <div class="notification_btns">
+                            <p class="fileinput-button"><input type="file" name="picture" id="picture" onchange="return ajaxFileUpload(this);"  /></p>
+                            <a href="#" class="blue_btn1">Upload</a>
+<!--                            <a href="#" class="blue_btn">Previous Images</a>-->
+                        </div>
+                    
+                </div>
+            </div>
+                        
+                        
+<!--                            <input type="file" name="picture" id="picture" onchange="return ajaxFileUpload(this);"  />-->
+                <span class="error" id="picture_error"></span>
+<!--                <div id="picture_preview"></div>-->
+                         
+               
+                    </div>
+                    <div class="clear"></div>
+
+                    <div class="bs_btns">
+                        <div><input type="button" name="cancel" id="cancel" value="Cancel" class="back_btn" /></div>
+                        <div><input type="submit" class="save_btn" name="button" value="Next" onclick="return getkeywords();" /></div>
+                        <div class="clear"></div>
+                    </div>
+
+<input type="hidden" name="hiddenlabel" id="hiddenlabel" value="">
+                    
+
+
+                </div>
+<!--                 <input type="submit" name="button" id="button" value="submit" />-->
+            </form>
+
+            <!--<div class="forms1">
+                <div><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/image_upload.png" height="206" width="209" alt="" /></a></div>
+                <div class="upload_btns">
+                    <form id="imageform" name="imageform" action=""  enctype="multipart/form-data">
+                        <div class="notification_btns">
+                            <p class="fileinput-button"><input type="file" name="photo" id="photo" onchange="return ajaxFileUpload(this);"  /></p>
+                            <a href="#" class="blue_btn">Upload</a>
+                            <a href="#" class="blue_btn">Previous Images</a>
+                        </div>
+                    </form>
+                </div>
+            </div>-->
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var i = 0;
+    $(function() {
+       var scntDiv = $('#p_scents');
+       var implodeval="";
+       
+       var splitVal = new Array();
+        $('#addFields').live('click', function() {
+                $('#fieldPopup').hide();                
+                var labelName = $('#labelName').val();
+                var hiddenVal="";
+
+                splitVal[i] = labelName;
+                for(var j=0;j<splitVal.length;j++){
+                    if(splitVal[j] != " "){
+                        if(hiddenVal == "" ){
+                            hiddenVal = splitVal[j];
+                        }
+                        else{
+                            hiddenVal = hiddenVal+','+splitVal[j];
+                        }
+                    }
+                }
+                $('#hiddenlabel').val(hiddenVal);
+                $('#labelName').val('');
+                while(i<=10){
+                    $('<div class="dataforms" name="'+i+'" id="'+i+'"><label class="name">'+labelName+'</label> <input type="text" id="labelfield" class="textfield" size="22" name="labelfield[]" value=""  /><a href="#" id="remScnt" onclick="RemoveDiv(\'#'+i+'\');">Remove</a></div>').appendTo(scntDiv);
+                    i++;
+                    return false;
+                }
+        });
+ 
+        $('#remScnt').live('click', function() {
+            if( i > 0 ) {
+                    splitVal[$(this).parent('p').attr('id')] = " ";
+                    implodeval = "";
+                    for(var j=0;j<splitVal.length;j++){
+                        if(splitVal[j] != " "){
+                            if(implodeval == "" ){
+                                implodeval = splitVal[j];
+                            }
+                            else{
+                                implodeval = implodeval+','+splitVal[j];
+                            }
+                        }
+                    }
+                    $('#hiddenlabel').val(implodeval);  
+                    $(this).parents('p').remove();
+                    i--;
+            }
+            return false;
+        });
+});
+
+
+</script>
+
+
+<?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/footer.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>  

@@ -1,0 +1,128 @@
+{include file="header.tpl.html"}
+<style type="text/css">h6 {
+display: block;
+font-size: 0.67em;
+-webkit-margin-before: 2.33em;
+-webkit-margin-after: 2.33em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+font-weight: bold;
+}
+    h1, h2, h3, h4, h5, h6 {
+font-size: 13px;
+color: #333;
+margin: 0;
+padding: 0;
+}.-cx-PRIVATE-fbTimelineUnitActor__header {
+font-size: 11px;
+font-weight: normal;
+margin-right: 15px;
+}
+    .fbTimelineCapsule .timelineUnitContainer {
+background: white;
+border-left: 1px solid #C4CDE0;
+border-right: 1px solid #C4CDE0;
+padding: 13px 15px;
+}.timelineUnitContainer {
+position: relative;
+}.fbTimelineCapsule {
+list-style: none;
+}body {
+font-size: 11px;
+font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+color: #333;
+line-height: 1.28;
+text-align: left;
+direction: ltr;
+}
+.-cx-PRIVATE-fbTimelineUnitActor__root {
+border-bottom: 1px solid #E5E5E5;
+}.-cx-PRIVATE-fbTimelineUnitActor__root + .aboveUnitContent {
+    margin-top: 15px;
+}.fbTimelineUFI {
+background: white;
+margin-bottom: 0 !important;
+margin-top: -12px;
+position: relative;
+top: 12px;
+}.timelineUnitContainer .uiCommentContainer {
+margin-bottom: -12px;
+margin-left: -12px;
+padding-top: 3px;
+width: 403px;
+}
+.fbTimelineUnit {
+display: block;
+width: 100%;
+margin-bottom: 15px;
+position: relative;
+z-index: 2;
+}
+</style>
+</div>
+<div style="width: 100%;float: left;">
+<form action="" method="post">
+    <input type="text" name="fanwirename" value="" />
+    <input type="submit" value="Submit"/>
+</form>
+<div  class="fbTimelineUnit">
+{if  $fbresult|@count gt 0} 
+{foreach from=$fbresult key=myId item=i}
+<!--Header with image-->
+<div class="fbTimelineUnit" id="u1ie9q_65" style="border: 3px solid #999; padding: 5px;">
+<div class="clearfix mbs pbs -cx-PRIVATE-fbTimelineUnitActor__root ">
+    <a class="-cx-PRIVATE-uiImageBlockDeprecated__image -cx-PRIVATE-uiImageBlockDeprecated__smallImage"
+    href="https://www.facebook.com/LilWayne" tabindex="-1" ><img class="-cx-PRIVATE-uiSquareImage__root -cx-PRIVATE-uiSquareImage__medium img" src="{$profie_image}" alt=""></a>
+    <div class="-cx-PRIVATE-uiImageBlockDeprecated__smallContent -cx-PRIVATE-uiImageBlockDeprecated__content">
+        <h6 class="-cx-PRIVATE-fbTimelineUnitActor__header">
+            <span class="fcg">
+                <span class="fwb">
+                    <a href="https://www.facebook.com/{$user}" id="js_2">{$user}</a>
+                </span>
+            </span>
+        </h6>
+    </div>
+</div>
+
+<!--Message-->
+<div class="aboveUnitContent">
+    <div class="-cx-PRIVATE-fbTimelineText__featured">{$i->message}        
+    </div>
+</div><br/>
+
+<br/>
+{if $i->picture neq null}
+Below Big image or message area
+<div class="photoUnit clearfix">
+    <div class="uiScaledThumb photo photoWidth1" data-cropped="1">
+        <a    rel="theater" >
+            <div class="uiScaledImageContainer photoWrap">
+                <img class="scaledImageFitWidth img" src="{$i->picture}" width="200" height="200"></div></a>
+    </div>
+</div>
+{/if}{$i->created_time|date_format:"%A, %B %e, %Y %l:%M:%S"}</div>
+
+{/foreach} </div>
+
+ 
+<!-- <div style="width: 100%;float: left;">
+{foreach from=$fbresult key=myId item=i}
+<div class="collect_photo" >
+        {if $i->picture neq null}
+         <img src="{$i->picture}" width="200" height="151" />
+         {/if}<br/>
+         <div class="data"> <img src="{$profie_image}" style="float: left; margin-right: 10px;"> <a href="https://www.facebook.com/{$user}" id="js_2">{$user}</a> <br />
+<span>{$i->message} </span></div>
+<div class="photo_post">
+    	<div class="message">(3)</div>
+        <div class="blue">(11)</div>
+        <div class="red">(19)</div>
+    </div>
+         
+    </div>{/foreach}</div>-->
+         {else}
+         <span style="font-size: 15px;">
+Sorry No results Found. <br/>
+Please check <b>{$user}</b> Facebook Id</span>
+         
+{/if}</div>

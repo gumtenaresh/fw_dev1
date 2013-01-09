@@ -1,0 +1,303 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-06 15:08:31
+         compiled from "/var/www/fanwire/views/fanwires/settings.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:867099812501f90979b0ba6-77581384%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '2d41278d11ae8d1786a9240ff69e0ce47ff81429' => 
+    array (
+      0 => '/var/www/fanwire/views/fanwires/settings.tpl.html',
+      1 => 1343111252,
+    ),
+  ),
+  'nocache_hash' => '867099812501f90979b0ba6-77581384',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('header.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?> 
+
+<script>
+    function changeName() {
+        //alert("hello");
+        var dataString = 'name=' + document.getElementById('name').value;
+
+        $.ajax({
+            type : "POST",
+            url : "<?php echo @SITE_URL;?>
+changeName",
+            data : dataString,
+            success : function(response) {
+
+                if (response == 1) {
+
+                    $('#message').html("<h2>Name Changed Successfully!</h2>")
+                    .hide().fadeIn(1500).fadeOut(1500)
+
+                } else {
+                    $('#message').html("<h2>" + response + "</h2>").hide()
+                    .fadeIn(1500).fadeOut(1500)
+
+                }
+            }
+        });
+        return false;
+    }
+    function changePassword() {
+        //alert('inchamgepassword');
+        var dataString = 'password='
+            + document.getElementById('password').value;
+        $.ajax({
+            type : "POST",
+            url : "<?php echo @SITE_URL;?>
+changePassword",
+            data : dataString,
+            success : function(response) {
+                if (response == 1) {
+                    $('#message').html(
+                    "<h2>Password Changed Successfully!</h2>").hide()
+                    .fadeIn(1500).fadeOut(1500)
+                } else {
+                    $('#message').html("<h2>" + response + "</h2>").hide()
+                    .fadeIn(1500).fadeOut(1500)
+                }
+            }
+        });
+        return false;
+    }
+    function changeEmail() {
+        //alert('inchamgeemail');
+        var dataString = 'email=' + document.getElementById('email').value;
+        $.ajax({
+            type : "POST",
+            url : "<?php echo @SITE_URL;?>
+changeEmail",
+            data : dataString,
+            success : function(response) {
+                //alert(response);
+                if (response == 1) {
+                    $('#message').html("<h2>Email Changed Successfully!</h2>")
+                    .hide().fadeIn(1500).fadeOut(1500)
+                } else {
+                    $('#message').html("<h2>" + response + "</h2>").hide()
+                    .fadeIn(1500).fadeOut(1500)
+                }
+            }
+        });
+        return false;
+    }
+    function changePrivacy() {
+        var dataString;
+        if(document.getElementById('privacy').checked && document.getElementById('privacy').value=='public'){
+            dataString = 'privacy=public';
+        }
+        else{
+            dataString = 'privacy=private';
+        }
+        $.ajax({
+            type : "POST",
+            url : "<?php echo @SITE_URL;?>
+changePrivacy",
+            data : dataString,
+            success : function(response) {
+                if (response == 1) {
+                    $('#message')
+                    .html("<h2>Privacy Updated Successfully!</h2>")
+                    .hide().fadeIn(1500).fadeOut(1500)
+                } else {
+                    $('#message').html("<h2>" + response + "</h2>").hide()
+                    .fadeIn(1500).fadeOut(1500)
+                }
+            }
+        });
+        return false;
+    }
+    function changeUrl() {
+        var dataString = 'url=' + document.getElementById('username2').value;
+        $.ajax({
+            type : "POST",
+            url : "<?php echo @SITE_URL;?>
+changeUrl",
+            data : dataString,
+            success : function(response) {
+                //alert(response);
+                if (response == 1) {
+                    $('#message')
+                    .html("<h2>Url changed Successfully!</h2>")
+                    .hide().fadeIn(1500).fadeOut(1500)
+                } else {
+                    $('#message').html("<h2>" + response + "</h2>").hide()
+                    .fadeIn(1500).fadeOut(1500)
+                }
+            }
+        });
+        return false;
+    }
+</script>
+
+<?php $_template = new Smarty_Internal_Template('myfanwireLeftBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="right_area">
+            <div class="connect_fans">
+                <div class="settings_page">
+                    <div class="awards_active">
+                        <ul>
+                            <li class="active"><a href="<?php echo @SITE_URL;?>
+settings"><span><strong>Profile
+											settings</strong>
+                                    </span>
+                                </a>
+                            </li>
+                            <li><a href="<?php echo @SITE_URL;?>
+social"><span><strong> social
+											media</strong>
+                                    </span>
+                                </a>
+                            </li>
+                            <li><a href="<?php echo @SITE_URL;?>
+about"><span><strong> about me</strong>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div
+                    id='message'
+                    class='settings_details'
+                    ></div>
+				<?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['na']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['na']['name'] = 'na';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['na']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('userdetails')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['na']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['na']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['na']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['na']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['na']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['na']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['na']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['na']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['na']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['na']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['na']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['na']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['na']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['na']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['na']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['na']['total']);
+?> <?php $_smarty_tpl->tpl_vars['x'] = new Smarty_variable($_smarty_tpl->getVariable('userdetails')->value[$_smarty_tpl->getVariable('smarty')->value['section']['na']['index']], null, null);?>
+                <div class="profile_settings">
+                    <div class="settings_details">
+                        <div class="name">Name</div>
+                        <div class="field_details">
+                            <input
+                                name="name"
+                                type="text"
+                                id='name'
+                                class="textfield"
+                                value='<?php echo $_smarty_tpl->getVariable('x')->value['username'];?>
+'
+                                /> <a
+                                href="javascript:void(0);"
+                                onclick="changeName();"
+                                >Change</a>
+                        </div>
+                    </div>
+                    <div class="settings_details">
+                        <div class="name">Username</div>
+                        <div class="field_details">
+                            <input
+                                name="username1"
+                                type="text"
+                                class="textfield3"
+                                value="http://www.fanwire.com/<?php if ($_smarty_tpl->getVariable('x')->value['url']){?><?php echo $_smarty_tpl->getVariable('x')->value['url'];?>
+<?php }?>"
+                                /> <?php if ($_smarty_tpl->getVariable('x')->value['url']){?><?php }else{ ?><input
+                                name="username2"
+                                id="username2"
+                                type="text"
+                                class="textfield2" 
+                                /> <a href="javascript:void(0);" onclick=" return changeUrl();">Change</a><?php }?>
+                        </div>
+                    </div>
+                    <div class="settings_details">
+                        <div class="name">Email</div>
+                        <div class="field_details">
+                            <input
+                                name="email"
+                                id='email'
+                                type="text"
+                                class="textfield"
+                                value='<?php echo $_smarty_tpl->getVariable('x')->value['email'];?>
+'
+                                /> <a
+                                href="javascript:void(0);"
+                                onclick="changeEmail();"
+                                >Change</a>
+                        </div>
+                    </div>
+                    <div class="settings_details">
+                        <div class="name">Password</div>
+                        <div class="field_details">
+                            <input
+                                name="password"
+                                id='password'
+                                type="password"
+                                class="textfield"
+                                /> <a
+                                href="javascript:void(0);"
+                                onclick="changePassword();"
+                                >Change</a>
+                        </div>
+                    </div>
+                    <div class="settings_details">
+                        <div class="name">Privacy</div>
+                        <div class="field_details">
+                            <input
+                                name="privacy3"
+                                type="text"
+                                id='privacy3'
+                                class="textfield"
+                                value="Allow my profile to be visible by search engines"
+                                /> <a
+                                href="javascript:void(0);"
+                                onclick="changePrivacy();"
+                                >Change</a>
+                        </div>
+                    </div>
+                    <div class="settings_details">
+                        <div class="name"></div>
+                        <input
+                            name="privacy"
+                            id='privacy'
+                            type="radio"
+                            value="public"
+                            <?php if ($_smarty_tpl->getVariable('x')->value['privacy']=='public'){?>
+                            checked="checked"<?php }?>
+                            /> Public <input
+                            name="privacy"
+                            id='privacy'
+                            type="radio"
+                            value="private"
+                            <?php if ($_smarty_tpl->getVariable('x')->value['privacy']=='private'){?>
+                            checked="checked"<?php }?>
+                            />Private
+                    </div>
+                </div>
+				<?php endfor; endif; ?>
+            </div>
+            <div class="clear"></div>
+        </div>
+		<?php $_template = new Smarty_Internal_Template('footer.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>

@@ -1,0 +1,39 @@
+{include file="$ADMIN/header.tpl.html"} 
+<div id="data_sectionarea">
+        <div class="data_rightsection1">
+        <div class="rightcontent">
+        <div class="datatabsection">
+        <div class="datatableftsection"><a href="{$smarty.const.ADMIN_URL}">Home</a> > <a href="{$smarty.const.ADMIN_URL}fanwires/fanwiresList/">FanWire Admin</a> > <a href="#">Comments List</a></div>
+        <div class="datatabrightsection"></div>
+        </div>
+        <div class="clear"></div>
+        
+    <table class="table_01" cellpadding="5" cellspacing="5" align="center">      
+        <tr class="table_header">
+<!--        <td>ID</td>-->
+        <td>COMMENT</td>
+        <td>COMMENT TIME</td>     
+        {if $smarty.session.admintype eq '2'}<td>DELETE</td>{/if}
+    </tr> 
+    {section name="id" loop= $list}
+    <tr {if $smarty.section.id.iteration % 2 eq '0'}class="color"{/if}>
+<!--         <td align="left">{$list[id].id}</td>-->
+          <td align="left">{$list[id].comment}</td>          
+         <td align="left">{$list[id].comment_time|date_format:'%m-%d-%y %I:%M %p'}&nbsp;&nbsp;</td>                 
+         {if $smarty.session.admintype eq '2'}<td><a onclick="return confirm('Delete Comment?');" href="{$smarty.const.ADMIN_URL}fanwires/deleteComment?id={$list[id].id}&type={$type}&referer_id={$referer_id}">delete</a></td>{/if}
+    </tr>
+    {sectionelse}
+    <tr><td colspan="13" style="text-align: center;vertical-align: middle;height: 100px;">NO COMMENTS</td></tr>
+    {/section}
+    {if !empty($navigation)}
+    <tr>
+    <td colspan="3" align="right">
+    {$navigation}
+    </td></tr>
+    {/if}
+    <tr><td colspan="3">&nbsp;</td></tr>
+</table>
+    </div>
+    </div>
+    </div>
+{include file="$ADMIN/footer.tpl.html"}

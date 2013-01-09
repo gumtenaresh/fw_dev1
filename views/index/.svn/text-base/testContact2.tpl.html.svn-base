@@ -1,0 +1,121 @@
+
+{include file='header2.tpl.html'}
+<script language="javascript">
+    function checkAll(){
+        for (var i=0;i<document.forms[0].elements.length;i++)
+        {
+            var e=document.forms[0].elements[i];
+            if ((e.name != 'allbox') && (e.type=='checkbox'))
+            {
+                e.checked=document.forms[0].allbox.checked;
+            }
+        }
+    }
+</script>
+
+
+<div class="left_menu">
+    <ul>
+        <li class="active"><a href="#">1- FIND your fans</a></li>
+        <li><a href="#">2- profile photo</a></li>
+        <li><a href="#">3- add fanwires</a></li>
+        <li><a href="#">4- social media connect</a></li>
+    </ul>
+
+</div>
+
+</div>
+
+<!--Left Section End-->  
+
+
+
+<!--Right Section-->
+<div class="right_container">
+
+    <div id="index_rightsection">
+
+        <div id="right_area">
+
+            <h2>Connect with fans you already know<br />
+                <span>We call all of our friends ‘fans’ in these community. Everyone is a fan of something, so why not connect with them? We made this step easy for you.</span></h2>
+
+            <div class="connect_fans_contact">
+                {*$contacts*}
+
+                <form name='contacts' id='contacts' method='post' action='{$smarty.const.SITE_URL}invite'>
+                    <table>
+                        {if $error neq 'failed'}
+                        <tr>
+                            <td width='10%'>
+                                <input type="checkbox" value="on" name="allbox" onclick="checkAll();"/> </td>
+                            <td width='20%'>
+                                &nbsp;Select all
+                            </td>
+                            <td width='60%'>
+                                &nbsp;
+                            </td>
+                        </tr>
+                        {else}
+                        <tr>
+
+                            <td width='60%'>
+                                &nbsp;Login failed. Please check the email and password you have provided and try again later !
+                            </td>
+                        </tr>
+
+                        {/if}  
+
+                        {foreach from=$add key=k item=v}
+                        {if !empty($v)}
+                        <tr>
+                            <td>
+                                <input type='checkbox' name='contacts{$v}' value='{$k}'>
+                            </td>
+                            <td>
+                                {$v}   
+                            </td>
+                            <td>
+                                {$k}
+                            </td>
+                        </tr>
+
+
+                        {/if}
+                        {/foreach}
+                    </table>
+
+            </div>
+
+
+
+            <div class="clear"></div>
+            <hr />
+            <br />
+
+            {if $error eq 'failed'}
+            <div class="skip">
+                <input name="submit" type="button" class="continue_btn" value="Back"  onclick="window.location.href='{$smarty.const.SITE_URL}findFans'"/>
+                {else}
+                <div class="skip"><input name="submit" type="submit" class="continue_btn" value="Invite" />
+                    {/if}
+
+
+                    <br /><br /><br />
+                    <br />
+
+                    </form>
+                    <a href="{$smarty.const.SITE_URL}uploadProfilePic" ><i>Skip this step</i></a></div>
+
+                <div class="clear"></div>
+
+
+
+            </div>    
+
+
+
+            <!--Right Section End--> 
+
+
+            {include file ='footer.tpl.html'}

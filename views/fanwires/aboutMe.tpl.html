@@ -1,0 +1,158 @@
+{include file='header.tpl.html'}
+{include file='zoom.tpl.html'} 
+<script type="text/javascript">
+    function getkeywords()
+    {
+        var keywords =new Array(); var i=0;
+        $("div #fankeywords span").each(function(){
+            keywords[i] = $(this).text(); i++;
+        });
+        var keyword = keywords.join(",");
+        document.getElementById("keyword").value = keyword;
+    }
+
+    function removespan(id)
+    {
+        $(id).remove();
+    }
+    function addkeywords()
+    {
+        var val = $.trim(document.getElementById("ilike").value);
+        var key = val.replace(" ", "_");
+        key = key.replace(" ", "_");
+        if(key!="")
+        {
+            $("#fankeywords").append('&nbsp;<span id="'+key+'" onclick=removespan("#'+key+'")><a href="javascript:void(0);">'+val+'</a></span>');
+            document.getElementById("ilike").value="";
+        }
+        getkeywords();
+    }
+</script>
+{include file='myfanwireLeftBar.tpl.html'}
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="right_area">
+            <div class="connect_fans">
+                <div class="settings_page">
+                    <div class="awards_active">
+                        <ul>
+                            <li><a href="{$smarty.const.SITE_URL}settings"><span><strong>Profile
+											settings</strong>
+                                    </span>
+                                </a>
+                            </li>
+                            <li><a href="{$smarty.const.SITE_URL}social"><span><strong> social
+											media</strong>
+                                    </span>
+                                </a>
+                            </li>
+<!--                            <li class="active"><a href="{$smarty.const.SITE_URL}about"><span><strong> about me</strong>
+                                    </span>
+                                </a>
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+                <div
+                    id='message'
+                    class='settings_details'
+                    >
+				Tell your Friends About you
+                </div>
+                {if $smarty.request.ms eq 1}Data is updated successfully{/if}
+                <form action="" method="POST" name="aboutme">
+				{section name=na loop=$userdetails} {assign var=x
+				value=$userdetails[na]}
+                    <div class="profile_settings">
+                        <div class="settings_details">
+                            <div class="name">Birthday</div>
+                            <div class="field_details">
+                                <input name="bday"  type="text"  id='bday'  class="textfield"
+                                       value='{$x.DOB}'
+                                       />
+                            </div>
+                        </div>
+
+                        <div class="settings_details">
+                            <div class="name">Sex</div>
+                            <div class="field_details">
+                                <select name="sex" id="sex" style="float: left;">
+                                    <ottion value="">Select Sex</option>
+                                        <option value="male" {if $x.gender eq male} selected{/if}>Male</option>
+                                        <option value="female" {if $x.gender eq female} selected{/if}>Female</option>
+
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="settings_details">
+                            <div class="name">Website</div>
+                            <div class="field_details">
+                                <input
+                                    name="website"
+                                    id='website'
+                                    type="text"
+                                    class="textfield"
+                                    value="{$x.website}"
+                                    />  
+                            </div>
+                        </div>
+                        <div class="settings_details">
+                            <div class="name">Home Town</div>
+                            <div class="field_details">
+                                <input
+                                    name="hometown"
+                                    id='hometown'
+                                    type="text"
+                                    class="textfield"
+                                    value="{$x.hometown}"
+                                    />  
+                            </div>
+                        </div>
+                        <div class="settings_details">
+                            <div class="name">Current City</div>
+                            <div class="field_details">
+                                <input
+                                    name="currentcity"
+                                    id='currentcity'
+                                    type="text"
+                                    class="textfield"
+                                    value="{$x.currentcity}"
+                                    />  
+                            </div>
+                        </div>
+                        <div class="settings_details">
+                            <div class="name">I Like</div>
+                            <div class="field_details">
+                                <input
+                                    name="ilike"
+                                    id='ilike'
+                                    type="text"
+                                    class="textfield"
+                                    value="{$x.likes}"
+                                    /><a href="javascript:void(0);" onclick="addkeywords();"><img src="{$smarty.const.SITE_URL}views/images/plus_icon.png" /></a> 
+                            </div>
+                            <div class="remove_keywords" style="float: left" id="fankeywords">
+                                <input type="hidden" name="keyword" id="keyword" />
+                            </div>
+                        </div>
+                        <div class="settings_details">
+
+                            <div class="field_details">
+                                <input
+                                    name="save"
+                                    id='save'
+                                    type="submit"
+                                    value="save"
+                                    /> 
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+				{/section}
+            </div>
+            <div class="clear"></div>
+        </div>
+		{include file='footer.tpl.html'}

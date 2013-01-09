@@ -1,0 +1,219 @@
+{include file='header.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="right_area">
+            <h2>
+                customize your profile: Add fanwires<br /> <span>A FanWire
+                    is a collection of information for a particular subject.<br />
+                    Select your favorite Band, Celebrity, News, or Sports. You can
+                    always add or remove anytime.</span>
+            </h2>
+            <br />
+            <div class="add_fanwires">
+                <h2>our suggestions:</h2>
+                <div class="search"><!-- added new -->    
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="minus">
+                                    <img src='{$smarty.const.SITE_URL}views/images/m.png'>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="float:left;width:130px;"><a href="#" class="tt" >
+                                        <div class="zoom" id="slider_two" style='width: 100%;float:left;'>
+                                            <span class="tooltip" >
+                                                <b>Tip:</b> Drag the slider to
+                                                increase/decrease the size of Fanwires
+                                            </span>
+                                        </div> 
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="plus"  >
+                                    <img src='{$smarty.const.SITE_URL}views/images/p.png'>
+                                </div>
+                            </td>
+                        </tr>
+                    </table> 
+
+                    <!-- added new end -->  
+                </div>
+            </div>
+
+            <div class="add_fanwires">
+                <div class="awards_active">
+                    <ul>
+                        <li ><a href="{$smarty.const.SITE_URL}addFan"><span><strong>My Fanwires&nbsp;( {$fanwires_for_more|count} )</strong>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="active"><a href="{$smarty.const.SITE_URL}browseFans"><span><strong>ADD FANWIRES</strong>
+                                </span>
+                            </a>
+                        </li>                      
+                    </ul>
+                </div>            
+            </div>
+            <div style="clear: both;"></div>
+            <div id="mainBlock">
+                {if $fanwires}
+                {section name=fanwire loop=$fanwires}
+                {assign var=fan value=$fanwires[fanwire]}
+                <div class="photo_list item block" id='one{$fan.id}' {if $zoomValues.0.width}style="width:{$zoomValues.0.width}px;height:{$zoomValues.0.height}+80px;"{/if}>
+                     <div class="photos_list" id='two'>
+                        <div class="data " style="min-height: 80px;" >
+                            <input type="hidden" name="image_width{$c}" id="image_width{$fanwire}"  value="{$fan.width}" />
+                            <input type="hidden" name="image_height{$c}" id="image_height{$fanwire}" value="{$fan.height}" />
+                            <a href='{$smarty.const.SITE_URL}phots?fwrid={$fan.id}' id='imm'>
+                                <img  style="margin: -12px -8px 10px 0px" src="{$smarty.const.IMAGE_URL}{$fan.photo}"  width="{if $zoomValues.0.width gt 0}{$zoomValues.0.width}{else}175{/if}" height="{if $zoomValues.0.width gt 0}{$zoomValues.0.width*$fan.height/$fan.width}{else}{175*$fan.height/$fan.width}{/if}"/>
+                            </a><br/>
+                            <a href='{$smarty.const.SITE_URL}phots?fwrid={$fan.id}' id='imm' style="color: #F04F2C;font-size: 14px;font-family: OswaldBook;text-decoration: float:left; none;text-transform: uppercase;">{$fan.name}</a> 
+                            <br /> <span class='more'>{$fan.description}.</span>
+                        </div>
+                    </div>
+                    <div class="photo_post">
+                        <div class="setimg">
+                            <div id="fan{$fan.id}" ><a onclick="addFan({$fan.id});"><img src="{$smarty.const.SITE_URL}views/images/plus_icon.png"></a></div>
+                            <div id="unfan{$fan.id}" style="display: none;"><a onclick="unFan({$fan.id});"><img src="{$smarty.const.SITE_URL}views/images/minus.png"></a></div>
+                        </div>
+                        <div id="showdislike{$fan.id}0" class="red" onclick="dislikefanwire('{$fan.id}','0');">{if $fan.dislike gt 0}({$fan.dislike}){else}&nbsp;{/if}</div>
+                        <div id="showlike{$fan.id}0" class="blue" onclick="likefanwire('{$fan.id}','0');">{if $fan.like gt 0}({$fan.like}){else}&nbsp;{/if}</div>
+                    </div>
+                </div>
+
+                {/section}
+                {else}No Records found........{/if}
+            </div>
+            <div class="clear"></div> 
+        </div>
+        <!--Right Section End-->
+        {literal}
+
+        <script>
+            $(function() {
+                $( "#slider_two" ).slider(
+                {
+                    value:{/literal}{if $zoomValues.0.value}{$zoomValues.0.value}{else}40{/if}{literal},
+                    min: 50,
+                    max: 100,
+                    step: 1,
+                    stop: function(event, ui) {
+                       
+                        zoomTheContent(ui.value,'{/literal}{$smarty.const.SITE_URL}{literal}zoomPositions',"#mainBlock > .photo_list > #two > .data > #imm > img","#mainBlock > .photo_list > #two >  .data > #image_height","#mainBlock > .photo_list > #two >  .data >#image_width");
+                    }
+                });
+            });
+    
+            function addFan(id){
+                //	alert(id);
+                var dataString ='id='+id;
+    
+                $.ajax({
+                    type: "POST",
+                    url:"{/literal}{$smarty.const.SITE_URL}{literal}addFanwire",
+                    data: dataString,
+                    success: function(response) {
+                        if(response==1){
+                            /*
+                            $("#n"+id).removeClass('fan');
+                            $("#n"+id).addClass('unfan');
+                            $("#n"+id).val('- unfan');
+                            $("#n"+id).removeAttr( 'onClick');
+                            $("#n"+id).attr( 'onClick', 'unFan("'+id+'")');*/
+                            
+                    
+                            $("#fan"+id).hide();
+                            $("#unfan"+id).show();
+                        }else{
+                            $('#message').html(response)
+                            .hide()
+                            .fadeIn(1500)
+                            .fadeOut(1500)
+                        }
+                    }
+                });
+                return false;
+            }
+            function unFan(id){
+	
+                var dataString ='id='+id;
+    
+                $.ajax({
+                    type: "POST",
+                    url:"{/literal}{$smarty.const.SITE_URL}{literal}unFanwire",
+                    data: dataString,
+                    success: function(response) {
+                        if(response==1){
+                            /*   $("#n"+id).removeClass('unfan');
+                            $("#n"+id).addClass('fan');
+                            $("#n"+id).val('+ fan');
+                            $("#n"+id).removeAttr( 'onClick');
+                            $("#n"+id).attr( 'onClick', 'addFan("'+id+'")');*/
+                            $("#unfan"+id).hide();
+                            $("#fan"+id).show();
+				
+                        }else{
+                            $('#message').html(response)
+                            .hide()
+                            .fadeIn(1500)
+                            .fadeOut(1500)
+                        }
+                    }
+                });
+                return false;
+            } 
+        
+            function likefanwire(fanwireid,type){
+                var params='like=1&dislike=0&fanwireid='+fanwireid+'&type='+type;
+                var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+                $.ajax({
+                    type: "POST",  
+                    url: url,  
+                    data: params,  
+                    success: function(result) {
+                        if(result == false)
+                        {
+                            // alert('comment given');
+                        }
+                        else
+                        {
+                            var res = result.split("::");
+                            $("div #showlike"+fanwireid+type).html('('+$.trim(res[0])+')');
+                            $("div #showlike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                            $("div #showdislike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                    
+                        }
+                    }
+                });
+            }
+        
+            function dislikefanwire(fanwireid,type){
+                var params='like=0&dislike=1&fanwireid='+fanwireid+'&type='+type;
+                var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+                $.ajax({
+                    type: "POST",  
+                    url: url,  
+                    data: params,  
+                    success: function(result) {
+                        if(result == false)
+                        {
+                            // alert('comment given');
+                        }
+                        else
+                        {
+                            var res = result.split("::");
+                            $("div #showdislike"+fanwireid+type).html('('+$.trim(res[1])+')');
+                  
+                            $("div #showlike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                            $("div #showdislike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                        }
+                    }
+                });
+            }
+        </script>
+        {/literal}
+        {include file='footer.tpl.html'}

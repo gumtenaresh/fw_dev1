@@ -1,0 +1,1292 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-17 16:35:46
+         compiled from "/var/www/fanwire/views/index/StepFurther.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:378202524502e258af2d4b7-10528073%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '6f9c8942a96de4dc1bacffdb2f93f6bb797a2ce8' => 
+    array (
+      0 => '/var/www/fanwire/views/index/StepFurther.tpl.html',
+      1 => 1345201012,
+    ),
+  ),
+  'nocache_hash' => '378202524502e258af2d4b7-10528073',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('headerguest.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<link rel="stylesheet" type="text/css" href="<?php echo @SITE_URL;?>
+views/css/jquery.Jcrop.css" />
+<!-- Bootstrap CSS Toolkit styles -->
+
+<link rel="stylesheet" href="<?php echo @SITE_URL;?>
+views/css/style.css">
+
+<link rel="stylesheet" href="<?php echo @SITE_URL;?>
+views/css/jquery.fileupload-ui.css">
+<div id="fb-root"></div>
+
+<script>
+    function fblogout()
+    {
+        if(confirm('Are you sure you want to disconnect your account?')){
+            FB.logout(function (response) {});
+        }
+    }
+</script>
+<style type="text/css">
+ 
+
+    .bstyle{           
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color:#fff;
+        z-index:1001;
+        -moz-opacity: 0.8;
+        opacity:.80;
+        filter: alpha(opacity=80);
+    }
+    .wstyle {
+        display: none;
+        background-color: whitesmoke;
+        border: 3px solid #CFCFCF;
+        left: 5%;
+        padding: 2px;
+        position: absolute;
+        top: 5%;
+        width: 90%;
+        z-index: 1002;
+        min-height: 600px;
+
+    }
+
+</style> 
+
+
+<div class="koryguest">  <a href="#">Guest User</a> </div>    
+<div class="icon_set">  
+    <?php if ($_smarty_tpl->getVariable('active')->value=='article'||$_smarty_tpl->getVariable('active')->value=='message'||$_smarty_tpl->getVariable('active')->value=='settings'||$_smarty_tpl->getVariable('active')->value=='cam'||$_smarty_tpl->getVariable('active')->value=='group'){?><ul class='white'><?php }else{ ?><ul><?php }?>
+            <li <?php if ($_smarty_tpl->getVariable('active')->value=='article'){?> class='active' <?php }?>><a href="<?php echo @SITE_URL;?>
+addItem" class="addicon"></a></li>        
+            <li <?php if ($_smarty_tpl->getVariable('active')->value=='cam'){?> class='active' <?php }?>><a href="<?php echo @SITE_URL;?>
+mediaCenter" class="camicon"></a></li>                 
+            <li <?php if ($_smarty_tpl->getVariable('active')->value=='group'){?> class="active" <?php }?>><a href="<?php echo @SITE_URL;?>
+fans" class="profileicon"></a></li>
+            <li <?php if ($_smarty_tpl->getVariable('active')->value=='message'){?> class="active" <?php }?>><a href="<?php echo @SITE_URL;?>
+messageCenter" class="msgicon"><?php if ($_smarty_tpl->getVariable('notifications')->value){?><sup style="color:black;float:right;font-size:9px;font-weight:bold;padding-top: 7px;padding-right: 5px;"><?php echo count($_smarty_tpl->getVariable('notifications')->value);?>
+</sup><?php }?></a></li>
+            <li <?php if ($_smarty_tpl->getVariable('active')->value=='settings'){?> class='active' <?php }?>><a  href="<?php echo @SITE_URL;?>
+settings" class="settingicon"></a></li>       
+            <div class="clear"></div>
+        </ul>
+</div>
+<div class="search_fanwire">
+    <input name="" type="text" class="search_field" placeholder='search something'/> 
+    <input name="" type="button" class="goguest" onclick="document.getElementById('step1').style.display='block';document.getElementById('fade').style.display='block'"/>
+
+</div>
+
+<div class="left_menusec">
+    <ul>        
+        <li <?php if ($_smarty_tpl->getVariable('active')->value=='fanwire'){?> class="active" <?php }?>><a href="<?php echo @SITE_URL;?>
+TopFanwires">Top Fanwires</a></li>        
+        <li <?php if ($_smarty_tpl->getVariable('active')->value=='recommend'){?> class='active' <?php }?>><a href="<?php echo @SITE_URL;?>
+werecommend">We recommend</a></li>
+        <li <?php if ($_smarty_tpl->getVariable('active')->value=='fannetwork'){?> class='active' <?php }?>><a href="<?php echo @SITE_URL;?>
+fannetwork">fan network</a></li>        
+        <li <?php if ($_smarty_tpl->getVariable('active')->value=='collection'){?> class='active' <?php }?>><a href="<?php echo @SITE_URL;?>
+mycollection">My collection</a></li>
+    </ul>
+</div>
+<div class="total_list">
+
+
+    <form name="fan_login" id ="fan_login" method="POST">
+
+        <input type="hidden" name="fa_login" value="login"/>
+        <div class="loginsection1"><div class="err"><?php echo $_smarty_tpl->getVariable('ermsg')->value;?>
+</div>
+            <p >Already Member?</p>
+            <a href="javascript:void(0);" style="margin:20px 0 0 50px;" onclick="return call();"><img src="<?php echo @SITE_URL;?>
+views/images/facebook-icon.png" height="" width="69" alt="" /></a>
+            <p>Or Login using your email:</p>
+            <div class="mailsec">
+                <div class="maildetail">Email
+                    <input name="fan_email"  id="fan_email" type="text" class="textfield" placeholder='Email Address'/></div>
+            </div>
+            <div class="passwordsec">
+                <div class="maildetail">Password
+                    <input name="fan_password" id="fan_password" type="password" class="textfield"placeholder='Password' /></div>
+            </div>
+
+            <div class="checkdetail"> <input name="fan_checked" type="checkbox" value="1" /> Keep me signed in<br />
+
+                <div class="forgot"><a href="<?php echo @SITE_URL;?>
+forgotpassword">Forgot password?</a></div>
+                <input name="submit" type="submit" class="btn" value="LOGIN" /></div>
+        </div>
+    </form>
+</div>
+</div>
+
+
+
+
+<!--Left Section End-->
+<!--Right Section-->
+
+<div class="right_container">
+
+    <div id="rightsection">
+
+        <div id="right_area">
+            <div class="search" >
+                <table><tr><td>
+                            <div class="minus">
+                                <img src='<?php echo @SITE_URL;?>
+views/images/m.png'>
+                            </div>
+                        </td><td>
+                            <div style="float:left;width:131px;  ">
+                                <a href="javascript:void(0);" class="tt" >
+                                    <div class="zoom" id="slider"  style='width: 100%;float:left; '>
+                                        <span class="tooltip" >
+                                            <b>Tip:</b> Drag the slider to
+                                            increase/decrease the size of Fanwires
+                                        </span>
+                                    </div> 
+                                </a>
+                            </div></td><td>
+                            <div class="plus"  >
+                                <img src='<?php echo @SITE_URL;?>
+views/images/p.png'>
+                            </div></td></tr></table>
+                <!-- added new end -->
+            </div>
+
+            <div class="collection_page" id='mainBlock'>
+                <!-- ****************************************collection stats here***********************-->
+                <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['name'] = 'fanwire';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('fanwiresguest')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total']);
+?> 
+                <?php $_smarty_tpl->tpl_vars['fan'] = new Smarty_variable($_smarty_tpl->getVariable('fanwiresguest')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']], null, null);?>
+                <div
+                    id="mydiv"
+                    class="view collect_photo"
+                    <?php if ($_smarty_tpl->getVariable('zoomValues')->value[0]['width']){?>style="width:<?php echo $_smarty_tpl->getVariable('zoomValues')->value[0]['width'];?>
+px;height:<?php echo $_smarty_tpl->getVariable('zoomValues')->value[0]['height'];?>
++80px;"<?php }?>>
+                    <div class="image_share_popup" id="image_share_popup">
+                        <img
+                            src="<?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->getVariable('fan')->value['photo'];?>
+"
+                            <?php if ($_smarty_tpl->getVariable('zoomValues')->value[0]['height']){?>height="<?php echo $_smarty_tpl->getVariable('zoomValues')->value[0]['height'];?>
+" width='<?php echo $_smarty_tpl->getVariable('zoomValues')->value[0]['width'];?>
+'<?php }else{ ?>height="151" width='246'<?php }?>
+                            />
+                            <div class="red_links" >
+                            <div id="fanid<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+">
+                                <a class="share_img_btn" name ='share' onclick = "getFanwireFans('<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');document.getElementById('light1<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+').style.display='block';document.getElementById('fade1<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+').style.display='block'" href="#">
+                                    <img src="<?php echo @SITE_URL;?>
+views/images/share_icon.png"/><?php if ($_smarty_tpl->getVariable('zoomValues')->value[0]['width']>280){?><span>Share</span><?php }?>
+                                </a> 
+                            </div>
+                            <div id="collect<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+">
+                                <a class="collect_img_btn" href="#" onclick="showConnect_popup_id('connect_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');"><?php if ($_smarty_tpl->getVariable('fan')->value['status']==1){?>
+                                    <img src="<?php echo @SITE_URL;?>
+views/images/collected_icon.png"/><?php if ($_smarty_tpl->getVariable('zoomValues')->value[0]['width']>280){?><span style="background: none repeat scroll 0 0 green;">collected</span><?php }?>
+                                    <?php }else{ ?><img src="<?php echo @SITE_URL;?>
+views/images/collect_icon.png"/><?php if ($_smarty_tpl->getVariable('zoomValues')->value[0]['width']>280){?> <span class="collec">collect</span><?php }?><?php }?>
+                                </a>
+                            </div>
+                            <a href="javascript:void(0)" class="close"  onClick="setVisibility('sub<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+', 'inline');"  >
+                            </a>
+                            <!-- close popup -->
+
+                            <div id="sub<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" class="sub3"  >
+                                <ul class="facebook_dd">
+                                    <li><a href="#">Hide Element</a></li>
+                                    <li><a href="#" onclick="return tog('tog<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');">Report element or spam</a> 
+                                        <div id="tog<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" style="display:none;">
+                                            <span><a class="selected" href="#">Inappropriate content</a></span>
+                                            <span><a href="#">Sapm</a></span>
+                                            <span><a href="#">Miscategorized</a></span>
+                                            <span><a href="#">Other</a></span>
+                                        </div>
+                                    </li>
+                                    <li><a href="#">Unsubscribe source from my profile</a></li>
+                                    <li><a href="<?php echo @SITE_URL;?>
+remove?fwrid=<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+">Remove <?php echo $_smarty_tpl->getVariable('fan')->value['name'];?>
+'s FanWire permanently</a></li>
+                                </ul>
+                            </div>
+                            <!-- close popup end -->
+                            <div class="conect_popup" id="connect_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+">
+                                <div class="conect_popupimg"></div>
+                                <div class="conect_popupcontent">
+                                    <a href="javascript:void(0);" style="float:right;" onclick="showConnect_popup_id('connect_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');"><img src="<?php echo @SITE_URL;?>
+views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+                                    <div class="clear"></div>
+                                    <p>Members never have to leave FanWire
+                                        by linking their social media accounts.
+                                        Sign up now to get full access.</p>
+
+
+
+                                    <div class="conect_popupcontent1"><div class="connect1"><a href="javascript:void(0);" onclick="showConnect_popup_id('connect_popup_id<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+'); callSign();">Conect</a></div></div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="data " style="min-height: 80px;" >
+                        <a href='<?php echo @SITE_URL;?>
+profileInfo?fwrid=<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+&ac=1'><?php echo $_smarty_tpl->getVariable('fan')->value['name'];?>
+</a> <br /> <span class='more'><?php echo $_smarty_tpl->getVariable('fan')->value['description'];?>
+.</span>
+                    </div>
+                    <div class="photo_post">
+                        <div class="message" id="showcomment<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" style="opacity: 0.50;" onClick="ShowDialog('true','<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');">(<?php echo $_smarty_tpl->getVariable('fan')->value['commentcnt'];?>
+)</div>
+                        <div>
+                            <div id="showdislike<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" class="red" style="opacity: 0.50;" onclick="dislikefanwire('<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');">(<?php if ($_smarty_tpl->getVariable('fan')->value['dislike']==''){?>0<?php }else{ ?><?php echo $_smarty_tpl->getVariable('fan')->value['dislike'];?>
+<?php }?>)</div>
+                            <div id="showlike<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" class="blue"  style="opacity: 0.50;" onclick="likefanwire('<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');">(<?php if ($_smarty_tpl->getVariable('fan')->value['like']==''){?>0<?php }else{ ?><?php echo $_smarty_tpl->getVariable('fan')->value['like'];?>
+<?php }?>)</div>
+                        </div>
+                        <div id="overlay" class="web_dialog_overlay"></div>
+                        <div id="dialog<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" class="web_dialog" >
+                            <div class="comments"    >
+                                <ul>  
+                                    <li class="view_comments">
+                                        <?php if (count($_smarty_tpl->getVariable('fan')->value['comments_for_this_post'])>3){?> <a href="javascript:void(0);" >view all comments</a><?php }else{ ?><a href="javascript:void(0);" >&nbsp;</a><?php }?>
+                                        <a href="javascript:void(0);" class="cross_btn" onclick="HideDialog('<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" >X</a>
+                                    </li>
+                                    <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['name'] = 'tem';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('fan')->value['comments_for_this_post']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total']);
+?>
+                                    <?php $_smarty_tpl->tpl_vars['t'] = new Smarty_variable($_smarty_tpl->getVariable('fan')->value['comments_for_this_post'][$_smarty_tpl->getVariable('smarty')->value['section']['tem']['index']], null, null);?>
+                                    <li>
+                                        <img src="<?php echo $_smarty_tpl->getVariable('smaty')->value['const']['SITE_URL'];?>
+profile_images/<?php echo $_smarty_tpl->getVariable('t')->value['profile_image'];?>
+">
+                                        <span><strong><?php echo $_smarty_tpl->getVariable('t')->value['name'];?>
+</strong>&nbsp;<?php echo $_smarty_tpl->getVariable('t')->value['comment'];?>
+</span>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <?php endfor; endif; ?>
+                                    <div id='comm<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+'></div>
+                                    <li>
+                                        <img src="<?php echo $_smarty_tpl->getVariable('smaty')->value['const']['SITE_URL'];?>
+profile_images/<?php echo $_smarty_tpl->getVariable('t')->value['profile_image'];?>
+">
+                                        <textarea id="msg<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" name="msg<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" onfocus=" return textlimits('#remainingCharacters<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+','#msg<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+');" onKeyPress="Javascript:if(event.keyCode==13) submitForm('<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+','<?php echo @SITE_URL;?>
+fan/sendComment');" placeholder="say something..."></textarea>
+                                        <button type="button" class="sendComment" onclick="submitForm('<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+','<?php echo @SITE_URL;?>
+fan/sendComment');">send</button>
+                                        <span class="characters" id="remainingCharacters<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+">140 Characters</span>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <input type="hidden" id="id" name="id" value="<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" />
+                                    <input type="hidden" name="type" id="type" value="0" />
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <?php endfor; endif; ?>
+                <!-- ****************************************collection end here***********************-->
+
+            </div>
+            <!--            <div class="btm_line">
+                            <div class="showmore"><a href="#">show more</a></div>
+                        </div>-->
+            <div class="clear"></div> 
+        </div>
+        <?php $_template = new Smarty_Internal_Template("footerww.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+
+        <!--step 2 starts here-->
+        <div id="step2" class="wstyle" >
+
+            <!--popup statrs here-->
+            <?php $_template = new Smarty_Internal_Template('header2.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+            <div class="left_menu_guest">
+                <ul>
+                    <!--<li ><a href="#">1- FIND your fans</a></li>-->
+                    <li class="active"><a href="#">1- profile photo</a></li>
+                    <li  ><a href="#">2- add fanwires</a></li>
+                    <li><a href="#">3- social media connect</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="right_container_guest">
+            <div id="index_rightsection_guest"  >
+                <div id="mailList"></div>
+                <div id="right_area_guest" >
+                    <h2>
+                        add a profile photo<br /> 
+                        <!--                        <span>Just a couple more steps
+                                                    left. The more you complete, the more we will reward you.</span>-->
+                    </h2>
+                    <div class="connect_fans">
+                        <div class="account_details">
+                            <h3><?php if ($_smarty_tpl->getVariable('image')->value){?>Current<?php }else{ ?>Preview<?php }?></h3>
+
+                            <div class="add_photo" id="preview" ><?php if ($_smarty_tpl->getVariable('image')->value){?><?php echo $_smarty_tpl->getVariable('image')->value;?>
+<?php }else{ ?><?php }?></div>
+
+                        </div>
+                        <div class="profile_photo_btns_section1">
+                            <div class="profile_photo_btns" style="float:left">
+
+                                <div id="showPicCrop"></div>
+                                <div style="float:left;width: 220px;">
+
+                                    <a class="your_desktop fileinput-button">Your Desktop
+                                        <form id="imageform" name="imageform" method="POST" enctype="multipart/form-data"action='<?php echo @SITE_URL;?>
+StepFurther?uPic=drG'>
+                                            <input type="file" name="photoimg" id="photoimg" > 
+                                            <input type="hidden" name='upload' value="upload"  />
+                                        </form>
+                                    </a>
+                                </div>
+                                <div style="float:right;width: 200px;">
+                                    <a href="javascript:void(0);" class="your_facebook">facebook</a>
+                                </div>
+                                <!--<a href="#" class="your_fanwire_profile">Your fanwire profile</a>-->
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- newlu added start-->
+                    <div
+                        id="thumbs"
+                        style="padding: 5px; width: 600px"
+                        ></div>
+                    <!-- newly added  end -->
+                    <div class="clear"></div>
+                    <hr />
+                    <br />
+                    <div class="skip">
+                        <form id="changePhoto" name="changePhoto" method="POST" enctype="multipart/form-data" action=''>                
+                            <input type="hidden" name="x1" id="x1" value="" />
+                            <input type="hidden" name="x2" id="x2" value="" />
+                            <input type="hidden" name="y1" id="y1" value="" />
+                            <input type="hidden" name="y2" id="y2" value="" />
+                            <input type="hidden" name="w" id="w" value="" />
+                            <input type="hidden" name="h" id="h" value="" />                    
+                            <input type="hidden" name="actual_image_name" id='actual_image_name' value="" /> 
+                            <input name="submitData" id="submitData" type="button" class="continue_btn" value="Continue" onclick="return changeImage1();" />
+                        </form>                                    
+                        <br /><br /><br /> <br />
+                        <a href="javascript:void(0);" onclick="document.getElementById('step2').style.display='none';document.getElementById('fade2').style.display='none';document.getElementById('step3').style.display='block';document.getElementById('fade3').style.display='block'"><i>Skip this
+                                step</i>
+                        </a>
+                    </div>
+                    
+                    <script type="text/javascript">
+                        function changeImage1()
+                        {
+                            // document.getElementById("actual_image_name").value = $("#photo").attr("src");
+                            var actual_image_name=document.getElementById("actual_image_name").value = $("#photo").attr("src");
+                            var x_axis =  document.getElementById("x1").value;
+                            var x2_axis = document.getElementById("x2").value;
+                            var y_axis = document.getElementById("y1").value;
+                            var y2_axis = document.getElementById("y2").value;
+                            var thumb_width = document.getElementById("w").value;
+                            var thumb_height = document.getElementById("h").value;
+                   
+                            $.ajax({
+                                type:"GET",
+                                url:"<?php echo @SITE_URL;?>
+ajaxImageCrop?t=ajax&img="+$("#photo").attr("src")+"&w="+thumb_width+"&h="+thumb_height+"&x="+x_axis+"&y="+y_axis+"&x2="+x2_axis+"&y2="+y2_axis+'&actual_image_name='+actual_image_name,
+                                cache:false,
+                                success:function(response)
+                                {       
+                          
+                                    $('#step2').hide();
+                                    $('#fade2').hide();
+                                    $('#step3').show();
+                                    $('#fade3').show();
+                                    $('#showPicCrop').html(response);
+                                    // document.changePhoto.submit();
+                                }
+                            }); 
+        
+                        }
+                    </script>
+                    
+                    <div class="clear"></div>
+                </div>
+
+            </div> 
+            <div class="footer">
+            </div>
+        </div>
+    </div>
+    <!--Left Section End-->
+    <!--Right Section-->
+    <!--end here-->
+</div>
+<div id="fade2" class="bstyle"></div> 
+<!--step 2 ends here-->
+<!--step 3 starts here-->
+<div id="step3" class="wstyle" >
+    <!--popup statrs here-->
+    <?php $_template = new Smarty_Internal_Template('header2.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+    <div class="left_menu_guest">
+        <ul>
+            <!--<li ><a href="#">1- FIND your fans</a></li>-->
+            <li ><a href="#">1- profile photo</a></li>
+            <li  class="active"><a href="#">2- add fanwires</a></li>
+            <li><a href="#">3- social media connect</a></li>
+        </ul>
+    </div>
+</div>
+
+<!--Left Section End-->
+<!--Right Section-->
+
+<div class="right_container_guest">
+    <div id="index_rightsection_guest"  >
+        <div id="mailList"></div>
+        <div id="right_area_guest" >
+            <h2>customize your profile: Add fanwires<br />
+                <span>A FanWire is a collection of information for a particular subject.<br />
+                    Select your favorite Band, Celebrity, News, or Sports. You can always add or remove anytime.</span></h2>
+            <br />
+            <div class="add_fanwires">
+                <h2>our suggestions:</h2>
+            </div>
+            <div id="message"></div>
+            <div id="fanwiresShowing">
+                <div class="add_fanwires">
+                    <div class="awards_active">
+                        <ul>
+                            <li class="active"><a href="javascript:void(0);"  onclick="nextPage('celebrity')" id="celebrityPopup"><span><strong>Celebrites</strong></span></a></li>
+                            <li ><a href="javascript:void(0);" onclick="nextPage('fashion')" id="fashionPopup"><span><strong>Fashion</strong></span></a></li>
+                            <li><a href="javascript:void(0);"  onclick="nextPage('news')" id="newsPopup"><span><strong>News</strong></span></a></li>
+                            <li><a href="javascript:void(0);"  onclick="nextPage('sports')" id="sportsPopup"><span><strong>Sports</strong></span></a></li>
+                            <li><a href="javascript:void(0);"  onclick="nextPage('music')" id="musicPopup"><span><strong>Music</strong></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="addpost">
+                    <div style="width: 100%;text-align: center;">
+                        <div id="mainBlock">
+
+                            <?php if ($_smarty_tpl->getVariable('fanwiresCelebrity')->value){?> 
+                            <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['name'] = 'fanwire';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('fanwiresCelebrity')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total']);
+?>
+                            <?php $_smarty_tpl->tpl_vars['fan'] = new Smarty_variable($_smarty_tpl->getVariable('fanwiresCelebrity')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']], null, null);?>
+
+                            <div class="post" id='one'>
+                                <div class="posts" id='two' >
+                                    <img src="<?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->getVariable('fan')->value['photo'];?>
+" width="114" height="105"  />
+                                    <div class="data" ><?php echo $_smarty_tpl->getVariable('fan')->value['name'];?>
+ </div>
+                                </div>
+                                <div>
+                                    <input  id="n<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+" type="button" <?php if ($_smarty_tpl->getVariable('fan')->value['userStatus']!=1){?>name="add" class="fan" value="+ fan"  onclick="addFan(<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+)" <?php }else{ ?>name="unfan" class="unfan" value="- unfan" onclick="unFan(<?php echo $_smarty_tpl->getVariable('fan')->value['id'];?>
+)"<?php }?>/>
+                                </div>
+                            </div> 
+
+                            <?php endfor; endif; ?>
+                            <?php }else{ ?>No Records found........<?php }?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="skip">
+                <a href="javascript:void(0);" onclick="document.getElementById('step3').style.display='none';document.getElementById('fade3').style.display='none';document.getElementById('step2').style.display='block';document.getElementById('fade2').style.display='block'" style="float: left;margin-right: 10px;"><input type="button" class="continue_btn" value="back" /></a>
+
+                <input name="" type="button" class="continue_btn" value="continue"  onclick='checkMinThreeFan();'/><br /><br /><br />
+                <br />
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div> 
+    <div class="footer">
+    </div>
+</div>
+<!--end here-->
+</div>
+<div id="fade3" class="bstyle"></div> 
+<!--step 3 ends here-->
+<!--step 4 starts here-->
+<div id="step4" class="wstyle" >
+    <!--popup statrs here-->
+    <?php $_template = new Smarty_Internal_Template('header2.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+    <div class="left_menu_guest">
+        <ul>
+            <!--            <li ><a href="#">1- FIND your fans</a></li>-->
+            <li ><a href="#">1- profile photo</a></li>
+            <li  ><a href="#">2- add fanwires</a></li>
+            <li class="active"><a href="#">3- social media connect</a></li>
+        </ul>
+    </div>
+</div>
+
+<!--Left Section End-->
+<!--Right Section-->
+
+<div class="right_container_guest">
+    <div id="index_rightsection_guest"  >
+        <div id="mailList"></div>
+        <div id="right_area_guest" >
+            <h2>
+                Connect your social media<br /> <span>You’ll never have to go to more than one website again! Connect all of your accounts here, and we’ll do the rest. FanWire gives you all of the features you need to keep your accounts active. You can disconnect or add multiple accounts at anytime.</span>
+            </h2>
+            <br />
+            <div id="fb-root"></div>
+            <div id="user-info"></div>
+            <div class="addpost">
+                <div class="connecting">
+                    <div class="connect">
+
+
+                        <a href="javascript:void(0);" id="disconnectfacebook" <?php if ($_REQUEST['fBCn']==true){?>style="display:block"<?php }else{ ?>style="display:none"<?php }?>  onclick="fblogout();">Disconnect facebook</a>
+
+                        <a href="javascript:void(0);" id="connectfacebook" <?php if ($_REQUEST['fBCn']==true){?>style="display:none"<?php }else{ ?>style="display:block"<?php }?>  onclick="FB.login(null,{perms:'email,user_birthday,status_update,publish_stream,user_about_me'});return false;">connect facebook</a> 
+                        <div class="connected" id="connectedfacebook" <?php if ($_REQUEST['fBCn']==true){?>style="display:block"<?php }else{ ?>style="display:none"<?php }?>>
+                             <img  src="<?php echo @SITE_URL;?>
+views/images/connected.png"  width="21" height="20" />  Connected! 
+                        </div>
+                    </div>
+
+                    <div class="connect">
+
+                        <a href="<?php echo $_smarty_tpl->getVariable('t_login_url')->value;?>
+" id="disconnecttwitter" style="display:none">connected twitter</a>
+
+                        <a href=""  id="connecttwitter">connect twitter</a>
+
+                        <div class="connected" id="connectedtwitter" style="display:none"> 
+                            <img  src="<?php echo @SITE_URL;?>
+views/images/connected.png"  width="21" height="20" />  Connected! 
+                        </div>
+
+                    </div>
+
+                    <div class="connect">
+                        <a href="#" id="connectyoutube">connect youtube</a>
+                        <div class="connected" id="connectedyoutube" style="display:none"> 
+                            <img  src="<?php echo @SITE_URL;?>
+views/images/connected.png"  width="21" height="20"  /> Connected!  
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+            <hr />
+            <br />
+            <div style="padding-left: 10px;">
+                <a href='javascript:void(0);'onclick="document.getElementById('step4').style.display='none';document.getElementById('fade4').style.display='none';document.getElementById('step3').style.display='block';document.getElementById('fade3').style.display='block'">
+                    <input name="" type="button" class="back_btn" value="BACK"/> </a>
+            </div>
+            <div class="skip">
+                <input name="" type="button" class="continue_btn" value="finished" onclick="window.location.href='<?php echo @SITE_URL;?>
+myFanwire'"/>
+            </div>
+        </div>
+        <div class="footer">
+        </div>
+    </div></div>
+<!--end here-->
+</div>
+
+<div id="fade4" class="bstyle"></div> 
+<!--step 4 ends here-->
+
+
+<script type="text/javascript" >
+    function call(){
+        $('#fanwirepopupbox').slideToggle("slow")
+    }
+            
+    function callSign(){
+        document.getElementById('fanwirepopupbox').style.display='none';
+        $('#fanwirepopupbox1').slideToggle("slow")
+    }
+       
+    function uploadFile() {
+        var fd = new FormData();
+        fd.append("photoimg", document.getElementById('photoimg').files[0]);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", uploadProgress, false);
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.open("POST", "");
+        xhr.send(fd);    
+    }
+ 
+    jQuery(function($) {
+        $('img#photo').Jcrop({
+            onSelect: showCoords,
+            onChange: showCoords,
+            bgColor:     'black',
+            bgOpacity:   .4,            
+            aspectRatio: 9 / 9
+        });
+    });
+    
+    function showCoords(obj)
+    {
+        var x_axis = obj.x;
+        var x2_axis = obj.x2;
+        var y_axis = obj.y;
+        var y2_axis = obj.y2;
+        var thumb_width = obj.w;
+        var thumb_height = obj.h;
+        document.getElementById("x1").value =obj.x;
+        document.getElementById("x2").value =obj.x2;
+        document.getElementById("y1").value =obj.y;
+        document.getElementById("y2").value =obj.y2;
+        document.getElementById("w").value =obj.w;
+        document.getElementById("h").value =obj.h;
+    };
+   
+    $(document).ready(function() { 	
+        $('#photoimg').live('change', function(){     
+            document.imageform.submit();         
+            uploadFile();
+        });        
+    }); 
+      
+          
+    
+  
+    function validateDate(){
+        var selectedDay = $("#days").val();
+        var numDays;
+        if($("#months").val() == 2){
+            if($("#years").val() == ""){
+                setDaysString(29);
+                // if day is less than 29 pre slecting it
+                if((selectedDay !="") && selectedDay<=29){
+                    preSelectingValue(selectedDay);
+                }
+            }else{
+                numDays = daysInMonth($("#months").val(), $("#years").val());
+                setDaysString(numDays);
+                // if day is less than numDays pre slecting it
+                if((selectedDay !="") && selectedDay<=numDays){
+                    preSelectingValue(selectedDay);
+                }
+            }
+
+        }else if(($("#months").val() == 4) ||($("#months").val() == 6)||($("#months").val() == 9)||($("#months").val() == 11)){
+            setDaysString(30)
+            // if day is less than 30 pre slecting it
+            if((selectedDay !="") && selectedDay<=30){
+                preSelectingValue(selectedDay);
+            }
+        }else{
+            setDaysString(31);
+            // if day is less than 31 pre slecting it
+            if((selectedDay !="") && selectedDay<=31){
+                preSelectingValue(selectedDay);
+            }
+        }
+        // setting dob value to hidden field//
+        $("#dob").val($("#years").val()+"-"+$("#months").val()+"-"+$("#days").val());
+        //document.getElementById("dob").value=5;
+    }
+    function daysInMonth(month, year){
+        var dd = new Date(year, month, 0);
+        return dd.getDate();
+    }
+    function setDaysString(days){
+        var i=1;
+        var s="01";
+        var string = "<option value=\"\">Day</option>";
+
+        for(i;i<=days;i++){
+            if(i<10)
+                s='0'+i;
+            else
+                s=i;
+            string +="<option value=\""+s+"\">"+s+"</option>";
+        }
+        //alert(string);
+        $("#days").html(string);
+    }
+    function preSelectingValue(day){
+        var day =day;
+        $("#days option").each(function(){
+            if($(this).val() == day){
+                $("#days option[value="+day+"]").attr('selected', 'selected');
+            }
+        });
+    }
+     
+
+     
+  
+    function addFan(id){
+        //	alert(id);
+        var dataStringa ='id='+id;
+    
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+addFanwire",
+            data: dataStringa,
+            success: function(response) {
+                   
+                if(response==1){
+                    $("#n"+id).removeClass('fan');
+                    $("#n"+id).addClass('unfan');
+                    $("#n"+id).val('- unfan');
+                    $("#n"+id).removeAttr( 'onClick');
+                    $("#n"+id).attr( 'onClick', 'unFan("'+id+'")');
+                }else{
+                    $('#message').html(response)
+                    .hide()
+                    .fadeIn(1500)
+                    .fadeOut(1500)
+                }
+            }
+        });
+        return false;
+    }
+    function unFan(id){
+	
+        var dataStringb ='id='+id;
+    
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+unFanwire",
+            data: dataStringb,
+            success: function(response) {
+                if(response==1){
+             
+                    $("#n"+id).removeClass('unfan');
+                    $("#n"+id).addClass('fan');
+                    $("#n"+id).val('+ fan');
+                    $("#n"+id).removeAttr( 'onClick');
+                    $("#n"+id).attr( 'onClick', 'addFan("'+id+'")');
+				
+                }else{
+                    $('#message').html(response)
+                    .hide()
+                    .fadeIn(1500)
+                    .fadeOut(1500)
+                }
+            }
+        });
+        return false;
+    }
+    function checkMinThreeFan(){
+        	
+        var dataStringc ='session_id='+'<?php echo $_SESSION['id'];?>
+';
+     
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+checkMinThreeFan",
+            data: dataStringc,
+            success: function(response) {
+                if(response>=3){
+                    $('#step3').hide();
+                    $('#fade3').hide();
+                    $('#step4').show();
+                    $('#fade4').show();
+                }else{
+                    $('#message').html( "<h2>Must be fan of three fanwires</h2>")
+                    .hide()
+                    .fadeIn(3000)
+                    .fadeOut(3000)
+                }
+            }
+        });
+        return false;
+    }
+    
+       
+            
+            
+            
+    //validations for feilds 
+ 
+    jQuery(function(){
+        jQuery("#fan_email").validate({
+            expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
+            message: "Please enter a valid Email ID"
+        });
+        jQuery("#fan_password").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "Please enter the Required field"
+        });
+                
+        jQuery('#fan_login').validated(function(){
+            document.fan_login.submit();
+        }); 
+    });    
+    
+   
+    jQuery(function(){
+        jQuery("#firstname").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "Please enter the Required field"
+        });
+        jQuery("#lastname").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "Please enter the Required field"
+        });
+        jQuery("#email").validate({
+            expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
+            message: "Please enter a valid Email ID"
+        });
+        jQuery("#password").validate({
+            expression: "if (VAL.length > 5 && VAL) return true; else return false;",
+            message: "Please enter a valid Password"
+        });
+        jQuery("#reenterpassword").validate({
+            expression: "if ((VAL == jQuery('#password').val()) && VAL) return true; else return false;",
+            message: "Confirm password field doesn't match the password field"
+        });
+        jQuery("#sex").validate({
+            expression: "if (VAL != '0') return true; else return false;",
+            message: "Please select gender"
+        });
+             
+        jQuery("#months").validate({
+            expression:"if (VAL != '0') return true; else return false;",
+            message: "Please Select Month."
+        });
+        jQuery("#days").validate({
+            expression:"if (VAL != '0') return true; else return false;",
+            message: "Please Select Date."
+        });
+        jQuery("#years").validate({
+            expression:"if (VAL != '0') return true; else return false;",
+            message: "Please Select Year."
+        });
+            
+        jQuery('#fan_register').validated(function(){
+            //ajax registration form submission
+            var fname=document.getElementById('firstname').value;
+            var lname=document.getElementById('lastname').value;
+            var email=document.getElementById('email').value;
+            var password=document.getElementById('password').value;
+            var sex=document.getElementById('sex').value;
+            var months=document.getElementById('months').value;
+            var years=document.getElementById('years').value;
+            var days=document.getElementById('days').value;
+                    
+            var dataStringd="firstname="+fname+"&lastname="+lname+"&email="+email+"&password="+password+"&sex="+sex+"&years="+years+"&months="+months+"&days="+days;
+            $.ajax({
+                type: "POST",
+                url:"<?php echo @SITE_URL;?>
+registerAjax",
+                data: dataStringd,
+                beforeSend: function(){
+                    $('#loader').show();
+                },
+						
+                complete: function(){
+                    $('#loader').hide();
+                },
+                success: function(resa) {
+                      
+                    $('#mss').html('<span    style="color: MediumSpringGreen;float: left;font: 15px OpenSansRegular;margin: 20px 0 0;"> '+resa+'</span><div class="conect_to_fb1"><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/conect-facebook.png" height="" width="233" alt="" /></a><div class="clear"></div></div>');
+                }
+            });
+                    
+        }); 
+    });    
+    jQuery(function(){
+        jQuery("#email_box").validate({
+            expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
+            message: "Please enter a valid Email ID"
+        });
+        jQuery("#password_box").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "Please enter the Required field"
+        });
+                
+        jQuery('#openinviter').validated(function(){
+            //ajax registration form submission
+            var email_box=document.getElementById('email_box').value;
+            var password_box=document.getElementById('password_box').value;
+            var hiddenVal=document.getElementById('step').value;
+                    
+            var dataStringd="email_box="+email_box+"&password_box="+password_box+"&step="+hiddenVal;
+            $.ajax({
+                type: "POST",
+                url:"<?php echo @SITE_URL;?>
+multiMailContacts",
+                data: dataStringd,
+                beforeSend: function(){
+                   
+                    $('#loader2').show();
+                },
+						
+                complete: function(){
+                     
+                    $('#loader2').hide();
+                },
+                success: function(resM) {
+                    
+                    $('#right_area_guest').html(resM);
+                     
+                    // $('#mailList').html(resM);
+                }
+            });
+        }); 
+    }); 
+      
+    function showConnect_popup_id(id){
+        $('#'+id).toggle();
+    }
+    
+    function checkAll(){
+        
+        $(function(){
+            // add multiple select / deselect functionality
+            $("#allbox").click(function () {
+                $('.case').attr('checked', this.checked);
+            });
+            // if all checkbox are selected, check the selectall checkbox
+            // and viceversa
+            $(".case").click(function(){
+
+                if($(".case").length == $(".case").length) {
+                    $("#allbox").attr("checked", "checked");
+                } else {
+                    $("#allbox").removeAttr("checked");
+                }
+
+            });
+        });
+    }
+    function inviteFriends(){
+        var arr = $("input[name='contacts[]']:checked").map(function() { 
+            return this.value; 
+        }).get();
+        var dataStringd="det="+arr;
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+invite",
+            data: dataStringd,
+            beforeSend: function(){
+                $('#loader3').show();
+            },
+            complete: function(){
+                $('#loader3').hide();
+            },
+            success: function(resa) {
+                if(resa){
+                    $('#step1').hide();
+                    $('#fade').hide();
+                    $('#step2').show();
+                    $('#fade2').show();
+                } else{
+                    $('#loader3').html('There is something problem');
+                }    
+            }
+        });
+       
+ 
+    }
+    function nextPage(id){
+        var dataStringd='val='+id;
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+ajaxFashionCategoryFanwires",
+            data: dataStringd,
+            beforeSend: function(){
+            },
+            complete: function(){
+            },
+            success: function(response) {
+                $('#fanwiresShowing').html(response);
+            }
+        });
+    }
+        
+</script>
+
+
+
+
+<?php if ($_REQUEST['Axt']=='Itt'){?>
+
+<script type="text/javascript">
+ 
+    document.getElementById('step2').style.display='block';document.getElementById('fade2').style.display='block'; 
+</script>
+
+<?php }?>
+
+<?php if ($_REQUEST['uPic']=='drG'){?>
+
+<script type="text/javascript">
+    //document.getElementById('step1').style.display='none';document.getElementById('fade').style.display='none'; 
+    document.getElementById('step2').style.display='block';document.getElementById('fade2').style.display='block'; 
+</script>
+
+<?php }?>
+
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.Jcrop.js"></script>
+
+<script type="text/javascript">
+    window.fbAsyncInit = function() {
+        FB.init({appId: '<?php echo @FB_APP_ID;?>
+', status: true, cookie: true, xfbml: true});
+
+        /* All the events registered */
+        FB.Event.subscribe('auth.login', function(response) {
+            // do something with response
+           
+            document.getElementById('disconnectfacebook').style.display = "block";
+            document.getElementById('connectfacebook').style.display = "none";
+            document.getElementById('connectedfacebook').style.display = "block"
+            
+            login();
+        });
+        FB.Event.subscribe('auth.logout', function(response) {
+            // do something with response
+            document.getElementById('disconnectfacebook').style.display = "none";
+            document.getElementById('connectfacebook').style.display = "block";
+            document.getElementById('connectedfacebook').style.display = "none"
+            logout();
+            
+        });
+
+        FB.getLoginStatus(function(response) {
+            if (response.session) {
+                // logged in and connected user, someone you know
+                login();
+            }
+        });
+    };
+    (function() {
+        var e = document.createElement('script');
+        e.type = 'text/javascript';
+        e.src = document.location.protocol +
+            '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+    }());
+
+    function login(){
+        FB.api('/me', function(response) {
+            //  alert('hi');
+            document.getElementById('disconnectfacebook').style.display = "block";
+            document.getElementById('connectfacebook').style.display = "none";
+            document.getElementById('connectedfacebook').style.display = "block"
+            // document.getElementById('login').innerHTML = response.name + " succsessfully logged in!";
+        });
+    }
+    function logout(){
+        //document.getElementById('login').style.display = "none";
+    }
+
+    //stream publish method
+    function streamPublish(name, description, hrefTitle, hrefLink, userPrompt){
+        FB.ui(
+        {
+            method: 'stream.publish',
+            message: '',
+            attachment: {
+                name: name,
+                caption: '',
+                description: (description),
+                href: hrefLink
+            },
+            action_links: [
+                { text: hrefTitle, href: hrefLink }
+            ],
+            user_prompt_message: userPrompt
+        },
+        function(response) {
+
+        });
+
+    }
+    function showStream(){
+        FB.api('/me', function(response) {
+            //console.log(response.id);
+            streamPublish(response.name, 'Thinkdiff.net contains geeky stuff', 'hrefTitle', 'http://thinkdiff.net', "Share thinkdiff.net");
+        });
+    }
+
+    function share(){
+        var share = {
+            method: 'stream.share',
+            u: 'http://thinkdiff.net/'
+        };
+
+        FB.ui(share, function(response) { console.log(response); });
+    }
+
+    function graphStreamPublish(){
+        var body = 'Reading New Graph api & Javascript Base FBConnect Tutorial from Thinkdiff.net';
+        FB.api('/me/feed', 'post', { message: body }, function(response) {
+            if (!response || response.error) {
+                alert('Error occured');
+            } else {
+                alert('Post ID: ' + response.id);
+            }
+        });
+    }
+
+    function fqlQuery(){
+        FB.api('/me', function(response) {
+            var query = FB.Data.query('select name, hometown_location, sex, pic_square from user where uid={0}', response.id);
+            query.wait(function(rows) {
+                       
+                document.getElementById('name').innerHTML =
+                    'Your name: ' + rows[0].name + "<br />" +
+                    '<img src="' + rows[0].pic_square + '" alt="" />' + "<br />";
+            });
+        });
+    }
+
+    function setStatus(){
+        status1 = document.getElementById('status').value;
+        FB.api(
+        {
+            method: 'status.set',
+            status: status1
+        },
+        function(response) {
+            if (response == 0){
+                alert('Your facebook status not updated. Give Status Update Permission.');
+            }
+            else{
+                alert('Your facebook status updated');
+            }
+        }
+    );
+    }
+</script>

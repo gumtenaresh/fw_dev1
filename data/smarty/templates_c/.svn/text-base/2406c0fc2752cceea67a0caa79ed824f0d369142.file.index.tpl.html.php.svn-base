@@ -1,0 +1,75 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-07-26 18:10:19
+         compiled from "/var/www/fanwire/views/admin/index/index.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:179693046150113ab39a9860-57526366%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '2406c0fc2752cceea67a0caa79ed824f0d369142' => 
+    array (
+      0 => '/var/www/fanwire/views/admin/index/index.tpl.html',
+      1 => 1343216870,
+    ),
+  ),
+  'nocache_hash' => '179693046150113ab39a9860-57526366',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+ <?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/header1.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+ 
+ <script type="text/javascript">
+	$().ready(function() {
+	$("#loginform").validate({
+		rules: {
+			email: {
+				required:true,
+				email:true
+			},
+			pwd: {
+				required: true
+			}
+		}
+	});
+
+});
+</script>
+  
+            	 <div>
+                     <div  align="center" style="padding: 50px">
+             	 <form name="loginform" id="loginform" action="" method="post">
+                 <table   border="0"  cellpadding="5" cellspacing="5"  align="center">
+                <?php if (!empty($_smarty_tpl->getVariable('error')->value)&&$_smarty_tpl->getVariable('error')->value==1){?>
+                <tr>
+                    <td height="45" colspan="2" align="center" >
+                        <span style="color:#FF0000">Error : </span><?php echo $_smarty_tpl->getVariable('errorMsg')->value;?>
+
+                    </td>
+                </tr>
+                <?php }?>
+                 
+                <tr>
+                    <td height="45" class="name">Email Id</td>
+
+                    <td><input type="text" name="email" id="email" tabindex="1" value="<?php echo $_smarty_tpl->getVariable('rs')->value['email'];?>
+"  size="22" class="testprofile_box" maxlength="64"/></td>
+                </tr>
+                 <tr>
+                    <td height="45" class="name">Password</td>
+                    <td><input type="password" name="pwd" id="pwd" tabindex="2" value="<?php echo $_smarty_tpl->getVariable('rs')->value['pwd'];?>
+" size="22" class="testprofile_box" maxlength="32"/>
+                    </td>
+                </tr>
+                 <tr>
+                     <td></td>
+                     <td style="float: left;">
+                        <input type="submit"  height="50" width="119" name="login" tabindex="3" class="btn"  value="Log In"/>
+                    </td>                      
+                </tr> 
+            </table>
+            </form>
+                <div class="clear"></div> 
+                </div>  </div>
+<?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/footer.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>

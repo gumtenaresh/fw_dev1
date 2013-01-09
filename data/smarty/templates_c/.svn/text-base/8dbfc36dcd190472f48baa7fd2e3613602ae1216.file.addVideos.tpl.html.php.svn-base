@@ -1,0 +1,222 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-13 13:01:17
+         compiled from "/var/www/fanwire/views/admin/videos/addVideos.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:14478544335028ad45c66c54-30206979%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '8dbfc36dcd190472f48baa7fd2e3613602ae1216' => 
+    array (
+      0 => '/var/www/fanwire/views/admin/videos/addVideos.tpl.html',
+      1 => 1344843075,
+    ),
+  ),
+  'nocache_hash' => '14478544335028ad45c66c54-30206979',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+ <?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/header.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.validate.min.js"></script>
+<script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/textLimit.js"></script>
+ 
+<script type="text/javascript" >
+    $(document).ready(function() {        
+        var characterLimit = 300;
+        var remainingchars='#remainingCharacters';
+        var textarea = '#description';
+        textlimit(characterLimit,remainingchars,textarea);              
+    });
+   
+    function getkeywords()
+    {
+        var keywords =new Array(); var i=0;
+        $("div #albumkeywords span").each(function(){
+            keywords[i] = $(this).text(); i++;
+        });      
+        var keyword = keywords.join(",");
+        document.getElementById("keyword").value = keyword;
+     
+        var fanwires =new Array(); var i=0;
+        $("div #additional_fanwires span").each(function(){
+            fanwires[i] = $(this).text(); i++;
+        });      
+        var fanwire = fanwires.join(",");
+        document.getElementById("fanwire").value = fanwire;       
+    }
+     
+    function removespan(id)
+    {
+        $(id).remove();
+    } 
+    function addkeywords()
+    {
+        var val = $.trim(document.getElementById("keywords").value);
+        val = val.replace (/,/g, "");//removing the , from the content
+        var key = val.replace(" ", "_");
+        key = key.replace(" ", "_");           
+        if(key!="")
+        {
+            $("#albumkeywords").append('&nbsp;<span class="keywords" id="'+key+'" onclick=removespan("#'+key+'")><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" height="11" width="8" alt="" /></a>'+val+'</span>');           
+            document.getElementById("keywords").value="";
+        }
+    } 
+   function addfanwires()
+    {
+        var val = $.trim(document.getElementById("fanwires").value);
+        val = val.replace (/,/g, "");//removing the , from the content
+        var key = val.replace(" ", "_");
+        key = key.replace(" ", "_");           
+        if(key!="")
+        {
+            $("#additional_fanwires").append('&nbsp;<span class="keywords" id="'+key+'" onclick=removespan("#'+key+'")><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" height="11" width="8" alt="" /></a>'+val+'</span>');            
+            document.getElementById("fanwires").value="";
+        }
+    }
+    $().ready(function(){
+        
+        $("#addvideos").validate({ 
+            rules: {
+                video: {
+                    required:true				
+                },
+                fanwireName: {
+                    required: true                 
+                },
+                description:{
+                    required:true
+                },
+                embedcode:{
+                    required:true
+                }
+            }
+        }); 
+  });    
+   function seeVideo(){
+        var url=document.getElementById('embedcode').value;
+        var n=url.split(" ");
+        var i;
+        var p;
+        for(i=0;i<n.length;i++){
+            p=n[i].split('=');
+            if(p[0]=="src"){
+                var urls=n[i];
+            }
+        }
+        $('#videoDisplay').html('<iframe '+urls+' height="150" width="246" frameborder="0" allowfullscreen></iframe>');
+        return true;
+    }
+</script>
+  
+ <div id="data_sectionarea">
+    <?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/fanwires_left_section.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+            <div class="data_rightsection">
+        <form id="addvideos" name="addvideos" action="" method="POST" enctype="multipart/form-data">
+            <div class="rightcontent">
+            	<div class="datatabsection">
+                	<div class="datatableftsection"><a href="<?php echo @ADMIN_URL;?>
+">Home</a> > <a href="<?php echo @ADMIN_URL;?>
+fanwires/fanwiresList/">FanWire Admin</a> > <a href="<?php echo @ADMIN_URL;?>
+videos/addVideos/">Add New Video</a></div>
+            	</div>
+                	<div class="clear"></div>
+                    <div class="menu_area">
+                    <div class="menu_area_list">
+                    <ul><li class="active"><a href="#"><span><strong>NEW</strong></span></a></li><li><a href="#"><span><strong>MANAGE</strong></span></a></li></ul>
+                    </div>
+                    </div>
+                    	<div class="clear"></div>
+                        
+                                  <div class="datasettingarea">
+                                        <div class="forms">
+                                        <div class="dataforms">
+                            <label class="name">Fanwire Name</label>
+                            <select name="fanwireName" id="fanwireName">
+                                <option value="">select</option>
+                                <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['id']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['name'] = 'id';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('fanwires')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['id']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['id']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['id']['total']);
+?>
+                                <option value="<?php echo $_smarty_tpl->getVariable('fanwires')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+"><?php echo $_smarty_tpl->getVariable('fanwires')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['name'];?>
+</option>
+                                <?php endfor; endif; ?>
+                            </select>
+                        </div>
+                                        <div class="dataforms">
+                                        <label class="name">Video Name</label><input name="video" id="video" type="text" class="textfield" />
+                                        </div>
+                                        
+                                        <div class="dataforms">
+                                            <label class="name">Keywords</label>
+                                            <input name="keywords" id="keywords" type="text" class="textfield" style="float:left;" onkeyup="Javascript:if(event.keyCode==188) addkeywords();"/>
+                                            <img src="<?php echo @SITE_URL;?>
+views/images/add.png" height="28" width="25" alt="" onclick="addkeywords();" style="cursor: pointer" />
+                                        </div>
+                                        <div class="add_keywords" style="float: left" id="albumkeywords"><input type="hidden" name="keyword" id="keyword" /></div>
+                                        
+                                        <div class="dataforms">
+                            <label class="name">Additional Fanwires</label>
+                            <input name="fanwires" id="fanwires" type="text" class="textfield" style="float:left;" onkeyup="Javascript:if(event.keyCode==188) addfanwires();"/>
+                            <img src="<?php echo @SITE_URL;?>
+views/images/add.png" height="28" width="25" alt="" onclick="addfanwires();" style="cursor: pointer" />
+                        </div>
+
+                        <div class="remove_keywords" id="additional_fanwires"><input type="hidden" name="fanwire" id="fanwire" /></div>  
+                                        
+                                        <div class="dataforms">
+                            <label class="name"></label><textarea name="description" id="description" cols="" rows="" class="text_area" style="float:left; padding:0 10px 0 0;"></textarea>
+                            <div class="Char_remaining"> 
+                                <p>Characters</p>
+                                <p>remaining</p>
+                                <b><span id="remainingCharacters"></span></b>
+                            </div>
+                        </div>
+                                        <div class="dataforms">
+                                        <label class="name">Video Embed or URL</label><textarea name="embedcode" onblur="return seeVideo();" id="embedcode" cols="" rows="" class="text_area3" style="float:left; padding:0 10px 0 0;"></textarea>
+                  <div class="Preview">
+                                    <p>Preview</p> 
+                   <p><object width="246" height="150" id="videoDisplay">
+                            </object></p>                    
+                                  </div>
+                                        </div>                                        
+                                        </div>                                                                                
+                                       <div class="clear"></div> 
+                            <div class="bs_btns">
+                            <div class="back_btn">back</div>
+                            <div><input type="submit" name="submit" value="Next" class="save_btn" onclick="return getkeywords();" /></div>
+                            <div class="clear"></div>
+                            </div>      
+                                  </div>
+            </div>
+            </form>
+            </div>            
+        </div>        
+ <?php $_template = new Smarty_Internal_Template(($_smarty_tpl->getVariable('ADMIN')->value)."/footer.tpl.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?> 

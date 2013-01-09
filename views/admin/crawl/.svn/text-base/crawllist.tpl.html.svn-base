@@ -1,0 +1,65 @@
+{include file="$ADMIN/header.tpl.html"}
+{literal} 
+<style>
+    .list{
+        text-decoration: non;
+        color:#000;
+        font-family: arial;
+        font-size: px;
+        line-height: 20px;
+    }
+    
+    .list a{
+        text-decoration: non;
+        color:#000;
+        font-family: arial;
+        font-size: px;
+        line-height: 20px;
+    }
+</style>
+{/literal}
+<div id="data_sectionarea">
+        <div class="data_rightsection1">
+        <div class="rightcontent">
+         
+            <div class="clear">&nbsp;</div>
+         
+    <table class="table_01" cellpadding="5" cellspacing="5" align="center">      
+        <tr class="table_header">            
+        <td>ID</td>
+        <td>TITLE</td>
+        <td>DESCRIPTION</td>        
+        <td>PHOTO</td>
+        <td>CREATED DATE</td>
+        <td>RELEASED DATE</td>        
+        <td>ARTICLE SOURCE</td>
+        <td>STATUS</td>   
+        <td>DELETE</td>
+    </tr> 
+    {section name="id" loop= $list}
+    <tr {if $smarty.section.id.iteration % 2 eq '0'}class="color"{/if}>
+         <td align="left">{$list[id].id}</td>         
+        <td align="left">{$list[id].title}</td>         
+         <td align="left">{$list[id].description}</td>
+         <td align="left"><img src="{$smarty.const.IMAGE_URL}{$list[id].photo}" height="200" width="200"/></td>                  
+         <td align="left">{$list[id].cdate|date_format:'%m-%d-%y %I:%M %p'}</td>
+         <td align="left">{$list[id].released_date|date_format:'%m-%d-%y %I:%M %p'}</td>
+         <td align="left">{$list[id].article_from}</td>
+         <td align="left"><a href="{$smarty.const.ADMIN_URL}crawl/changeStatus?id={$list[id].id}&status={$list[id].visible}">{if $list[id].visible eq 1}active{else}inactive{/if}</a></td>
+        <td align="left"><a onclick="return confirm('Delete Article?')" href="{$smarty.const.ADMIN_URL}crawl/deleteArticle?id={$list[id].id}">delete</a></td>
+    </tr>
+    {sectionelse}
+    <tr><td colspan="13" style="text-align: center;vertical-align: middle;height: 100px;">NO DATA</td></tr>
+    {/section}
+    {if !empty($navigation)}
+    <tr>
+    <td colspan="13" align="right">
+    {$navigation}
+    </td></tr>
+    {/if}
+    <tr><td colspan="13">&nbsp;</td></tr>
+</table>
+    </div>
+    </div>
+    </div>
+{include file="$ADMIN/footer.tpl.html"}

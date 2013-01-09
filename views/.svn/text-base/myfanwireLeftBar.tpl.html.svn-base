@@ -1,0 +1,90 @@
+<div class="kory">
+    {if $profile_image} 
+    <a href="{$smarty.const.SITE_URL}changeProfilePic"><img src="{$profile_image}" width="82" height="82"/></a>             
+    {else}     
+    <a href="{$smarty.const.SITE_URL}changeProfilePic"><img src="{$smarty.const.SITE_URL}views/images/logodef.png" width="82" height="82"/></a>             
+    {/if}
+    <a href="{$smarty.const.SITE_URL}profile?uid={$smarty.session.id}&ac=1">{$smarty.session.name}</a> 
+</div>
+<div class="logout">
+    <!--<a href="{*if $smarty.session.logout_fb_url*}{*$smarty.session.logout_fb_url*}{*else*}{*$smarty.const.SITE_URL*}logout{*/if*}" >logout</a>-->
+    <a href='#' onclick='log("{$smarty.const.SITE_URL}");'>logout</a>
+
+    <!--onclick=" FB.logout();"-->
+</div>
+
+<div>  
+<ul style="margin-top: 32px;margin-bottom: 1px;height: 44px;background: url(/views/images/left_top_bg.jpg) left top repeat-x;">
+<li>
+{include file='searchbox_logged.html'}
+</li>
+</ul>
+</div>   
+
+
+<!--<div class="searchbox">
+    <input name="" type="text" class="search_field" placeholder='search something'/> 
+    <input name="" type="button" class="go"/>
+</div>-->
+<div class="left_menusec" style="padding-top:3px;padding-bottom:3px">
+    <ul>        
+        {if $fanwires.name}
+        <li {if $active eq fanwire} class="active" {/if}><a  href="#">{$fanwires.name}</a></li>        
+        {/if}
+        <li {if $active eq fanwire} {if $fanwires.name}{else}class="active"{/if}{/if}><a href="{$smarty.const.SITE_URL}myFanwire">My FANWIre</a></li>        
+        <!--        <li {if $active eq recommend} class='active' {/if}><a href="#">We recommend</a></li>{*$smarty.const.SITE_URL*}werecommend
+                <li {if $active eq fannetwork} class='active' {/if}><a href="#">fan network</a></li>  {*$smarty.const.SITE_URL*}fannetwork-->
+        <li {if $active eq collection} class='active' {/if}><a href="{$smarty.const.SITE_URL}mycollection">My collection</a></li>
+    </ul>
+</div>
+<div class="total_list">
+    <div class="fanwires">
+        <h2>&nbsp;<a href="{$smarty.const.SITE_URL}browseFans" >Fan wires</a></h2>
+        <a href="{$smarty.const.SITE_URL}browseFans"><img src="{$smarty.const.SITE_URL}views/images/addd.png" width="13" height="13" hspace="5" vspace="3" align="right"/></a>
+    </div>
+    <div style="float: left;">
+        <div id="demo1" class="left_scroller" style="height: 2px;"></div>
+        <div id="demo1" class="left_scroller1">
+            {assign var=i value=1}
+            {section name=fanwire loop=$fanwires_for_more}
+            {assign var=j value=$i++}
+            {assign var=fan value=$fanwires_for_more[fanwire]}
+            {if $fan.type eq 0 &&  $j lt 21}
+            <div class="fanslist">
+                <p>
+                    <a href="{$smarty.const.SITE_URL}{$fan.fanwire}" style="text-decoration: none;color: #424140">{$fan.name}</a>
+                </p>
+                <span>
+                    <!--(111)-->
+                </span>
+            </div>
+            {/if} 
+            {/section}
+            <div class="fanslist_more" style="display: none">
+                {assign var=i value=1}
+                {section name=fanwire loop=$fanwires_for_more}
+                {assign var=j value=$i++}
+                {assign var=fan value=$fanwires_for_more[fanwire]}
+                {if $fan.type eq 0 && $j gt 20}
+                <div class="fanslist">
+                    <p>
+                        <a href="{$smarty.const.SITE_URL}{$fan.fanwire}" style="text-decoration: none;color: #424140">{$fan.name}</a>
+                    </p>
+                    <span>
+                        <!--(111)-->
+                    </span>
+                </div>
+                {/if} 
+                {/section}
+            </div>
+        </div>
+        {if $fanwires_for_more|count gt 20}
+        <div class="viewall">
+            <p style="background: #ededed; display: inline; padding: -20px 5px 0px 5px; color: #02a0bf;">
+                <a href='javascript:void(0)' class="view_all_fan" style="padding: 0px 5px 0 0">View all ({$fanwires_for_more|count})</a>
+            </p>
+        </div>
+        {/if}
+    </div>
+</div> 
+</div>

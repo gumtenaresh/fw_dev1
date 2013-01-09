@@ -1,0 +1,53 @@
+{include file='headerguest.tpl.html'}
+{include file='zoom.tpl.html'}
+{include file='guest_left_section.tpl.html'}
+<!--Right Section-->
+
+<div class="right_container">
+    <div class="more_posts">
+        <!--<a href="#">More Posts</a>-->
+    </div>
+    <div id="inner_rightsection">
+
+        <div id="right_area">
+            {include file='fanwireshalfRightBar.tpl.html'}<!-- fanwireshalfRightBar -->
+
+            {if $fans}
+                <div style="clear: both;"></div>
+            <div id="mainBlock">
+            {foreach from=$fans key=myId item=i}
+            {foreach from=$i key=m item=p}
+
+
+              <div class="collection_page item block">
+                <div class="collect_photo"> 
+                    <a href="{$p.link}"  class="userProf"   >  <img src="{$smarty.const.PROFILE_IMAGES_VIEW_PATH}{$p.profile_image}" width="246" height="151" /></a>
+
+                    <div class="data">{$p.fname}{$p.lname}<br />
+                        <span></span></div>
+                    <div class="photo_post">
+                        <div class="message">(3)</div>
+                        <div class="blue">(21)</div>
+                        <div class="red">(29)</div>
+                    </div>
+                    <!--          {*$fanwires.description*}uncomment to display the description of the fanwire -->
+                </div>
+
+            </div>
+
+
+                {/foreach}
+                {/foreach}
+            </div>
+                {/if}
+            <!--
+                        <div class="btm_line">
+                            <div class="showmore"><a href="#">show more</a></div>
+                        </div>-->
+            <div class="clear"></div> 
+        </div>
+       {include file='footerGuest.tpl.html'}
+<!--        
+         <div class="login">
+            <p><a href="javascript:void(0);" onclick="loginPop();" id="loginFacebook2">LOGIN</a></p>
+        </div> -->

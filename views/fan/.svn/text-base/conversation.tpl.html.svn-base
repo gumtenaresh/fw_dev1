@@ -1,0 +1,47 @@
+{include file='header.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+ <!--Right Section-->  
+<div class="right_container">
+<div class="more_posts"><a href="#">More Posts</a></div>
+<div id="inner_rightsection">
+
+    <div id="right_area" >
+       <div class="connect_fans">
+     
+           <div class="message_area">
+        <h2>message center</h2>
+      <div class="fieldset"> <select name="" class="selectlist1"></select></div></div>
+        
+      {section name="id" loop= $list}      
+      <div id="message{$list[id].id}">
+          <div class="message_data">    
+    <div class="msg_photo">
+        <a href="{$smarty.const.SITE_URL}profile?uid={$list[id].sender_id}">
+             {if $list[id].image eq ''}
+            <img src="{$smarty.const.SITE_URL}views/images/private_normal.png" width="82" height="82" /></a><br />
+            {else}
+            <img src="{$smarty.const.PROFILE_IMAGES_VIEW_PATH}{$list[id].image}" width="82" height="82" /></a><br />
+            {/if}
+  {$list[id].sender}
+    </div>
+   <div class="msg_txt">{$list[id].message} </div>
+       	
+          </div>
+      </div>  
+{sectionelse}
+    <div align="center" style="line-height: 40px;">No Messages</div>
+    {/section}
+     </div>      
+  <div class="clear"></div>  
+  <form action="{$smarty.const.SITE_URL}fan/conversations?sender_id={$senderid}" method="post" >
+  <div>
+      <div style="width: 300px;float:left;padding-top: 20px;"><input type="text" name="msg" id="msg" style="height: 30px;width: 300px;" /></div>
+      <div style="float:left;"> <input type="submit" name="submit" id="submit" class="connect_btn" value="Reply"/></div>      
+      <input type="hidden" id="sender_id" name="sender_id" value="{$senderid}" />
+      <input type="hidden" id="user_id" name="user_id" value="{$userid}" />
+  </div>
+  </form>
+
+      <div class="clear"></div>      
+   </div>
+{include file='footer.tpl.html'} 

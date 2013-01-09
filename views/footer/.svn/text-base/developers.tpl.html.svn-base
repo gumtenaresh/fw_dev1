@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>FANWIRE</title>
+<link href="{$smarty.const.SITE_URL}views/css/login_style.css" rel="stylesheet" type="text/css" />
+
+<!--Select Dropmenu CSS-->
+
+<script language="javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.js" type="text/javascript"></script>
+<script language="javascript" src="{$smarty.const.SITE_URL}views/scripts/selectzor.js" type="text/javascript"></script>
+<link href="{$smarty.const.SITE_URL}views/styles/selectzor.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+	
+<div id="wrapper">
+    	
+      
+        
+        	<!--Left Section Start-->
+            	
+ 				<div id="leftsection">
+                
+                	<div class="logo"><a href="{$smarty.const.SITE_URL}myFanwire"><img src="{$smarty.const.SITE_URL}views/images/logo.png" width="143" height="127" border="0" /></a></div>
+                    <div class="left_menu">
+                    <ul>
+                    	<li><a href="{$smarty.const.SITE_URL}footer/aboutus">About</a></li>
+                        <li><a href="{$smarty.const.SITE_URL}footer/termsandconditions">Terms & COnditions</a></li>
+						<li><a href="{$smarty.const.SITE_URL}footer/privacypolicy">privacy policy</a></li>
+						<li class="active"><a href="{$smarty.const.SITE_URL}footer/developers">developers</a></li>
+                        <li><a href="{$smarty.const.SITE_URL}footer/advertising">Advertising</a></li>
+						<li><a href="{$smarty.const.SITE_URL}footer/help">Help</a></li>
+						<li><a href="{$smarty.const.SITE_URL}footer/contact">Contact</a></li>
+                    </ul>
+                    
+                    </div>
+                
+                </div>
+                
+            <!--Left Section End-->  
+            
+            
+            
+             <!--Right Section-->
+             <div class="right_container">
+            
+             <div id="rightsection">
+            	
+             <div id="right_area">
+             
+             		 <h2>About fanwire</h2>
+       		   <div class="clear"></div>
+              
+        <div class="main_data_sec">
+        
+        <br />
+<br />
+<h1>What is Fanwire</h1>
+
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti.
+<br />
+<br />
+
+Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.
+<br />
+<br />
+
+Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus, vitae facilisis libero dolor a purus. Sed vel lacus. Mauris nibh felis, adipiscing varius, adipiscing in, lacinia vel, tellus. Suspendisse ac urna. Etiam pellentesque mauris ut lectus. Nunc tellus ante, mattis eget, gravida vitae, ultricies ac, leo. Integer leo pede, ornare a, lacinia eu, vulputate vel, nisl.
+
+<br />
+<br />
+</p>
+<h1>What can you do with fanwire?</h1>
+
+<p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.
+<br />
+<br />
+
+Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus, vitae facilisis libero dolor a purus. Sed vel lacus. Mauris nibh felis, adipiscing varius, adipiscing in, lacinia vel, tellus. Suspendisse ac urna. Etiam pellentesque mauris ut lectus. Nunc tellus ante, mattis eget, gravida vitae, ultricies ac, leo. Integer leo pede, ornare a, lacinia eu, vulputate vel, nisl.</p>
+
+        </div>
+           <div class="clear"></div>  
+              </div>    
+              
+         {include file='footerww.tpl.html'}

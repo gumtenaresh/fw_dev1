@@ -1,0 +1,506 @@
+{include file="header.tpl.html"}
+
+<style type="text/css">
+    h6 {
+        display: block;
+        font-size: 0.67em;
+        -webkit-margin-before: 2.33em;
+        -webkit-margin-after: 2.33em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        font-weight: bold;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 13px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+    }.-cx-PRIVATE-fbTimelineUnitActor__header {
+        font-size: 11px;
+        font-weight: normal;
+        margin-right: 15px;
+    }
+    .fbTimelineCapsule .timelineUnitContainer {
+        background: white;
+        border-left: 1px solid #C4CDE0;
+        border-right: 1px solid #C4CDE0;
+        padding: 13px 15px;
+    }.timelineUnitContainer {
+        position: relative;
+    }.fbTimelineCapsule {
+        list-style: none;
+    }body {
+        font-size: 13px;
+        font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+        color: #000;
+        line-height: 1.28;
+        text-align: left;
+        direction: ltr;
+    }
+    .-cx-PRIVATE-fbTimelineUnitActor__root {
+        border-bottom: 1px solid #E5E5E5;
+    }.-cx-PRIVATE-fbTimelineUnitActor__root + .aboveUnitContent {
+        margin-top: 15px;
+    }.fbTimelineUFI {
+        background: white;
+        margin-bottom: 0 !important;
+        margin-top: -12px;
+        position: relative;
+        top: 12px;
+    }.timelineUnitContainer .uiCommentContainer {
+        margin-bottom: -12px;
+        margin-left: -12px;
+        padding-top: 3px;
+        width: 403px;
+    }
+    .fbTimelineUnit {
+        display: block;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+    }
+    label{
+        width: 100px!important;
+    }
+    .content{
+        margin: 10px 0;
+        border: 1px solid #999;
+    }
+    .fbTimelineUnit {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+    }
+
+</style>
+<script type="text/javascript">
+    function checkYoutube(){
+       
+        var isChecked = $('#channelname_check:checked').val()?true:false;
+        if(isChecked){
+            $('#cnl').toggle();
+            //  $('#fanwireName').attr('disabled','disabled');
+        } else{
+            $('#cnl').hide();
+            // $('#fanwireName').removeAttr('disabled');
+        }
+       
+    }
+    function crawlOnlyOneF(){
+     
+       
+        var isChecked = $('#crawlOnlyOne:checked').val()?true:false;
+        if(isChecked){
+            $('#oov').toggle();
+            //  $('#fanwireName').attr('disabled','disabled');
+        } else{
+            $('#oov').hide();
+            // $('#fanwireName').removeAttr('disabled');
+        }
+       
+    }
+    function countPostsTweets(id){
+       
+        var id=document.getElementById(id).value;
+        if(id == "facebook" || id == "twitter"){
+           
+            $('#counttype').show();
+            $('.showdiv').hide();
+            $('.hidediv').show();
+        }else{  
+            $('#counttype').hide();
+            
+            $('.showdiv').show();
+            $('.hidediv').hide();
+        }
+    }
+    
+   
+</script>
+</div>
+
+<div  class="fbTimelineUnit">
+    <form id="crawlForm" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label class="name">Data Crawl Type</label>
+                </td>
+                <td>
+
+                    <select id="selecttype" name="Crawltype" onchange="countPostsTweets(this.id);">
+                        <option value="">------select-----</option>
+                        <option value="facebook" {if $Ctype eq "facebook"} selected="selected" {/if} title="{$smarty.const.SITE_URL}/facebookCrawl">Faceboook</option>
+                        <option value="twitter" {if $Ctype eq "twitter"} selected="selected" {/if} title="{$smarty.const.SITE_URL}/twitterCrawl">twitter</option>
+                        <!--option value="website" {if $Ctype eq "website"} selected="selected" {/if}>rollingstone.com</option-->
+
+                        {foreach from=$fanwires_sites key=myId item=i}
+                        <option value="{$i.id}" title="{$i.source}" {if $user eq $i.source} selected="selected" {/if}>{$i.source}</option>
+                        {/foreach}
+                        <option value="youtube" {if $Ctype eq "youtube"} selected="selected" {/if}>youtube.com</option>
+                    </select>   
+                </td>
+                <td>
+
+                    <select id="counttype"  name="count" {if $countPost neq ''}style="display:block;"{else}style="display: none;"{/if} >
+                            <option value="5">------No of Posts/Tweets-----</option>
+                        <option value="5"  {if $countPost eq "5"} selected="selected" {/if} >5</option>
+                        <option value="10" {if $countPost eq "10"} selected="selected" {/if}>10</option>
+                        <option value="20" {if $countPost eq "20"} selected="selected" {/if} >20</option>
+                        <option value="50" {if $countPost eq "50"} selected="selected" {/if} >50</option>
+                    </select>   
+                </td>
+                <td ><input type="checkbox" name="channelname_check" id="channelname_check" onclick="checkYoutube()"/>do you want to pull from channel</td>
+                <td ><input type="checkbox" name="crawlOnlyOne" id="crawlOnlyOne" onclick="crawlOnlyOneF()"/>Crawl Only One Video</td>
+
+            </tr>
+            <tr id="cnl" style="display: none;"><td>Please enter channel name:</td><td><input type="text" name="channelname" id="channelname"/></td></tr>
+            <tr id="oov" style="display: none;"><td>Please enter URL of vedio:</td><td><input type="text" name="videourl" id="videourl"/></td></tr>
+            <tr id="fanwiretr">
+                <td>
+                    <label class="name">Fanwire Name</label>
+                </td>
+                <td>
+
+                    <select name="fanwirenameft[]" id="fanwireNameft" multiple="multiple" size="20" class="hidediv" style="display: none;" >
+                        <option value="">------You can select multiple-----</option>
+                        {foreach from=$fanwires key=myId item=i}
+                        <!--option value="{$i.name}" title="{$i.id}" {if $user eq $i.url} selected="selected" {/if}>{$i.name}</option-->
+                        <option value="{$i.url}*{$i.facebook}*{$i.twitter}*{$i.youtube}*{$i.id}*{$i.name}" title="{$i.id}" {if $user eq $i.url} selected="selected" {/if}>{$i.name}</option>
+                        {/foreach}
+                    </select>
+                    <select name="fanwirename" id="fanwireName" class="showdiv" >
+                        <option value="">------select-----</option>
+                        {foreach from=$fanwires key=myId item=i}
+                        <!--option value="{$i.name}" title="{$i.id}" {if $user eq $i.url} selected="selected" {/if}>{$i.name}</option-->
+                        <option value="{$i.url}*{$i.facebook}*{$i.twitter}*{$i.youtube}*{$i.id}*{$i.name}" title="{$i.id}" {if $user eq $i.url} selected="selected" {/if}>{$i.name}</option>
+                        {/foreach}
+                    </select>
+
+                    <input type="hidden" name="websiteCrawlname" id="websiteCrawlname"/>
+                    <input type="hidden" name="websitename" id="websitename"/>
+                    <input type="hidden" name="websiteCrawlid" id="websiteCrawlid"/>
+
+                </td>
+            </tr>
+            <tr id="fantext">
+                <td>
+                    <label class="name">Fanwire Name</label>
+                </td>
+                <td>
+                    <input type="text" name="searchkeyword"/><br/>
+                    <!--                    <input type="button" value="Submit" onclick="submitForm();">-->
+                </td>
+            </tr>
+            <tr >
+                <td>
+
+                </td>
+                <td>
+                    <input type="button" value="Submit" onclick="submitForm();">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+{literal}
+<script type="text/javascript">
+    $("#fantext").hide();  
+    
+    function submitForm(){
+         
+        str=$("#selecttype").val();
+        //$("#crawlForm").attr('action',$("#selecttype").val());
+        if(str.toLowerCase().indexOf("website") >= 0){
+            alert($("#fanwireName option[value='"+$('#fanwireName').val()+"']").text())
+            var site=$("#selecttype option[value='website']").text();
+            var ab=$("#fanwireName option[value='"+$('#fanwireName').val()+"']").text();
+            var bc=$("#fanwireName option[value='"+$('#fanwireName').val()+"']").attr('title');
+            
+            $("#websiteCrawlname").val(ab);
+            $("#websiteCrawlid").val(bc);
+            $("#websitename").val(site);
+            
+            //alert($("#websiteCrawlname").val())
+        }
+        if(str.toLowerCase().indexOf("twitter") >= 0){
+            
+            // alert($("#fanwireName option[value='"+$('#fanwireName').val()+"']").text())
+            var ab=$("#fanwireName option[value='"+$('#fanwireName').val()+"']").text();
+            var bc=$("#fanwireName option[value='"+$('#fanwireName').val()+"']").attr('title');
+           
+            $("#websiteCrawlname").val(ab);
+            $("#websiteCrawlid").val(bc);
+            
+            //alert($("#websiteCrawlname").val())
+        }
+        if(str.toLowerCase().indexOf("facebook") >= 0){
+            
+            // alert($("#fanwireName option[value='"+$('#fanwireName').val()+"']").text())
+            var ab=$("#fanwireName option[value='"+$('#fanwireName').val()+"']").text();
+            var bc=$("#fanwireName option[value='"+$('#fanwireName').val()+"']").attr('title');
+           
+            $("#websiteCrawlname").val(ab);
+            $("#websiteCrawlid").val(bc);
+            
+            //alert($("#websiteCrawlname").val())
+        }
+        if(str.toLowerCase().indexOf("youtube") >= 0){
+            
+            // alert($("#fanwireName option[value='"+$('#fanwireName').val()+"']").text())
+            var ab=$("#fanwireName option[value='"+$('#fanwireName').val()+"']").text();
+            var bc=$("#fanwireName option[value='"+$('#fanwireName').val()+"']").attr('title');
+           
+            $("#websiteCrawlname").val(ab);
+            $("#websiteCrawlid").val(bc);
+        }
+        var selectedArray = new Array();
+        var selObj = document.getElementById('fanwireNameft');
+        var i;
+        var count=0;
+        for (i=0; i<selObj.options.length; i++) {
+            if (selObj.options[i].selected) {
+                selectedArray[count] = selObj.options[i].value;
+                count++;
+            }
+        }
+         
+        if(count>5){
+            alert("You can not choose more than 5 fanwires");
+            return false;
+        }
+        //alert(count);
+        
+        //if($('#fanwireNameft').val()==''){alert('Please select the channel belongs to which fanwire.');return false;}
+         
+        $("#crawlForm").submit();
+     
+    }
+   
+</script>
+{/literal}
+</div>
+{if $Ctype eq 'facebook'}
+<div  class="fbTimelineUnit">
+
+
+    {if  $fbresult|@count gt 0} 
+    <div style="float: left;">
+        {foreach from=$fbresult key=myId item=i}
+        <!--Header with image-->
+        {if $myId lt $countPost}
+        <div class="fbTimelineUnit" id="u1ie9q_65" style=" border: 1px solid #000;">
+            <div class="clearfix mbs pbs -cx-PRIVATE-fbTimelineUnitActor__root ">
+                <a class="-cx-PRIVATE-uiImageBlockDeprecated__image -cx-PRIVATE-uiImageBlockDeprecated__smallImage"
+                   href="https://www.facebook.com/LilWayne" tabindex="-1" ><img class="-cx-PRIVATE-uiSquareImage__root -cx-PRIVATE-uiSquareImage__medium img" src="{$profie_image}" alt=""></a>
+                <div class="-cx-PRIVATE-uiImageBlockDeprecated__smallContent -cx-PRIVATE-uiImageBlockDeprecated__content">
+                    <h6 class="-cx-PRIVATE-fbTimelineUnitActor__header">
+                        <span class="fcg">
+                            <span class="fwb">
+                                <a href="https://www.facebook.com/{$user}" id="js_2">{$user}</a>
+                            </span>
+                        </span>
+                    </h6>
+                </div>
+            </div>
+
+            <!--Message-->
+            <div class="aboveUnitContent">
+                <div class="-cx-PRIVATE-fbTimelineText__featured">{$i->message}        
+                </div>
+            </div>
+            {if $i->picture neq null}
+            <!--Below Big image or message area-->
+            <div class="photoUnit clearfix">
+                <div class="uiScaledThumb photo photoWidth1" data-cropped="1">
+                    <div class="uiScaledImageContainer photoWrap">
+                        <img class="scaledImageFitWidth img" src="{$i->picture|replace:'_s.':'_n.'}" width="200" height="200">{$i->created_time|date_format:"%A, %B %e, %Y %l:%M:%S"}</div>
+                </div>
+            </div>
+            {/if}</div>
+        {/if}
+        {/foreach}
+        {else}
+        <span style="font-size: 15px;">Sorry No results Found. <br/>Please check <b>{$user}</b> Facebook Id</span>
+
+        {/if}</div>
+
+    {elseif $Ctype eq 'twitter'}
+
+    <div style="width: 100%;float: left;">
+        {foreach from=$twitterRes key=myId item=i}
+        <!--Header with image-->
+        <div class="content" style="width: 100%;float: left">
+            <div class="stream-item-header">
+
+                <small class="time" >
+                    <img  style="float: left"class="avatar js-action-profile-avatar" src="{$i->user->profile_image_url|replace:'normal':'reasonably_small'}" alt="Lady Gaga">
+                    <strong style="float: left" class="fullname js-action-profile-name show-popup-with-id">{$i->user->name}</strong>
+                </small>
+                <div ><img  class="avatar js-action-profile-avatar" src="{$i->user->profile_image_url}" alt="{$user}"></div>
+            </div>
+            <br/>
+            <br/>
+
+            <p class="js-tweet-text">
+                {$i->text}</p>
+            {$i->created_at|date_format:"%A, %B %e, %Y %l:%M:%S"}
+        </div>
+        {/foreach} </div>
+
+    {elseif $Ctype eq 'website'}
+
+    <style type="text/css">  #storyTextContainer {
+            margin-bottom: 25px;
+        }
+        #col1_content {
+            color: #202020;
+            font-size: 13px;
+            letter-spacing: 0.012em;
+            line-height: 1.37;
+        }
+        #col1_content {
+            color: #202020;
+            font-size: 13px;
+            letter-spacing: 0.012em;
+            line-height: 1.37;
+            padding: 0px 10px 24px 18px;
+        }
+        #contentInfo.withImage {
+            width: 287px;
+            float: right;
+        }#storyTextContainer .author, #storyTextContainer .author a {
+            font-family: Georgia, "Times New Roman", Times, serif;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: black;
+        } #storyTextContainer .date {
+            color: black;
+            display: block;
+            font-family: Tahoma, Geneva, sans-serif;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: normal;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            margin-top: 5px;
+            padding: 0;
+            text-transform: uppercase;
+        }div.assetContainer {
+            float: left;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }#storyTextContainer p {
+            color: black;
+            font-size: 15px;
+        }
+        img{ float: left; margin: 5px;}
+    </style>
+    <div style="width: 100%;float: left;">
+        {foreach from=$websiteresults key=myId item=i}
+
+        <br/>
+        <div class="copy" style="border: 1px solid #000; float: left">
+            <h2><a href="{$i.url}" title="{$i.tit}">{$i.tit}</a></h2>
+            {$i.desc}
+        </div>  
+        <div id="storyTextContainer" style="border: 1px solid #000; float: left">
+            <div class="subcl">
+                <h2>{$i.tit}</h2>
+            </div>
+            {if $i.ItemDesc neq null}
+            <div id="contentInfo" class="withImage" style="float: left">
+                <div class="author"><span class="floatLt">By</span>&nbsp;<a href="#">{$i.getAuthor}</a></div>
+                <div class="date"> {if $i.date eq ''}{$i.getDate}{else}{$i.date}{/if}</div>
+            </div>
+
+            <div class="assetContainer imageStandard floatLt" class="withImage" style="float: left">
+                {if $i.getreviewImage neq null}
+                <div class="image-holder">
+                    <img src="{$i.getreviewImage}"  alt="Metallica">
+                </div>{/if}
+                {if $i.image neq null}
+                <div class="image-holder">
+                    <img src="{$i.image}"  alt="Metallica">
+                </div>
+                {/if}
+                {$i.ItemDesc}
+            </div>	
+            {/if}
+        </div><br/>
+        <br/>
+        {/foreach} </div>
+
+
+    {elseif $Ctype eq 'youtube'}
+
+    <style type="text/css">  #storyTextContainer {
+            margin-bottom: 25px;
+        }
+        #col1_content {
+            color: #202020;
+            font-size: 13px;
+            letter-spacing: 0.012em;
+            line-height: 1.37;
+        }
+        #col1_content {
+            color: #202020;
+            font-size: 13px;
+            letter-spacing: 0.012em;
+            line-height: 1.37;
+            padding: 0px 10px 24px 18px;
+        }
+        #contentInfo.withImage {
+            width: 287px;
+            float: right;
+        }#storyTextContainer .author, #storyTextContainer .author a {
+            font-family: Georgia, "Times New Roman", Times, serif;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: black;
+        } #storyTextContainer .date {
+            color: black;
+            display: block;
+            font-family: Tahoma, Geneva, sans-serif;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: normal;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            margin-top: 5px;
+            padding: 0;
+            text-transform: uppercase;
+        }div.assetContainer {
+            float: left;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }#storyTextContainer p {
+            color: black;
+            font-size: 15px;
+        }
+        img{ float: left; margin: 5px;}
+    </style>
+    <div style="width: 100%;float: left;">
+
+        {foreach from=$item key=myId item=i}
+
+
+        <div >
+            <h2><a href="#">{$i.video}</a></h2>
+            {$i.description}<br>
+            {$i.released}<br>
+            {$i.iframe}<br>
+            thumbnail<img src="{$i.thumbnail}"/>
+
+        </div>  
+
+        {/foreach} </div>
+    {/if}

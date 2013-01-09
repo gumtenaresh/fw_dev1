@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+.TabbedPanels {
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+	clear: none;
+	width: 100%; /* IE Hack to force proper layout when preceded by a paragraph. (hasLayout Bug)*/
+}
+
+.TabbedPanelsTabGroup {
+	margin: 0px;
+	padding: 10px 0 0 0px;
+}
+
+.TabbedPanelsTab {
+	position: relative;
+	float: left;
+	outline:none;
+	list-style: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	cursor: pointer;
+	background:#FFF;
+	float:left; padding-right:22px;
+}
+
+.TabbedPanelsTabHover {
+	background-color: #fff;
+}
+
+.TabbedPanelsTabSelected {
+	background-color: #fff;
+}
+
+.TabbedPanelsTab a {
+	color:#999999; border-top:#999999 solid 4px; font-weight:bold; font-size:13px; padding:7px 2px 0px 2px; text-transform:uppercase;
+}
+.TabbedPanelsTab a:hover {
+	color:#1d95cb; border-top:#1d95cb solid 4px; font-weight:bold; font-size:13px; padding:7px 2px 0px 2px; text-transform:uppercase;
+}
+
+.TabbedPanelsContentGroup {
+	clear: both;
+	background-color: #fff;
+}
+
+.TabbedPanelsContent {
+	overflow: hidden;
+	padding: 4px;
+}
+
+.TabbedPanelsContentVisible {
+}
+
+.VTabbedPanels {
+	overflow: hidden;
+	zoom: 1;
+}
+
+.VTabbedPanels .TabbedPanelsTabGroup {
+	float: left;
+	width: 10em;
+	height: 20em;
+	background-color: #EEE;
+	position: relative;
+	border-top: solid 1px #999;
+	border-right: solid 1px #999;
+	border-left: solid 1px #CCC;
+	border-bottom: solid 1px #CCC;
+}
+
+.VTabbedPanels .TabbedPanelsTab {
+	float: none;
+	margin: 0px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+
+.VTabbedPanels .TabbedPanelsTabSelected {
+	background-color: #EEE;
+	border-bottom: solid 1px #999;
+}
+
+.VTabbedPanels .TabbedPanelsContentGroup {clear: none;float: left;padding: 0px;width: 30em;height: 20em;}
+
+@media print {
+.TabbedPanels {
+	overflow: visible !important;
+}
+.TabbedPanelsContentGroup {
+	display: block !important;
+	overflow: visible !important;
+	height: auto !important;
+}
+.TabbedPanelsContent {
+	overflow: visible !important;
+	display: block !important;
+	clear:both !important;
+}
+.TabbedPanelsTab {
+	 overflow: visible !important;
+	 display: block !important;
+	 clear:both !important;
+}
+}

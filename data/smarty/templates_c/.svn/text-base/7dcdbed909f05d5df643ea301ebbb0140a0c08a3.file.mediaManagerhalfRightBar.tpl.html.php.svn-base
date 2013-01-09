@@ -1,0 +1,105 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-03 12:28:59
+         compiled from "/var/www/fanwire/views/mediaManagerhalfRightBar.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:1827737276501b76b3aecfe8-23343180%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '7dcdbed909f05d5df643ea301ebbb0140a0c08a3' => 
+    array (
+      0 => '/var/www/fanwire/views/mediaManagerhalfRightBar.tpl.html',
+      1 => 1342074257,
+    ),
+  ),
+  'nocache_hash' => '1827737276501b76b3aecfe8-23343180',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<!--Right Section-->
+<div class="right_container">
+    <div class="more_posts"><a href="#">More Posts</a></div>
+    <div id="inner_rightsection">
+
+        <div id="right_area">
+            <div class="search">
+                <!-- added new -->
+                <!--             <div id="slider" class="zoom" style='width:20%;'> -->
+                <!--              <a class="tt" href="#" style="left:12%; ">&nbsp; -->
+                <!--               <span class="tooltip"> <b>Tip:</b> Drag the slider to -->
+                <!-- 							increase the size of images. </span> -->
+                <!--                 </a> -->
+                <!--             </div> -->
+                <table><tr><td>
+                            <div class="minus">
+                                <img src='<?php echo @SITE_URL;?>
+views/images/m.png'>
+                            </div>
+                        </td><td>
+                            <div style="float:left;width:200px;">
+
+
+
+
+                                <a href="#" class="tt" >
+                                    <div class="zoom" id="slider" style='width: 100%;float:left;'>
+                                        <span class="tooltip" >
+                                            <b>Tip:</b> Drag the slider to
+                                            increase/decrease the size of Fanwires
+                                        </span>
+                                    </div> 
+                                </a>
+                            </div></td><td>
+                            <div class="plus"  >
+                                <img src='<?php echo @SITE_URL;?>
+views/images/p.png'>
+                            </div></td></tr></table>
+                <!-- added new end -->
+            </div>
+            <!--     <div class="filters"> -->
+            <!--    	  <h2>filter by:</h2> -->
+            <!--      <img src="images/fcb.png" width="25" height="21" /> <img src="images/twt.png" width="25" height="21" /> <img src="images/yu.png" width="25" height="21" /> <img src="images/cam1.png" width="25" height="21" /> <img src="images/vediio.png" width="25" height="21" /> <img src="images/note.png" width="25" height="21" /> <img src="images/music.png" width="25" height="21" /> | <a href="#">popularity</a>  |  <a href="#">recent</a>  |  <a href="#">a-z</a>  |  <a href="#">z-a</a></div> -->
+            <div class="connect_fans">
+
+                <h2>media manager</h2>
+                <br />
+
+                <div class="settings_page">
+                    <div class="awards_active">
+                        <ul>
+                	<?php if ($_smarty_tpl->getVariable('media')->value=='photos'){?>
+                            <li class="active"><a href="<?php echo @SITE_URL;?>
+mediaCenter"><span><strong>My photos</strong></span></a></li>
+                            <?php }else{ ?>
+                            <li ><a href="<?php echo @SITE_URL;?>
+mediaCenter"><span><strong>My photos</strong></span></a></li>
+                            <?php }?>
+                            <?php if ($_smarty_tpl->getVariable('media')->value=='vedios'){?>
+                            <li class="active"><a href="<?php echo @SITE_URL;?>
+myVedios"><span><strong>My videos</strong></span></a></li>
+                            <?php }else{ ?>
+                            <li ><a href="<?php echo @SITE_URL;?>
+myVedios"><span><strong>My videos</strong></span></a></li>
+                            <?php }?>
+                            <?php if ($_smarty_tpl->getVariable('media')->value=='articles'){?>
+                            <li class="active"><a href="<?php echo @SITE_URL;?>
+myArticles"><span><strong>my articles</strong></span></a></li>
+                            <?php }else{ ?>
+                            <li ><a href="<?php echo @SITE_URL;?>
+myArticles"><span><strong>my articles</strong></span></a></li>
+                            <?php }?>
+                            
+<!--                         second phase     -->
+<!--                             <li class="active"><a href="myLinks"><span><strong>my links</strong></span></a></li> -->
+<!--                              -->
+<!--                             <li ><a href="myLinks"><span><strong>my links</strong></span></a></li> -->
+<!--                              -->
+
+
+
+
+                        </ul>
+
+                    </div>
+
+                </div>

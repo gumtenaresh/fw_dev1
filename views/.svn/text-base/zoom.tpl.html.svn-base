@@ -1,0 +1,48 @@
+{literal}
+<script>
+ 
+    $(function() {
+        $( "#slider_one" ).slider(
+        {
+            value:{/literal}{if $zoomValues.0.value}{$zoomValues.0.value}{else}55{/if}{literal},
+            min: 10,
+            max: 100,
+            step: 5,
+            stop: function(event, ui) {
+                zoomTheContentNew(ui.value,'{/literal}{$smarty.const.SITE_URL}{literal}zoomPositions',"#mainBlock > #one > #two > img","","");
+            }
+        });
+    }); 
+
+
+    
+    $(function() {
+        $( "#slider_fanwireProfile{/literal}{$smarty.request.ac}{literal}").slider(
+        {
+            value:{/literal}{if $zoomValues.0.value}{$zoomValues.0.value}{else}40{/if}{literal},
+            min: 50,
+            max: 100,
+            step: 1,
+            stop: function(event, ui) {
+          
+                zoomTheContentFanwireProfile2(ui.value,'{/literal}{$smarty.const.SITE_URL}{literal}zoomPositions',"#mainBlock > #mydiv > .image_share_popup > .userProf > #image","#mainBlock > #mydiv > .image_share_popup  > .userProf > #image_height","#mainBlock > #mydiv > .image_share_popup  > .userProf > #image_width");
+            }
+        });
+    });
+  
+ 
+    $(function() {
+        $( "#slideraddfanwires" ).slider(
+        {
+            value:{/literal}{if $zoomValues.0.value}{$zoomValues.0.value}{else}68{/if}{literal},
+            min: 45,
+            max: 100,
+            step: 1,
+            stop: function(event, ui) {
+                zoomTheContentAddFanwires(ui.value,'{/literal}{$smarty.const.SITE_URL}{literal}zoomPositions',"#mainBlock > .photo_list  > #two > .data > #imm > #imaged","#mainBlock > .photo_list  > #two > .data > #imm > #imaged","#mainBlock > .photo_list  > #two > .data > #imm > #imaged");
+            }
+        });
+    }); 
+    
+</script>
+{/literal}

@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Fanwire</title>
+<link href="css/fanwire-css.css" rel="stylesheet" type="text/css">
+ <script src="jquery/place_holder/modernizr.js"></script>
+ <script src="jquery/place_holder/jquery.js"></script>
+    <script src="jquery/place_holder/modernizr.js"></script>
+    <script type="text/javascript">
+		
+		$(document).ready(function(){
+
+ if(!Modernizr.input.placeholder){
+
+	$('[placeholder]').focus(function() {
+	  var input = $(this);
+	  if (input.val() == input.attr('placeholder')) {
+		input.val('');
+		input.removeClass('placeholder');
+	  }
+	}).blur(function() {
+	  var input = $(this);
+	  if (input.val() == '' || input.val() == input.attr('placeholder')) {
+		input.addClass('placeholder');
+		input.val(input.attr('placeholder'));
+	  }
+	}).blur();
+	$('[placeholder]').parents('form').submit(function() {
+	  $(this).find('[placeholder]').each(function() {
+		var input = $(this);
+		if (input.val() == input.attr('placeholder')) {
+		  input.val('');
+		}
+	  })
+	});
+
+}
+
+});
+		
+		
+	</script>
+
+
+</head>
+
+<body>
+<div  class="wrapper">
+<div class="left_section">
+  <div class="logo"><a href="#"><img src="../../views/images/logo.png" height="120" width="109" alt=""></a></div>
+  <div class="guest_user"><a href="login.html">Guest User</a></div>
+  
+  <div class="search">
+	<div class="search_input">
+    	<input type="text" class="search_text" placeholder="Search">
+      <a href="#" class="search_icon"></a>
+    </div>
+      
+  </div>
+  
+  <div class="left_menusec">
+      <ul>
+        <li><a href="Contact.html" class="active">1. Connect</a></li>
+        <li><a href="sign up page 2.html">2. Add Fanwires</a></li>
+        <li><a href="sign up page 3.html">3. Profile photo</a></li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+   <div class="popular"></div>
+
+    
+</div>
+
+<div class="right_menusec">
+
+	<div class="login_section"><div class="login"><a href="#" class="login_check">Login</a></div></div>
+    <div class="login_menu">
+    	<ul>
+        	<li><a href="#">Customize</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#" style="border:none;">Help</a></li>
+        </ul>
+    </div>
+    	<div class="clear"></div>
+    
+    
+    
+
+</div>
+
+
+<div class="main_section1">
+
+	<div class="fanwire_contact">
+    		<div class="contact_text">
+            	<p>Email Us</p>
+                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut  <br >
+labore et dolore magna aliqua. Ut enim ad minim veniam quis.</span>
+            </div>
+            
+            
+            <div class="contacts">
+            <p style="color:#999999; font-size:12px;"><span>*</span>required</p>
+            
+            	<form>
+               	<p>Your Name<span>*</span></p>
+                <input type="text" class="contact_input">
+                <p>Your Email Address<span>*</span></p>
+                <input type="text" class="contact_input">
+                <p>Subject<span>*</span></p>
+                <input type="text" class="contact_input">
+                <p>Message<span>*</span></p>
+                <textarea  class="contact_textarea"> &nbsp;</textarea>
+                	<div class="clear"></div>
+                <input type="submit" class="contct_btn" value="Send Message">
+                
+                </form>
+            </div>
+            
+    </div>
+
+
+
+
+
+</div>
+
+</div>
+</body>
+</html>

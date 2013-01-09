@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib
+END
+AuthorizeNetARB.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/AuthorizeNetARB.php
+END
+AuthorizeNetDPM.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/AuthorizeNetDPM.php
+END
+AuthorizeNetSOAP.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/AuthorizeNetSOAP.php
+END
+AuthorizeNetAIM.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/AuthorizeNetAIM.php
+END
+AuthorizeNetCP.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/AuthorizeNetCP.php
+END
+AuthorizeNetCIM.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/AuthorizeNetCIM.php
+END
+AuthorizeNetSIM.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/AuthorizeNetSIM.php
+END
+AuthorizeNetTD.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/AuthorizeNetTD.php
+END

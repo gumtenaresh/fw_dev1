@@ -1,0 +1,299 @@
+<?php
+
+/**
+ * This is class is all CombineFeatures 
+ * * */
+class CombineFeatures {
+
+    private $conn = null;
+    private $sql = null;
+    private $rs = null;
+    private $data = array();
+
+    /**
+     * creating dao object
+     */
+    function __construct() {
+        $this->conn = Dao::getInstance();
+        $this->obj = new Users();
+    }
+
+    //destroying memory
+    function __destruct() {
+        unset($this->conn);
+        unset($this->rs);
+        unset($this->sql);
+        unset($this->data);
+    }
+
+    /**
+     * get all images and move to the server this is for moving the images into amazone server 
+     * 
+     */
+    public function moveImages($val = '') {
+        if ($val == 'photos') {
+            $this->sql = "(SELECT `thumbnail` as photo FROM `tbl_videos`) 
+                     union(SELECT `url` as photo FROM `tbl_timeline_photos`)
+                     union(SELECT `name` as photo FROM `tbl_photos`)
+                     union(SELECT `url` as photo FROM `tbl_avatar_photos`)
+                     union(SELECT `photo` as photo FROM `tbl_articles`)
+                     union(SELECT `album_url` as photo FROM `tbl_albums`)";
+        } else {
+            $this->sql = "SELECT profile_image as photo FROM `tbl_users` where profile_image!=''";
+        }
+        $this->rs = $this->conn->executeQuery($this->sql);
+        $i = 0;
+        foreach ($this->rs as $key => $value) {
+            $data[$i]['photo'] = $value['photo'];
+            $i++;
+        }
+        return $data;
+    }
+
+    /**
+     * testing purpose
+     */
+    public function getImagess($fanwireid = null, $pageSize = 6) {
+
+        $fanwireObject = new Fanwires();
+        $list = array();
+        $where = "where pid=$fanwireid";
+        $i = 0;
+        if ($fanwireid != null) {
+            $this->sql = "SELECT * FROM `tbl_albums`" . $where;
+        } else {
+            $this->sql = "SELECT * FROM `tbl_albums`";
+        }
+
+        $pageObject = new Pagination($pageSize, 9); //params: pagesize, scroll size
+        $navigation = $pageObject->showNavigationCustomize(sizeof($this->conn->executeQuery($this->sql)), $fanwireid);
+        $this->sql .= $pageObject->getLimitQry();
+        $this->rs = $this->conn->executeQuery($this->sql);
+        foreach ($this->rs as $key => $value) {
+            $list[$i]['id'] = $value['id'];
+            $list[$i]['name'] = $fanwireObject->getFanwireName($value['pid']);
+            $list[$i]['link'] = SITE_URL . $fanwireObject->getFanwireUrl($value['pid']); //"phots?fwrid = " . $val1['pid'] . "&ac = 1";
+            $list[$i]['title'] = $value['name'];
+            $list[$i]['photo'] = $value['album_url'];
+            $list[$i]['heigtwidth'] = YoutubeUrl::thumbnail_sizefix($value['album_url'], 79, 120);
+            $list[$i]['description'] = '';
+            if ($value['name'] == '') {
+                $title = $value['id'];
+                $list[$i]['title_link'] = SITE_URL . $fanwireObject->getFanwireUrl($value['pid']) . "/Instagram/" . $title;
+            } else {
+                $list[$i]['title_link'] = SITE_URL . $fanwireObject->getFanwireUrl($value['pid']) . "/Gallery/" . YoutubeUrl::fixurl($list[$i]['title']);
+            }
+
+            if ($val1['source'] == 'Instagram') {
+                $list[$i]['type'] = '4';
+            } else {
+                $list[$i]['type'] = '1';
+            }
+            $list[$i]['source'] = '';
+            $list[$i]['cdate'] = $value['cdate'];
+            $time = DatePicker::getTimeStamp($value['cdate']);
+            $list[$i]['time'] = $time;
+            $i++;
+        }
+        $data['list'] = $list;
+        $data['navigation'] = $navigation;
+        return $data;
+    }
+
+    /**
+     *
+     * @param type $aid
+     * @return type
+     */
+    public function getArticles($fanwireid = null, $pageSize = 1) {//$fanwireid,
+        if ($fanwireid != null) {
+            $this->sql = "SELECT * from tbl_articles where source in('3') and user_id=" . $fanwireid;
+        } else {
+            $this->sql = "SELECT * from tbl_articles where source in('3')"; //and user_id=".$fanwireid;
+        }
+        error_log($this->sql);
+        //echo $this->sql;
+        $i = 0;
+        $objUser = new Users();
+        $obj = new Fanwires();
+        $pageObject = new Pagination($pageSize, 9); //params: pagesize, scroll size
+        $navigation = $pageObject->showNavigationCustomize2(sizeof($this->conn->executeQuery($this->sql)));
+        $this->sql .= $pageObject->getLimitQry();
+        $this->rs = $this->conn->executeQuery($this->sql);
+
+        foreach ($this->rs as $val) {
+            $this->data[$i]['id'] = $val['id'];
+            $this->data[$i]['user_id'] = $val['user_id'];
+            $this->data[$i]['title'] = ($val['title']);
+            $this->data[$i]['description'] = stripslashes($val['description']);
+            $this->data[$i]['photo'] = empty($val['photo']) ? 'logodef.png' : $val['photo'];
+            $this->data[$i]['published_date'] = $val['published_date'];
+            $this->data[$i]['article_source'] = $val['article_source'];
+            $this->data[$i]['article_link'] = $val['article_link'];
+            $sub = explode('.', $val['article_link']);
+            $this->data[$i]['article_sub_link'] = $sub['0'] . '.' . $sub['1'] . '.' . end(array_reverse(explode('/', $sub['2'])));
+            $this->data[$i]['type_source'] = $val['type_source'];
+            $this->data[$i]['article_from'] = $val['article_from'];
+            $this->data[$i]['cdate'] = DatePicker::getTimeStamp($val['cdate']);
+            $this->data[$i]['date'] = date(DATE_RFC822, strtotime($val['cdate']));
+            // $arr = explode(",", $objUser->getLikesCount($val['id'], ART_TYPE));
+            //  $this->data[$i]['like'] = $arr[0];
+            $this->data[$i]['source'] = $val['source'];
+            // $this->data[$i]['dislike'] = $arr[1];
+            $this->data[$i]['released_date'] = $val['released_date'];
+            //$this->data[$i]['artstatus'] = $obj->getCollectedStatus($val['id'], ART_TYPE);
+            // $this->data[$i]['keywords'] = $obj->getKeywords($val['id'], '3');
+            // $this->data[$i]['additional_fans'] = $obj->getAdditionalFans($val['id'], '1');
+            $i++;
+        }
+        $this->data['navigation'] = $navigation;
+
+        return $this->data;
+    }
+
+    /**
+     * getFanwires
+     * @param integer $fanwire_id
+     * @return string  name
+     */
+    public function getFanwires() {
+        $this->sql = "SELECT * from tbl_fanwires";
+        $this->rs = $this->conn->executeQuery($this->sql);
+        $i = 0;
+        foreach ($this->rs as $val) {
+            $this->data[$i]['id'] = $val['id'];
+            $this->data[$i]['name'] = str_replace(" ", "_", ucfirst($val['name']));
+            $i++;
+        }
+        return $this->data;
+    }
+
+    public function insertBiography($data) {
+        extract($data);
+        $this->sql = "insert into  tbl_biography(`fanwire_id`,`fanwire_name`,`biography`,`bio_image`) values(?,?,?,?)";
+        $data = array($id, $name, str_replace("'", "", $bio), $image);
+        $this->rs = $this->conn->executePrepared($this->sql, $data);
+        return mysql_insert_id();
+    }
+
+    /**
+     * getBio
+     */
+    public function getBio($pageSize = 1) {
+        $this->sql = "SELECT * from tbl_biography";
+        $pageObject = new Pagination($pageSize, 9); //params: pagesize, scroll size
+        $navigation = $pageObject->showNavigationBiography(sizeof($this->conn->executeQuery($this->sql)));
+        $this->sql .= $pageObject->getLimitQry();
+        $this->rs = $this->conn->executeQuery($this->sql);
+        $i = 0;
+        foreach ($this->rs as $val) {
+            $bo = explode(":::", $val['biography']);
+            foreach ($bo as $value) {
+                $rr = explode("**", $value);
+                $this->list[$i][$rr[0]] = $rr[1];
+            }
+            $this->list[$i]['image'] = $val['bio_image'];
+
+            $i++;
+        }
+        $this->list['heightwidth'] = YoutubeUrl::thumbnail_sizefix($val['bio_image'], 108, 82);
+
+        $this->list['name'] = $val['fanwire_name'];
+
+        $this->list['navigation'] = $navigation;
+        //echo "<pre>";print_r($this->list);
+        // exit;
+        return $this->list;
+    }
+
+    /**
+     * getAlbums
+     * @param type 
+     * @return type
+     */
+    public function getNextAlbums($fanwireid = null, $pageSize = 1) {//$fanwireid,
+        if ($fanwireid != null) {
+            $this->sql = "SELECT * from tbl_albums where pid=" . $fanwireid;
+        } else {
+            $this->sql = "SELECT * from tbl_articles"; //and user_id=".$fanwireid;
+        }
+
+        $i = 0;
+        $objUser = new Users();
+        $obj = new Fanwires();
+        $pageObject = new Pagination($pageSize, 9); //params: pagesize, scroll size
+        $navigation = $pageObject->showNavigationCustomize2(sizeof($this->conn->executeQuery($this->sql)));
+        $this->sql .= $pageObject->getLimitQry();
+        $this->rs = $this->conn->executeQuery($this->sql);
+
+        foreach ($this->rs as $val) {
+            $this->data[$i]['fanwire_id'] = $val['pid'];
+            $this->data[$i]['album_id'] = $val['id'];
+            $this->data[$i]['title'] = ($val['name']);
+            $this->data[$i]['link'] = ($val['link']);
+            $this->data[$i]['photo'] = $val['album_url'];
+            $this->data[$i]['heightwidth'] = YoutubeUrl::thumbnail_sizefix($val['album_url'], 381, 441);
+            $this->data[$i]['date'] = DatePicker::getTimeStamp($val['cdate']);
+            $this->data[$i]['metadate'] = date("m/d/y", strtotime($val['cdate']));
+            $this->data[$i]['source'] = $val['source'];
+            $arr = explode(",", $objUser->getLikesCount($val['id'], PHOTO_TYPE));
+            $this->data[$i]['like'] = $arr[0];
+            $this->data[$i]['dislike'] = $arr[1];
+            $i++;
+        }
+        $this->data['navigation'] = $navigation;
+
+        return $this->data;
+    }
+
+    /**
+     * getPopular videos 
+     */
+    public function getPopularVideos($fanwireid = null, $pageSize = 6) {
+
+        $fanwireObject = new Fanwires();
+        $list = array();
+        $where = "where whomItBelongsTo=$fanwireid";
+        $i = 0;
+        if ($fanwireid != null) {
+            $this->sql = "SELECT * FROM `tbl_videos`" . $where;
+        } else {
+            $this->sql = "SELECT * FROM `tbl_videos`";
+        }
+
+        $pageObject = new Pagination($pageSize, 9); //params: pagesize, scroll size
+        $navigation = $pageObject->showNavigationVideo(sizeof($this->conn->executeQuery($this->sql)), $fanwireid);
+        $this->sql .= $pageObject->getLimitQry();
+        $this->rs = $this->conn->executeQuery($this->sql);
+        foreach ($this->rs as $key => $val3) {
+            $list[$i]['id'] = $val3['id'];
+            $list[$i]['name'] = $fanwireObject->getFanwireName($val3['whomItBelongsTo']);
+            $list[$i]['link'] = SITE_URL . $fanwireObject->getFanwireUrl($val3['whomItBelongsTo']); // "phots?fwrid = " . $val3['whomItBelongsTo'] . "&ac = 1";
+            $list[$i]['title'] = $val3['title'];
+            $list[$i]['photo'] = $val3['thumbnail'];
+            list($width, $height) = getimagesize(DOC_ROOT_PATH . "/photos/" . $val3['thumbnail']);
+            $list[$i]['width'] = $width;
+            $list[$i]['height'] = $height;
+            $list[$i]['description'] = $val3['description'];
+            $list[$i]['type'] = '3';
+            $list[$i]['title_link'] = SITE_URL . $fanwireObject->getFanwireUrl($val3['whomItBelongsTo']) . "/Videos/" . YoutubeUrl::fixurl($list[$i]['title']);
+            $list[$i]['source'] = '';
+            $list[$i]['cdate'] = $val3['cdate'];
+            $time = DatePicker::getTimeStamp($val3['cdate']);
+            $list[$i]['time'] = $time;
+            $i++;
+        }
+        $data['list'] = $list;
+        $data['navigation'] = $navigation;
+        return $data;
+    }
+
+    public function chechBio($id) {//for cron action
+        $sql = "SELECT * FROM `tbl_biography` where fanwire_id=".$id;
+        $rs = $this->conn->selectSql($sql, array());
+        return $rs;
+    }
+
+}
+
+?>

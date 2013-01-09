@@ -1,0 +1,26 @@
+{include file='headerguest.tpl.html'}
+{include file='zoom.tpl.html'}
+{include file='guest_left_section.tpl.html'}
+<!--Right Section-->
+
+<div class="right_container">
+    <div class="more_posts"><a href="#">More Posts</a></div>
+    <div id="inner_rightsection">
+
+        <div id="right_area">
+            {include file='fanwireshalfRightBar.tpl.html'}<!-- fanwireshalfRightBar -->
+            <div class="collection_page">
+                Name:{$fanwires.name}<br>
+                Picture:<img src="{$smarty.const.IMAGE_URL}{$fanwires.photo}" height="151" width="246"/><br>
+                Description:{$fanwires.description}
+            </div>
+            <!--            <div class="btm_line">
+            <div class="showmore"><a href="#">show more</a></div>
+            </div>-->
+            <div class="clear"></div> 
+        </div>
+        {include file='footerGuest.tpl.html'}
+        
+         <div class="login">
+            <p><a href="javascript:void(0);" onclick="loginPop();" id="loginFacebook2">LOGIN</a></p>
+        </div> 

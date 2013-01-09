@@ -1,0 +1,38 @@
+{include file='leftbarFooter.tpl.html'}    
+
+<div class="right_container">
+
+    <div id="rightsection">
+
+        
+            <div class="footer_maildata">
+                <h2>About fanwire</h2>
+                <div class="clear"></div>
+
+                <div class="main_data_sec">
+
+                    <!--<div style="clear: both;line-height: 20px;"><p>{$about}</p></div>-->
+                    <div class="clear"></div>  
+
+                    <div id="demo1"></div>
+
+                    <p> {$about}</p>
+
+                    <p>
+                        <!--{$about}-->
+                    </p>
+
+                </div>
+                <div class="clear"></div>  
+            </div>        
+
+
+
+
+
+        {if $name neq ''}
+        {include file="footer.tpl.html"} 
+        {else}
+        {include file="footerGuest.tpl.html"} 
+
+        {/if}

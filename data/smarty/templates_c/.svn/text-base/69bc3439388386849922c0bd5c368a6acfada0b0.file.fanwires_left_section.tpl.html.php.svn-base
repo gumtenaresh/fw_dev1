@@ -1,0 +1,38 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-13 17:44:35
+         compiled from "/var/www/fanwire/views/admin//fanwires_left_section.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:21305971175028efaba10b63-88548454%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '69bc3439388386849922c0bd5c368a6acfada0b0' => 
+    array (
+      0 => '/var/www/fanwire/views/admin//fanwires_left_section.tpl.html',
+      1 => 1344860051,
+    ),
+  ),
+  'nocache_hash' => '21305971175028efaba10b63-88548454',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<div class="data_leftsection">
+        <div class="glossymenu">
+            <a class="menuitem <?php if ($_smarty_tpl->getVariable('menu')->value=='addFanwire'){?>active<?php }?> " href="#">Information</a>
+            <a class="menuitem submenuheader <?php if ($_smarty_tpl->getVariable('menu')->value=='media'){?>active<?php }?>" href="#">Media</a>
+            <div class="submenu">
+                <ul>
+                    <li><a <?php if ($_smarty_tpl->getVariable('item')->value=='photos'){?>class="active"<?php }?>" href="<?php echo @ADMIN_URL;?>
+photos/addPhotos">Photo</a></li>
+                    <li><a <?php if ($_smarty_tpl->getVariable('item')->value=='videos'){?>class="active"<?php }?>" href="<?php echo @ADMIN_URL;?>
+videos/addVideos">Video</a></li>
+                    <li><a <?php if ($_smarty_tpl->getVariable('item')->value=='articles'){?>class="active"<?php }?>" href="<?php echo @ADMIN_URL;?>
+articles/addArticles">Articles</a></li>
+                    <li><a href="#">Incoming</a></li>
+                </ul>
+            </div>
+            <a class="menuitem <?php if ($_smarty_tpl->getVariable('menu')->value=='profile'){?>active<?php }?>" href="#">Profile</a>
+            <a class="menuitem" href="#">Contact</a>
+            <a class="menuitem" href="#" style="border-bottom-width: 0">Admin Log</a>		
+        </div>            
+</div>

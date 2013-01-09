@@ -1,0 +1,270 @@
+{include file='header2.tpl.html'}
+{include file='zoom.tpl.html'}
+
+
+<div class="left_menu">
+    <ul>
+        <li><a href="{$smarty.const.SITE_URL}findFans">1- FIND your fans</a></li>
+        <li><a href="{$smarty.const.SITE_URL}uploadProfilePic">2- profile photo</a></li>
+        <li class="active"><a href="{$smarty.const.SITE_URL}addFanwires">3- add fanwires</a></li>
+        <li><a href="{$smarty.const.SITE_URL}socialMedia">4- social media connect</a></li>
+    </ul>
+
+</div>
+
+</div>
+
+<!--Left Section End-->  
+
+
+
+<!--Right Section-->
+
+
+<div class="right_container">
+
+    <div id="index_rightsection">
+
+        <div id="right_area">
+
+            <h2>customize your profile: Add fanwires<br />
+                <span>A FanWire is a collection of information for a particular subject.<br />
+
+                    Select your favorite Band, Celebrity, News, or Sports. You can always add or remove anytime.</span></h2>
+            <br />
+
+            <div class="add_fanwires">
+                <h2>our suggestions:</h2>
+                <div class="search">
+                    <!-- added new -->    
+                    <table><tr><td>
+                                <div class="minus">
+                                    <img src='{$smarty.const.SITE_URL}views/images/m.png'>
+                                </div>
+                            </td><td>
+                                <div style="float:left;width:200px;"><a href="#" class="tt" >
+                                        <div class="zoom" id="slider_one" style='width: 100%;float:left;'>
+                                            <span class="tooltip" >
+                                                <b>Tip:</b> Drag the slider to
+                                                increase/decrease the size of Fanwires
+                                            </span>
+                                        </div> 
+                                    </a>
+                                </div></td><td>
+                                <div class="plus"  >
+                                    <img src='{$smarty.const.SITE_URL}views/images/p.png'>
+                                </div></td></tr></table>
+                    <!--                 <div id="slider_one" class="zoom"> -->
+                    <!--                     <a class="" href="#" style="left:12%; "> </a> -->
+                    <!--                 </div> -->
+
+                    <!-- added new end -->  </div>
+
+
+            </div>
+
+            <div class="add_fanwires">
+                <div class="awards_active">
+                    <ul>
+                        <li ><a href="{$smarty.const.SITE_URL}addFanwires"><span><strong>Celebrity</strong></span></a></li>
+                        <li><a href="{$smarty.const.SITE_URL}fashion"><span><strong>Fashion</strong></span></a></li>
+                        <li ><a href="{$smarty.const.SITE_URL}news"><span><strong>News</strong></span></a></li>
+                        <li  ><a href="{$smarty.const.SITE_URL}sports"><span><strong>Sports</strong></span></a></li>
+                        <li class="active"><a href="{$smarty.const.SITE_URL}music"><span><strong>Music</strong></span></a></li>
+
+
+                    </ul>
+                </div>
+
+                <div class="search">
+                    <input
+                        name=""
+                        type="text"
+                        class="search_field"
+                        placeholder='Search fanwire'
+						style="text-align: center;"
+                        /> <input
+                        name=""
+                        type="button"
+                        class="go2"
+                        placeholder="search here somthing"
+                        />
+                </div>
+
+            </div>
+            <div id='message' class='settings_details'></div>
+            <div class="addpost">
+                <div style="width: 100%;text-align: center;">
+                    <!--================================================= Testing testing============================================================ -->
+
+                    <div id="mainBlock">
+                        {if $fanwires}
+                        {section name=fanwire loop=$fanwires}
+                        {assign var=fan value=$fanwires[fanwire]}
+                       {if $fan.user_id eq $smarty.session.id || $fan.user_id eq ''}
+                      <div class="post" id='one'
+                         style="width: {$zoomValues.0.width}px;"
+                  
+                        >
+                            <div class="posts" id='two' 
+                            style="width: {$zoomValues.0.width}px;"
+                            
+                            >
+                                <img src="{$smarty.const.IMAGE_URL}{$fan.photo}" 
+                                {if $zoomValues.0.height} 
+                                	height="{$zoomValues.0.height}!important" width='{$zoomValues.0.width}!importanat'
+                                {else}
+                                 	width="114" height="105"  
+                                 {/if}
+                                />
+                                <div class="data">{$fan.name}</div>
+                            </div>
+                            
+                            <div>
+                                <input  id="n{$fan.id}" type="button" {if $fan.user_id eq '' ||  ($fan.user_id eq $smarty.session.id && $fan.fan_status eq 0)}name="add" class="fan" value="+ fan"  onclick="addFan({$fan.id})" {else if $fan.user_id eq $smarty.session.id && $fan.fan_status eq 1}name="unfan" class="unfan" value="- unfan" onclick="unFan({$fan.id})" {/if}/>
+                            </div>
+
+                        </div>
+                        {/if}
+
+                        {/section}
+                        {else}No Records found........{/if}
+
+
+
+
+                    </div>
+                </div>
+
+
+
+
+                <!--====================================== END Testing testing================================================ -->
+
+
+
+
+            </div>
+
+
+            <div class="clear"></div>
+
+         {if $fanwires|@count gt 14}
+            <div class="btm_line">
+                <div class="showmore"><a href="#">show more</a></div>
+            </div>
+{/if}
+            <div class="skip"><input name="" type="button" class="continue_btn" value="continue"  onclick='checkMinThreeFan();'/><br /><br /><br />
+                <br />
+
+
+                <a href="{$smarty.const.SITE_URL}socialMedia" ><i>Skip this step</i></a></div>
+
+            <div class="clear"></div>
+
+
+
+        </div>    
+
+
+
+        <!--Right Section End--> 
+        {literal}
+
+        <script>
+            function addFan(id){
+                //	alert(id);
+                var dataString ='id='+id;
+    
+                $.ajax({
+                    type: "POST",
+                    url:"{/literal}{$smarty.const.SITE_URL}{literal}addFanwire",
+                    data: dataString,
+                    success: function(response) {
+                        if(response==1){
+                            /*location.reload();		
+                        $('#message').html(response)
+                        .hide()
+                        .fadeIn(1500)
+                        .fadeOut(1500)*/
+                            //alert($("#n"+id).val());
+                            $("#n"+id).removeClass('fan');
+                            $("#n"+id).addClass('unfan');
+                            $("#n"+id).val('- unfan');
+                            $("#n"+id).removeAttr( 'onClick');
+                            $("#n"+id).attr( 'onClick', 'unFan("'+id+'")');
+                        }else{
+                            $('#message').html(response)
+                            .hide()
+                            .fadeIn(1500)
+                            .fadeOut(1500)
+                        }
+                    }
+                });
+                return false;
+            }
+            function unFan(id){
+	
+                var dataString ='id='+id;
+    
+                $.ajax({
+                    type: "POST",
+                    url:"{/literal}{$smarty.const.SITE_URL}{literal}unFanwire",
+                    data: dataString,
+                    success: function(response) {
+                        if(response==1){
+                            /*location.reload();
+                    
+                        $('#message').html(reponse)
+                        .hide()
+                        .fadeIn(1500)
+                        .fadeOut(1500)*/
+                            //$("#n"+id).toggle();
+                            //alert($("#n"+id).val());
+                            //$("#n"+id).hasClass();
+                            $("#n"+id).removeClass('unfan');
+                            $("#n"+id).addClass('fan');
+                            $("#n"+id).val('+ fan');
+                            //$("#n"+id).hide();
+                            //$("#n"+id).hasClass();
+                            $("#n"+id).removeAttr( 'onClick');
+                            $("#n"+id).attr( 'onClick', 'addFan("'+id+'")');
+				
+                        }else{
+                            $('#message').html(response)
+                            .hide()
+                            .fadeIn(1500)
+                            .fadeOut(1500)
+                        }
+                    }
+                });
+                return false;
+            }
+            function checkMinThreeFan(){
+        	
+                var dataString ='session_id='+'{/literal}{$smarty.session.id}{literal}';
+    
+                $.ajax({
+                    type: "POST",
+                    url:"{/literal}{$smarty.const.SITE_URL}{literal}checkMinThreeFan",
+                    data: dataString,
+                    success: function(response) {
+                	 
+                        if(response>=3){
+                            //location.reload();
+                        
+                            window.location.href="{/literal}{$smarty.const.SITE_URL}{literal}socialMedia";
+                        }else{
+                            $('#message').html( "<h2>Must be fan of three fanwires</h2>")
+                            .hide()
+                            .fadeIn(3000)
+                            .fadeOut(3000)
+                        }
+                    }
+                });
+                return false;
+            }
+        </script>
+        {/literal}
+
+        {include file='footerww.tpl.html'}

@@ -1,0 +1,167 @@
+.tooltip, .arrow:after {
+  background: #f2f2f2;
+   /*border: 2px solid white;
+ background:#f2f2f2;
+	moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 30px 30px 30px 30px;
+	box-shadow: 2px 2px 1px #dcdddd;*/
+
+  
+}
+
+.tooltip {
+  pointer-events: none;
+  opacity: 0;
+  display: inline-block;
+  position: relative;
+  padding: 10px 20px;
+  z-index:2;
+  color: gray;
+  border-radius: 20px;
+  margin-top: 20px;
+  text-align: center;
+  font: bold 14px "Helvetica Neue", Sans-Serif;
+  font-stretch: condensed;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 1px #dcdddd;
+  width:200px;
+
+	   
+}
+.arrow {
+  width: 70px;
+  height: 50px;
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  margin-left: 35px;
+  bottom: -50px;
+}
+.arrow:after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: -15px;
+  width: 25px;
+  height: 25px;
+ box-shadow: 2px 2px 1px #dcdddd;
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+}
+.tooltip.active {
+  opacity: 1;
+  margin-top: 5px;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition:    all 0.2s ease;
+  -ms-transition:     all 0.2s ease;
+  -o-transition:      all 0.2s ease;
+}
+.tooltip.out {
+  opacity: 0;
+  margin-top: -20px;
+}
+
+/***********NARESH***************/
+
+
+div>.tooltip,li>.tooltip,a>.tooltip,span>.tooltip {
+	opacity: 0;
+	margin-top: -10px;
+	visibility: hidden;
+	margin-left: -65px;
+/*	-webkit-transition-property: opacity, margin-top, visibility,
+		margin-left;
+	-webkit-transition-duration: 0.5s, 0.3s, 0.5s, 0.3s;
+	-webkit-transition-timing-function: ease-in-out, ease-in-out,
+		ease-in-out, ease-in-out;
+	-moz-transition-property: opacity, margin-top, visibility, margin-left;
+	-moz-transition-duration: 0.5s, 0.3s, 0.5s, 0.3s;
+	-moz-transition-timing-function: ease-in-out, ease-in-out, ease-in-out,
+		ease-in-out;
+	-o-transition-property: opacity, margin-top, visibility, margin-left;
+	-o-transition-duration: 0.5s, 0.3s, 0.5s, 0.3s;
+	-o-transition-timing-function: ease-in-out, ease-in-out, ease-in-out,
+		ease-in-out;
+	transition-property: opacity, margin-top, visibility, margin-left;
+	transition-duration: 0.5s, 0.3s, 0.5s, 0.3s;
+	transition-timing-function: ease-in-out, ease-in-out, ease-in-out,
+		ease-in;*/
+}
+
+div:hover>.tooltip,li:hover>.tooltip,a:hover>.tooltip,span:hover>.tooltip,a .tooltip:hover,span .tooltip:hover,li .tooltip:hover,div .tooltip:hover
+	{
+	opacity: 1;
+	visibility: visible;
+	overflow: visible;
+	margin-top: 30px;
+	display: inline;
+	margin-left: -40px;
+	 
+}
+
+.tooltip {
+	background: #f2f2f2;;
+/*	background: -moz-linear-gradient(top, #FFFBCF 0%, #FFFCDF 100%);*/
+/*	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFFBCF),
+		color-stop(100%, #FFFCDF) );*/
+/*	filter: progid :     DXImageTransform.Microsoft.gradient (     
+		 startColorstr =  
+		  '#FFFBCF', endColorstr =     '#FFFCDF', GradientType =     0 );
+	border: 1px solid #EFE795;*/
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-o-border-radius: 20px;
+	border-radius: 20px;
+	padding: 20px;
+	position: absolute;
+	left:20px;top:-20PX;
+	font-size: 13px;
+	text-decoration: none;
+          	font-style: normal;
+	color: #777;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.75);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), inset 0PX 4px 0 #D1D1D1;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), inset 0PX 4px 0px #D1D1D1;
+	-o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), inset 0PX 4PX 0 #D1D1D1;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), inset 0PX 0PX 0 #D1D1D1;
+	z-index: 999999;
+}
+.tooltip, .arrow:after {
+  background: #f2f2f2;
+   /*border: 2px solid white;
+ background:#f2f2f2;
+	moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 30px 30px 30px 30px;
+	box-shadow: 2px 2px 1px #dcdddd;*/
+
+  
+}
+ 
+.arrow {
+  width: 70px;
+  height: 50px;
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  margin-left: 35px;
+  bottom: -50px;
+}
+.arrow:after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: -15px;
+  width: 25px;
+  height: 25px;
+ box-shadow: 2px 2px 1px #dcdddd;
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+}
+

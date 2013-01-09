@@ -1,0 +1,28 @@
+ 
+
+a.left{
+	display: block;
+	width: 18px;
+	height: 18px;
+	float: left;
+	margin: 60px 10px;
+	cursor: pointer;
+}
+ a.right {
+	display: block;
+	width: 18px;
+	height: 18px;
+	float: left;
+	margin: 60px 10px;
+	cursor: pointer;
+}
+
+a.right { background: url(../images/upload_image_R_arrow.png) no-repeat;  clear:right; margin-right: 0px;}
+a.right:hover  { background-position:0px -18px; }
+a.right:active 	{ background-position:0px 0px; } 
+
+a.left	{ background: url(../images/upload_image_L_arrow.png) no-repeat;  margin-left: 0px; }
+a.left:hover  { background-position:0px -18px; }
+a.left:active  { background-position:-0px 0px; }
+
+a.disabled { visibility:hidden !important; } 	

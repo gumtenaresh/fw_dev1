@@ -1,0 +1,42 @@
+{include file="header.tpl.html"}
+<div class="main_section1">
+    <div class="fanwire_contact">
+        <div class="contact_text">
+            <p>Customize Your Fanwire: Add Profile</p>
+            <span>A FanWire is a collection of information for a particular subject.</span>
+            <span>Select your favorite Band, Celebrity, News, or Sports. You can always add or remove anytime</span>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="browser">
+        <p>Our Suggestions</p>
+        <div class="menu">
+            <ul>
+                <li {if $activeBrowse eq 'myfanwires'}class="active"{/if}><a href="{$smarty.const.SITE_URL}myfanwires" {if $activeBrowse eq 'myfanwires'}class="active"{/if}>My fanwires ({$fanwires_for_more|count})    </a></li>
+                <li {if $activeBrowse eq 'addfan'}class="active"{/if} ><a href="{$smarty.const.SITE_URL}browseFans" {if $activeBrowse eq 'addfan'}class="active"{/if}> Add Fanwires</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="browser_comment" id="mainBlock"  >
+        {if $fanwires}
+        {section name=fanwire loop=$fanwires}
+        {assign var=fan value=$fanwires[fanwire]}
+        <div class="comment item block">
+            <div class="comment_img"> <img src="{$smarty.const.IMAGE_URL}{$fan.photo}" width="180"  height="{180*$fan.height/$fan.width}" ></div>
+            <div class="comment_text"><p>{$fan.name}</p><span class="more">{$fan.description}.</span> </div>
+            <div class="comment_bottom">
+                <div class="comment_follow">
+                    <a href="javascript:void(0);" rel="{$fan.fan_status}" id="folunfol{$fan.id}"  title="{$fan.id}"  {if $fan.fan_status eq 1} class="comment_follow_img_active" {else}class="comment_follow_img"{/if} alt="{$fan.fan_status}"></a>
+                    <!--<span  style="clear:right">1,234 Followed</span>-->
+                </div>
+
+            </div>
+        </div>
+        {/section}
+        {else}No Records found........{/if}
+    </div>
+</div>
+</div>
+{include file="footer.tpl.html"}

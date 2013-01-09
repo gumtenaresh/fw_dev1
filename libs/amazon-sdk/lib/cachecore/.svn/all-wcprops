@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/lib/cachecore
+END
+cachexcache.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/lib/cachecore/cachexcache.class.php
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/lib/cachecore/LICENSE
+END
+cachefile.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/lib/cachecore/cachefile.class.php
+END
+cachecore.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/lib/cachecore/cachecore.class.php
+END
+cacheapc.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/lib/cachecore/cacheapc.class.php
+END
+cachemc.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/lib/cachecore/cachemc.class.php
+END
+cachepdo.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/lib/cachecore/cachepdo.class.php
+END
+icachecore.interface.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/lib/cachecore/icachecore.interface.php
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/lib/cachecore/README
+END

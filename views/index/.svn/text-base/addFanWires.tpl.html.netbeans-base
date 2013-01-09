@@ -1,0 +1,56 @@
+{include file='header.tpl.html'}
+ 
+<div class="clear"></div>
+
+<div class="main_section1" onclick="checkMinThreeFan('$smarty.session.id')">
+    <div id="categorycontents">
+        <div class="browser">
+            <p>Add 3 Profiles You Are Interested In </p>
+            <div class="menu">
+                <ul>
+                    {section name=id loop=$categories}                                    
+                    <li {if $selected_cat eq $categories[id].id}class="active"{/if}><a href="javascript:void(0);"  onclick="nextPage('{$categories[id].id}')" id="celebrityPopup"><span><strong>{$categories[id].name}</strong></span></a></li>
+                    {/section}                                
+                </ul>
+                <!--            <ul>
+                                <li class="active"><a href="#" class="active">CELEBRITY</a></li>
+                                <li><a href="#">     Music  </a></li>
+                                <li><a href="#">   PUBLIC FIGURE</a></li>
+                
+                            </ul>-->
+            </div>
+
+        </div>
+        <script type="text/javascript">window.onload=checkMinThreeFan('{$smarty.session.id}')</script>
+        <div class="browser_comment" id="mainBlock"  >
+
+            {section name=fanwire loop=$fanwiresCelebrity}
+            {assign var=fan value=$fanwiresCelebrity[fanwire]}
+            <div class="comment item block">
+                <div class="comment_img"> <img src="{$smarty.const.IMAGE_URL}{$fan.photo}" width="180"  height="{180*$fan.height/$fan.width}" ></div>
+                <div class="comment_text"><p>{$fan.name}</p><span class="more">{$fan.description}.</span> </div>
+                <div class="comment_bottom">
+                    <div class="comment_follow">
+                        <a href="javascript:void(0);" rel="{$fan.fan_status}" id="folunfol{$fan.id}"  title="{$fan.id}"  {if $fan.fan_status eq 1} class="comment_follow_img_active" {else}class="comment_follow_img"{/if} alt="{$fan.fan_status}"></a>
+                        <!--<span  style="clear:right">1,234 Followed</span>-->
+                    </div>
+
+                </div>
+            </div>
+            {/section}
+        </div>
+    </div>
+    <span id="cont1" style="position: absolute;right: 10px;top:66px;">
+        <a href="{$smarty.const.SITE_URL}uploadProfilePic"><input type="button" class="Continue" value="Finished" /></a>
+    </span>
+</div>
+
+
+
+</div>
+</body>
+</html>
+
+
+
+

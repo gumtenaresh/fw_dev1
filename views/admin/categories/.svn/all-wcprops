@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/purpletalk_fanwire/!svn/ver/1112/fanwire/views/admin/categories
+END
+addCategory.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/purpletalk_fanwire/!svn/ver/1112/fanwire/views/admin/categories/addCategory.tpl.html
+END
+categoriesList.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/purpletalk_fanwire/!svn/ver/1112/fanwire/views/admin/categories/categoriesList.tpl.html
+END
+editCategory.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/purpletalk_fanwire/!svn/ver/1112/fanwire/views/admin/categories/editCategory.tpl.html
+END

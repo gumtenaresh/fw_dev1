@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>FANWIRE</title>
+<link rel="stylesheet" type="text/css" href="{$smarty.const.SITE_URL}views/css2/login_style.css" />
+</head>
+<body>	
+ <div id="wrapper">
+        <!--Left Section Start-->
+        <div id="leftsection">
+            <div class="logo">
+                <a href="#"><img src="{$smarty.const.SITE_URL}views/images/logo.png" width="143" height="127" border="0" /></a>
+            </div>
+        </div>
+ <div class="right_container">
+            <div id="rightsection">
+                <div id="right_area" >
+                 {include file="$ADMIN/header.tpl.html"}
+      
+                 
+                 <div class="contet_box">
+
+<!--<iframe width="420" height="315" src="http://www.youtube.com/embed/KOHgbVpyH0Y" frameborder="0" allowfullscreen></iframe>         -->
+                     
+                     <br /><br /><br />
+                     
+                     <div align="center"><h3>ALBUMS LIST</h3></div>
+                     <br />
+    {section name="id" loop= $list}
+    
+    <div style="float:left;width: 200px;padding:10px;border: #CCC solid 1px;margin: 5px;">  
+        <a href="{$smarty.const.ADMIN_URL}fanwires/photoslist?id={$list[id].id}"><img src="{$smarty.const.IMAGE_URL}{if $list[id].image_url eq ''}default_photo.jpg{else}{$list[id].image_url}{/if}" height="200" width="200" border="0" /> </a>
+        <div align="center">{$list[id].name}&nbsp;</div>
+        {if $smarty.session.admintype eq '2'}<div align="center"><a href="{$smarty.const.ADMIN_URL}fanwires/deleteAlbum?id={$list[id].id}" onclick="return confirm('Delete Album?')">delete</a></div>{/if}
+    </div>
+    {sectionelse}
+    <div align="center" style="padding-top: 50px;">No Albums</div>
+    {/section}
+    {if !empty($navigation)}
+    <div>
+    {$navigation}
+    </div>
+    {/if}
+    
+</div>       
+        </div>
+    </div>
+</div>
+</div> 
+
+{include file="$ADMIN/footer.tpl.html"}
+</body>
+</html>

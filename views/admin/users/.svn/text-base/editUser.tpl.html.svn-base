@@ -1,0 +1,58 @@
+{include file="{$smarty.const.ADMIN}/header.tpl.html"}
+<div id="data_sectionarea">
+        <div class="data_rightsection1">
+        <div class="rightcontent">                      
+                    <form  name="createuse" id="createuse" method="post" action="">
+                        <div class="fw_login_right">
+                            <div style="width: 600px;float:right;">
+                                    <div style="font-size: 22px; margin:  0 0 25px 0px; ">Update Editor Details</div>
+                            <input type="hidden" name="fa_register" value="register"/>
+                            <div class="fealds_popup_right">
+                                <div style="color:#F00;">{$msg}</div>
+                                <div style="color:#00F;">{$success}</div>
+                                <div>
+                                    <label style="font-family: 'OpenSansRegular'; color:#424140; font-size:14px; "class="fealds_popup_leftl">First Name</label>
+                                    <input type="text" name="firstname" id="firstname" class="popuptextfield" value="{$list.0.fname}"  />
+
+                                </div>
+                                <div>
+                                    <label style="font-family: 'OpenSansRegular'; color:#424140; font-size:14px; "class="fealds_popup_leftl">Last Name</label>
+                                    <input type="text" name="lastname" id="lastname" class="popuptextfield" value="{$list.0.lname}"/>
+                                </div>
+                                <div>
+                                    <label style="font-family: 'OpenSansRegular'; color:#424140; font-size:14px; "class="fealds_popup_leftl">Email</label>
+                                    <input type="text" name="email" id ="email" class="popuptextfield" value="{$list.0.email}" />
+                                </div>
+                                <select id="usertype" name="usertype">
+                    <!--                 <option value="">Select</option>    -->
+                                    <option value="3" {if $list.0.usertype eq '3'}selected{/if}>Editor</option>    
+                                    <option value="2" {if $list.0.usertype eq '2'}selected{/if}>Admin</option>
+                                </select>
+                                <div>
+                                    <label style="font-family: 'OpenSansRegular'; color:#424140; font-size:14px; "class="fealds_popup_leftl">Enter Password</label>
+                                    <input type="password"  name="password" id="password" class="popuptextfield"value="" />
+                                </div>
+
+                                <div>
+                                    <label style="font-family: 'OpenSansRegular'; color:#424140; font-size:14px; "class="fealds_popup_leftl">Re Enter Password</label>
+                                    <input type="password"  name="confpassword" id="confpassword" class="popuptextfield" value=""/>
+                                </div>
+                            </div>
+                            <div class="clear"></div>  
+                             
+                            <div class="clear"></div>
+                            <div style="float: left;"> 
+                                <input name="submit"  type="submit" class="button_login" value="CREATE"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        </div>
+                    </form>
+</div>       
+        </div>
+    </div>
+</div>
+</div> 
+
+{include file="{$smarty.const.ADMIN}/footer.tpl.html"}
+ 

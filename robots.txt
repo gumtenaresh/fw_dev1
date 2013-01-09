@@ -1,0 +1,12 @@
+User-agent: *
+
+
+sitemap: http://a16894.hostedsitemaps.com/3841527/sitemap.xml
+
+
+
+
+
+
+
+

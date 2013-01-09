@@ -1,0 +1,173 @@
+{include file='header.tpl.html'}
+{include file ='zoom.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}<!-- this is left bar -->
+
+<!--Right Section-->
+<div d class="right_container">
+
+    <div id="rightsection">
+
+        <div id="right_area">
+            <div class="connect_fans">
+
+                <h2>Add a new item</h2>
+                <br />
+
+                <div class="settings_page">
+                    <div class="awards_active">
+                        <ul>
+                            <li><a href="#"><span><strong>Step 1. Content Type</strong></span></a></li>
+                            <li class="active"><a href="#"><span><strong>Step 2. Add Information</strong></span></a></li>
+                            <li><a href="#"><span><strong>Step 3. organize</strong></span></a></li>
+                            <li><a href="#"><span><strong>step 4. preview and publish</strong></span></a></li>
+                        </ul>
+
+                    </div></div>
+
+                <div class="heading2">
+                    <h2>add a new photo</h2></div>
+
+                <div class="adding_article">
+
+                    <div class="settings_details">
+                        <div class="name">Name</div>
+                        <div class="field_details"><input name="" type="text" class="textfield" /> </div>
+
+
+                        <!-- ++++=============================================addmore========================================== -->
+                        <table width="100%" cellspacing="0" cellpadding="10">
+
+                            <tr>
+                                <td class="name" >Upload Photo</td> 
+                                <td><input type="file" name='file' ></input></td>
+                            </tr>
+                            <tr>
+                                <td class="left_align">&nbsp;</span></td>
+                                <td class="add_more"> 
+                                    <a id="lnkAttch" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'" class="attach_file" onclick="AddFileInput()">+ add more</a>
+                                </td>                  
+                            </tr>
+                            <tr><td>&nbsp;</td>
+                                <td  id="tdFileInputs"></td>  
+                            </tr>
+
+                        </table>
+                        <!-- ++++=============================================end addmore========================================== -->
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="import">
+
+                    or<br />
+                    <h3>Import from facebook</h3>
+
+                    <input name="" type="button" value="connect" class="reply_btn" />
+                </div>
+                <div class="be_fan">
+                    <h3>up loaded images</h3>
+                    <div class="be_fan">
+
+                        <div class="view fan_post"><div class="mask">
+
+                                <a href="#" class="close2"></a>
+                            </div><img src="{$smarty.const.SITE_URL}views/images/march_medium.jpg" width="175" height="144" alt="Image" />
+
+
+                        </div>
+
+                        <div class="fan_post"><img src="{$smarty.const.SITE_URL}views/images/march_medium.jpg" width="175" height="144" alt="Image" />
+                        </div>
+
+                        <div class="fan_post"><img src="{$smarty.const.SITE_URL}views/images/march_medium.jpg" width="175" height="144" alt="Image" />
+                        </div>
+
+                        <div class="fan_post"><img src="{$smarty.const.SITE_URL}views/images/march_medium.jpg" width="175" height="144" alt="Image" />
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+            <div class="clear"></div>
+
+            <hr />
+
+            <input name="" type="button" class="back" value="back" onclick="window.location.href='{$smarty.const.SITE_URL}addItem';"/>
+            <input name="" type="submit" class="next" value="next" />
+
+        </div>
+
+        <div class="clear"></div>
+        {literal}
+        <script language="javascript" type="text/javascript">
+            function Load()
+            {
+		
+                document.getElementById("btnSend").style.display="none";
+            }
+            count  = 0;
+            function AddFileInput()
+            {
+                var tdFileInputs = document.getElementById('tdFileInputs');
+                var id = (new Date()).getTime();
+                var file = document.createElement('input');
+                file.setAttribute('id',id);
+                file.setAttribute('name',id);
+                file.setAttribute('type','file');
+                tdFileInputs.appendChild(file);
+                var a = document.createElement('a');
+                a.setAttribute('id','remove_' + id);
+                a.innerHTML = "Remove<br>";
+                a.onclick = RemoveFileInput;
+                tdFileInputs.appendChild(a);
+                var lnkAttch = document.getElementById('lnkAttch');
+                count = count + 1;
+                if(count>0)
+                {
+                    lnkAttch.innerHTML = "+ ADD MORE";
+                    document.getElementById("btnSend").style.display="";
+                }
+                else
+                {
+                    document.getElementById("btnSend").style.display="none";
+                    lnkAttch.innerHTML = "+ ADD MORE";
+                }
+            }
+		
+            function RemoveFileInput(e)
+            {
+                var Event = e ? e : window.event; 
+                var obj = Event.target ? Event.target : window.event.srcElement; 
+                var tdFileInputs = document.getElementById('tdFileInputs');
+                var a = document.getElementById(obj.id);
+                tdFileInputs.removeChild(a);
+                var fileInputId = obj.id.replace('remove_','');
+                var fileInput = document.getElementById(fileInputId);
+                tdFileInputs.removeChild(fileInput);
+                var lnkAttch = document.getElementById('lnkAttch');
+                count = count - 1;
+                if(count>0)
+                {
+                    lnkAttch.innerHTML = "Attach another file";
+                    document.getElementById("btnSend").style.display="";
+                }
+                else
+                {
+                    lnkAttch.innerHTML = "Attach a file";
+                    document.getElementById("btnSend").style.display="none";
+                }
+            }
+		
+        </script>
+        {/literal}
+        {include file ='footer.tpl.html'}

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/shared
+END
+AuthorizeNetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/shared/AuthorizeNetRequest.php
+END
+AuthorizeNetXMLResponse.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/shared/AuthorizeNetXMLResponse.php
+END
+AuthorizeNetTypes.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/shared/AuthorizeNetTypes.php
+END
+AuthorizeNetResponse.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/purpletalk_fanwire/!svn/ver/2/fanwire/libs/authorize/anet_php_sdk/lib/shared/AuthorizeNetResponse.php
+END

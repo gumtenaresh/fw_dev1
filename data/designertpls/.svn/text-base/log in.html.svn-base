@@ -1,0 +1,915 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Fanwire</title>
+<link href="css/fanwire-css.css" rel="stylesheet" type="text/css">
+
+ <script src="jquery/place_holder/jquery.js"></script>
+    <script src="jquery/place_holder/modernizr.js"></script>
+    <script type="text/javascript">
+		
+		$(document).ready(function(){
+
+ if(!Modernizr.input.placeholder){
+
+	$('[placeholder]').focus(function() {
+	  var input = $(this);
+	  if (input.val() == input.attr('placeholder')) {
+		input.val('');
+		input.removeClass('placeholder');
+	  }
+	}).blur(function() {
+	  var input = $(this);
+	  if (input.val() == '' || input.val() == input.attr('placeholder')) {
+		input.addClass('placeholder');
+		input.val(input.attr('placeholder'));
+	  }
+	}).blur();
+	$('[placeholder]').parents('form').submit(function() {
+	  $(this).find('[placeholder]').each(function() {
+		var input = $(this);
+		if (input.val() == input.attr('placeholder')) {
+		  input.val('');
+		}
+	  })
+	});
+
+}
+
+});
+		
+		
+	</script>
+
+
+</head>
+
+<body>
+<div  class="wrapper">
+<div class="left_section">
+  <div class="logo"><a href="#"><img src="../../views/images/logo.png" height="120" width="109" alt=""></a></div>
+  <div class="guest_user"><a href="login.html">Guest User</a></div>
+  
+  <div class="search">
+	<div class="search_input">
+    	<input type="text" class="search_text" placeholder="Search">
+      <a href="#" class="search_icon"></a>
+    </div>
+      
+  </div>
+  
+  <div class="left_menusec">
+      <ul>
+        <li><a href="my_fanwire.html" >My FANWIre</a></li>
+        <li><a href="werecommended.html">We recommend</a></li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+   <div class="popular">
+            <div class="popular_conent">
+            <h1>Who’s Popular</h1>
+            
+            <div class="spear">
+            <div class="spear_left">
+            <span class="spear_left1">1</span>
+            <img src="../../views/images/spear.gif" height="30" width="30" alt="">
+            </div>
+            <div class="spear_right">
+            <p>Briney Spears</p>
+            <span>Briney Spears</span>
+            </div>
+            <div class="clear"></div>
+            
+            </div>
+            
+            <div class="spear">
+            <div class="spear_left">
+            <span class="spear_left1">2</span><img src="../../views/images/spear.gif" height="30" width="30" alt=""></div>
+            <div class="spear_right"> <p>Briney Spears</p><span>Briney Spears</span> </div>
+            <div class="clear"></div>
+            </div>
+            
+            <div class="spear">
+            <div class="spear_left">
+            <span class="spear_left1">3</span>
+            <img src="../../views/images/spear.gif" height="30" width="30" alt="">
+            </div>
+            <div class="spear_right">
+            <p>Briney Spears</p>
+            <span>Briney Spears</span>
+            </div>
+            <div class="clear"></div>
+            </div>
+            <div class="spear">
+            <div class="spear_left">
+            <span class="spear_left1">4</span>
+            <img src="../../views/images/spear.gif" height="30" width="30" alt="">
+            </div>
+            <div class="spear_right">
+            <p>Briney Spears</p>
+            <span>Briney Spears</span>
+            </div>
+            <div class="clear"></div>
+            </div>
+            <div class="spear">
+            <div class="spear_left">
+            <span class="spear_left1">5</span>
+            <img src="../../views/images/spear.gif" height="30" width="30" alt="">
+            </div>
+            <div class="spear_right">
+            <p>Briney Spears</p>
+            <span>Briney Spears</span>
+            </div>
+            <div class="clear"></div>
+            
+            </div>
+            
+            <div class="spear">
+            <div class="spear_left">
+            <span class="spear_left1">6</span>
+            <img src="../../views/images/spear.gif" height="30" width="30" alt="">
+            </div>
+            <div class="spear_right">
+            <p>Briney Spears</p>
+            <span>Briney Spears</span>
+            </div>
+            <div class="clear"></div>
+            
+            </div>
+            
+            <div class="spear">
+            <div class="spear_left">
+            <span class="spear_left1">7</span>
+            <img src="../../views/images/spear.gif" height="30" width="30" alt="">
+            </div>
+            <div class="spear_right">
+            <p>Briney Spears</p>
+            <span>Briney Spears</span>
+            </div>
+            <div class="clear"></div>
+            
+            </div>
+            
+            <div class="spear">
+            <div class="spear_left">
+            <span class="spear_left1">8</span>
+            <img src="../../views/images/spear.gif" height="30" width="30" alt="">
+            </div>
+            <div class="spear_right">
+            <p>Briney Spears</p>
+            <span>Briney Spears</span>
+            </div>
+            <div class="clear"></div>
+            
+            
+            
+            
+            
+            </div>
+            <div class="see">
+            <a href="#">See all</a>
+            </div>
+            
+            </div>
+            
+            
+            
+            
+            <div class="popular_conent1">
+            <h1>What’s Hot</h1>
+            
+            <div class="spear1">
+            <div class="spear1_left">
+            <img src="../../views/images/spear1.gif" height="40" width="50" alt="" >
+            </div>
+            <div class="spear1_right">
+            <span>Early voting in key </span>
+            <span>states</span>
+            </div>
+            <div class="clear"></div>
+            
+            </div>
+            
+            <div class="spear1">
+            <div class="spear1_left">
+            <img src="../../views/images/spear1.gif" height="40" width="50" alt="" >
+            </div>
+            <div class="spear1_right">
+            <span>Early voting in key </span>
+            <span>states</span>
+            </div>
+            <div class="clear"></div>
+            
+            </div>
+            
+            <div class="spear1">
+            <div class="spear1_left">
+            <img src="../../views/images/spear1.gif" height="40" width="50" alt="" >
+            </div>
+            <div class="spear1_right">
+            <span>Early voting in key </span>
+            <span>states</span>
+            </div>
+            <div class="clear"></div>
+            
+            </div>
+            <div class="spear1">
+            <div class="spear1_left">
+            <img src="../../views/images/spear1.gif" height="40" width="50" alt="" >
+            </div>
+            <div class="spear1_right">
+            <span>Early voting in key </span>
+            <span>states</span>
+            </div>
+            <div class="clear"></div>
+            
+            </div>
+            <div class="spear1">
+            <div class="spear1_left">
+            <img src="../../views/images/spear1.gif" height="40" width="50" alt="" >
+            </div>
+            <div class="spear1_right">
+            <span>Early voting in key </span>
+            <span>states</span>
+            </div>
+            <div class="clear"></div>
+            
+            </div>
+            
+
+            
+            <div class="see">
+            <a href="#">See all</a>
+            </div>
+            </div>
+
+   </div>
+
+    
+</div>
+
+<div class="right_menusec">
+
+	<div class="login_section">
+    <div class="login"><a href="#" class="login_check">Login</a>
+    
+    <div class="login_popup">
+    
+    	<div class="login_popup_content">
+        	<div class="popup_arrow"></div>
+        
+        	<div class="popup_icons">
+            	<a href="#" class="fb_icon1"></a>
+                <a href="#"  class="tw_icon1"></a>
+                <p><img src="../../views/images/line1.png" height="7" width="242" alt="" ></p>
+                <form>
+                	<input type="text" class="login_input" placeholder="Your Email Address">
+                	<input type="password" class="login_input"placeholder="Password">
+                    <div class="clear"></div>
+<input type="button" class="login_check_btn" value="Login">
+                    <div class="forget_pass"><a href="#"> Forgot your password?</a></div>
+                </form>
+            </div>
+        </div>
+        <div class="clear"></div>
+         <div class="popup_bottom">
+         	<p>Not a Member yet? <a href="#">Sign up.</a></p>
+         </div>
+    </div>
+    
+    </div>
+    </div>
+    <div class="login_menu">
+    	<ul>
+        	<li><a href="#">Customize</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#" style="border:none;">Help</a></li>
+        </ul>
+    </div>
+    	<div class="clear"></div>
+    <div class="plr_pts">
+    
+            <div class="plr_pts1">
+            <P>Mariah Carey</P>
+            <span>Popular Photos</span>
+            
+            <div class="plr_links">
+              <a href="#"><img src="../../views/images/arrow_left.gif" height="13" width="5" alt=""></a>
+              <a href="#"><img src="../../views/images/arrow_right.gif" height="13" width="5" alt=""></a>
+            </div>
+            </div>
+            <div class="clear"></div>
+            <div class="plr_photos">
+            	<img src="../../views/images/plr_img.gif" height="79" width="120" alt="">
+                <img src="../../views/images/plr_img1.gif" height="79" width="120" alt="">
+                <img src="../../views/images/plr_img.gif" height="79" width="120" alt="">
+                <img src="../../views/images/plr_img1.gif" height="79" width="120" alt="">
+                <img src="../../views/images/plr_img1.gif" height="79" width="120" alt="">
+                <img src="../../views/images/plr_img.gif" height="79" width="120" alt="">
+            </div>
+            <div class="clear"></div>
+            <div class="plr_twitter">
+            		<div class="plr_twitter1">
+                    	<img src="../../views/images/twitetr-icon.png" height="50" width="50" alt="" >
+                        <div class="twitter_name"><p>Mariah Carey</p><span>Twitter</span></div>
+                         <a href="#" class="twitter_icon"></a>
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <div class="twitter_comments_links">
+                    	<ul>
+                        	<li><a href="#">Hot!</a></li>
+                            <li><a href="#">Celeb</a></li>
+                            <li><a href="#">Music</a></li>
+                            <li><a href="#">Sports</a></li>
+                            <li><a href="#">Custom</a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <div class="twitter_comments">
+                    	
+                        
+                        
+                        
+                        
+                        
+                      <div class="spear_comment">
+                      <div class="spr_cmt_img"><img src="../../views/images/spear.gif" height="30" width="30" alt="" ></div>
+                      <div class="spr_cmt_right">
+                      <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                      <div class="clear"></div>
+                      <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                      <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                      </div>
+                      <div class="clear"></div>
+                      </div>
+                      <div class="spear_comment">
+                      <div class="spr_cmt_img"><img src="../../views/images/spear.gif" height="30" width="30" alt="" ></div>
+                      <div class="spr_cmt_right">
+                      <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                      <div class="clear"></div>
+                      <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                      <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                      </div>
+                      <div class="clear"></div>
+                      </div>
+                      <div class="spear_comment" style="border:none;">
+                      <div class="spr_cmt_img"><img src="../../views/images/spear.gif" height="30" width="30" alt="" ></div>
+                      <div class="spr_cmt_right">
+                      <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                      <div class="clear"></div>
+                      <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                      <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                      </div>
+                      <div class="clear"></div>
+                      </div>
+                     
+                      
+                       
+                            <div class="twitter_bottom">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    
+                    
+                    
+            </div>
+            <div class="clear"></div>
+            
+            <div class="plr_twitter">
+            		<div class="plr_twitter1">
+                    	<img src="../../views/images/facebook-icon.png" height="50" width="50" alt="" >
+                        <div class="twitter_name"><p>FACEBOOK TRENDS
+</p><span>Today</span></div>
+                         <a href="#" class="facebook_icon"></a>
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <div class="twitter_comments_links">
+                    	<ul>
+                        	<li><a href="#">Hot!</a></li>
+                            <li><a href="#">Celeb</a></li>
+                            <li><a href="#">Music</a></li>
+                            <li><a href="#">Sports</a></li>
+                            <li><a href="#">Custom</a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <div class="twitter_comments">
+                    	
+                        
+                        
+                        
+                        
+                        
+                      <div class="spear_comment">
+                      <div class="spr_cmt_img"><img src="../../views/images/spear.gif" height="30" width="30" alt="" ></div>
+                      <div class="spr_cmt_right">
+                      <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                      <div class="clear"></div>
+                      <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                      <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                      </div>
+                      <div class="clear"></div>
+                      </div>
+                      <div class="spear_comment">
+                      <div class="spr_cmt_img"><img src="../../views/images/spear.gif" height="30" width="30" alt="" ></div>
+                      <div class="spr_cmt_right">
+                      <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                      <div class="clear"></div>
+                      <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                      <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                      </div>
+                      <div class="clear"></div>
+                      </div>
+                      <div class="spear_comment"style="border:none;">
+                      <div class="spr_cmt_img"><img src="../../views/images/spear.gif" height="30" width="30" alt="" ></div>
+                      <div class="spr_cmt_right">
+                      <div class="spr_cmt_righttitle"><p>@Briney Spears</p> <span>41m</span></div>
+                      <div class="clear"></div>
+                      <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                      <a href="#">Retweet   </a><a href="#">Reply</a><a href="#">   Shore</a>
+                      </div>
+                      <div class="clear"></div>
+                      </div>
+                     
+                      
+                       
+                            <div class="twitter_bottom">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    
+                    
+                    
+            </div>
+            <div class="plr_twitter">
+            		<div class="plr_twitter1">
+                    	<img src="../../views/images/spear.png" height="50" width="50" alt="" >
+                        <div class="twitter_name"><p>MUSIC TRENDS</p><span>Lil Wayne</span>
+                        </div>
+                         <a href="#" class="music_icon"></a>
+                         
+                         <div class="buy_text">
+                         	<p>A Moment Isn’t ...</p> <a href="#" class="buy_text_buy">Buy</a>
+                         </div>
+                         
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <div class="twitter_comments_links">
+                    	<ul>
+                        	<li><a href="#">Hot!</a></li>
+                            <li><a href="#">Celeb</a></li>
+                            <li><a href="#">Music</a></li>
+                            <li><a href="#">Sports</a></li>
+                            <li><a href="#">Custom</a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <div class="video_playlist">
+                       
+                       <div class="playlist">
+                       <a href="#" class="play_list_active">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist"  style="border:none">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       
+                       
+                       
+                       
+                       
+                       <div class="clear"></div>
+                            <div class="twitter_bottom">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    
+                    
+                    
+            </div>
+            
+            <div class="plr_twitter">
+            		<div class="plr_twitter1">
+                    	<img src="../../views/images/spear.png" height="50" width="50" alt="" >
+                        <div class="twitter_name"><p>MUSIC TRENDS</p><span>Lil Wayne</span>
+                        </div>
+                         <a href="#" class="music_icon"></a>
+                         
+                         <div class="buy_text">
+                         	<p>My Homies Still</p> <a href="#" class="buy_text_buy">Buy</a>
+                         </div>
+                         
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <div class="twitter_comments_links">
+                    	<ul>
+                        	<li><a href="#">Hot!</a></li>
+                            <li><a href="#">Celeb</a></li>
+                            <li><a href="#">Music</a></li>
+                            <li><a href="#">Sports</a></li>
+                            <li><a href="#">Custom</a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <div class="video_playlist">
+                       <div>
+                    	<img src="../../views/images/vedio_img.png" height="145" width="220" alt="" >
+                    </div>
+                       <div class="playlist">
+                       <a href="#" class="play_list_active">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist"  style="border:none">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       
+                       
+                       
+                       
+                       
+                       <div class="clear"></div>
+                            <div class="twitter_bottom">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    
+                    
+                    
+            </div>
+            
+            <div class="plr_twitter">
+            		<div class="plr_twitter1">
+                    	<img src="../../views/images/spear4.gif" height="65" width="50" alt="" >
+                        <div class="twitter_name"><p>TOP MOVIE TRAILERS</p>
+                        </div>
+                         <a href="#" class="video1_icon"></a>
+                         
+                         <div class="buy_text">
+                         	<p>The Dark Knight Rises</p>
+                            <span>Lorem ipsum dolor sit amet, con
+sectetur adipisicing elit, sed do 
+eiusmod tempor incididunt ut la
+bore et dolore magna aliqua.</span>
+<a href="#" class="buy_text_more">more</a>
+                         </div>
+                         
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <div class="twitter_comments_links">
+                    	<ul>
+                        	<li><a href="#">Hot!</a></li>
+                            <li><a href="#">Celeb</a></li>
+                            <li><a href="#">Music</a></li>
+                            <li><a href="#">Sports</a></li>
+                            <li><a href="#">Custom</a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                    
+                   
+                    
+                    
+                    <div class="video_playlist">
+                    <div>
+                    	<img src="../../views/images/vedio1_img.png" height="145" width="220" alt="" >
+                    </div>
+                       
+                             <div class="playlist">
+                       <a href="#" class="play_list_active">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       <div class="playlist" style="border:none;">
+                       <a href="#" class="play_list">A Moment Isn’t Very Long</a>
+                       <span>2:43</span></div>
+                       
+                       <div class="clear"></div>
+                            <div class="twitter_bottom">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    
+                    
+                    
+            </div>
+            
+            
+           
+    </div>
+    
+    
+
+</div>
+
+
+<div class="main_section">
+<div class="main_content">
+	
+    <div class="menu">
+    	<ul>
+        	<li class="active"><a href="#" class="active">What’s Hot</a></li>
+            <li><a href="#">Celebrity</a></li>
+            <li><a href="#">Music</a></li>
+            <li><a href="#">Sports</a></li>
+        </ul>
+    </div>
+    	<div class="clear"></div>
+    <div class="whats_hot">
+    	<div class=""></div>
+    </div>
+    
+
+
+<div class="other_news">
+    	<p>Other News About <span>Mariah Carey</span></p>
+  <div class="news_elements">
+        
+                <div class="element">
+                <div class="element_content">
+                      <div class="element_content1">
+                      <p>Mariah Carey</p>
+                     <a href="#" class="small_icons_mda"></a>
+                      <div class="clear"></div> 
+                      <span>Springsteen Plays Obama 
+      Song in Virginia</span>
+                      </div>
+                    <p>10/21/12</p> 
+                    <div class="video">
+                    	<img src="../../views/images/video.png" height="113" width="202" alt="" >
+                      <p>YouTube</p>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="twitter_bottom1">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                  </div>
+                </div>
+                <div class="element">
+                <div class="element_content">
+                      <div class="element_content1">
+                      <p>Mariah Carey</p>
+                      <a href="#"></a>
+                      <div class="clear"></div> 
+                      <span>Springsteen Plays Obama 
+      Song in Virginia</span>
+                      </div>
+                    <p>10/21/12</p> 
+                    <div class="image">
+                    <img src="../../views/images/iamge.png" height="75" width="75" alt="" >
+                      <p>YouTube</p>
+                    </div>
+                    <p>Lorem ipsum dolor sitamet, consectetur adipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco Lorem ipsum dolor sitamet, consecteturadipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco 
+
+</p>                </div>
+                <div class="clear"></div>
+                <div class="twitter_bottom1">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                  </div>
+                </div>
+                
+                
+                
+                <div class="element">
+                <div class="element_content">
+                      <div class="element_content1">
+                      <p>Mariah Carey</p>
+                       <a href="#" class="small_icons_mda"></a>
+                      <div class="clear"></div> 
+                      <span>Springsteen Plays Obama 
+      Song in Virginia</span>
+                      </div>
+                    <p>10/21/12</p> 
+                    <div class="video">
+                    	<img src="../../views/images/video.png" height="113" width="202" alt="" >
+                      <p>YouTube</p>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="twitter_bottom1">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                  </div>
+                </div>
+                <div class="element">
+                <div class="element_content">
+                      <div class="element_content1">
+                      <p>Mariah Carey</p>
+                     <a href="#" class="small_icons_mda"></a>
+                      <div class="clear"></div> 
+                      <span>Springsteen Plays Obama 
+      Song in Virginia</span>
+                      </div>
+                    <p>10/21/12</p> 
+                    <div class="image">
+                    <img src="../../views/images/iamge.png" height="75" width="75" alt="" >
+
+                      <p>YouTube</p>
+                    </div>
+                    <p>Lorem ipsum dolor sitamet, consectetur adipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco Lorem ipsum dolor sitamet, consecteturadipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco 
+
+</p>                </div>
+                <div class="clear"></div>
+                <div class="twitter_bottom1">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                  </div>
+                </div>
+                <div class="element">
+                <div class="element_content">
+                      <div class="element_content1">
+                      <p>Mariah Carey</p>
+                     <a href="#" class="small_icons_fb"></a>
+                      <div class="clear"></div> 
+                      <span>Springsteen Plays Obama 
+      Song in Virginia</span>
+                      </div>
+                    <p>10/21/12</p> 
+                    <div class="image">
+                    <img src="../../views/images/iamge.png" height="75" width="75" alt="" >
+
+                      <p>YouTube</p>
+                    </div>
+                    <p>Lorem ipsum dolor sitamet, consectetur adipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco Lorem ipsum dolor sitamet, consecteturadipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco 
+
+</p>                </div>
+                <div class="clear"></div>
+                <div class="twitter_bottom1">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                  </div>
+                </div>
+                <div class="element">
+                <div class="element_content">
+                      <div class="element_content1">
+                      <p>Mariah Carey</p>
+                     <a href="#" class="small_icons_tw"></a>
+                      <div class="clear"></div> 
+                      <span>Springsteen Plays Obama 
+      Song in Virginia</span>
+                      </div>
+                    <p>10/21/12</p> 
+                    <div class="image">
+                    <img src="../../views/images/iamge.png" height="75" width="75" alt="" >
+
+                      <p>YouTube</p>
+                    </div>
+                    <p>Lorem ipsum dolor sitamet, consectetur adipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco Lorem ipsum dolor sitamet, consecteturadipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco 
+
+</p>                </div>
+                <div class="clear"></div>
+                <div class="twitter_bottom1">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                  </div>
+                </div>
+                <div class="element">
+                <div class="element_content">
+                      <div class="element_content1">
+                      <p>Mariah Carey</p>
+                      <a href="#" class="small_icons_cam"></a>
+                      <div class="clear"></div> 
+                      <span>Springsteen Plays Obama 
+      Song in Virginia</span>
+                      </div>
+                    <p>10/21/12</p> 
+                    <div class="image">
+                    <img src="../../views/images/iamge.png" height="75" width="75" alt="" >
+
+                      <p>YouTube</p>
+                    </div>
+                    <p>Lorem ipsum dolor sitamet, consectetur adipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco Lorem ipsum dolor sitamet, consecteturadipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco 
+
+</p>                </div>
+                <div class="clear"></div>
+                <div class="twitter_bottom1">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                  </div>
+                </div>
+                
+                
+                <div class="element">
+                <div class="element_content">
+                      <div class="element_content1">
+                      <p>Mariah Carey</p>
+                       <a href="#" class="small_icons_mda"></a>
+                      <div class="clear"></div> 
+                      <span>Springsteen Plays Obama 
+      Song in Virginia</span>
+                      </div>
+                    <p>10/21/12</p> 
+                    <div class="video">
+                    	<img src="../../views/images/video.png" height="113" width="202" alt="" >
+                      <p>YouTube</p>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="twitter_bottom1">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                  </div>
+                </div>
+                <div class="element">
+                <div class="element_content">
+                      <div class="element_content1">
+                      <p>Mariah Carey</p>
+                     <a href="#" class="small_icons_mda"></a>
+                      <div class="clear"></div> 
+                      <span>Springsteen Plays Obama 
+      Song in Virginia</span>
+                      </div>
+                    <p>10/21/12</p> 
+                    <div class="image">
+                    <img src="../../views/images/iamge.png" height="75" width="75" alt="" >
+                      <p>YouTube</p>
+                    </div>
+                    <p>Lorem ipsum dolor sitamet, consectetur adipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco Lorem ipsum dolor sitamet, consecteturadipisicing elit, sed do eiusmotempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim ve exercitation ullamco 
+
+</p>                </div>
+                <div class="clear"></div>
+                <div class="twitter_bottom1">
+                        	<p style="float:left;"><a href="#">Share</a></p>
+                            <p style="float:right";><a href="#">View More</a></p>
+                  </div>
+                </div>
+                
+                
+                
+                
+        </div>
+    </div>
+    
+    <div class="clear"></div>
+    
+    
+</div>
+
+<div class="loading">
+    	<a href="#" class="load_more">Load More</a>
+        <a href="#" class="loading"> <img src="../../views/images/loading.gif" height="30" width="21" alt="" >
+        <div class="clear"></div>
+        <p>Loading</p></a>
+    </div>
+
+
+
+</div>
+
+</div>
+</body>
+</html>

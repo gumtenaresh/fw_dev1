@@ -1,0 +1,222 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-09 18:14:16
+         compiled from "/var/www/fanwire/views//header.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:6493494735023b0a0ced877-77888951%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '1935c9964448fc12d01b86f028cec0a131a4683b' => 
+    array (
+      0 => '/var/www/fanwire/views//header.tpl.html',
+      1 => 1344088396,
+    ),
+  ),
+  'nocache_hash' => '6493494735023b0a0ced877-77888951',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>FANWIRE</title>
+        <link href="<?php echo @SITE_URL;?>
+views/css/login_style.css" rel="stylesheet" type="text/css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Goole OAuth Gmail contacts import</title>
+        <meta content=' Goole OAuth Gmail contacts import.' name='description'/> 
+        <meta content='Google, Oauth, php, Gmail, Contacts,import' name='keywords'/> 
+
+
+
+        <script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.validate.min.js"></script>
+
+        <script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.rsv.js"></script>
+
+        <script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.form.js"></script>
+
+        <script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/sessionvars.js"></script>
+        <script type="text/javascript" src="<?php echo @SITE_URL;?>
+views/scripts/jquery.validation.functions.js"></script>
+        
+ 
+
+        
+        <script type="text/javascript">
+            jQuery(function($) {
+                var open = false;
+                $('.left_close').click(function () {
+                    $("#footerSlideButton").hide();
+                    $("#footerSlideButton1").show();
+                    if(open === false) {
+                        $('#footerSlideContent').animate({height:'300px'});
+                        $(this).css('backgroundPosition', 'bottom left');
+                        open = true;
+                    } else {
+                        $('#footerSlideContent').animate({ height: '0px' });
+                        $(this).css('backgroundPosition', 'bottom right');
+                        open = false;
+                    }
+                });
+
+                $('#right_clear').click(function () {
+                    $("#footerSlideButton1").hide();
+                    $("#footerSlideButton").show();
+                    if(open === false) {
+                        $('#footerSlideContent').animate({height:'300px'});
+                        $(this).css('backgroundPosition', 'bottom left');
+                        open = true;
+                    } else {
+                        $('#footerSlideContent').animate({ height: '0px' });
+                        $(this).css('backgroundPosition', 'bottom right');
+                        open = false;
+                    }
+                });
+                $('#clearHistory').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        url:"<?php echo @SITE_URL;?>
+fanwires/clearSession/",
+                        success: function(response) {
+                            window.location.reload(true);
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <style type="text/css">
+            .chat{
+                width:240px;
+                left: 80%;
+                height:auto;
+                background-color:#fff;
+                border:1px solid #dbdbdb;
+                position: fixed;
+                bottom:0;
+                z-index:999999;
+            }
+
+            .chat_session{
+                position: relative;
+                width:230px;
+                height:auto;
+                background-color:#f4f5f5;
+                margin:0 auto 0 auto;
+                padding:2px;
+                z-index:999999;
+
+
+            }
+            .chat_heading{
+                width:230px;
+                text-align:center;
+                color:#fff;
+                height:27px;
+                line-height:27px;
+                background-color:#444243;
+                border:1px solid #444243;
+            }
+            .chat_heading1{
+                width:230px;
+                text-align:center;
+                color:#fff;
+                height:27px;
+                line-height:27px;
+                background-color:#02a0bf;
+                border:1px solid #02a0bf;
+            }
+            .left_close{
+                width:auto;
+                padding:0px 10px 0px 10px;
+                color:#444243;
+                background-color:#f4f5f5;
+                float:left;
+                cursor:pointer;
+                height:27px;
+            }
+            .left_close a{
+                color:#444243;
+                text-decoration:none;
+                cursor:pointer;
+
+            }
+            .left_close a:hover{
+                color:#444243;
+                text-decoration:none;
+                cursor:pointer;
+            }
+            .right_clear{
+                width:auto;
+                padding:0px 10px 0px 10px;
+                color:#444243;
+                background-color:#f4f5f5;
+                float:right;
+                height:27px;
+            }
+            .right_clear a{
+                color:#444243;
+                text-decoration:none;
+                cursor:pointer;
+
+            }
+            .right_clear a:hover{
+                color:#444243;
+                text-decoration:none;
+                cursor:pointer;
+            }
+            .chat_list{
+                width:222px;
+                height:auto;
+                border-bottom:1px dashed #02a0bf;
+                /*        margin:5px 0px;*/
+                padding:15px 0;
+            }
+            .chat_list img{margin-right:10px;}
+
+            .collapse{
+                width:230px;
+                float:left; height:27px;
+                text-align:center;
+                color:#02a0bf;
+                line-height:27px;
+                font-weight:bold;
+            }
+            #footerSlideContent {
+                overflow-y: scroll;
+                overflow-x: hidden;
+                height: 0px;
+                font-size: 0.8em;
+                border: none;
+                font-family: DejaVuSansBook, Sans-Serif;
+            }
+            #footerSlideText {
+                padding: 15px 10px 25px 25px;
+            }
+        </style>
+        
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+
+
+
+            <!--Left Section Start-->
+
+            <div id="leftsection">
+
+                <div class="logo"><a href="<?php echo @SITE_URL;?>
+myFanwire"><img src="<?php echo @SITE_URL;?>
+views/images/logo.png" width="143" height="127" border="0" /></a>
+                </div>
+

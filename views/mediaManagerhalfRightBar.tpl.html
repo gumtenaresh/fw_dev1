@@ -1,0 +1,79 @@
+<!--Right Section-->
+<div class="right_container">
+    <!--<div class="more_posts"><a href="#">More Posts</a></div>-->
+    <div id="inner_rightsection">
+
+        <div id="right_area">
+            <div class="search">
+                <!-- added new -->
+                <!--             <div id="slider" class="zoom" style='width:20%;'> -->
+                <!--              <a class="tt" href="#" style="left:12%; ">&nbsp; -->
+                <!--               <span class="tooltip"> <b>Tip:</b> Drag the slider to -->
+                <!-- 							increase the size of images. </span> -->
+                <!--                 </a> -->
+                <!--             </div> -->
+                <table><tr><td>
+                            <div class="minus">
+                                <img src='{$smarty.const.SITE_URL}views/images/m.png'>
+                            </div>
+                        </td><td>
+                            <div style="float:left;width:130px;">
+
+
+
+
+                                <a href="#" class="tt" >
+                                    <div class="zoom" id="slider" style='width: 100%;float:left;'>
+                                        <span class="tooltip" >
+                                            <b>Tip:</b> Drag the slider to
+                                            increase/decrease the size of Fanwires
+                                        </span>
+                                    </div> 
+                                </a>
+                            </div></td><td>
+                            <div class="plus"  >
+                                <img src='{$smarty.const.SITE_URL}views/images/p.png'>
+                            </div></td></tr></table>
+                <!-- added new end -->
+            </div>
+            <!--     <div class="filters"> -->
+            <!--    	  <h2>filter by:</h2> -->
+            <!--      <img src="images/fcb.png" width="25" height="21" /> <img src="images/twt.png" width="25" height="21" /> <img src="images/yu.png" width="25" height="21" /> <img src="images/cam1.png" width="25" height="21" /> <img src="images/vediio.png" width="25" height="21" /> <img src="images/note.png" width="25" height="21" /> <img src="images/music.png" width="25" height="21" /> | <a href="#">popularity</a>  |  <a href="#">recent</a>  |  <a href="#">a-z</a>  |  <a href="#">z-a</a></div> -->
+            <div class="connect_fans">
+
+                <h2>media manager</h2>
+                <br />
+
+                <div class="settings_page">
+                    <div class="awards_active">
+                        <ul>
+                            {if $media eq photos}
+                            <li class="active"><a href="{$smarty.const.SITE_URL}mediaCenter"><span><strong>My photos</strong></span></a></li>
+                            {else}
+                            <li ><a href="{$smarty.const.SITE_URL}mediaCenter"><span><strong>My photos</strong></span></a></li>
+                            {/if}
+                            {if $media eq vedios}
+                            <li class="active"><a href="{$smarty.const.SITE_URL}myVedios"><span><strong>My videos</strong></span></a></li>
+                            {else}
+                            <li ><a href="{$smarty.const.SITE_URL}myVedios"><span><strong>My videos</strong></span></a></li>
+                            {/if}
+                            {if $media eq articles}
+                            <li class="active"><a href="{$smarty.const.SITE_URL}myArticles"><span><strong>my articles</strong></span></a></li>
+                            {else}
+                            <li ><a href="{$smarty.const.SITE_URL}myArticles"><span><strong>my articles</strong></span></a></li>
+                            {/if}
+
+                            <!--                         second phase    {*if $media eq links*} -->
+                            <!--                             <li class="active"><a href="{*$smarty.const.SITE_URL*}myLinks"><span><strong>my links</strong></span></a></li> -->
+                            <!--                             {*else*} -->
+                            <!--                             <li ><a href="{*$smarty.const.SITE_URL*}myLinks"><span><strong>my links</strong></span></a></li> -->
+                            <!--                             {*/if*} -->
+
+
+
+
+                        </ul>
+
+                    </div>
+
+                </div>

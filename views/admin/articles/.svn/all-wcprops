@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/purpletalk_fanwire/!svn/ver/1171/fanwire/views/admin/articles
+END
+facebookList.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/purpletalk_fanwire/!svn/ver/1171/fanwire/views/admin/articles/facebookList.tpl.html
+END
+twitterList.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/purpletalk_fanwire/!svn/ver/1171/fanwire/views/admin/articles/twitterList.tpl.html
+END
+addArticles.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/purpletalk_fanwire/!svn/ver/952/fanwire/views/admin/articles/addArticles.tpl.html
+END
+editArticle.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/admin/articles/editArticle.tpl.html
+END
+articlesList.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/purpletalk_fanwire/!svn/ver/1171/fanwire/views/admin/articles/articlesList.tpl.html
+END

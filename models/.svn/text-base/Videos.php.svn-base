@@ -1,0 +1,447 @@
+<?php
+
+/**
+ * Description of Videos
+ * 
+ * @author naresh
+ */
+class Videos {
+
+    private $conn = null;
+    private $sql = null;
+    private $rs = null;
+    private $data = array();
+
+    /**
+     * creating dao object
+     */
+    function __construct() {
+        $this->conn = Dao::getInstance();
+        $this->conn1 = Dao1::getInstance();
+    }
+
+    //destroying memory
+    /**
+     * Enter description here ...
+     */
+    function __destruct() {
+        unset($this->conn);
+        unset($this->conn1);
+        unset($this->rs);
+        unset($this->sql);
+        unset($this->data);
+    }
+
+    /**
+     * getUserName
+     * @param object $userid userid
+     * @return string  fanwire name 
+     */
+    public function getUserName($userid) {
+        $sql = "select fname,lname from tbl_users where id=?";
+        $rs = $this->conn->selectSql($sql, array($userid));
+        return $rs[0]['fname'] . " " . $rs[0]['lname'];
+    }
+
+    /**
+     * getVideos
+     * @param integer $uid id
+     * @param integer $belongsTo whome it belongs to fanwire or user
+     * @return array details of video
+     */
+    public function getVideos($uid, $belongsTo) {
+        if (isset($_REQUEST['fwrid'])) {
+            $belongsTo = $_REQUEST['fwrid'];
+            $this->sql = "SELECT * FROM  tbl_videos where whomItBelongsTo =? and visible='1'";
+        } else {
+            $this->sql = "SELECT * FROM  tbl_videos where userid=? and belongsTo=? and visible='1'";
+        }
+        $this->rs = $this->conn->selectSql($this->sql, array($uid, $belongsTo));
+
+        //return $this->rs = $this->conn->selectSql($this->sql, array($uid, $belongsTo));
+
+        $obj = new Users();
+        $i = 0;
+        foreach ($this->rs as $val) {
+            $this->data[$i]['id'] = $val['id'];
+            $this->data[$i]['title'] = $val['title'];
+            $this->data[$i]['description'] = $val['description'];
+            $this->data[$i]['photo'] = $val['photo'];
+            $this->data[$i]['thumbnail'] = $val['thumbnail'];
+            $this->data[$i]['status'] = $val['status'];
+            $arr = explode(",", $obj->getLikesCount($val['id']));
+            $this->data[$i]['like'] = $arr[0];
+            $this->data[$i]['dislike'] = $arr[1];
+            $this->data[$i]['commentcnt'] = $obj->getCommentCount($val['id'], 3);
+            $this->data[$i]['userid'] = $this->getUserName($val['user_id']);
+            $this->data[$i]['comments_for_this_post'] = $obj->getComments($val['id'], 3);
+            $i++;
+        }
+        return $this->data;
+    }
+
+    /**
+     * getVideoDetails
+     * @param integer $uid
+     * @return array vedio details
+     */
+    public function getVideoDetails($uid) {
+
+        $this->sql = "SELECT * FROM  tbl_videos where id=? and visible='1'";
+
+        $this->rs = $this->conn->selectSql($this->sql, array($uid));
+        $i = 0;
+        $objUser = new Users();
+        $obj = new Fanwires();
+        foreach ($this->rs as $val) {
+            $this->data[$i]['id'] = $val['id'];
+            $this->data[$i]['title'] = $val['title'];
+            $this->data[$i]['description'] = $val['description'];
+            $this->data[$i]['video'] = $val['video'];
+            $this->data[$i]['photo'] = $val['thumbnail'];
+            $this->data[$i]['user'] = $this->getUserName($val['user_id']);
+            $this->data[$i]['whomItBelongsTo'] = $val['whomItBelongsTo'];
+            $arr = explode(",", $objUser->getLikesCount($val['id'], VDO_TYPE));
+            $this->data[$i]['like'] = $arr[0];
+            $this->data[$i]['dislike'] = $arr[1];
+            $this->data[$i]['source'] = $val['source'];
+            $this->data[$i]['released_date'] = $val['released_date'];
+            $this->data[$i]['cdate'] = DatePicker::getTimeStamp($val['cdate'], "m-d-Y");
+            $this->data[$i]['artstatus'] = $obj->getCollectedStatus($val['id'], VDO_TYPE);
+            $this->data[$i]['keywords'] = $obj->getKeywords($val['id'], '2');
+            $this->data[$i]['additional_fans'] = $obj->getAdditionalFans($val['id'], '2');
+            $i++;
+        }
+        return $this->data;
+    }
+
+    /**
+     * addVideos
+     * @param object $data this object consist of all the data related to video
+     * @return boolean true/false
+     */
+    public function addVideos($data) {
+        extract($data);
+        if (isset($thumbnail))
+            $thumbnail = $thumbnail;
+        else
+            $thumbnail = "default.jpg";
+        if ($personal == 'personal')
+            $personal = $_SESSION['id'];
+        else
+            $personal = $fanwirename;
+        if ($privacy == 'public')
+            $privacy = 1;
+        else
+            $privacy = 0;
+        if (isset($type))
+            $type = $type;
+        else
+            $type = "embed";
+
+        $this->sql = "insert into tbl_videos(title,description,video,thumbnail,type,userid,belongsTo,status,whomItBelongsTo) values(?,?,?,?,?,?,?,?,?)";
+        $data = array($title, $description, $url, $thumbnail, $type, $_SESSION['id'], '1', $privacy, $personal);
+        $this->conn->executePrepared($this->sql, $data) or die(mysql_error());
+        $inId = $this->conn->getInsertId();
+        $this->sql1 = "insert into tbl_keywords(keyword,referer_id,type) values(?,?,?)";
+        $data = array($keyword, $inId, '2');
+        $this->conn->executePrepared($this->sql1, $data) or die(mysql_error());
+        return true;
+    }
+
+    /**
+     * insert videos from admin panel
+     * insertVideos 
+     *  @param type $params
+     */
+    public function insertVideos($params) {
+        extract($params);
+        $var = explode('<', $embedcode);
+        if (!isset($var['1'])) {
+            $var2['5'] = $embedcode;
+            $embedcode = YoutubeUrl::parse_youtube_url($var2['5'], 'embed', '', '', 0, 1);
+        } else {
+            $var2 = explode('"', $var['1']);
+        }
+        $thumbnail = YoutubeUrl::parse_youtube_url($var2['5'], 'hqthumb', '', '', 0, 1);
+        if (isset($thumbnail)) {
+            $filename = strtotime(date("Y-m-d H:i:s")) . "_vdoImg.jpg";
+            $img = file_get_contents($thumbnail);
+            if ($img) {
+                $file = DOC_ROOT_PATH . '/photos/' . $filename;
+                file_put_contents($file, $img);
+                $thumbnail = $filename;
+            } else {
+                $thumbnail = "default.jpg";
+            }
+        } else {
+            $thumbnail = "default.jpg";
+        }
+        $type = "embed";
+        if ($_SESSION['adminid'])
+            $cid = $_SESSION['adminid'];else
+            $cid = 143;
+        $this->sql = "insert into tbl_videos(title,description,video,thumbnail,type,userid,belongsTo,status,whomItBelongsTo,source,released_date) values(?,?,?,?,?,?,?,?,?,?,?)";
+        $data = array($video, $description, $embedcode, $thumbnail, $type, $cid, '2', '1', $fanwireName, 0, date("Y-m-d H:i:s", strtotime($released)));
+        $this->conn->executePrepared($this->sql, $data) or die(mysql_error());
+        $videoId = $this->conn->getInsertId();
+        if (isset($keyword) && $keyword != "") {
+            $keys = explode(",", $keyword);
+            foreach ($keys as $val) {
+                $this->sql = "insert into tbl_keywords(`keyword`,`referer_id`,`type`) values(?,?,?)";
+                $data = array($val, $videoId, 2);
+                $this->conn->executePrepared($this->sql, $data) or die(mysql_error());
+            }
+        }
+        $obj = new Fanwires();
+        if (isset($fanwire) && $fanwire != "") {
+            $fans = explode(",", $fanwire);
+            foreach ($fans as $value) {
+                $fan_id = $obj->getFanwireIdByName($value);
+                $this->sql = "insert into tbl_additional_fanwires(`fanwire_id`,`content_id`,`content_type`) values(?,?,?)";
+                $data = array($fan_id, $videoId, '2');
+                $this->conn->executePrepared($this->sql, $data) or die(mysql_error());
+            }
+        }
+    }
+
+    /**
+     * get videos list
+     * @param integer $pageSize page size
+     * @param integer $fanwire_id 
+     * @return array
+     */
+    public function getVideosList($fanwire_id, $pageSize = 100) {
+        $this->sql = "SELECT * from tbl_videos where belongsTo=2 and whomItBelongsTo='$fanwire_id' and visible='1' order by id desc";
+        $pageObject = new Pagination($pageSize, 9); //params: pagesize, scroll size
+        $navigation = $pageObject->showNavigation(sizeof($this->conn->executeQuery($this->sql)));
+        $this->sql .= $pageObject->getLimitQry();
+        $this->rs = $this->conn->executeQuery($this->sql);
+        $i = 0;
+        $obj = new Fanwires();
+        foreach ($this->rs as $val) {
+            $this->data[$i]['id'] = $val['id'];
+            $this->data[$i]['title'] = $val['title'];
+            $this->data[$i]['description'] = $val['description'];
+            $this->data[$i]['photo'] = $val['thumbnail'];
+            $this->data[$i]['fanwire'] = $obj->getFanwireName($val['whomItBelongsTo']);
+            $this->data[$i]['cdate'] = $val['cdate'];
+            $this->data[$i]['released_date'] = $val['released_date'];
+            $this->data[$i]['video'] = $val['video'];
+            $i++;
+        }
+        $this->data['list'] = $this->data;
+        $this->data['navigation'] = $navigation;
+        return $this->data;
+    }
+
+    /**
+     * deleteVideo
+     * @param integer $id
+     * @return array
+     */
+    public function deleteVideo($id) {
+        $this->sql = "update tbl_videos set visible='0' where id=?";
+        $data = array($id);
+        return $this->conn->executePrepared($this->sql, $data) or die(mysql_error());
+    }
+
+    /**
+     * updateDate
+     * @param object $params
+     */
+    function updateDate($params, $cdate1) {
+        extract($params);
+        $this->sql = "update tbl_videos set cdate=? where id=?";
+        //$data = array(date("Y-m-d H:i:s", strtotime($cdate)), $video_id);
+        $data = array($cdate1, $video_id);
+        $this->conn->executePrepared($this->sql, $data);
+    }
+
+    /**
+     * updateReleasedDate
+     * @param object $params consisting of released date and video id
+     */
+    function updateReleasedDate($params, $dt_release) {
+        extract($params);
+        $this->sql = "update tbl_videos set released_date=? where id=?";
+        //$data = array(date("Y-m-d H:i:s", strtotime($released_date)), $video_id);
+        $data = array($dt_release, $video_id);
+        $this->conn->executePrepared($this->sql, $data);
+    }
+
+    /**
+     * editVideo
+     * @param object $params 
+     */
+    public function editVideo($params) {
+        extract($params);
+        $var = explode('<', $embedcode);
+        if (!isset($var['1'])) {
+            $var2['5'] = $embedcode;
+            $embedcode = YoutubeUrl::parse_youtube_url($var2['5'], 'embed', '', '', 0, 1);
+        } else {
+            $var2 = explode('"', $var['1']);
+        }
+        $var3 = explode('?', $var2['5']);
+        $thumbnail = YoutubeUrl::parse_youtube_url($var3[0], 'hqthumb', '', '', 0, 1);
+        if (isset($thumbnail)) {
+            $filename = strtotime(date("Y-m-d H:i:s")) . "_vdoImg.jpg";
+            $img = file_get_contents($thumbnail);
+            if ($img) {
+                $file = DOC_ROOT_PATH . '/photos/' . $filename;
+                file_put_contents($file, $img);
+                $thumbnail = $filename;
+            } else {
+                $thumbnail = "default.jpg";
+            }
+        } else {
+            $thumbnail = "default.jpg";
+        }
+        $type = "embed";
+        $this->sql = "update tbl_videos set `title`=?,`description`=?,`video`=?,`released_date`=?,`thumbnail`=? where `id`=?";
+        $data = array($video, $description, $embedcode, date("Y-m-d H:i:s", strtotime($released)), $thumbnail, $id) or die("error");
+        $this->conn->executePrepared($this->sql, $data);
+        $obj = new Fanwires();
+
+        if (isset($keyword) && $keyword != "") {
+            $keys = explode(",", $keyword);
+            foreach ($keys as $val) {
+                $this->sql = "insert into tbl_keywords(`keyword`,`referer_id`,`type`) values(?,?,?)";
+                $data = array($val, $id, '2');
+                $this->conn->executePrepared($this->sql, $data) or die(mysql_error());
+            }
+        }
+        if (isset($fanwire) && $fanwire != "") {
+            $fans = explode(",", $fanwire);
+            foreach ($fans as $value) {
+                $fan_id = $obj->getFanwireIdByName($value);
+                $this->sql = "insert into tbl_additional_fanwires(`fanwire_id`,`content_id`,`content_type`) values(?,?,?)";
+                $data = array($fan_id, $id, '2');
+                $this->conn->executePrepared($this->sql, $data) or die(mysql_error());
+            }
+        }
+    }
+
+    /**
+     * getComments
+     * @param integer $id 
+     * @param integer $type
+     * @param integer $pageSize 
+     * @return array 
+     */
+    public function getComments($id, $type, $pageSize = 100) {
+        $this->sql = "select id,comment_time,userid,comment  from tbl_comments where receiver_id=? AND receiver_type = " . $type;
+        $pageObject = new Pagination($pageSize, 9); //params: pagesize, scroll size
+        $navigation = $pageObject->showNavigation(sizeof($this->conn->selectSql($this->sql, array($id, $type))));
+        $this->sql .= $pageObject->getLimitQry();
+        $this->rs = $this->conn->selectSql($this->sql, array($id, $type));
+        $i = 0;
+        foreach ($this->rs as $key => $value) {
+            $data[$i]['id'] = $value['id'];
+            $data[$i]['comment'] = $value['comment'];
+            $data[$i]['comment_time'] = $value['comment_time'];
+            $i++;
+        }
+        $data['list'] = $data;
+        $data['navigation'] = $navigation;
+        return $data;
+    }
+
+    /**
+     * deleteComment
+     * @param integer $id 
+     * 
+     */
+    public function deleteComment($id) {
+        $this->sql = "delete from tbl_comments where id=?";
+        $this->conn->executePrepared($this->sql, array($id));
+    }
+
+    /**
+     * check the vedio is exist or not
+     * checkVideoTitle
+     * @param string  $title 
+     * @return integer Count of the records
+     */
+    public function checkVideoTitle($title) {
+        //$sql = "select count(*) as cnt from tbl_videos where title=? and visible='1'";
+        $sql = "select count(*) as cnt from tbl_videos where youtubeid=?";
+        $rs = $this->conn->selectSql($sql, array($title));
+        return $rs[0]['cnt'];
+    }
+
+    /**
+     * insert videos from admin panel
+     * @param type $params
+     * @return integer $retId
+     */
+    public function insertVideosCrawl($params) {
+
+        $i = 0;
+        foreach ($params as $value) {
+            //if (self::checkVideoTitle($value['video']) == 0) {
+            if (self::checkVideoTitle($value['youtubeid']) == 0) {
+
+                //$img = file_get_contents(str_replace('default', 'hqdefault', $value['thumbnail']));
+                $filename = strtotime(date("Y-m-d H:i:s")) . rand(2, 8564) . $i++ . "_vdoImg.jpg";
+                //$file = DOC_ROOT_PATH . '/photos/' . $filename;
+                //$res = file_put_contents($file, $img);
+                $imageurl = str_replace('default', 'hqdefault', $value['thumbnail']);
+                $fs = StorageFactory::getObject();
+                 $img = file_get_contents($imageurl);
+                $fs->saveFileFromContents($img, "photos/" . $filename);
+
+                //  if ($res) {
+                $type = "embed";
+                if ($_SESSION['adminid'])
+                    $cid = $_SESSION['adminid'];else
+                    $cid = 143;
+                $this->sql = "insert into tbl_videos(title,description,video,thumbnail,type,userid,belongsTo,status,whomItBelongsTo,source,cdate,youtubeid) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+                $data = array($value['video'], $value['description'], $value['iframe'], $filename, $type, $cid, '2', '1', $value['fanwireName'], '3', $value['released'], $value['youtubeid']);
+                $this->conn->executePrepared($this->sql, $data);
+                $this->conn1->executePrepared($this->sql, $data);
+                $retId[] = $this->conn->getInsertId();
+                // }
+            }else {
+                error_log("video exists");
+            }
+        }
+        return $retId;
+    }
+
+    /**
+     * update_data 
+     * @param object $field 
+     * @param object $data 
+     * @param object $rownum 
+     * @param object $tbl_name
+     * @return object $res
+     */
+    function update_data($field, $data, $rownum, $tbl_name) {
+        $this->sql = "update " . $tbl_name . " set " . $field . " = \"" . mysql_escape_string($data) . "\" where id = " . $rownum;
+        $res = $this->conn->executeUpdate($this->sql);
+        return $res;
+    }
+
+    /**
+     * deleteVideos
+     * @param object $vid video id 
+     * 
+     */
+    public function deleteVideos($vid) {
+        $this->sql = "update tbl_videos set visible='0' where id in($vid)";
+        $this->conn->executePrepared($this->sql, array());
+    }
+
+    /**
+     * releaseVideos
+     * @param interger $vid 
+     * @return array 
+     */
+    public function releaseVideos($vid) {
+        $this->sql = "update tbl_videos set released_date=? where id in ($vid)";
+        return $this->conn->executePrepared($this->sql, array(date("Y-m-d H:i")));
+    }
+
+}

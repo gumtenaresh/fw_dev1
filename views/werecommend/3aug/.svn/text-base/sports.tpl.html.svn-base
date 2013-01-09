@@ -1,0 +1,89 @@
+{include file='header.tpl.html'}
+{include file='zoom.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+<div class="right_container">
+    <div id="rightsection">
+
+        <div id="right_area">
+            <div class="settings_page">
+                <div class="awards_active">
+                    <ul>
+                        <li><a href="{$smarty.const.SITE_URL}werecommend"><span><strong>CELEBRITY</strong></span></a></li>
+                        <li><a href="{$smarty.const.SITE_URL}wefashion"><span><strong>FASHION</strong></span></a></li>
+                        <li><a href="{$smarty.const.SITE_URL}wemusic"><span><strong>MUSIC</strong></span></a></li>
+                        <li><a href="{$smarty.const.SITE_URL}wenews"><span><strong>NEWS</strong></span></a></li>
+                        <li  class="active"><a href="{$smarty.const.SITE_URL}wesports"><span><strong>SPORTS</strong></span></a></li>
+
+                    </ul>
+
+                </div></div>
+            <div class="collection_page">
+                {section name="id" loop=$catdisp}
+
+                <div class="collect_photo">
+                    <a href="{$smarty.const.SITE_URL}profileInfo?fwrid={$catdisp[id].id}&ac=1"><img src="{$smarty.const.IMAGE_URL}{$catdisp[id].photo}" width="246" height="151" />
+                    </a>
+
+
+
+
+
+                    <div class="data">{$catdisp[id].name} <br />
+                        <span>{$catdisp[id].description|truncate:200}.</span></div>
+                    <div class="photo_post">
+                        <div class="message">(3)</div>
+
+                        <div class="red">(19)</div>
+                        <div class="blue">(11)</div>
+                    </div>
+
+                </div>
+
+
+                <!--                <div class="collect_photo">
+                                    <div class="collect_logo"><img src="{$smarty.const.SITE_URL}views/images/jett.jpg" width="56" height="56" /> <h3>jettmg <br />
+                                            <span>via  </span></h3><span class="twt"><img src="{$smarty.const.SITE_URL}views/images/twt.png" width="25" height="21" align="left" />twitter</span>
+
+                                    </div>
+
+                                    <div class="data">
+                                        <span>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.</span></div>
+                                    <div class="photo_post">
+                                        <div class="message">(3)</div>
+                                        <div class="blue">(11)</div>
+                                        <div class="red">(19)</div>
+                                    </div>
+
+                                </div>-->
+
+
+                {sectionelse}
+                No Categories
+                {/section}
+
+
+
+
+
+
+
+            </div>
+
+            <!--         <div class="btm_line"> -->
+            <!--     	<div class="showmore"><a href="#">show more</a></div> -->
+            <!--     </div> -->
+
+            <div class="clear"></div>
+
+
+        </div>
+
+
+
+
+     
+     
+      
+
+   
+   {include file="footer.tpl.html"}

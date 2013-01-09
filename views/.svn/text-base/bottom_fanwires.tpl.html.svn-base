@@ -1,0 +1,85 @@
+<div class="be_fan">
+    <h2>You may also want to be a fan of the...</h2>
+    <div class="be_fan" id="befan">
+        {assign var=i value=1}
+        {section name=q loop=$fanwiresMore} 
+        {assign var=fan value=$fanwiresMore[q]}
+        {assign var=j value=$i++}
+        {if $j lt 5}
+        <div class="photo_list item block" id='n{$fan.id}' {if $zoomValues.0.width}style="width:{$zoomValues.0.width}px;height:{$zoomValues.0.height}+80px;"{/if}>
+             <div class="photos_list" id='two'>
+                <div class="data " style="min-height: 80px;" >
+                    <input type="hidden" name="image_width{$c}" id="image_width{$fanwire}"  value="{$fan.width}" />
+                    <input type="hidden" name="image_height{$c}" id="image_height{$fanwire}" value="{$fan.height}" />
+                    <a href='{$smarty.const.SITE_URL}{$fan.url}' id='imm'>
+                        <img  style="margin: -12px -8px 10px 0px" src="{$smarty.const.IMAGE_URL}{$fan.photo}"  width="175" height="144" alt="Image" />
+                    </a>
+                    <br/><span style="color: #F04E2C;text-decoration: none;">{$fan.name}</span> <br /> <span class='more'>{$fan.description|truncate:100}.</span>
+                </div>
+            </div>
+            <div class="photo_post">
+                <div class="setimg">
+                    <div id="fan{$fan.id}" ><a onclick="addFan({$fan.id});"><img src="{$smarty.const.SITE_URL}views/images/plus_icon.png"></a></div>
+                    <div id="unfan{$fan.id}" style="display: none;"><a onclick="unFan({$fan.id});"><img src="{$smarty.const.SITE_URL}views/images/minus.png"></a></div>
+                </div>
+                <div class="red">({if $fan.like gt 0}{$fan.like}{else}0{/if})</div>
+                <div class="blue">({if $fan.dislike gt 0}{$fan.dislike}{else}0{/if})</div>
+            </div>
+        </div>
+        {/if}
+        {/section}
+        <div class="clear"></div>
+    </div>
+</div>
+
+{literal}
+<script type="text/javascript">
+    function likefanwire(fanwireid,type){
+        var params='like=1&dislike=0&fanwireid='+fanwireid+'&type='+type;
+        var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    // alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showlike"+fanwireid+type).html('('+$.trim(res[0])+')');
+                    $("div #showlike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                    
+                }
+            }
+        });
+    }
+        
+    function dislikefanwire(fanwireid,type){
+        var params='like=0&dislike=1&fanwireid='+fanwireid+'&type='+type;
+        var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    // alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showdislike"+fanwireid+type).html('('+$.trim(res[1])+')');
+                  
+                    $("div #showlike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid+type).animate({opacity:0.4}, "slow");
+                }
+            }
+        });
+    }
+</script>
+{/literal}

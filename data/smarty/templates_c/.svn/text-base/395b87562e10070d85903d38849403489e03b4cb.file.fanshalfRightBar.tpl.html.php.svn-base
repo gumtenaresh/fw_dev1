@@ -1,0 +1,260 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-10 17:42:05
+         compiled from "/var/www/fanwire/views/fanshalfRightBar.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:16912321135024fa95321218-01908281%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '395b87562e10070d85903d38849403489e03b4cb' => 
+    array (
+      0 => '/var/www/fanwire/views/fanshalfRightBar.tpl.html',
+      1 => 1344330171,
+    ),
+  ),
+  'nocache_hash' => '16912321135024fa95321218-01908281',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<!-- <div class="filters">&nbsp;<br />
+          <h2>filter by:</h2>
+           <img src="images/cam1.png" width="25" height="21" vspace='3px;' /> <img src="images/vediio.png" width="25" height="21" /> <img src="images/note.png" width="25" height="21" /> <img src="images/music.png" width="25" height="21" /> | <a href="#">popularity</a>  |  <a href="#">recent</a>  |  <a href="#">a-z</a>  |  <a href="#">z-a</a>
+           </div> -->
+
+<script>
+    function connect(userId,friendId) {
+		 
+        var dataString = 'userId=' +userId+'&friendId='+friendId;
+
+        $.ajax({
+            type : "POST",
+            url : "<?php echo @SITE_URL;?>
+fan/connect",
+            data : dataString,
+            success : function(response) {
+                if (response) {
+                    $('#con').html('<input name="" type="button" class="connect_btn" value="connect request sent"  />');
+                } else {
+                    alert(response);
+                }
+            }
+        });
+        return false;
+    }
+</script>
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function ()
+    {
+        $("#btnShowSimple").click(function (e)
+        {
+            ShowDialog(false);
+            e.preventDefault();
+        });
+
+        $("#message_dialogue").click(function (e)
+        {
+            $("#output").html('');
+            $("#msg").val('');
+            ShowDialog(true);
+            e.preventDefault();
+        });
+
+        $("#btnClose").click(function (e)
+        {
+            HideDialog();
+            e.preventDefault();
+        });
+            
+            
+        $('#compose_message').ajaxForm({
+            beforeSubmit: function() {
+                $('#compose_message').validate({rules: {
+                        msg:{
+                            required: true
+                        }
+                    }  });
+                return $('#compose_message').valid();
+            },
+            success: function(resp) {
+                displayAlertMessage('message sent');
+                HideDialog();
+                e.preventDefault();
+            }
+        });
+ 
+            
+    });
+
+    function ShowDialog(modal)
+    {
+        $("#overlay").show();
+        $("#dialog").fadeIn(300);
+
+        if (modal)
+        {
+            $("#overlay").unbind("click");
+        }
+        else
+        {
+            $("#overlay").click(function (e)
+            {
+                HideDialog();
+            });
+        }
+    }
+
+    function HideDialog()
+    {
+        $("#overlay").hide();
+        $("#dialog").fadeOut(300);
+    }
+    function displayAlertMessage(message)
+    {
+        var timeOut = 5
+        jQuery('#output').text(message).fadeIn()
+        jQuery('#output').css("display", "block")
+        setTimeout(function() {
+            jQuery('#output').fadeOut()
+            jQuery('#output').css("display", "none")
+        }, timeOut * 1000);
+    }
+</script>
+
+<div class="banner" > <img src="<?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->getVariable('userDetails')->value[0]['cover_photo'];?>
+"    /> </div>
+<div class="james_photo"><img src="<?php echo @SITE_URL;?>
+profile_images/<?php echo $_smarty_tpl->getVariable('userDetails')->value[0]['profile_image'];?>
+" width="144" height="144" alt="james" /></div>
+<div class="clear" style="height:275px;"></div>
+
+<div class="james_msg"><div class="james_data">
+       	<h2><?php echo $_smarty_tpl->getVariable('userDetails')->value[0]['fname'];?>
+</h2><br />
+        <span>I’m loving FanWire!!</span>
+    </div>
+    <div class="connect_me" > 
+        <?php if ($_SESSION['id']!=$_REQUEST['uid']){?>
+        <span id='con'>
+            <?php if ($_smarty_tpl->getVariable('connects')->value[0]['requester_user_id']==$_SESSION['id']&&$_smarty_tpl->getVariable('connects')->value[0]['status']==1){?>
+            <input name="" type="button" class="connect_btn" value="connect request sent"/>
+            <?php }elseif($_smarty_tpl->getVariable('connects')->value[0]['requester_user_id']==$_SESSION['id']&&$_smarty_tpl->getVariable('connects')->value[0]['status']==4){?>
+
+            <input name="" type="button" class="connect_btn" value="connected"   />
+
+            <?php }else{ ?>
+            <input name="test" id ="test" type="button" class="connect_btn" value="connect" onclick="return connect(<?php echo $_SESSION['id'];?>
+,<?php echo $_smarty_tpl->getVariable('userDetails')->value[0]['id'];?>
+);" />
+            <?php }?>
+        </span>
+
+        <input name="" type="button" class="connect_btn" value="message" id="message_dialogue" />
+        <?php }?>
+        <div id="overlay" class="web_dialog_overlay2"></div>
+        <form id="compose_message" name="compose_message" action="<?php echo @SITE_URL;?>
+fan/sendMessage" >
+            <div id="dialog" class="web_dialog2">
+                <table style="width: 100%; border: 0px;" cellpadding="5" cellspacing="0">
+                    <tr>
+                        <td class="web_dialog_title">Reply</td>
+                        <td class="web_dialog_title align_right">
+                            <a href="#" id="btnClose" onclick="closedialogue('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+');" >Close</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="hidden" id="fanid" name="fanid" value="<?php echo $_smarty_tpl->getVariable('fanid')->value;?>
+" />
+                            <input type="hidden" id="userid" name="userid" value="<?php echo $_smarty_tpl->getVariable('userid')->value;?>
+" />
+                            <textarea id="msg" name="msg" cols="25" style="width: 230px;" rows="7" class="required"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <input id="btnSubmit" type="submit" value="Send" class="connect_btn" style="float:right;margin:0;" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+        <div id="output" style="color:#F00;" ></div>
+    </div>
+</div>
+<div class="zoom">
+    <table>
+        <tr>
+            <td>
+                <div class="minus">
+                    <img src='<?php echo @SITE_URL;?>
+views/images/m.png'>
+                </div>
+            </td>
+            <td>
+                <div style="float:left;width:131px;"><a href="#" class="tt" >
+                        <div class="zoom" id="slider" style='width: 100%;float:left;'>
+                            <span class="tooltip" >
+                                <b>Tip:</b> Drag the slider to
+                                increase/decrease the size of Fanwires
+                            </span>
+                        </div> 
+                    </a>
+                </div>
+            </td>
+            <td>
+                <div class="plus"  >
+                    <img src='<?php echo @SITE_URL;?>
+views/images/p.png'>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!-- added new end -->
+</div>
+<div class="settings_page">
+    <div class="awards_active">
+        <ul> 
+            <li <?php if ($_REQUEST['ac']==1){?>class="active"<?php }?>><a href="<?php echo @SITE_URL;?>
+profile?uid=<?php echo $_REQUEST['uid'];?>
+&ac=1"><span><strong> fanwires    </strong></span></a></li>
+            <li <?php if ($_REQUEST['ac']==2){?>class="active"<?php }?>><a href="<?php echo @SITE_URL;?>
+uFans?uid=<?php echo $_REQUEST['uid'];?>
+&ac=2"><span><strong> fans        </strong></span></a></li>
+            <!--            <li <?php if ($_REQUEST['ac']==3){?>class="active"<?php }?>><a href="<?php echo @SITE_URL;?>
+profile?uid=<?php echo $_REQUEST['uid'];?>
+&ac=3"><span><strong> wires       </strong></span></a></li>-->
+            
+            <li <?php if ($_REQUEST['ac']==4){?>class="active"<?php }?>><a href="<?php echo @SITE_URL;?>
+profile?uid=<?php echo $_REQUEST['uid'];?>
+&ac=4"><span><strong> media       </strong></span></a>
+            	<ul class="subLikns">
+            		<li <?php if ($_REQUEST['ac']==4){?>class="active"<?php }?>><a href="<?php echo @SITE_URL;?>
+phots?uid=<?php echo $_REQUEST['uid'];?>
+&ac=4"> photos</a></li>
+        		    <li <?php if ($_REQUEST['ac']==4){?>class="active"<?php }?>><a href="<?php echo @SITE_URL;?>
+vidos?uid=<?php echo $_REQUEST['uid'];?>
+&ac=4">vedios</a></li>
+            		<li <?php if ($_REQUEST['ac']==4){?>class="active"<?php }?>><a href="<?php echo @SITE_URL;?>
+articles?uid=<?php echo $_REQUEST['uid'];?>
+&ac=4"> articles</a></li>
+            
+            	</ul>
+            </li>
+            <li <?php if ($_REQUEST['ac']==5){?>class="active"<?php }?>><a href="<?php echo @SITE_URL;?>
+fCollections?uid=<?php echo $_REQUEST['uid'];?>
+&ac=5"><span><strong> collection  </strong></span></a></li>
+            <li <?php if ($_REQUEST['ac']==6){?>class="active"<?php }?>><a href="<?php echo @SITE_URL;?>
+fanInfo?uid=<?php echo $_REQUEST['uid'];?>
+&ac=6"><span><strong> about       </strong></span></a></li>
+        </ul>
+
+    </div>
+</div>

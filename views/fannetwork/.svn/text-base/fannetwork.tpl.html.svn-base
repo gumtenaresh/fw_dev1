@@ -1,0 +1,257 @@
+{include file='header.tpl.html'}
+{include file='zoom.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+<!-- Code by Rak 08/04/2012 -->
+{literal}
+<script type="text/javascript" language="javascript">
+    function textlimits(re,te){
+        var characterLimit = 140;
+        var remainingchars=re;
+        var textarea =te;
+
+        textlimit(characterLimit,remainingchars,textarea);
+    } 
+    function textlimit(characterLimit,remainingchars,textarea)
+
+    {
+        $(remainingchars).html(characterLimit+"characters remaining.");
+        $(textarea).bind('keyup', function(){
+            var charactersUsed = $(this).val().length;
+
+            if(charactersUsed > characterLimit){
+                charactersUsed = characterLimit;
+                $(this).val($(this).val().substr(0, characterLimit));
+                $(this).scrollTop($(this)[0].scrollHeight);
+            }
+            var charactersRemaining = characterLimit - charactersUsed;
+            //  alert(charactersRemaining);
+            $(remainingchars).html(charactersRemaining+"characters remaining.");
+        });
+    }
+
+    function ShowDialog(modal,id)
+    {
+        $("#dialog"+id).toggle();
+        $('#commentsToShow'+id).hide();
+    }
+    
+    function HideDialog(id)
+    
+    {
+      
+        $('#commentsToShow'+id).hide();
+        $("#dialog"+id).hide();
+        // document.getElementById('#dialog'+id).style.display='none';
+         
+        //    $("#dialog"+id).hide();
+    }
+    function showSend(id){
+        $('#commentsToShow'+id).show();
+        // document.getElementById('commentsToShow').style.display='block' ;
+    }
+    function expandtext(textArea){
+        while (textArea.rows > 1 && textArea.scrollHeight < textArea.offsetHeight){
+            textArea.rows--;
+        }
+        while (textArea.scrollHeight > textArea.offsetHeight)
+        {
+            textArea.rows++;
+        }
+        textArea.rows++
+    }
+    function submitForm(fanwireid,url)
+    {
+        var msg = document.getElementById("msg"+fanwireid).value;
+        var dataString = 'id='+fanwireid+'&comment='+msg+'&type=2';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function() {
+                var url1 = '{/literal}{$smarty.const.SITE_URL}{literal}fan/commentCount';
+                var params = 'id='+fanwireid+'&type=2';
+                $.ajax({
+                    type: "POST",
+                    url: url1,
+                    data: params,
+                    success: function(result) { 
+                        var rs=result.split('@@');
+                        $("div #showcomment"+fanwireid).html('('+rs[0]+')');
+                        $("#comm"+fanwireid).prepend(rs[1]);
+                    }
+                });
+                document.getElementById("msg"+fanwireid).value="";
+                // HideDialog(fanwireid);
+            }
+        });
+    }
+
+   
+        
+    
+    //Like and Dislike Code By Rak
+    
+    function onloadcall(fanwireid) {
+        var params='fanwireid='+fanwireid;
+        var url = '{/literal}{$smarty.const.SITE_URL}{literal}fanlikesLoad';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                    
+                }
+            }
+        });
+    }
+    
+    function likefanwire(fanwireid){
+        //alert(fanwireid);
+        var params='like=1&dislike=0&fanwireid='+fanwireid;
+        var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    // alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showlike"+fanwireid).html('('+res[0]+')');
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                    
+                }
+            }
+        });
+    }
+        
+    function dislikefanwire(fanwireid){
+        var params='like=0&dislike=1&fanwireid='+fanwireid;
+        var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    //alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+           
+                    $("div #showdislike"+fanwireid).html('('+res[1]+')');
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                }
+            }
+        });
+    }
+    
+    
+      
+</script>
+
+{/literal}
+
+<div class="right_container">
+    <div id="rightsection">
+
+        <div id="right_area">
+
+
+            <div class="collection_page">
+                {section name="id" loop=$list}
+                <div class="collect_photo">
+                    <a href="{$smarty.const.SITE_URL}profileInfo?fwrid={$list[id].id}&ac=1"><img src="{$smarty.const.IMAGE_URL}{$list[id].photo}" width="246" height="151" />
+                    </a>
+
+
+
+
+                    <div class="data">{$list[id].name} <br />
+                        <span>{$list[id].description|truncate:200}.</span></div>
+                    <div class="photo_post">
+                        <div class="message" id="showcomment{$list[id].id}" onClick="ShowDialog('true','{$list[id].id}');">({$list[id].commentcnt})</div>      
+
+                        <script type="text/javascript"> window.onload=onloadcall('{$list[id].id}');</script>
+                        <div id="showdislike{$list[id].id}" class="red" onclick="dislikefanwire('{$list[id].id}');">({if $list[id].dislike eq ''} 0{else}{$list[id].dislike}{/if})</div>
+                        <div id="showlike{$list[id].id}" class="blue" onclick="likefanwire('{$list[id].id}');">({if $list[id].like eq ''} 0{else}{$list[id].like}{/if})</div>  
+
+
+
+
+
+
+                        <div id="dialog{$list[id].id}" class="web_dialog" >
+
+                            <div class="comments">
+                                <ul >  
+                                    <li class="view_comments">
+                                        {if $list[id].comments_for_this_post|@count gt 3} <a href="javascript:void(0);" >view all comments</a>{else}<a href="javascript:void(0);" >&nbsp;</a>{/if}
+                                        <a href="javascript:void(0);" class="cross_btn" onclick="HideDialog('{$list[id].id}');" >X</a>
+                                    </li>
+                                    {section name=tem loop=$list[id].comments_for_this_post}
+                                    {assign var=t value=$list[id].comments_for_this_post[tem]}
+                                    <li >
+                                        <img src="{$smarty.const.PROFILE_IMAGES_VIEW_PATH}{$t.profile_image}">
+                                        <span><strong>{$t.name}</strong>&nbsp;{$t.comment}</span>
+                                        <div class="clear"></div>
+                                    </li >
+                                    {/section}
+                                    <div id='comm{$list[id].id}'></div>
+                                    <li >
+                                        <img src="{$profile_image}">
+                                        <textarea  id="msg{$list[id].id}" name="msg{$list[id].id}"  onkeyup='expandtext(this)' onclick="return showSend('{$list[id].id}');"onfocus=" return textlimits('#remainingCharacters{$list[id].id}','#msg{$list[id].id}');" onKeyPress="Javascript:if(event.keyCode==13) submitForm('{$list[id].id}','{$smarty.const.SITE_URL}fan/sendComment');" placeholder="say something..." title="say something..."   autocomplete="off" rows="1" ></textarea>
+                                        <div id="commentsToShow{$list[id].id}" style="display: none;">
+                                            <button type="button" class="sendComment" onclick="submitForm('{$list[id].id}','{$smarty.const.SITE_URL}fan/sendComment');">say something</button>
+                                            <span class="characters" id="remainingCharacters{$list[id].id}">140 Characters</span>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <input type="hidden" id="id" name="id" value="{$list[id].id}" />
+                                    <input type="hidden" name="type" id="type" value="0" />
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {sectionelse}
+                <div align="center" style="line-height: 40px;">No Fan Network</div>
+                {/section}
+
+
+
+
+
+
+
+            </div>
+
+
+            <!--         <div class="btm_line"> -->
+            <!--     	<div class="showmore"><a href="#">show more</a></div> -->
+            <!--     </div> -->
+
+            <div class="clear"></div>
+
+
+        </div>
+
+
+
+
+
+
+        {include file="footer.tpl.html"}

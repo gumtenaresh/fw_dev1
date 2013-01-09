@@ -1,0 +1,292 @@
+{include file='header.tpl.html'}
+{include file='zoom.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+{literal}
+<script>
+    function deleteVideo(id)
+    {
+        var dataString='id='+id;
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}mediamanager/deleteVideo",
+            data: dataString,
+            success: function(response) {
+                $(response).hide('slow', function() {
+                });
+            }
+        });
+    }
+
+    function textlimits(re,te){
+        var characterLimit = 140;
+        var remainingchars=re;
+        var textarea =te;
+
+        textlimit(characterLimit,remainingchars,textarea);
+    } 
+    function textlimit(characterLimit,remainingchars,textarea)
+
+    {
+        $(remainingchars).html(characterLimit+"characters remaining.");
+        $(textarea).bind('keyup', function(){
+            var charactersUsed = $(this).val().length;
+
+            if(charactersUsed > characterLimit){
+                charactersUsed = characterLimit;
+                $(this).val($(this).val().substr(0, characterLimit));
+                $(this).scrollTop($(this)[0].scrollHeight);
+            }
+            var charactersRemaining = characterLimit - charactersUsed;
+            //  alert(charactersRemaining);
+            $(remainingchars).html(charactersRemaining+"characters remaining.");
+        });
+    }
+
+    function deleteAlbum(id)
+    {
+           
+        var dataString='id='+id;
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}mediamanager/deleteArticle",
+            data: dataString,
+            success: function(response) {
+                $(response).hide('slow', function() {
+                });
+            }
+        });
+    }
+
+    function ShowDialog(modal,id)
+    {
+        $("#dialog"+id).toggle();
+        $('#commentsToShow'+id).hide();
+    }
+    function HideDialog(vid)
+    {
+        $("#dialog"+vid).hide();
+    }
+       
+    function submitForm(fanwireid,url)
+    {
+        var msg = document.getElementById("msg"+fanwireid).value;
+        var dataString = 'id='+fanwireid+'&comment='+msg+'&type=3';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function() {
+                var url1 = '{/literal}{$smarty.const.SITE_URL}{literal}fan/commentCount';
+                var params = 'id='+fanwireid+'&type=3';
+                $.ajax({
+                    type: "POST",
+                    url: url1,
+                    data: params,
+                    success: function(result) { 
+                        var rs=result.split('@@');
+                        $("div #showcomment"+fanwireid).html('('+rs[0]+')');
+                        $("#comm"+fanwireid).append(rs[1]);
+                    }
+                });
+                document.getElementById("msg"+fanwireid).value="";
+                // HideDialog(fanwireid);
+            }
+        });
+    }
+
+    //view all comments are shown here.SAI SUDHEER
+    function viewAllComments(fanwireid,url)
+    {
+       /* var msg = document.getElementById("msg"+fanwireid).value;*/
+        var dataString = 'id='+fanwireid+'&type=3';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function(result) {                
+               // var rs=result.split('@@');
+                $("#all_comments_vedio"+fanwireid).html(result);                 
+                $("#view_all_link"+fanwireid).html("&nbsp;");//document.getElementById("#comm"+fanwireid).innerHTML=result;
+                
+            }
+        });
+    }
+	
+    //Like and Dislike Code By Rak
+    
+    function onloadcall(fanwireid) {
+    	
+        //alert('Exec on Onload');
+        //alert(fanwireid);
+        var params='fanwireid='+fanwireid;
+        var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                    
+                }
+            }
+        });
+    }
+    
+    function likefanwire(fanwireid){
+        var params='like=1&dislike=0&fanwireid='+fanwireid;
+        var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    // alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showlike"+fanwireid).html('('+res[0]+')');
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                    
+                }
+            }
+        });
+    }
+        
+    function dislikefanwire(fanwireid){
+        var params='like=0&dislike=1&fanwireid='+fanwireid;
+        var url = '{/literal}{$smarty.const.SITE_URL}{literal}fan/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    //alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showdislike"+fanwireid).html('('+res[1]+')');
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                }
+            }
+        });
+    }
+
+    function showSend(id){
+        $('#commentsToShow'+id).show();
+        // document.getElementById('commentsToShow').style.display='block' ;
+    }
+    function expandtext(textArea){
+        while (textArea.rows > 1 && textArea.scrollHeight < textArea.offsetHeight){
+            textArea.rows--;
+        }
+        while (textArea.scrollHeight > textArea.offsetHeight)
+        {
+            textArea.rows++;
+        }
+        textArea.rows++
+    }
+</script>
+{/literal}
+{include file='mediaManagerhalfRightBar.tpl.html'}<!-- media manager half right bar -->
+{section name="id" loop= $list}
+<div class="photo_list2" id="div{$list[id].id}">
+    <div class="orange_arrow"><img src="{$smarty.const.SITE_URL}views/images/orange_arrow.jpg" />
+        <!--popup window start here-->
+        <div class="photo_popup">
+            <ul>
+                <li><a href="#">Edit Group</a></li>
+                <li><a href="#">Rename</a></li>
+                <li><a href="#">This Group is</a>
+                    <span><a href="#" {if $list[id].status eq 0}class="selected"{/if}>Private</a></span>
+                    <span><a href="#" {if $list[id].status eq 1}class="selected"{/if}>Public</a></span>
+                </li>
+                <li><a href="#">Delete Group</a></li>
+            </ul>
+        </div>
+        <!--popup window end here-->
+    </div>
+    <div class="photos_list">
+        <a href="{$smarty.const.SITE_URL}viewVideos?vid={$list[id].id}">
+            <img src="{$smarty.const.IMAGE_URL}thumbs/{$list[id].thumbnail}" height="151" width="246"/></a>
+
+        <div class="data" onclick="">
+            <img src="{$smarty.const.SITE_URL}views/images/minus.png" width="19" height="19" onclick="return deleteVideo('{$list[id].id}');" /> {$list[id].title} <br />
+            <span>{$list[id].description|truncate:200}</span></div></div>
+    <div class="photo_post">
+        <div class="message" id="showcomment{$list[id].id}" onClick="ShowDialog('true','{$list[id].id}');">({$list[id].commentcnt})</div>
+
+        <!-- Below two divs display like and unlike btns code by Rak -->
+        <script> window.onload=onloadcall('{$list[id].id}');</script>
+
+
+
+        <div id="showdislike{$list[id].id}" class="red" onclick="dislikefanwire('{$list[id].id}');">({if $list[id].dislike eq ''} 0{else}{$list[id].dislike}{/if})</div>
+        <div id="showlike{$list[id].id}" class="blue" onclick="likefanwire('{$list[id].id}');">({if $list[id].like eq ''} 0{else}{$list[id].like}{/if})</div>
+    </div>
+
+    <div id="dialog{$list[id].id}" class="web_dialogvedios" >
+
+        <div class="comments"    >
+            <ul >  
+                <li class="view_comments">
+                    {if $list[id].commentcnt gt 5}<a id="view_all_link{$list[id].id}" href="javascript:void(0);" onclick="viewAllComments('{$list[id].id}', '{$smarty.const.SITE_URL}fan/viewAllComments')" >view all comments</a>{else}<a href="javascript:void(0);" >&nbsp;</a>{/if}
+                    <a href="javascript:void(0);" class="cross_btn" onclick="HideDialog('{$list[id].id}');" >X</a>
+                </li>
+				</ul>
+				<ul id="all_comments_vedio{$list[id].id}">
+                {section name=tem loop=$list[id].comments_for_this_post}
+                {assign var=t value=$list[id].comments_for_this_post[tem]}
+                <li >
+                    <img src="{$smaty.const.SITE_URL}profile_images/{$t.profile_image}">
+                    <span><strong>{$t.name}</strong>&nbsp;{$t.comment}</span>
+                    <div class="clear"></div>
+                </li >
+                {/section}
+				</ul>
+				<ul>
+                <div id='comm{$list[id].id}'></div>
+                <li >
+                    <img src="{$profile_image}">
+                    <textarea  id="msg{$list[id].id}" name="msg{$fan.id}"  onkeyup='expandtext(this)' onclick="return showSend('{$list[id].id}');"onfocus=" return textlimits('#remainingCharacters{$list[id].id}','#msg{$list[id].id}');" onKeyPress="Javascript:if(event.keyCode==13) submitForm('{$list[id].id}','{$smarty.const.SITE_URL}fan/sendComment');" placeholder="say something..." title="say something..."   autocomplete="off" rows="1" ></textarea>
+                    <div id="commentsToShow{$list[id].id}" style="display: none;">
+                        <button type="button" class="sendComment" onclick="submitForm('{$list[id].id}','{$smarty.const.SITE_URL}fan/sendComment');">say something</button>
+                        <span class="characters" id="remainingCharacters{$list[id].id}">140 Characters</span>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+                <input type="hidden" id="id" name="id" value="{$list[id].id}" />
+                <input type="hidden" name="type" id="type" value="0" />
+            </ul>
+        </div>
+    </div>
+
+</div>
+{sectionelse}
+<div align="center" style="line-height: 40px;">No Videos</div>
+{/section}
+
+
+</div>
+
+<div class="clear"></div>
+
+<!--<div class="btm_line">
+    <div class="showmore"><a href="#">show more</a></div>
+</div>-->
+
+
+</div>
+
+
+{include file='footerww.tpl.html'}

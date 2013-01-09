@@ -1,0 +1,53 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-06 16:10:16
+         compiled from "/var/www/fanwire/views/fanwires/aboutFanwireGuest.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:1797354692501f9f10b5a6e8-14680329%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '60cc6e957295932055465efde260542692d7ad27' => 
+    array (
+      0 => '/var/www/fanwire/views/fanwires/aboutFanwireGuest.tpl.html',
+      1 => 1344249543,
+    ),
+  ),
+  'nocache_hash' => '1797354692501f9f10b5a6e8-14680329',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('headerguest.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('guest_left_section.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<!--Right Section-->
+
+<div class="right_container">
+    <div class="more_posts"><a href="#">More Posts</a></div>
+    <div id="inner_rightsection">
+
+        <div id="right_area">
+            <?php $_template = new Smarty_Internal_Template('fanwireshalfRightBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?><!-- fanwireshalfRightBar -->
+            <div class="collection_page">
+                Name:<?php echo $_smarty_tpl->getVariable('fanwires')->value['name'];?>
+<br>
+                Picture:<img src="<?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->getVariable('fanwires')->value['photo'];?>
+" height="151" width="246"/><br>
+                Description:<?php echo $_smarty_tpl->getVariable('fanwires')->value['description'];?>
+
+            </div>
+            <!--            <div class="btm_line">
+            <div class="showmore"><a href="#">show more</a></div>
+            </div>-->
+            <div class="clear"></div> 
+        </div>
+        <?php $_template = new Smarty_Internal_Template('footerGuest.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+        
+         <div class="login">
+            <p><a href="javascript:void(0);" onclick="loginPop();" id="loginFacebook2">LOGIN</a></p>
+        </div> 

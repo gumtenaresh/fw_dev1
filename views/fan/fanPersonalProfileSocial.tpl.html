@@ -1,0 +1,78 @@
+{include file='header.tpl.html'}
+{include file='zoom.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+{literal}
+<script type="text/javascript">
+    $().ready(function() {
+        var showChar = 150;
+        var ellipsestext = "...";
+        var moretext = "more";
+        var lesstext = "less";
+        $('.more').each(function() {
+            var content = $(this).html();
+            if(content.length > showChar) {
+                var c = content.substr(0, showChar);
+                var h = content.substr(showChar-1, content.length - showChar);
+                var html = c + '<span >'+ellipsestext+'</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">'+moretext+'</a></span>';
+                $(this).html(html);
+            }
+        });
+        $(".morelink").click(function(){
+            if($(this).hasClass("less")) {
+                $(this).removeClass("less");
+                $(this).html(moretext);
+            } else {
+                $(this).addClass("less");
+                $(this).html(lesstext);
+            }
+            $(this).parent().prev().toggle();
+            $(this).prev().toggle();
+            return false;
+        });
+    });
+</script>
+{/literal}
+<!--Right Section-->
+<div class="right_container">
+    <div class="more_posts"><a href="#">More Posts</a></div>
+    <div id="inner_rightsection">
+        <div id="right_area">
+		 {include file='fanshalfRightBar.tpl.html'}
+            <!-- fanwireshalfRightBar -->
+            
+            {section name=list loop=$fansFanwiresDeetails}
+            <div class="collection_page">
+                <div class="collect_photo">
+                    <a href="{$smarty.const.SITE_URL}profileInfo?fwrid={$fansFanwiresDeetails[list].id}&ac=1"  ><img src="{$smarty.const.IMAGE_URL}{$fansFanwiresDeetails[list].photo}" width="246" height="151" /></a>
+                    <div class="data">{$fansFanwiresDeetails[list].name} <br />
+                        <span class='more'>{$fansFanwiresDeetails[list].description}</span>
+                    </div>
+                    <div class="photo_post">
+                        <div class="message">(3)</div>
+                        <div class="blue">(1)</div>
+                        <div class="red">(19)</div>
+                    </div>
+                    <!--          {*$fanwires.description*}uncomment to display the description of the fanwire -->
+                </div>
+            </div>
+            {/section}
+            <!-- if via twitter enable it-->
+            <!--   <div class="collect_photo"> -->
+            <!--         <div class="collect_logo"><img src="images/jett.jpg" width="56" height="56" /> <h3>jettmg <br /> -->
+            <!-- <span>via  </span></h3><span class="twt"><img src="images/twt.png" width="25" height="21" align="left" />twitter</span> -->
+            <!--         </div> -->
+            <!--          <div class="data"> -->
+            <!-- <span>Test test.</span></div> -->
+            <!-- <div class="photo_post"> -->
+            <!--     	<div class="message">(3)</div> -->
+            <!--         <div class="blue">(11)</div> -->
+            <!--         <div class="red">(19)</div> -->
+            <!--     </div> -->
+            <!--          </div> -->
+            <div class="btm_line">
+                <div class="showmore"><a href="#">show more</a></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        {include file='footer.tpl.html'}
+

@@ -1,0 +1,191 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-06 16:25:50
+         compiled from "/var/www/fanwire/views/fan/requests.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:1371640081501fa2b6f18ff0-56479687%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '95b51391b44cd5839b00cfb86771e466af511d86' => 
+    array (
+      0 => '/var/www/fanwire/views/fan/requests.tpl.html',
+      1 => 1342515374,
+    ),
+  ),
+  'nocache_hash' => '1371640081501fa2b6f18ff0-56479687',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('header.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('myfanwireLeftBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<!--Right Section-->
+  
+<script type="text/javascript">
+    function acceptRequest(userId,fanId)
+    {
+       
+         
+        var dataString = 'userId='+userId+'&fanId='+fanId+'&action=ar';
+        var url = "<?php echo @SITE_URL;?>
+respondRequest";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function(result) {
+                $("#message"+fanId).hide();
+                
+            }
+        });
+    }
+    function denyRequest(userId,fanId)
+    {
+         
+
+        var dataString = 'userId='+userId+'&fanId='+fanId+'&action=dr';
+        var url = "<?php echo @SITE_URL;?>
+respondRequest";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function(result) {
+                $("#message"+fanId).hide();
+            }
+        });
+    }
+     
+</script>
+
+<div class="right_container">
+    <div id="rightsection">
+
+        <div id="right_area">
+            <div class="connect_fans">
+
+                <div class="fanbox_title"><h2>fanbox</h2></div>
+
+                <div class="awards_active">
+                    <ul>
+                        <li <?php if ($_smarty_tpl->getVariable('message')->value=='messages'){?> class="active" <?php }?>><a href="<?php echo @SITE_URL;?>
+messageCenter"><span><strong>messages</strong></span></a></li>
+<!--                         <li class="active"><a href="notifications"><span><strong>Notifications</strong></span></a></li> -->
+                        <li <?php if ($_smarty_tpl->getVariable('message')->value=='requests'){?>class="active"<?php }?>><a href="<?php echo @SITE_URL;?>
+requests"><span><strong>Requests</strong></span></a></li>
+                    </ul>
+                </div>
+
+                <div class="clear"></div>
+
+                <div class="notification_body">
+
+                    <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['name'] = "id";
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'] = is_array($_loop=$_smarty_tpl->getVariable('userFansDetails')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']["id"]['total']);
+?>
+                    <?php $_smarty_tpl->tpl_vars['userFans'] = new Smarty_variable($_smarty_tpl->getVariable('userFansDetails')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']], null, null);?>
+
+                    <div class="message_data">
+
+                        <div class="msg_photo">
+                            <a href="<?php echo @SITE_URL;?>
+profile?uid=<?php echo $_smarty_tpl->getVariable('userFans')->value['id'];?>
+">
+                                <?php if ($_smarty_tpl->getVariable('userFans')->value['profile_image']==''){?>
+                                <img src="<?php echo @SITE_URL;?>
+views/images/private_normal.png" width="82" height="82" /></a><br />
+                            <?php }else{ ?>
+                            <img src="<?php echo @SITE_URL;?>
+profile_images/<?php echo $_smarty_tpl->getVariable('userFans')->value['profile_image'];?>
+" width="82" height="82" /></a><br />
+                            <?php }?>
+                            <?php echo $_smarty_tpl->getVariable('userFans')->value['fname'];?>
+
+                        </div>
+                        <div class="msg_txt"> <?php echo $_smarty_tpl->getVariable('userFans')->value['fname'];?>
+&nbsp;<?php echo $_smarty_tpl->getVariable('userFans')->value['lname'];?>
+  wants to be your fan. 
+                            <span class="blue_text">
+                                <a href="#"> You have <?php echo count($_smarty_tpl->getVariable('commonFanwires')->value[$_smarty_tpl->getVariable('userFans')->value['id']]);?>
+ Fanwires in common.</a>
+                            </span>
+
+                            <div class="request_imges">
+                                <ul>
+                                    <?php  $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable;
+ $_smarty_tpl->tpl_vars['myId'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->getVariable('commonFanwiresDetails')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+if (count($_from) > 0){
+    foreach ($_from as $_smarty_tpl->tpl_vars['i']->key => $_smarty_tpl->tpl_vars['i']->value){
+ $_smarty_tpl->tpl_vars['myId']->value = $_smarty_tpl->tpl_vars['i']->key;
+?>
+                                    <li><a href="<?php echo @SITE_URL;?>
+profileInfo?fwrid=<?php echo $_smarty_tpl->tpl_vars['i']->value['id'];?>
+"><img src="<?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->tpl_vars['i']->value['photo'];?>
+" /></a></li>
+                            
+                                    <?php }} ?>
+                                    <?php if (count($_smarty_tpl->getVariable('commonFanwiresDetails')->value)>15){?>
+                                    <li><a href="#" class="more">15 more</a></li>
+                                    <?php }?>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="notification_close_box">
+                            <input name="accept"  id="accept" onclick="return acceptRequest('<?php echo $_SESSION['id'];?>
+','<?php echo $_smarty_tpl->getVariable('userFans')->value['id'];?>
+');" type="button" class="accept_btn" value="ACCEPT" />
+                            <input name="deny" id="deny"  class="deny_btn" type="button" value="DENY" onclick="return denyRequest('<?php echo $_SESSION['id'];?>
+','<?php echo $_smarty_tpl->getVariable('userFans')->value['id'];?>
+');"  />
+                        </div>
+
+
+
+                    </div>
+                    <?php endfor; else: ?>
+                    <div  class="message_data" align="center" style="line-height: 40px;">No Requests So far.......</div>
+                    <?php endif; ?>
+
+                    <div class="clear"></div>
+                </div>
+
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="btm_line">
+                <?php if ($_smarty_tpl->getVariable('msgcnt')->value>'5'){?><div id="showmore" class="showmore"><a href="#">show more</a></div><?php }?>
+                <input type="hidden" name="moreval" id="moreval" value="5" />
+            </div>
+
+
+        </div>
+        <?php $_template = new Smarty_Internal_Template('footer.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>

@@ -1,0 +1,236 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-03 12:26:07
+         compiled from "/var/www/fanwire/views/videos/my_fanwire_add_new_videos.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:1210204363501b7607bc87e6-02295847%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '18ae0f4b837a9eaddf7eb11415616267ee8355eb' => 
+    array (
+      0 => '/var/www/fanwire/views/videos/my_fanwire_add_new_videos.tpl.html',
+      1 => 1343293743,
+    ),
+  ),
+  'nocache_hash' => '1210204363501b7607bc87e6-02295847',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('header.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('myfanwireLeftBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?><!-- this is left bar -->
+
+<script>
+    $(document).ready(function(){
+        $("#videoupload").validate({
+            rules:{
+                title:{required:true},
+                personal:{required:true},
+                url:{required:true}
+            }
+        });
+    });
+    function toggleText(){
+        var res=document.getElementById('personal').checked;
+        var res1=document.getElementById('personal1').checked;
+
+        if(res1==true)
+            $('#fanwirename').show();
+        else $('#fanwirename').hide();
+    }
+    function getkeywords()
+    {
+        var keywords =new Array(); var i=0;
+        $("div #fankeywords span").each(function(){
+            keywords[i] = $(this).text(); i++;
+        });
+        var keyword = keywords.join(",");
+        document.getElementById("keyword").value = keyword;
+    }
+
+    function removespan(id)
+    {
+        $(id).remove();
+    }
+    function addkeywords()
+    {
+       
+        var val = $.trim(document.getElementById("keywords").value);
+      
+        val = val.replace (/,/g, "");//removing the , from the content
+         
+        var key = val.replace(" ", "_");
+        
+        key = key.replace(" ", "_");
+        if(key!="")
+        {
+            $("#fankeywords").append('&nbsp;<span id="'+key+'" onclick=removespan("#'+key+'")><a href="javascript:void(0);">X</a>'+val+'</span>');
+            document.getElementById("keywords").value="";
+        }
+        getkeywords();
+    }
+    function autoResize(){
+        var newheight;
+        var newwidth;
+
+
+        newheight=document.getElementById(id).contentWindow.document .body.scrollHeight;
+        newwidth=document.getElementById(id).contentWindow.document .body.scrollWidth;
+       
+
+        document.getElementById(id).height= (newheight) + "px";
+        document.getElementById(id).width= (newwidth) + "px";
+    }
+    function seeTitle(){
+        var title=document.getElementById('title').value;
+        $('#titleOfVideo').html(title);
+        // document.getElementById('addA').style.display="block";
+        return true;
+    }
+    function seeVideo(){
+        var url=document.getElementById('url').value;
+        var n=url.split(" ");
+        var i;
+        var p;
+        for(i=0;i<n.length;i++){
+            p=n[i].split('=');
+            if(p[0]=="src"){
+                var urls=n[i];
+            }
+        }
+        $('#videoDisplay').html('<iframe '+urls+' height="150" width="246" frameborder="0" allowfullscreen></iframe>');
+        return true;
+    }
+
+</script>
+
+<!--Right Section-->
+<div class="right_container">
+
+    <div id="rightsection">
+
+        <div id="right_area">
+            <div class="connect_fans">
+                <form action="<?php echo @SITE_URL;?>
+videos/organize" method="post" id="videoupload" name="videoupload" enctype="multipart/form-data">
+                    <h2 class="new_video">Add a new video</h2>
+
+                    <!--this photos are section start here-->
+                    <div class="this_photos">
+                        <h3>This Video is :</h3>
+                        <form action="" method="post">
+                            <div class="tp_options">
+                                <input type="radio" name="personal" value="personal" id="personal"  onclick=" return toggleText();" checked/> Personal<br />
+                                <input type="radio" name="personal"  value="forfanwire"  id="personal1" onclick=" return toggleText();"/> For a Fanwire<br />
+                                <input type="text" name="fanwirename" id="fanwirename" style="display: none"  />
+                            </div>
+                            <div class="clear"></div>
+                    </div>
+                    <!--this photos are section start here-->
+
+                    <!--we support section start here-->
+                    <div class="we_support">
+                        <h3>we support :</h3>
+                        <div class="support_icons">
+                            <a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/youtube_icon.png" alt=""/></a>
+                            <a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/vimeo_icon.png" alt="" /></a>
+                            <a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/funny_die_icon.png" alt="" /></a>
+                            <a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/break_icon.png" alt="" /></a>
+                            <a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/daily_motion_icon.png" alt="" /></a>
+                        </div>
+                    </div>
+                    <!--we support section start here-->
+                    <div class="clear"></div>
+                    <!--video information and preview sections start here-->
+                    <div class="add_new_video">
+                        <!--video information section start here-->
+                        <div class="add_new_video_information">
+                            <h3>video information</h3>
+
+                            <label>Video embed code of URL</label>
+                            <textarea name="url" id="url" onblur="return seeVideo();"></textarea>
+                            <label>Title of Video</label>
+                            <input type="text" name="title" id="title" onblur="return seeTitle();"/>
+                            <span>This title was automatically suggested. Feel free to
+                                change it if you'd like.</span>
+
+                            <label>Keywords</label><input type="text" name="keywords" id="keywords" onkeyup="Javascript:if(event.keyCode==188) addkeywords();"/>
+
+                            <!--<div class="plus_btn"><a href="javascript:void(0);" onclick="addkeywords();"><img src="views/images/plus_icon.png" /></a></div>-->
+
+                            <div class="remove_keywords" style="float: left" id="fankeywords">
+
+                                <input type="hidden" name="keyword" id="keyword" />
+                            </div>
+                            <div class="clear"></div>
+
+                        </div>
+                        <!--video information section end here-->
+
+                        <!--video preview section start here-->
+                        <div class="new_video_preview" id="newVideo">
+                            <h3>preview</h3>
+                            <object width="246" height="150" id="videoDisplay">
+
+                            </object>
+                            <p id="titleOfVideo"></p>
+                            <div class="add_another_video" id="addA" style="display:none;">
+                                <a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/plus_icon.png" />add another video</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <!--video preview section end here-->
+                        <div class="clear"></div>
+                    </div>
+                    <!--video information and preview sections end here-->
+
+                    <!--notification options section start here-->
+                    <div class="notifications_div">
+                        <h3>Notification</h3>
+
+                        <div class="n_options">
+                            <input type="checkbox" name="twitter" id="twitter"/> Twitter Account <span><a href="#">add account</a></span><br />
+                            <input type="checkbox" name="facebook" id="facebook"/> Facebook Account<br />
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <!--notification options section start here-->
+
+                    <!--privacy are section start here-->
+                    <div class="privacy">
+                        <h3>Privacy</h3>
+
+                        <div class="privacy_options">
+                            <input type="radio" name="privacy" value="private" id="privacy" checked/> This is a private post<br />
+                            <input type="radio" name="privacy" value="public"id="privacy"/> This is a public post<br />
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <!--privacy section start here-->
+
+                    <!--save, back btns sections start here-->
+                    <div class="bs_btns">
+                        <a href="<?php echo @SITE_URL;?>
+addItem" class="back_btn">back</a>
+                        <div id="submitbutton"></div>
+                        <input type="submit" class="save_btn" name="submit" value="publish" />
+                        <div class="clear"></div>
+                    </div>
+                    <!--save, back btns sections end here-->
+                </form>
+            </div>
+            <for>
+
+        </div>
+        <?php $_template = new Smarty_Internal_Template('footer.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>

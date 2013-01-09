@@ -1,0 +1,21 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-07-26 18:10:19
+         compiled from "/var/www/fanwire/views/admin/footer.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:45077203850113ab3a67b05-71619021%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'b78c7048c415b84f4275f51ff571a31b800651eb' => 
+    array (
+      0 => '/var/www/fanwire/views/admin/footer.tpl.html',
+      1 => 1343025901,
+    ),
+  ),
+  'nocache_hash' => '45077203850113ab3a67b05-71619021',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+</div>
+</body>
+</html>

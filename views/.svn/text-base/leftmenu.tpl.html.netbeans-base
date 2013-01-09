@@ -1,0 +1,28 @@
+<div class="left_menusec">
+    {if $activefooter}
+
+    <ul>
+        <li><a href="http://fanwire.tumblr.com/" target="_blank">1. NEWS</a></li>
+        <li><a href="{$smarty.const.SITE_URL}footer/terms" {if $activefooter eq 'terms'}class="active"{/if} >2. TERMS & CONDITIONS</a></li>
+        <li><a href="{$smarty.const.SITE_URL}footer/privacy" {if $activefooter eq 'privacy'}class="active"{/if} >3. PRIVACY POLICY</a></li>
+        <li><a href="{$smarty.const.SITE_URL}footer/help" {if $activefooter eq 'help'}class="active"{/if} >4. HELP</a></li>
+        <li><a href="{$smarty.const.SITE_URL}contactUs"  {if $activefooter eq 'connect'}class="active"{/if} >5. CONTACT</a></li>
+
+    </ul>
+    {/if}
+    {if $active}
+    <ul>
+        <li><a href="javascript:void(0);" {if $active eq 'connect'}class="active"{/if} >1. Connect{if $active eq 'addFanWires'||$active eq 'pic'}<span style=" float:right; padding:5px 14px 0 0;"><img src="{$smarty.const.SITE_URL}views/images/RIGHT-MARK.png" height="16" width="15" alt="" ></span> {/if}</a></li>
+        <li><a href="javascript:void(0);" {if $active eq 'addFanWires'}class="active"{/if}>2. Add Fanwires{if $active eq 'pic'}<span style=" float:right; padding:5px 14px 0 0;"><img src="{$smarty.const.SITE_URL}views/images/RIGHT-MARK.png" height="16" width="15" alt="" ></span> {/if}</a></li>
+        <li><a href="javascript:void(0);" {if $active eq 'pic'}class="active"{/if} >3. Profile Photo</a></li>
+    </ul>
+    {/if}
+    {if $activeBrowseAddFan}
+
+    <ul>
+        <li><a href="javascript:void(0);" {if $activeBrowseAddFan eq 'browse'}class="active"{/if}>My Fanwire</a></li>
+        <li><a href="javascript:void(0);" {if $activeBrowseAddFan eq 'collection'}class="active"{/if}>My Collection</a></li>
+        
+    </ul>
+    {/if}
+</div>

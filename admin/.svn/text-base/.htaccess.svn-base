@@ -1,0 +1,22 @@
+RewriteEngine On
+
+#If a file or folder is found, go to that folder, else goto index.php
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d 
+
+#Add query string to the url
+
+
+RewriteRule ^.*$ - [NC,L]
+
+#redirect get variables also under %1
+RewriteCond %{QUERY_STRING} (.*)
+
+#redirect to api calls
+RewriteRule   ^api/([a-z0-9\.]+)/(.*)$  api/$1/index.php?path=$2&%1	[NC,L]
+
+#redirect get variables also under %1
+RewriteCond %{QUERY_STRING} (.*)
+#redirecting web pages.
+RewriteRule ^(.*)$ index.php?path=$1&%1 [NC,L]

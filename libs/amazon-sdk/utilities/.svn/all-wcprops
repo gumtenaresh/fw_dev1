@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities
+END
+info.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/info.class.php
+END
+stepconfig.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/stepconfig.class.php
+END
+manifest.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/manifest.class.php
+END
+request.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/request.class.php
+END
+hadoopstep.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/hadoopstep.class.php
+END
+response.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/response.class.php
+END
+policy.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/policy.class.php
+END
+batchrequest.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/batchrequest.class.php
+END
+simplexml.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/simplexml.class.php
+END
+mimetypes.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/mimetypes.class.php
+END
+array.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/array.class.php
+END
+complextype.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/complextype.class.php
+END
+utilities.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/libs/amazon-sdk/utilities/utilities.class.php
+END

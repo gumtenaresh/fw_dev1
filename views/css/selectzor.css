@@ -1,0 +1,26 @@
+﻿.ddn {
+	background-image: url(../images/ddlSelector-OG.gif);
+	background-position: right center;
+	background-repeat: no-repeat;
+	border: solid 1px #7fb718;
+	height: 13px;
+	padding: 2px;
+	padding-right: 12px; /* This is the width of the selector dropdown image */
+	color: #D27E00;
+}
+.ddn-container {
+    border: solid 1px #7fb718;
+    border-top: none; 
+    position: absolute; 
+    background-color: #fff;
+     /* This is the width of the selector dropdown image in the ddn class */
+}
+.ddn-item {
+	padding: 2px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.ddn-item-hover {
+    background-color: #7fb718; 
+    color: #000;
+}

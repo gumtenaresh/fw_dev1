@@ -1,0 +1,68 @@
+{include file="{$smarty.const.ADMIN}/header.tpl.html"}
+{literal}
+<script type="text/javascript">
+    $(document).ready(function(){
+        
+       $("#createuse").validate({
+          rules:{
+              firstname:{required:true},
+              lastname:{required:true},
+              email:{required:true,email:true},
+              password:{required:true},
+              reenterpassword:{required:true,equalTo:'#password'}
+          } 
+       }); 
+    });
+</script>
+{/literal}
+<div id="data_sectionarea">
+        <div class="data_rightsection1">
+        <div class="rightcontent"> 
+                     
+  <form  name="createuse" id="createuse" method="post" action="">
+                        <div class="fw_login_right">
+                            <div style="width: 600px;float:right;">
+                                    <div style="font-size: 22px; margin:  0 0 25px 0px; "> Create Editor</div>
+                            <input type="hidden" name="fa_register" value="register"/>
+                            <div class="fealds_popup_right">
+                                <div>
+                                    <label style="font-family: 'OpenSansRegular'; color:#424140; font-size:14px; "class="fealds_popup_leftl">First Name</label>
+                                    <input type="text" name="firstname" id="firstname" class="popuptextfield" value="{$values.firstname}"  />
+
+                                </div>
+                                <div>
+                                    <label style="font-family: 'OpenSansRegular'; color:#424140; font-size:14px; "class="fealds_popup_leftl">Last Name</label>
+                                    <input type="text" name="lastname" id="lastname" class="popuptextfield" value="{$values.lastname}"/>
+                                </div>
+                                <div>
+                                    <label style="font-family: 'OpenSansRegular'; color:#424140; font-size:14px; "class="fealds_popup_leftl">Email</label>
+                                    <input type="text" name="email" id ="email" class="popuptextfield" value="" />
+                                </div>
+                                <div>
+                                    <label style="font-family: 'OpenSansRegular'; color:#424140; font-size:14px; "class="fealds_popup_leftl">Enter Password</label>
+                                    <input type="password"  name="password" id="password" class="popuptextfield"value="{$values.password}" />
+                                </div>
+
+                                <div>
+                                    <label style="font-family: 'OpenSansRegular'; color:#424140; font-size:14px; "class="fealds_popup_leftl">Re Enter Password</label>
+                                    <input type="password"  name="reenterpassword" id="reenterpassword" class="popuptextfield" value="{$values.password}"/>
+                                </div>
+                            </div>
+                            <div class="clear"></div>  
+                             
+                            <div class="clear"></div>
+                            <div style="float: left;"> 
+                                <input name="submit"  type="submit" class="button_login" value="CREATE"/>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        </div>
+                    </form>
+</div>       
+        </div>
+    </div>
+</div>
+</div> 
+
+{include file="{$smarty.const.ADMIN}/footer.tpl.html"}
+ 

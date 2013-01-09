@@ -1,0 +1,119 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-06 16:10:01
+         compiled from "/var/www/fanwire/views/articles/thumbArticlesGuest.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:616835918501f9f01985089-75744207%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '779077b351be8ea334ae5608486e37b0c8df64f2' => 
+    array (
+      0 => '/var/www/fanwire/views/articles/thumbArticlesGuest.tpl.html',
+      1 => 1344249579,
+    ),
+  ),
+  'nocache_hash' => '616835918501f9f01985089-75744207',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php if (!is_callable('smarty_modifier_truncate')) include '/var/www/fanwire/libs/Smarty/plugins/modifier.truncate.php';
+?><?php $_template = new Smarty_Internal_Template('headerguest.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+
+  <?php $_template = new Smarty_Internal_Template('guest_left_section.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<!--Right Section-->
+
+<div class="right_container">
+    <div class="more_posts"><a href="#">More Posts</a></div>
+    <div id="inner_rightsection">
+        <div id="right_area">
+            <?php if (isset($_REQUEST['fwrid'])){?>
+            <?php $_template = new Smarty_Internal_Template('fanwireshalfRightBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+            <?php }?>
+            <?php if (isset($_REQUEST['uid'])){?>
+            <?php $_template = new Smarty_Internal_Template('fanshalfRightBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+            <?php }?>
+            <!-- fanwireshalfRightBar -->
+		<?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['art']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['art']['name'] = 'art';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['art']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('articles')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['art']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['art']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['art']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['art']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['art']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['art']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['art']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['art']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['art']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['art']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['art']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['art']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['art']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['art']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['art']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['art']['total']);
+?>
+		  <?php $_smarty_tpl->tpl_vars['p'] = new Smarty_variable($_smarty_tpl->getVariable('articles')->value[$_smarty_tpl->getVariable('smarty')->value['section']['art']['index']], null, null);?>
+
+            <div class="collection_page">
+                <div class="collect_photo">
+                    <a href="javascript:void(0);"  ><img src="<?php if ($_smarty_tpl->getVariable('p')->value['photo']){?><?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->getVariable('p')->value['photo'];?>
+<?php }else{ ?><?php echo @SITE_URL;?>
+photos/thumbs/default.jpg<?php }?>" width="246" height="151" /></a>
+                    <div class="data"><?php echo $_smarty_tpl->getVariable('p')->value['title'];?>
+ <br />
+                        <span><?php echo smarty_modifier_truncate($_smarty_tpl->getVariable('p')->value['description'],200);?>
+</span>
+                    </div>
+
+                    <div class="photo_post">
+                        <div class="message">(3)</div>
+                        <div class="blue">(11)</div>
+                        <div class="red">(19)</div>
+                    </div>
+                    <!--          uncomment to display the description of the fanwire -->
+                </div>
+            </div>
+<?php endfor; else: ?><div class="collection_page">norecords</div>
+
+		<?php endif; ?>
+            <!-- if via twitter enable it-->
+            <!--   <div class="collect_photo"> -->
+            <!--         <div class="collect_logo"><img src="images/jett.jpg" width="56" height="56" /> <h3>jettmg <br /> -->
+            <!-- <span>via  </span></h3><span class="twt"><img src="images/twt.png" width="25" height="21" align="left" />twitter</span> -->
+
+            <!--         </div> -->
+
+            <!--          <div class="data"> -->
+            <!-- <span>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.</span></div> -->
+            <!-- <div class="photo_post"> -->
+            <!--     	<div class="message">(3)</div> -->
+            <!--         <div class="blue">(11)</div> -->
+            <!--         <div class="red">(19)</div> -->
+            <!--     </div> -->
+            <!--          </div> -->
+            <?php if (count($_smarty_tpl->getVariable('articles')->value)>6){?>
+            <div class="btm_line">
+                <div class="showmore"><a href="#">show more</a></div>
+            </div>
+            <?php }?>
+
+            <div class="clear"></div>
+        </div>
+    <?php $_template = new Smarty_Internal_Template('footerGuest.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+        
+         <div class="login">
+            <p><a href="javascript:void(0);" onclick="loginPop();" id="loginFacebook2">LOGIN</a></p>
+        </div> 

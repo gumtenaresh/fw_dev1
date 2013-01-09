@@ -1,0 +1,288 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-20 13:50:49
+         compiled from "/var/www/fanwire/views/zoom.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:14422943355031f361645766-32294931%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '72276dbf844db43c7d3548d5e65196812ebb247d' => 
+    array (
+      0 => '/var/www/fanwire/views/zoom.tpl.html',
+      1 => 1345450810,
+    ),
+  ),
+  'nocache_hash' => '14422943355031f361645766-32294931',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<link rel="stylesheet" href="<?php echo @SITE_URL;?>
+views/css/jquery-ui-1.8.18.custom.css"  >
+
+<script src="<?php echo @SITE_URL;?>
+views/scripts/jquery.ui.core.js"></script>
+
+<script src="<?php echo @SITE_URL;?>
+views/scripts/jquery.ui.widget.js"></script>
+
+<script src="<?php echo @SITE_URL;?>
+views/scripts/jquery.ui.mouse.js"></script>
+
+<script src="<?php echo @SITE_URL;?>
+views/scripts/jquery.ui.slider.js"></script>
+
+<script  type="text/javascript"   src="views/scripts/ui.min.js" ></script>
+
+<script type="text/javascript"    src="views/scripts/jquery.ui.touch-punch.min.js"></script>
+
+<script     type="text/javascript"     src="views/scripts/facescroll.js"></script> 
+
+
+
+
+<style>
+
+    .imgCls {
+        display: block;
+        margin: 10px auto;
+        max-height: 500px;
+        max-width: 100%;
+    }
+</style>
+<script>
+    $(function() {
+        //$( "#slider" ).slider();
+
+        $( "#slider" ).slider(
+        {
+            value:<?php if ($_smarty_tpl->getVariable('zoomValues')->value[0]['value']){?><?php echo $_smarty_tpl->getVariable('zoomValues')->value[0]['value'];?>
+<?php }else{ ?>68<?php }?>,
+            min: 40,
+            max: 100,
+            step: 1,
+            stop: function(event, ui) {
+                zoomTheContent(ui.value);
+            }
+        });
+
+                
+               
+    });
+
+    function zoomTheContent(percentage){
+    	 
+    	 
+        var newWidth = percentage*150/40;
+        var dataString='';
+    	  
+        newWidth = Math.floor(newWidth);
+        $("#mainBlock").children("div").width(newWidth);
+        
+        var max_size = newWidth;
+        $("#mainBlock > #mydiv  > #image_share_popup > img ").each(function(i) {
+            if ($(this).height() > $(this).width()) {
+        	 
+                var h = max_size ;
+                var w = Math.ceil($(this).width() / $(this).height() * max_size) ;
+                // h=h+20;
+            } else {
+                var w = max_size ;
+                var h = Math.ceil($(this).height() / $(this).width() * max_size) ;
+                //w=w+20;
+            }
+        
+            dataString ='value='+percentage+'&width='+w+'&height='+h;
+            $(this).css({ height: h, width: w });
+            // $("#mainBlock > #mydiv  > .mask ").css({ height: h, width: w });
+        });
+        //var dataString ='value='+percentage+'&width='+w+'&height='+h;
+        //write the code to save the zoom content
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+zoomPositions",
+            data: dataString,
+            success: function(response) {
+               
+            }
+        });
+			 
+    }
+    $(function() {
+        //$( "#slider" ).slider();
+
+        $( "#slider_one" ).slider(
+        {
+            value:<?php if ($_smarty_tpl->getVariable('zoomValues')->value[0]['value']){?><?php echo $_smarty_tpl->getVariable('zoomValues')->value[0]['value'];?>
+<?php }else{ ?>55<?php }?>,
+            min: 10,
+            max: 100,
+            step: 5,
+            stop: function(event, ui) {
+                zoomTheContentNew(ui.value);
+            }
+        });
+
+                
+               
+    });
+
+    function zoomTheContentNew(percentage){
+        var newWidth = percentage*80/40;
+        var dataString='';
+        newWidth = Math.floor(newWidth);
+        $("#mainBlock").children("div").width(newWidth);
+        
+        var max_size = newWidth;
+        $("#mainBlock > #one > #two > img").each(function(i) {
+        	 
+            if ($(this).height() > $(this).width()) {
+                var h = max_size;
+                var w = Math.ceil($(this).width() / $(this).height() * max_size);
+                // alert(w);
+                // h=h+20;
+            } else {
+                var w = max_size;
+                var h = Math.ceil($(this).height() / $(this).width() * max_size);
+                // w=w+20;
+            }
+       
+            dataString ='value='+percentage+'&width='+w+'&height='+h;
+            $(this).css({ height: h, width: w });
+            $("#mainBlock > #one > #two ").css({ height: h+40, width: w });
+            //$("#mainBlock > #one ").css({ height: h, width: w });
+          
+        });
+        
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+zoomPositions",
+            data: dataString,
+            success: function(response) {
+            	 
+            }
+        });
+			 
+    }
+    
+    
+    $(function() {
+        $( "#slider_two" ).slider(
+        {
+            value:<?php if ($_smarty_tpl->getVariable('zoomValues')->value[0]['value']){?><?php echo $_smarty_tpl->getVariable('zoomValues')->value[0]['value'];?>
+<?php }else{ ?>40<?php }?>,
+            min: 50,
+            max: 100,
+            step: 1,
+            stop: function(event, ui) {
+                zoomTheContentNew2(ui.value);
+            }
+        });
+    });
+    function zoomTheContentNew2(percentage){
+        var newWidth = percentage*145/40;
+        newWidth = Math.floor(newWidth);
+        $("#mainBlock").children("div").width(newWidth);
+        
+        var max_size = newWidth;
+        $("#mainBlock > .post > #two > .data > #imm > img").each(function(i) {
+            if ($(this).height() > $(this).width()) {
+                var h = max_size;
+                var w = Math.ceil($(this).width() / $(this).height() * max_size);
+            } else {
+                var w = max_size;
+                var h = Math.ceil($(this).height() / $(this).width() * max_size);
+            }
+            $(this).css({ height: h, width: w });
+            dataString ='value='+percentage+'&width='+w+'&height='+h;
+        });
+        
+        //write the code to save the zoom content
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+zoomPositions",
+            data: dataString,
+            success: function(response) {
+               //alert(response);
+            }
+	 });		 
+    }
+    $(function() {
+        $( "#slider_three" ).slider(
+        {
+            
+            value:<?php if ($_smarty_tpl->getVariable('zoomValues')->value[0]['value']){?><?php echo $_smarty_tpl->getVariable('zoomValues')->value[0]['value'];?>
+<?php }else{ ?>40<?php }?>,
+            min: 50,
+            max: 100,
+            step: 1,
+            stop: function(event, ui) {
+                zoomTheContentNew3(ui.value);
+            }
+        });
+    });
+
+    function zoomTheContentNew3(percentage){
+     
+        var newWidth = percentage*145/40;
+        newWidth = Math.floor(newWidth);
+        $("#mainBlock").children("div").width(newWidth);
+        
+        var max_size = newWidth;
+        $("#mainBlock > .photo_list > #two > .data > #imm > img").each(function(i) {
+            if ($(this).height() > $(this).width()) {
+                var h = max_size;
+                var w = Math.ceil($(this).width() / $(this).height() * max_size);
+            } else {
+                var w = max_size;
+                var h = Math.ceil($(this).height() / $(this).width() * max_size);
+            }
+           
+            $(this).css({ height: h, width: w });
+             dataString ='value='+percentage+'&width='+w+'&height='+h;
+        });
+        //write the code to save the zoom content
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+zoomPositions",
+            data: dataString,
+            success: function(response) {
+              
+               
+            }
+        });
+			 
+    }
+    
+ 
+
+    //for thin scroll
+    jQuery(function(){ // on page DOM load
+        $('#demo1').alternateScroll();
+        //$('#demo1').alternateScroll({ 'vertical-bar-class': 'styled-v-bar', 'hide-bars': false });	
+    })
+    //for thin scroll
+    jQuery(function(){ // on page DOM load
+        $('#footerSlideContent').alternateScroll();
+        //$('#demo1').alternateScroll({ 'vertical-bar-class': 'styled-v-bar', 'hide-bars': false });	
+    })
+    //for thin scroll
+    jQuery(function(){ // on page DOM load
+        // $('.comments').alternateScroll();
+        //$('#demo1').alternateScroll({ 'vertical-bar-class': 'styled-v-bar', 'hide-bars': false });	
+    })
+    jQuery(function(){ // on page DOM load
+        $('.share_fanwire_checkbox').alternateScroll();
+        //$('#demo1').alternateScroll({ 'vertical-bar-class': 'styled-v-bar', 'hide-bars': false });	
+    })
+    //for thin scroll
+    jQuery(function(){ // on page DOM load
+        $('.web_dailog').alternateScroll();
+        //$('#demo1').alternateScroll({ 'vertical-bar-class': 'styled-v-bar', 'hide-bars': false });	
+    })
+    
+</script>
+

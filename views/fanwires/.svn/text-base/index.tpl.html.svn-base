@@ -1,0 +1,258 @@
+
+{include file='header.tpl.html'}
+{literal}
+<script type="text/javascript">
+ 
+   
+   
+
+    function myOnComplete()
+    {
+        document.fan_register.submit();
+
+
+    }
+    function myOnCompleteLogin()
+    {
+        document.fan_login.submit();
+
+
+    }
+
+
+    $(document).ready(function() {
+        $("#fan_register").RSV({
+            onCompleteHandler: myOnComplete,
+            displayType: "display-html",
+            errorFieldClass: "errorFieldDemo1",
+            errorTargetElementId:"rsvErrorsRegister",
+            rules: [
+                "required,firstname,Please enter your first name.",
+                "required,lastname,Please enter your last name.",
+                "required,email,Please enter your email address.",
+                "valid_email,email,Please enter a valid email address.",
+                "required,sex,Please select your gender.",
+                "required,password,Please enter a password.",
+                "same_as,password,reenterpassword,Please ensure the passwords you enter are the same.",
+                "required,days,Please select the days of date of birth.",
+                "required,months,Please select the months of date of birth.",
+                "required,years,Please select the years of date of birth."
+            ]
+        });
+    });
+    $(document).ready(function() {
+        $("#fan_login").RSV({
+            onCompleteHandler: myOnCompleteLogin,
+            displayType: "display-html",
+            errorFieldClass: "errorFieldDemo2",
+            errorTargetElementId:"rsvErrorsLogin",
+            rules: [
+                "required,fan_email,Please enter your email address.",
+                "valid_email,fan_email,Please enter a valid email address.",
+                "required,fan_password,Please enter a password.",
+            ]
+        });
+    });
+    /* $().ready(function() {
+
+        // validate signup form on keyup and submit
+        $("#fan_login").validate({
+            rules: {
+                fan_email:{
+                    required: true,
+                    email:true
+                },
+                fan_password: {
+                    required: true
+                }
+
+            } ,
+            messages:{
+                fan_email:{
+                    email:'Provide valid email'
+                }
+            }
+        });
+        $("#fan_register").validate({
+            rules: {
+                firstname:{
+                    required:true
+                },
+                lastname:{
+                    required:true
+                },
+                email:{
+                    required: true,
+                    email:true
+                },
+                password: {
+                    required: true
+                },
+                reenterpassword: {
+                    required: true,
+                    equalTo: '#password'
+                },
+                sex:{
+                    required:true
+                },months:{
+                    required:true
+                },days:{
+                    required:true
+                },years:{
+                    required:true
+                }
+
+            },
+            messages:{
+                reenterpassword: {
+
+                    equalTo: 'Password doesnot matched'
+                }, email:{
+                    email:'Provide valid email'
+                }
+
+            }
+        });
+    });*/
+</script>
+<style type="text/css">
+
+
+</style>
+<script type="text/javascript">
+
+
+    function validateDate(){
+        var selectedDay = $("#days").val();
+        var numDays;
+        if($("#months").val() == 2){
+            if($("#years").val() == ""){
+                setDaysString(29);
+                // if day is less than 29 pre slecting it
+                if((selectedDay !="") && selectedDay<=29){
+                    preSelectingValue(selectedDay);
+                }
+
+            }else{
+                numDays = daysInMonth($("#months").val(), $("#years").val());
+                setDaysString(numDays);
+                // if day is less than numDays pre slecting it
+                if((selectedDay !="") && selectedDay<=numDays){
+                    preSelectingValue(selectedDay);
+                }
+            }
+
+        }else if(($("#months").val() == 4) ||($("#months").val() == 6)||($("#months").val() == 9)||($("#months").val() == 11)){
+            setDaysString(30)
+            // if day is less than 30 pre slecting it
+            if((selectedDay !="") && selectedDay<=30){
+                preSelectingValue(selectedDay);
+            }
+        }else{
+            setDaysString(31);
+            // if day is less than 31 pre slecting it
+            if((selectedDay !="") && selectedDay<=31){
+                preSelectingValue(selectedDay);
+            }
+        }
+
+        // setting dob value to hidden field//
+        $("#dob").val($("#years").val()+"-"+$("#months").val()+"-"+$("#days").val());
+        //document.getElementById("dob").value=5;
+    }
+
+    function daysInMonth(month, year){
+        var dd = new Date(year, month, 0);
+        return dd.getDate();
+    }
+
+    function setDaysString(days){
+        var i=1;
+        var s="01";
+        var string = "<option value=\"\">Day</option>";
+
+        for(i;i<=days;i++){
+            if(i<10)
+                s='0'+i;
+            else
+                s=i;
+            string +="<option value=\""+s+"\">"+s+"</option>";
+        }
+        //alert(string);
+        $("#days").html(string);
+    }
+    function preSelectingValue(day){
+        var day =day;
+        $("#days option").each(function(){
+            if($(this).val() == day){
+                $("#days option[value="+day+"]").attr('selected', 'selected');
+            }
+        });
+    }
+    function goToEventDetailView(primaryKey,sampleon_events_view_scope_id){
+        // alert(siteUrl+"events/eventDetailView?campaignkey="+primaryKey+"&evskey="+sampleon_events_view_scope_id+"&fbshare=fb&promotions=promotions"+primaryKey);
+        $("#primaryKey").val(primaryKey);
+        $("#sampleon_events_view_scope_id").val(sampleon_events_view_scope_id);
+        $("#tteventDetailView").attr("action",httpSiteUrl+"events/eventDetailView?campaignkey="+primaryKey+"&evskey="+sampleon_events_view_scope_id+"&fbshare=fb&promotions=promotions"+primaryKey+"&");
+        $("#tteventDetailView").submit();
+    }
+
+</script>
+<style type="text/css">
+
+</style>
+
+
+{/literal}
+
+
+
+</div>
+
+<!--Left Section End-->
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="right_area">
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="main_data_sec">
+                {if $msg}{$msg}Please <a href='{$smarty.const.SITE_URL}'>login</a> and continue our services.{else}
+                Thanks for confirming your account please <a href='{$smarty.const.SITE_URL}'>login</a> and continue our services
+                {/if}
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        {include file='footerww.tpl.html'}
+
+

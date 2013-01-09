@@ -1,0 +1,145 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-06 16:24:49
+         compiled from "/var/www/fanwire/views/fan/myFans.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:682110615501fa279a01763-56100869%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '6339f34bd0585247bf967eea7a191d5a8e18be8e' => 
+    array (
+      0 => '/var/www/fanwire/views/fan/myFans.tpl.html',
+      1 => 1341660279,
+    ),
+  ),
+  'nocache_hash' => '682110615501fa279a01763-56100869',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('header.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('myfanwireLeftBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="right_area">
+            <div class="connect_fans">
+                <div class="awards_active">
+                    <ul>
+                        <li class="active"><a href="<?php echo @SITE_URL;?>
+fans"><span><strong>My Fans (<?php echo count($_smarty_tpl->getVariable('commonFanwires')->value);?>
+)</strong></span></a></li>
+                        <li><a href="<?php echo @SITE_URL;?>
+chooseFans"><span><strong>Find Fans</strong></span></a></li>
+                    </ul>
+                </div>
+                <div style="float:right; width:278px;">
+                    <div class="search">
+                        <input name="" type="text"  placeholder='Search fans'  class="search_field"  style="text-align: center;"  />
+                        <input  name=""  type="button"  class="go2"  />
+                    </div>
+                </div>
+                <!--                 <div class="fan_tabs"> -->
+                <!--                     <ul> -->
+                <!--                         <li><img src="<?php echo @SITE_URL;?>
+views/images/march.jpg" width="31" height="31" /><a href="#">James marchetti</a><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" width="13" height="13" hspace="2" vspace="9" border="0" /></a></li> -->
+                <!--                         <li><img src="<?php echo @SITE_URL;?>
+views/images/march.jpg" width="31" height="31" /><a href="#">James marchetti</a><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" width="13" height="13" hspace="2" vspace="9" border="0" /></a></li> -->
+                <!--                         <li><img src="<?php echo @SITE_URL;?>
+views/images/march.jpg" width="31" height="31" /><a href="#">James marchetti</a><a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/close.png" width="13" height="13" hspace="2" vspace="9" border="0" /></a></li> -->
+                <!--                     </ul> -->
+                <!--                 </div> -->
+                <!--                 <div class="addpost"> -->
+                <!--                     <div class="post"> -->
+                <!--                         <div class="posts"> -->
+                <!--                             <img src="<?php echo @SITE_URL;?>
+views/images/lil.png" width="114" height="105" /> -->
+                <!--                             <div class="data2">James marchetti</div></div> -->
+                <!--                     </div> -->
+                <!--                     <div class="post"> -->
+                <!--                         <div class="posts"> -->
+                <!--                             <img src="<?php echo @SITE_URL;?>
+views/images/lil.png" width="114" height="105" /> -->
+                <!--                             <div class="data2">James marchetti</div></div> -->
+                <!--                     </div> -->
+                <!--                 </div> -->
+                <div class="addpost">
+                    <?php if ($_smarty_tpl->getVariable('userFansDetails')->value){?>
+                    <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['nott']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['name'] = 'nott';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('userFansDetails')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['nott']['total']);
+?>
+                    <?php $_smarty_tpl->tpl_vars['notification'] = new Smarty_variable($_smarty_tpl->getVariable('userFansDetails')->value[$_smarty_tpl->getVariable('smarty')->value['section']['nott']['index']], null, null);?>
+                    <div class="photo_list">
+                        <div class="photos_list">
+                            <img src="<?php echo @SITE_URL;?>
+profile_images/<?php echo $_smarty_tpl->getVariable('notification')->value['profile_image'];?>
+" width="184" height="152" />
+                            <div class="data2">
+                                <a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/social_icons.jpg" width="49" height="17" border="0" align="right" /></a><?php echo $_smarty_tpl->getVariable('notification')->value['fname'];?>
+ </div></div>
+                        <div class="photo_post">
+                            <?php echo count($_smarty_tpl->getVariable('commonFanwires')->value[$_smarty_tpl->getVariable('notification')->value['id']]);?>
+ FanWires in common
+                        </div>
+                    </div>
+                    <?php endfor; endif; ?>
+                    <?php }?>
+                </div>
+                <!--                 <div class="addpost"> -->
+                <!-- 	                <div class="photo_list2"> -->
+                <!-- 	                    <div class="photos_list"> -->
+                <!-- 	                        <img src="<?php echo @SITE_URL;?>
+views/images/photo_big.jpg" width="246" height="203" /> -->
+                <!-- 	                        <div class="data2"> -->
+                <!-- 	                            <a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/social_icons.jpg" width="49" height="17" border="0" align="right" /></a>Lil wayne </div></div> -->
+                <!-- 	                    <div class="photo_post"> -->
+                <!-- 	                        12 FanWires in common -->
+                <!-- 	                    </div> -->
+                <!-- 	                </div> -->
+                <!-- 	                <div class="photo_list2"> -->
+                <!-- 	                    <div class="photos_list"> -->
+                <!-- 	                        <img src="<?php echo @SITE_URL;?>
+views/images/photo_big.jpg" width="246" height="203" /> -->
+                <!-- 	                        <div class="data2"> -->
+                <!-- 	                            <a href="#"><img src="<?php echo @SITE_URL;?>
+views/images/social_icons.jpg" width="49" height="17" border="0" align="right" /></a>Lil wayne </div></div> -->
+                <!-- 	                    <div class="photo_post"> -->
+                <!-- 	                        12 FanWires in common -->
+                <!-- 	                    </div> -->
+                <!-- 	                </div> -->
+                <!--                 </div>      -->
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <?php $_template = new Smarty_Internal_Template('footer.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>

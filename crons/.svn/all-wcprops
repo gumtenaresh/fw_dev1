@@ -1,0 +1,87 @@
+K 26
+svn:wc:ra_dav:activity-url
+V 33
+/svn/purpletalk_fanwire/!svn/act/
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/purpletalk_fanwire/!svn/ver/1172/fanwire/crons
+END
+facebook.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/crons/facebook.php
+END
+simple_html_dom.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/crons/simple_html_dom.php
+END
+websiteCrawl.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/purpletalk_fanwire/!svn/ver/1196/fanwire/crons/websiteCrawl.php
+END
+CurlHttpClient.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/purpletalk_fanwire/!svn/ver/1123/fanwire/crons/CurlHttpClient.php
+END
+facebookCrawl.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/purpletalk_fanwire/!svn/ver/1203/fanwire/crons/facebookCrawl.php
+END
+Instagram.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/purpletalk_fanwire/!svn/ver/1124/fanwire/crons/Instagram.php
+END
+test.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/crons/test.php
+END
+releaseArticlesCrawl.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/purpletalk_fanwire/!svn/ver/1161/fanwire/crons/releaseArticlesCrawl.php
+END
+base_facebook.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/crons/base_facebook.php
+END
+twitterCrawl.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/purpletalk_fanwire/!svn/ver/1196/fanwire/crons/twitterCrawl.php
+END
+youtubeCrawl.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/crons/youtubeCrawl.php
+END
+callback.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/crons/callback.php
+END
+instagramCrawl.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/purpletalk_fanwire/!svn/ver/1196/fanwire/crons/instagramCrawl.php
+END

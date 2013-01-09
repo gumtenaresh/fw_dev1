@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>FANWIRE</title>
+<link rel="stylesheet" type="text/css" href="{$smarty.const.SITE_URL}views/css2/login_style.css" />
+<script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.js"></script>
+<script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.lightbox-0.5.js"></script>
+<link rel="stylesheet" type="text/css" href="{$smarty.const.SITE_URL}views/css/jquery.lightbox-0.5.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="{$smarty.const.SITE_URL}views/css/style-projects-jquery.css" />
+{literal}
+<script type="text/javascript">
+    $(function() {
+        $('#gallery a').lightBox();
+    });
+    </script>
+   	<style type="text/css">
+	/* jQuery lightBox plugin - Gallery style */
+	#gallery {
+		background-color: #444;
+		padding: 10px;
+		width: 98%;
+	}
+	#gallery ul { list-style: none; }
+	#gallery ul li { display: inline; }
+	#gallery ul img {
+		border: 5px solid #3e3e3e;
+		border-width: 5px 5px 20px;
+	}
+	#gallery ul a:hover img {
+		border: 5px solid #fff;
+		border-width: 5px 5px 20px;
+		color: #fff;
+	}
+	#gallery ul a:hover { color: #fff; }
+	</style>
+{/literal}
+</head>
+<body>	
+ <div id="wrapper">
+        <!--Left Section Start-->
+        <div id="leftsection">
+            <div class="logo">
+                <a href="#"><img src="{$smarty.const.SITE_URL}views/images/logo.png" width="143" height="127" border="0" /></a>
+            </div>
+        </div>
+ <div class="right_container">
+            <div id="rightsection">
+                <div id="right_area" >
+                 {include file="$ADMIN/header.tpl.html"}
+      
+                 
+                 <div class="contet_box">
+
+                     
+                     <br /><br />
+                     
+                     <div align="center"><h3>Photos in {$album_name}</h3></div>
+    
+                     
+          <div id="gallery">
+            <ul>
+                    {section name="id" loop= $list}                    
+
+                    <li> <a href="{$IMAGE_URL}{$list[id].image_url}"><img src="{$IMAGE_URL}{$list[id].image_url}" height="200" width="200"/></a>
+<!--                     <div align="center" style="padding-top: 20px;"><a href="{$smarty.const.ADMIN_URL}fanwires/deletePhoto?id={$list[id].id}&album_id={$list[id].album_id}" onclick="return confirm('Delete Photo?')">delete</a></div>-->
+                    </li>
+                    {sectionelse}
+                    <div style="clear:both;padding-top: 50px;" align="center">No Photos</div>
+                    {/section}
+            </ul>              
+          </div>
+</div>
+<!--    <div style="float:left;width: 200px;margin: 5px;padding: 10px;border: #ccc solid 1px;">
+        <div align="center"> <img src="{$IMAGE_URL}{$list[id].image_url}" height="200" width="200" /></div>
+        <div align="center" style="padding-top:10px; "><a href="{$smarty.const.ADMIN_URL}fanwires/deletePhoto?id={$list[id].id}&album_id={$list[id].album_id}" onclick="return confirm('Delete Photo?')">delete</a></div>
+    </div>    -->
+    
+</div>    
+                
+        </div>
+    </div>
+</div>
+</div> 
+
+{include file="$ADMIN/footer.tpl.html"}
+</body>
+</html>

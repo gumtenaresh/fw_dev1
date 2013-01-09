@@ -1,0 +1,192 @@
+{include file='header.tpl.html'}
+
+<script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.Jcrop.js"></script>
+<link href="{$smarty.const.SITE_URL}views/css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
+{literal}
+<style type="text/css">
+
+    .fileinput-button {
+        position: absolute;
+        float: left;
+    }
+
+    .fileinput-button input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        border: solid transparent;
+        border-width: 0 0 100px 200px;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        -moz-transform: translate(-300px, 0) scale(4);
+        direction: ltr;
+        cursor: pointer;
+    }
+</style>
+<script language="Javascript">
+    function uploadFile() {
+        var fd = new FormData();
+        fd.append("photoimg", document.getElementById('photoimg').files[0]);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", uploadProgress, false);
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.open("POST", "");
+        xhr.send(fd);    
+    }
+
+    function uploadProgress(evt) {         
+        var percentComplete = Math.round(evt.loaded * 100 / evt.total); 
+        document.getElementById('progressNumber').innerHTML = "<img src='images/progress.gif' />"; //percentComplete.toString() + '%';        
+    }
+    function uploadComplete(evt) {
+        document.getElementById("progressNumber").innerHTML = "";  
+    }
+      
+    jQuery(function($) {
+        $('img#photo').Jcrop({
+            onSelect: showCoords,
+            onChange: showCoords,
+            bgColor:     '#ccc',
+            bgOpacity:   .4,            
+            aspectRatio: 9 / 9
+        });
+    });
+    function showCoords(obj)
+    {
+        // variables can be accessed here as
+        // c.x, c.y, c.x2, c.y2, c.w, c.h
+        //document.getElementById("actual_image_name").value = $("#photo").attr("src");
+       
+        var x_axis = obj.x;
+        var x2_axis = obj.x2;
+        var y_axis = obj.y;
+        var y2_axis = obj.y2;
+        var thumb_width = obj.w;
+        var thumb_height = obj.h;
+        document.getElementById("x1").value =obj.x;
+        document.getElementById("x2").value =obj.x2;
+        document.getElementById("y1").value =obj.y;
+        document.getElementById("y2").value =obj.y2;
+        document.getElementById("w").value =obj.w;
+        document.getElementById("h").value =obj.h;
+    };
+ 
+    $(document).ready(function() { 	
+        $('#photoimg').live('change', function(){             
+            document.imageform.submit();
+            uploadFile();
+        });     
+       
+    }); 
+</script>
+{/literal}
+<div class="main_section1">
+
+    <div class="fanwire_contact">
+        <div class="contact_text">
+            <p>Add A Profile Photo</p>
+            <span>This is your last step before you get full access to your FanWire account.</span>
+        </div>
+
+
+        <div class="contacts">
+            <div class="upload">
+                <div class="upld_img">
+                    <p align="center">{$preview_title}</p>
+                    <div class="img_display"> 
+                        {if $image}{$image}{else}<img id="photo" src="{$profile_image}" height="183" width="181"/>{/if}
+                    </div>
+                    <p align="center" style="line-height: 25px;">{$smarty.session.name}</p>    
+                </div>
+
+                <div class="upld_content">
+                    <div class="file_browse">
+                        <span class="file-wrapper">
+                            <input type="file" name="photo" id="photo" />
+                            <span class="button">
+                                <a class="your_desktop">
+                                    Upload an Image
+                                    <form id="imageform" name="imageform" method="POST" enctype="multipart/form-data" action='{$smarty.const.SITE_URL}changeProfilePic'>
+                                        <input type="file" name="photoimg" id="photoimg"> 
+                                        <input type="hidden" name='upload' value="upload" />
+
+                                    </form>
+                                </a>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+            <div class="cotacts_bottom">
+                <a  class="create_pswrd1" href="{$smarty.const.SITE_URL}addFanwires">Back</a>
+
+                <div class="cntcts_btn_right">
+                    <form id="changePhoto" name="changePhoto" method="POST"style="float:left;" enctype="multipart/form-data" action='{$smarty.const.SITE_URL}changeProfilePic'>                
+                        <input type="hidden" name="x1" id="x1" value="" />
+                        <input type="hidden" name="x2" id="x2" value="" />
+                        <input type="hidden" name="y1" id="y1" value="" />
+                        <input type="hidden" name="y2" id="y2" value="" />
+                        <input type="hidden" name="w" id="w" value="" />
+                        <input type="hidden" name="h" id="h" value="" />                    
+                        <input type="hidden" name="actual_image_name" id='actual_image_name' value="{$profile_image}" /> 
+                        <input name="submitData" id="submitData" type="button" class="Continue" value="Finished" onclick="return changeImage1();" />
+                    </form>                	
+                    <div class="clear"></div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+<div class="connect_fans">
+    <div class="account_details">
+
+        <h3></h3>                    
+        <div class="add_photo" id="preview" > 
+            <table align="center"><tr><td>
+
+                    </td></tr></table>
+        </div>
+
+        <div style="color:#F00;">{$error}</div>
+    </div>
+
+
+
+    {literal}
+    <script>
+        function changeImage1()
+        {	
+                	
+            document.getElementById("actual_image_name").value = $("#photo").attr("src");
+            var x_axis =  document.getElementById("x1").value;
+            var x2_axis = document.getElementById("x2").value;
+            var y_axis = document.getElementById("y1").value;
+            var y2_axis = document.getElementById("y2").value;
+            var thumb_width = document.getElementById("w").value;
+            var thumb_height = document.getElementById("h").value;
+                    
+            $.ajax({
+                type:"GET",
+                url:"fanwires/ajax_image?t=ajax&img="+$("#photo").attr("src")+"&w="+thumb_width+"&h="+thumb_height+"&x="+x_axis+"&y="+y_axis+"&x2="+x2_axis+"&y2="+y2_axis,
+                cache:false,
+                success:function(response)
+                {         
+                    document.changePhoto.submit();
+                }
+            }); 
+        
+        }
+    </script>
+    {/literal} 
+
+    {include file='footer.tpl.html'}

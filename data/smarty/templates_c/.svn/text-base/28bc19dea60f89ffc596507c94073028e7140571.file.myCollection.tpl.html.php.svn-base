@@ -1,0 +1,679 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-08-20 16:16:12
+         compiled from "/var/www/fanwire/views/mycollection/myCollection.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:178795227550321574daabc7-12252092%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '28bc19dea60f89ffc596507c94073028e7140571' => 
+    array (
+      0 => '/var/www/fanwire/views/mycollection/myCollection.tpl.html',
+      1 => 1345459572,
+    ),
+  ),
+  'nocache_hash' => '178795227550321574daabc7-12252092',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php if (!is_callable('smarty_modifier_truncate')) include '/var/www/fanwire/libs/Smarty/plugins/modifier.truncate.php';
+?><?php $_template = new Smarty_Internal_Template('header.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('myfanwireLeftBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?><!-- this is left bar -->
+
+
+<script type="text/javascript" language="javascript">
+    function textlimits(re,te){
+        var characterLimit = 140;
+        var remainingchars=re;
+        var textarea =te;
+
+        textlimit(characterLimit,remainingchars,textarea);
+    } 
+    function textlimit(characterLimit,remainingchars,textarea)
+
+    {
+        $(remainingchars).html(characterLimit+" characters remaining.");
+        $(textarea).bind('keyup', function(){
+            var charactersUsed = $(this).val().length;
+
+            if(charactersUsed > characterLimit){
+                charactersUsed = characterLimit;
+                $(this).val($(this).val().substr(0, characterLimit));
+                $(this).scrollTop($(this)[0].scrollHeight);
+            }
+            var charactersRemaining = characterLimit - charactersUsed;
+            //  alert(charactersRemaining);
+            $(remainingchars).html(charactersRemaining+" characters remaining.");
+        });
+    }
+
+    function ShowDialog(modal,id)
+    {
+        $("#dialog"+id).toggle();
+        $('#commentsToShow'+id).hide();
+        //        $("#overlay").show();
+        //        $("#dialog"+id).fadeIn(300);
+        //
+        //        if (modal)
+        //        {
+        //            $("#overlay").unbind("click");
+        //        }
+        //        else
+        //        {
+        //            $("#overlay").click(function (e)
+        //            {
+        //                HideDialog(id);
+        //            });
+        //        }
+    }
+    
+    function HideDialog(id)
+    
+    {
+      
+        $('#commentsToShow'+id).hide();
+        $("#dialog"+id).hide();
+        // document.getElementById('#dialog'+id).style.display='none';
+         
+        //    $("#dialog"+id).hide();
+    }
+    function showSend(id){
+        $('#commentsToShow'+id).show();
+        // document.getElementById('commentsToShow').style.display='block' ;
+    }
+    function expandtext(textArea){
+        while (textArea.rows > 1 && textArea.scrollHeight < textArea.offsetHeight){
+            textArea.rows--;
+        }
+        while (textArea.scrollHeight > textArea.offsetHeight)
+        {
+            textArea.rows++;
+        }
+        textArea.rows++
+    }
+   
+    function submitForm(fanwireid,url)
+    {
+       /* var msg = document.getElementById("msg"+fanwireid).value;
+        var dataString = 'id='+fanwireid+'&comment='+msg+'&type=0';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function() {
+                var url1 = '<?php echo @SITE_URL;?>
+fan/commentCount';
+                var params = 'id='+fanwireid+'&type=0';
+                $.ajax({
+                    type: "POST",
+                    url: url1,
+                    data: params,
+                    success: function(result) { 
+                        var rs=result.split('@@');
+                        $("div #showcomment"+fanwireid).html('('+rs[0]+')');
+                        $("#comm"+fanwireid).prepend(rs[1]);
+                    }
+                });
+                document.getElementById("msg"+fanwireid).value="";
+                // HideDialog(fanwireid);
+            }*/
+            
+            
+        var msg = document.getElementById("msg"+fanwireid).value;
+        if(msg!=""){
+        var dataString = 'id='+fanwireid+'&comment='+msg+'&type=0';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function(result) {
+             //alert($.trim(result))
+             if($.trim(result)=='1'){
+                  alert("You can post onlyt two comments at a time.")
+                 return false;
+             }
+             else{
+                var url1 = '<?php echo @SITE_URL;?>
+fan/commentCount';
+                var params = 'id='+fanwireid+'&type=0';
+                $.ajax({
+                    type: "POST",
+                    url: url1,
+                    data: params,
+                    success: function(result) {                        
+                        var rs=result.split('@@');
+                        $("div #showcomment"+fanwireid).html('('+$.trim(rs[0])+')');
+                        $("#comm"+fanwireid).append(rs[1]);    
+                    }
+                });
+                document.getElementById("msg"+fanwireid).value="";
+                document.getElementById("msg"+fanwireid).rows=1;
+                // HideDialog(fanwireid);
+             }
+            }
+        });
+        }
+        else{
+            alert("Please enter comment.")
+        }
+       
+    }
+    //view all comments are shown here.SAI SUDHEER
+    function viewAllComments(fanwireid,url)
+    {
+        //alert(fanwireid);
+        /* var msg = document.getElementById("msg"+fanwireid).value;*/
+        var dataString = 'id='+fanwireid+'&type=0';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: dataString,
+            success: function(result) {                
+                // var rs=result.split('@@');
+                $("#all_comments_photos"+fanwireid).html(result);                 
+                $("#view_all_link"+fanwireid).html("&nbsp;");//document.getElementById("#comm"+fanwireid).innerHTML=result;
+                
+            }
+        });
+    }
+   
+        
+    
+    //Like and Dislike Code By Rak
+    
+    function onloadcall(fanwireid) {
+    	
+        //alert('Exec on Onload');
+        //alert(fanwireid);
+        var params='fanwireid='+fanwireid;
+        var url = '<?php echo @SITE_URL;?>
+mycollection/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                    
+                }
+            }
+        });
+    }
+    
+    function likefanwire(fanwireid){
+        var params='like=1&dislike=0&fanwireid='+fanwireid;
+        var url = '<?php echo @SITE_URL;?>
+mycollection/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    // alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showlike"+fanwireid).html('('+res[0]+')');
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                    
+                }
+            }
+        });
+    }
+        
+    function dislikefanwire(fanwireid){
+        var params='like=0&dislike=1&fanwireid='+fanwireid;
+        var url = '<?php echo @SITE_URL;?>
+mycollection/fanwirelikes';
+        $.ajax({
+            type: "POST",  
+            url: url,  
+            data: params,  
+            success: function(result) {
+                if(result == false)
+                {
+                    //alert('comment given');
+                }
+                else
+                {
+                    var res = result.split("::");
+                    $("div #showdislike"+fanwireid).html('('+res[1]+')');
+                    $("div #showlike"+fanwireid).animate({opacity:0.4}, "slow");
+                    $("div #showdislike"+fanwireid).animate({opacity:0.4}, "slow");
+                }
+            }
+        });
+    }
+    
+    
+      
+</script>
+
+
+
+
+
+
+
+<SCRIPT>
+    function setVisibility(id, visibility) {
+	 
+        if(document.getElementById(id).style.display=="inline"){
+		 
+            document.getElementById(id).style.display = 'none';
+        }else{
+            document.getElementById(id).style.display ='inline';	 
+        }
+   
+    
+    }
+    //collect the fanwires
+    function collect(fanid){
+        var dataString ='fwrid='+fanid;
+        $.ajax({
+            type: "POST",
+            url:"<?php echo @SITE_URL;?>
+collect",
+            data: dataString,
+            success: function(response) {
+                if(response=='one1'||response=='two1'){
+            	 
+                    $('#fanid'+fanid).html('<a href="#" class="red" onclick = "getFanwireFans(\''+fanid+'\');document.getElementById(\'light1'+fanid+'\').style.display=\'block\';document.getElementById(\'fade1'+fanid+'\').style.display=\'block\'">SHARE</a> <a href="#" class="red" onclick="collect('+fanid+');">collected</a> ');	
+                }
+                else{
+            	 
+                    $('#fanid'+fanid).html('<a href="#" class="red" onclick = "getFanwireFans(\''+fanid+'\');document.getElementById(\'light1'+fanid+'\').style.display=\'block\';document.getElementById(\'fade1'+fanid+'\').style.display=\'block\'">SHARE</a> <a href="#" class="red" onclick="collect('+fanid+');">collect</a> ');
+                }
+            }
+        });
+        return false;
+    }
+
+    $().ready(function() {
+        var showChar = 150;
+        var ellipsestext = "...";
+        var moretext = "more";
+        var lesstext = "less";
+        $('.more').each(function() {
+            var content = $(this).html();
+
+            if(content.length > showChar) {
+
+                var c = content.substr(0, showChar);
+                var h = content.substr(showChar-1, content.length - showChar);
+
+                var html = c + '<span >'+ellipsestext+'</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">'+moretext+'</a></span>';
+
+                $(this).html(html);
+            }
+
+        });
+
+        $(".morelink").click(function(){
+            if($(this).hasClass("less")) {
+                $(this).removeClass("less");
+                $(this).html(moretext);
+            } else {
+                $(this).addClass("less");
+                $(this).html(lesstext);
+            }
+            $(this).parent().prev().toggle();
+            $(this).prev().toggle();
+            return false;
+        });
+    });
+</SCRIPT>
+
+<script type="text/javascript">
+    /*    $(function() {
+        //More Button
+        $('.mor')
+        .live(
+        "click",
+        function() {
+             var ID = $(this).attr("id");
+            // alert(ID);
+            if (ID) {
+                $("#more" + ID)
+                .html(
+                '<img src="<?php echo @SITE_URL;?>
+views/images/moreajax.gif" />');
+
+                $.ajax({
+                    type : "POST",
+                    url : "<?php echo @SITE_URL;?>
+ajaxMoreCollections",
+                    data : "lastmsg=" + ID,
+                    cache : false,
+                    success : function(html) {
+                      
+
+                        var data = html.split("::");
+                        $(".collection_page").append(
+                        data[0]);
+
+                        $("#more" + ID).hide();
+                        $("#more").html(data[1]);
+                
+                        //more start    
+                        // alert('naresh');
+                        var showChar = 150;
+                        var ellipsestext = "...";
+                        var moretext = "more";
+                        var lesstext = "less";
+                      
+                        $('.more'+ID).each(function() {
+                            var content = $(this).html();
+
+                            if(content.length > showChar) {
+
+                                var c = content.substr(0, showChar);
+                                var h = content.substr(showChar-1, content.length - showChar);
+
+                                var html = c + '<span >'+ellipsestext+'</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink'+ID+'">'+moretext+'</a></span>';
+
+                                $(this).html(html);
+                            }
+
+                        });
+
+                        $(".morelink"+ID).click(function(){
+                            if($(this).hasClass("less")) {
+                                $(this).removeClass("less");
+                                $(this).html(moretext);
+                            } else {
+                                $(this).addClass("less");
+                                $(this).html(lesstext);
+                            }
+                            $(this).parent().prev().toggle();
+                            $(this).prev().toggle();
+                            return false;
+                        });
+                     
+                        
+                        //more end
+                         
+                        
+                    }
+                    
+                });
+            } else {
+                $(".showmore").html('end');
+            }
+            return false;
+        });
+    });
+     //to share the content to FB or twitter
+     function Share(fanid){
+         //alert(document.getElementById('facebook').value);
+         //alert(document.getElementById('twitter').value);
+         if(document.getElementById('facebook').checked ==true){
+             //alert(document.getElementById('facebook')+'facebook');
+             window.open('http://www.facebook.com/sharer.php?u=<?php echo @SITE_URL;?>
+profileInfo?fwrid='+fanid,'','width=400,height=300');
+         }
+         if(document.getElementById('twitter').checked==true){
+             //alert(document.getElementById('twitter')+'twitter');
+             window.open('https://twitter.com/intent/tweet?original_referer=<?php echo @SITE_URL;?>
+profileInfo?fwrid='+fanid+'&url=<?php echo @SITE_URL;?>
+profileInfo?fwrid='+fanid,'','width=400,height=300');
+         }
+     }
+     function getFanwireFans(fanid){
+         var dataString ='fwrid='+fanid;
+         $.ajax({
+             type: "POST",
+             url:"<?php echo @SITE_URL;?>
+getFanwireFans",
+             data: dataString,
+             success: function(response) {
+                             $('#fanwire_fans'+fanid).html(response);
+
+             }
+         });
+         return false;
+     }
+     //this function for select all /disselect all
+     function checkAll(){
+         for (var i=0;i<document.forms[0].elements.length;i++)
+         {
+             var e=document.forms[0].elements[i];
+          
+             if ((e.name != 'allbox') && (e.type=='checkbox'))
+             {
+                 if(e.name=='email_share'||e.name=='facebook_share'||e.name=='twitter_share'){
+             		
+                 }
+                 else{
+                     e.checked=document.forms[0].allbox.checked;
+                 }
+              
+             	
+                 
+             }
+         }
+     }*/
+</script>
+
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="right_area">
+            <div class="search">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="minus">
+                                <img src='<?php echo @SITE_URL;?>
+views/images/m.png'>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="float:left;width:200px;">
+                                <a href="#" class="tt" >
+                                    <div class="zoom" id="slider" style='width: 100%;float:left;'>
+                                        <span class="tooltip" >
+                                            <b>Tip:</b> Drag the slider to
+                                            increase/decrease the size of Fanwires
+                                        </span>
+                                    </div> 
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="plus"  >
+                                <img src='<?php echo @SITE_URL;?>
+views/images/p.png'>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <!-- added new end -->
+            </div>
+            <div class="filters">&nbsp;<br/>
+                <!--                <h2>filter by:</h2>
+                                <img src="<?php echo @SITE_URL;?>
+views/images/cam1.png" width="25" height="21"vspace="3"/> 
+                                <img src="<?php echo @SITE_URL;?>
+views/images/vediio.png" width="25" height="21"/>
+                                <img src="<?php echo @SITE_URL;?>
+views/images/note.png"  width="25" height="21"/>
+                                <img onclick="return showPer();" src="<?php echo @SITE_URL;?>
+views/images/music.png" width="25"height="21"/> |
+                                <a href="#">popularity</a> |
+                                <a href="#">recent</a> | 
+                                <a href="#">a-z</a> |
+                                <a href="#">z-a</a>-->
+            </div>
+
+
+            <div class="collection_page" id='mainBlock'>
+                <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['name'] = 'fanwire';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('list')->value) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['fanwire']['total']);
+?> 
+
+                <div class="collect_photo">
+                    <a href="<?php echo @SITE_URL;?>
+profileInfo?fwrid=<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+&ac=1">
+                        <img src="<?php echo @SITE_URL;?>
+photos/<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['photo'];?>
+" width="246" height="151" />
+                    </a>
+                    <div class="data"> <a href="<?php echo @SITE_URL;?>
+profileInfo?fwrid=<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+&ac=1" style="color: #F04F2C;font-family: OswaldBook;text-decoration: none;"><?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['name'];?>
+</a> <br />
+                        <span><?php echo smarty_modifier_truncate($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['description'],200);?>
+.</span></div>
+                    <div class="photo_post">
+                        <div class="message" id="showcomment<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+" onClick="ShowDialog('true','<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+');">(<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['commentcnt'];?>
+)</div>      
+                        <!-- Below two divs display like and unlike btns code by Rak -->
+                        <script> window.onload=onloadcall('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+');</script>
+
+
+
+                        <div id="showdislike<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+" class="red" onclick="dislikefanwire('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+');">(<?php if ($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['dislike']==''){?> 0<?php }else{ ?><?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['dislike'];?>
+<?php }?>)</div>
+                        <div id="showlike<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+" class="blue" onclick="likefanwire('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+');">(<?php if ($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['like']==''){?> 0<?php }else{ ?><?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['like'];?>
+<?php }?>)</div>  
+
+                        <div id="dialog<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+" class="web_dialog" >
+
+                            <div class="comments"    >
+                                <ul >  
+                                    <li class="view_comments">
+                                        <?php if ($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['commentcnt']>5){?><a id="view_all_link<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+" href="javascript:void(0);" onclick="viewAllComments('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+', '<?php echo @SITE_URL;?>
+fan/viewAllComments')" >view all comments</a><?php }else{ ?><a href="javascript:void(0);" >&nbsp;</a><?php }?>
+                                        <a href="javascript:void(0);" class="cross_btn" onclick="HideDialog('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+');" >X</a>
+                                    </li>
+                                </ul>
+                                <ul id="all_comments_photos<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+">
+                                    <?php unset($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['name'] = 'tem';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop'] = is_array($_loop=$_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['comments_for_this_post']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['tem']['total']);
+?>
+                                    <?php $_smarty_tpl->tpl_vars['t'] = new Smarty_variable($_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['comments_for_this_post'][$_smarty_tpl->getVariable('smarty')->value['section']['tem']['index']], null, null);?>
+                                    <li>
+                                        <img src="<?php echo $_smarty_tpl->getVariable('smaty')->value['const']['SITE_URL'];?>
+profile_images/<?php echo $_smarty_tpl->getVariable('t')->value['profile_image'];?>
+">
+                                        <span><strong><?php echo $_smarty_tpl->getVariable('t')->value['name'];?>
+</strong><h5 style="float: right; text-decoration: none;" > <?php echo $_smarty_tpl->getVariable('t')->value['stamp'];?>
+</h5>&nbsp;</span><span><?php echo $_smarty_tpl->getVariable('t')->value['comment'];?>
+</span>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <?php endfor; endif; ?>
+                                </ul>
+                                <ul id='comm<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+'></ul>
+                                <ul>
+                                    <li>
+                                        <img src="<?php echo $_smarty_tpl->getVariable('profile_image')->value;?>
+">
+                                        <textarea  id="msg<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+" name="msg<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+"  onkeyup='return expandtext(this);' onclick="return showSend('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+');" onfocus=" return textlimits('#remainingCharacters<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+','#msg<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+');" onKeyPress="Javascript:if(event.keyCode==13) submitForm('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['id']['index']]['id'];?>
+','<?php echo @SITE_URL;?>
+fan/sendComment');" placeholder="say something..." title="say something..."   autocomplete="off" rows="1" ></textarea>
+                                        <div id="commentsToShow<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+" style="display: none;">
+                                            <button type="button" class="sendComment" onclick="submitForm('<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+','<?php echo @SITE_URL;?>
+fan/sendComment');">send</button>
+                                            <span class="characters" id="remainingCharacters<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+">140 Characters</span>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <input type="hidden" id="id" name="id" value="<?php echo $_smarty_tpl->getVariable('list')->value[$_smarty_tpl->getVariable('smarty')->value['section']['fanwire']['index']]['id'];?>
+" />
+                                    <input type="hidden" name="type" id="type" value="0" />
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <?php endfor; else: ?>
+                <div align="center" style="line-height: 40px;">No Collections</div>
+                <?php endif; ?>
+
+            </div>
+            <div class="clear"></div> 
+        </div>
+
+        <?php $_template = new Smarty_Internal_Template('footer.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>

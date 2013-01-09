@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>FANWIRE</title>
+<link rel="stylesheet" type="text/css" href="{$smarty.const.SITE_URL}views/css2/login_style.css" />
+</head>
+<body>	
+ <div id="wrapper">
+        <!--Left Section Start-->
+        <div id="leftsection">
+            <div class="logo">
+                <a href="#"><img src="{$smarty.const.SITE_URL}views/images/logo.png" width="143" height="127" border="0" /></a>
+            </div>
+        </div>
+ <div class="right_container">
+            <div id="rightsection">
+                <div id="right_area" >
+                 {include file="$ADMIN/header.tpl.html"}
+      
+                 
+                 <div class="contet_box">
+
+<!--<iframe width="420" height="315" src="http://www.youtube.com/embed/KOHgbVpyH0Y" frameborder="0" allowfullscreen></iframe>         -->
+                     
+                     <br /><br />
+                     
+                     <table class="table_01" cellpadding="10" cellspacing="0" align="center" border="0">
+     
+    <tr ><td colspan="4" align="center" class="pageheader"> Videos List</td></tr>
+        <tr style="background-color: #CCC">        
+        <th class="tableheader">Title</th>
+        <th class="tableheader">Description</th>
+        <th class="tableheader">Video</th>
+        <th class="tableheader">User</th>        
+       {if $smarty.session.admintype eq '2'} <th class="tableheader">Delete</th>        {/if}
+    </tr> 
+    {section name="id" loop= $list}
+    <tr {if $smarty.section.id.iteration % 2 eq '0'}class="color"{/if}>
+         <td align="left" width="15%">{$list[id].title}</td>
+        <td align="left" width="30%">{$list[id].description}</td>
+        <td align="left">{$list[id].video}</td>        
+         <td align="left">{$list[id].user}</td>         
+         {if $smarty.session.admintype eq '2'}<td align="left"><a href="{$smarty.const.ADMIN_URL}fanwires/deleteVideo?id={$list[id].id}" onclick="return confirm('Delete Video?')">delete</a></td>         {/if}
+    </tr>
+    {sectionelse}
+    <tr><td colspan="4" align="center" height="100px" valign="middle">NO VIDEOS</td></tr>
+    {/section}
+    {if !empty($navigation)}
+    <tr>
+    <td colspan="4" align="right">
+    {$navigation}
+    </td></tr>
+    {/if}
+    <tr><td colspan="4">&nbsp;</td></tr>
+</table>
+</div>       
+        </div>
+    </div>
+</div>
+</div> 
+
+{include file="$ADMIN/footer.tpl.html"}
+</body>
+</html>

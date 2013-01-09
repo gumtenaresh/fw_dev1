@@ -1,0 +1,85 @@
+{include file="$ADMIN/header.tpl.html"}
+{literal}
+<script type="text/javascript">
+    function changeusertype(val,id)
+    {
+        var dataString = 'type='+val+'&id='+id;
+        $.ajax({
+                type: "POST",
+                url:"{/literal}{$smarty.const.ADMIN_URL}{literal}users/changeUserType",
+                data: dataString,              
+                success: function(response) {
+                    // alert(response);                    
+                }
+            });
+    }
+</script>
+{/literal}
+<div id="data_sectionarea">
+        <div class="data_rightsection1">
+        <div class="rightcontent">
+        <div class="datatabsection">
+        
+        <div class="datatabrightsection"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="search_fanwire">
+        <div class="search">
+        
+        <div><div style="float:left;"> Editors List</div> <div style="float:right;" class="connect"><a href="{$smarty.const.ADMIN_URL}users/createUser">Create Editor</a></div></div>
+        <div class="numbers">
+<!--        <div><p> First  <a href="#">&lt;</a>  1 Page of 2103 <a href="#"> &gt; </a> Last</p></div>-->
+        </div>
+        <div class="clear"></div>
+        </div>
+                     
+<table class="table_01" cellpadding="5" cellspacing="5" align="center">    
+    
+        <tr >
+        <th class="tableheader">First Name</th>
+        <th class="tableheader">Last Name</th>
+        <th class="tableheader">Email</th>
+<!--        <th class="tableheader">Profile Image</th>-->
+        <th class="tableheader">Created Date</th>
+        <th class="tableheader">Privileges</th>
+        <th class="tableheader">Edit</th>                
+        <th class="tableheader">Delete</th>                
+    </tr> 
+    {section name="id" loop= $list}
+    <tr {if $smarty.section.id.iteration % 2 eq '0'}class="color"{/if}>
+         <td align="left">{$list[id].fname}</td>
+         <td align="left">{$list[id].lname}</td>
+         <td align="left">{$list[id].email}</td>
+<!--         <td align="center"  >
+             <img src="{if $list[id].profile_image neq ''}{$SITE_URL}profile_images/{$list[id].profile_image}{else}{$SITE_URL}views/images/your_fanwire_profile_normal.png{/if}" width="100" height="100" /><br/><br/>
+             {if $list[id].profile_image neq ''} <a href="{$smarty.const.ADMIN_URL}users/deleteProfileImage?id={$list[id].id}" onclick="return confirm('Delete Profile Image?')">Delete Image</a> {/if}
+         </td>-->
+         <td align="left">{$list[id].cdate|date_format:"%m/%d/%Y %H:%M"} </td>
+         <td align="left">
+             <select id="privileges" name="privileges" onchange="return changeusertype(this.value,'{$list[id].id}');">
+<!--                 <option value="">Select</option>    -->
+                 <option value="3" {if $list[id].usertype eq '3'}selected{/if}>Editor</option>    
+                 <option value="2" {if $list[id].usertype eq '2'}selected{/if}>Admin</option>    
+             </select></td>
+         <td align="center"><a href="{$smarty.const.ADMIN_URL}users/editUser?id={$list[id].id}">edit</a></td>
+         <td align="center"><a href="{$smarty.const.ADMIN_URL}users/deleteUser?id={$list[id].id}&type=admin" onclick="return confirm('Delete User?');">delete</a></td>
+    </tr>
+    {sectionelse}
+    <tr><td colspan="4" align="center" height="100px" valign="middle">No Users</td></tr>
+    {/section}
+    {if !empty($navigation)}
+    <tr>
+    <td colspan="4" align="right">
+    {$navigation}
+    </td></tr>
+    {/if}
+    <tr><td colspan="4">&nbsp;</td></tr>
+</table>
+</div>       
+        </div>
+    </div>
+</div>
+</div> 
+
+{include file="$ADMIN/footer.tpl.html"}
+ 

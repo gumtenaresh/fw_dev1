@@ -1,0 +1,192 @@
+
+{include file='header.tpl.html'}
+{include file='myfanwireLeftBar.tpl.html'}
+{literal}
+<script type="text/javascript">
+    function changeStatus(n){
+        document.getElementById("status").value = n;
+        if(n=="1")
+        {
+            document.getElementById("public").className += " active";
+            document.getElementById('private').classList.remove('active');            
+        }
+        else
+        {
+            document.getElementById('public').classList.remove('active');
+            document.getElementById("private").className += " active";
+        }
+    }
+</script>
+{/literal}
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+
+
+        <div id="right_area">
+
+
+            <div class="connect_fans">
+
+                <h2>Add a new item</h2>
+                <br />
+
+                <div class="settings_page">
+                    <div class="awards_active">
+                        <ul>
+                            <li><a href="#"><span><strong>Step 1. Content Type</strong></span></a></li>
+                            <li><a href="#"><span><strong>Step 2. Add Information</strong></span></a></li>
+                            <li class="active"><a href="#"><span><strong>Step 3. organize</strong></span></a></li>
+                            <li><a href="#"><span><strong>step 4. preview and publish</strong></span></a></li>
+                        </ul>
+
+                    </div></div>
+
+                <div class="heading2">
+                    <h2>privacy settings</h2></div>
+                <div class="clear"></div>
+
+                <div class="privacy_settings">
+                    <form id="organize" name="organize" action="">
+                        <a href="#" id="public" class="public" onclick="return changeStatus('1');">Public</a>
+                        <a href="#" id="private" class="private active" onclick="return changeStatus('0');">Private</a>
+                        <input type="hidden" name="status" id="status" value="0" />
+                    </form>
+                </div>
+
+
+                <div class="build_wire">
+
+                    <h3>Rearrange your wires    <span>Drag and drop your elements in any order you want</span></h3>
+                </div>
+
+                <div class="addpost">
+
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+                    <div class="post">
+                        <div class="posts">
+                            <img src="{$smarty.const.SITE_URL}views/images/lil.png" width="114" height="105" />
+                            <div class="data2">James marchetti</div></div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="clear"></div>
+
+            <hr />
+
+            <input name="" type="button" class="back" value="back" onclick="window.location.href='{$smarty.const.SITE_URL}addItem';"/>
+            <input name="" type="submit" class="next" value="next" onclick="document.organize.submit();" />
+
+        </div> 
+
+
+
+        {include file='footer.tpl.html'}

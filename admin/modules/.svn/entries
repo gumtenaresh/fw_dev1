@@ -1,0 +1,58 @@
+10
+
+dir
+1207
+https://purpletalk.unfuddle.com/svn/purpletalk_fanwire/fanwire/admin/modules
+https://purpletalk.unfuddle.com/svn/purpletalk_fanwire
+
+
+
+2013-01-02T09:15:36.429875Z
+1205
+naresh
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+2a17a4c6-0575-4aa3-993e-1ba027e1496d
+
+articles
+dir
+
+categories
+dir
+
+crawl
+dir
+
+crons
+dir
+
+fanwires
+dir
+
+footer
+dir
+
+index
+dir
+
+photos
+dir
+
+users
+dir
+
+videos
+dir
+

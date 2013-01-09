@@ -1,0 +1,249 @@
+<!-- <div class="filters">&nbsp;<br />
+          <h2>filter by:</h2>
+           <img src="images/cam1.png" width="25" height="21" vspace='3px;' /> <img src="images/vediio.png" width="25" height="21" /> <img src="images/note.png" width="25" height="21" /> <img src="images/music.png" width="25" height="21" /> | <a href="#">popularity</a>  |  <a href="#">recent</a>  |  <a href="#">a-z</a>  |  <a href="#">z-a</a>
+           </div> -->
+<div id="fb-root"></div>
+<script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="{$smarty.const.SITE_URL}views/scripts/imagepanner.js"></script>
+{literal}
+<script type="text/javascript">
+ 
+    function addFan(fanwireid,id){
+    	 
+        var dataString ='id='+fanwireid;
+    
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}addFanwire",
+            data: dataString,
+            success: function(response) {
+                if(response==1){
+                    $("#"+id).removeClass('addfan_btn');
+                    $("#"+id).addClass('connect_btn');
+                    $("#"+id).val('CONNECTED');
+                    $("#"+id).removeAttr( 'onClick');
+                    $("#"+id).attr( 'onClick', 'unFan("'+fanwireid+'","'+id+'")');
+                }else{
+                    $('#message').html(response)
+                    .hide()
+                    .fadeIn(1500)
+                    .fadeOut(1500)
+                }
+            }
+        });
+        return false;
+    }
+    
+    
+    
+    
+    function unFan(fanwireid,id){
+        var a=fanwireid;
+        var b=id;
+        $('#id1').val(a);
+        $('#id2').val(b);
+        Popup.showModal('fanwireRemoval','','fixed','','');return false;
+    
+        
+        /*  if(confirm('Are you should you want to remove this FanWire? All of the items in your collection will be gone\' Remove / Keep\' ')){
+          
+            var dataString ='id='+fanwireid;
+    
+            $.ajax({
+                type: "POST",
+                url:"{/literal}{$smarty.const.SITE_URL}{literal}unFanwire",
+                data: dataString,
+                success: function(response) {
+                     
+                    if(response==1){
+                        $("#"+id).removeClass('connect_btn');
+                        $("#"+id).addClass('addfan_btn');
+                        $("#"+id).val('ADD FANWIRE');
+                        $("#"+id).removeAttr( 'onClick');
+                        $("#"+id).attr( 'onClick', 'addFan("'+fanwireid+'","'+id+'")');
+				
+                    }else{
+                        $('#message').html(response)
+                        .hide()
+                        .fadeIn(1500)
+                        .fadeOut(1500)
+                    }
+                }
+            });
+            return false;
+        } */
+        
+    }
+    function unFanIt(){
+        var id1=$('#id1').val();
+        var id2=$('#id2').val();
+        //alert(id1+id2);
+               
+        var dataString ='id='+id1;
+        $.ajax({
+            type: "POST",
+            url:"{/literal}{$smarty.const.SITE_URL}{literal}unFanwire",
+            data: dataString,
+            success: function(response) {
+                     
+                if(response==1){
+                    Popup.hide('fanwireRemoval');
+                    $("#"+id2).removeClass('connect_btn');
+                    $("#"+id2).addClass('addfan_btn');
+                    $("#"+id2).val('ADD FANWIRE');
+                    $("#"+id2).removeAttr( 'onClick');
+                    $("#"+id2).attr( 'onClick', 'addFan("'+id1+'","'+id2+'")');
+                   
+				
+                }else{
+                    $('#message').html(response)
+                    .hide()
+                    .fadeIn(1500)
+                    .fadeOut(1500)
+                }
+            }
+        });
+        return false;
+                
+      
+                 
+                 
+    }
+
+</script>
+{/literal}
+
+<div class="banner" id="bann" {if $fanwires.cover_photo} style="background:#000;"{/if}> 
+
+     {if $fanwires.cover_photo}
+
+
+     <div class="pancontainer" data-orient="center" data-canzoom="yes" style="width: 100%; height:270px;" id="pancontainer">
+        <img src="{$smarty.const.SITE_URL}photos/{$fanwires.cover_photo}"    />
+    </div>
+
+
+
+    {else}<img src="{$smarty.const.SITE_URL}views/images/Img Defalt_image.png" height="257" width="274" alt="" />{/if} 
+
+</div>
+<div class="james_photo"><img src="{$smarty.const.SITE_URL}photos/{$fanwires.photo}" width="144" height="144" alt="james" /></div>
+<div class="james_photo">
+    <div class="james_photoimg"><img src="{$smarty.const.SITE_URL}photos/{$fanwires.photo}" width="144" height="144" alt="james" /></div>
+
+    <div class="james_data">
+       	<h2>{$fanwires.name}</h2><br />
+        <span>{$fanwires.category}</span>
+    </div>
+
+
+</div>
+<div class="clear" style="height:275px;"></div>
+
+<div class="james_msg">
+
+    <div class="connect_me">
+        <div id="fanunfan">
+            {if $fanwires.areTheyFan eq yes}
+            <input type="hidden" name="id1" id="id1" />
+            <input type="hidden" name="id2" id="id2" />
+            {if $smarty.session.name} <input name="" type="button" class="connect_btn" value="Connected" id="n{$smarty.request.fwrid}"{if $smarty.session.name}onclick="unFan({$profileid},'n{$smarty.request.fwrid}')"{else}onclick="Popup.show('connect_popup_idfan');return false;" {/if} /><br>{/if}
+            {else}
+
+            {if $smarty.session.name} <input name="" type="button" class="addfan_btn" value="ADD FANWIRE"  id='m{$smarty.request.fwrid}' {if $smarty.session.name}onclick="addFan({$profileid},'m{$smarty.request.fwrid}')"{else}onclick="Popup.show('connect_popup_idfan');return false;"{/if} /><br>{/if}
+
+            {/if}
+        </div>
+        {if $smarty.session.name} <span class="fans_count">{$fanwires.numberOfFans} {if $fanwires.numberOfFans eq 1}Fan{else}Fans{/if}</span>{/if}
+    </div>
+
+    <div class="fanwire_popup" id="connect_popup_idfan">
+        <div class="conect_popupimg1"></div>
+        <div class="conect_popupcontent">
+            <a href="javascript:void(0);" style="float:right;" onclick="showConnect_popup_id('connect_popup_id{$fan.id}');"><img src="{$smarty.const.SITE_URL}views/images/0_popupclose.png" height="11" width="7" alt="" /></a>
+            <div class="clear"></div>
+            <p>Members never have to leave FanWire
+                by linking their social media accounts.
+                Sign up now to get full access.</p>
+
+
+
+            <div class="conect_popupcontent1"><div class="connect1"><a href="javascript:void(0);" onclick="showConnect_popup_id('connect_popup_id{$fan.id}'); callSign();">Connect</a></div></div>
+
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="zoom">
+    <table>
+        <tr>
+            <td>
+                <div class="minus">
+                    <img src='{$smarty.const.SITE_URL}views/images/m.png'>
+                </div>
+            </td>
+            <td>
+                <div style="float:left;width:131px;"><a href="#" class="tt" >
+                        <div class="zoom" id="slider_fanwireProfile{$smarty.request.ac}" style='width: 98%;float:left;'>
+                            <span class="tooltip" >
+                                <b>Tip:</b> Drag the slider to
+                                increase/decrease the size of Fanwires
+                            </span>
+                        </div> 
+                    </a>
+                </div>
+            </td>
+            <td>
+                <div class="plus"  >
+                    <img src='{$smarty.const.SITE_URL}views/images/p.png'>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <!-- added new end -->
+</div>
+<div class="settings_page">
+    <div class="awards_active" >
+        <ul> 
+
+            <!--             <li {if $ac eq 1}class="active"{/if}> -->
+            <!--             	<a href="{$smarty.const.SITE_URL}profileInfo?fwrid={$fwrid}&ac=1" onmouseover="document.getElementById('poplistid').style.display='block'" onmouseout="document.getElementById('poplistid').style.display='none'"><span><strong> Media</strong></span></a></li> -->
+            <li {if $ac eq 1}class="active"{/if}>
+                <a href="{$smarty.const.SITE_URL}{$fanwires.url}" ><span><strong> Media</strong></span></a>
+
+                <!--                <ul class="subLikns">
+    
+                                    <li><a href="{$smarty.const.SITE_URL}phots?fwrid={$fwrid}&bt=2"  onmouseover="document.getElementById('poplistid').style.display='block'" > photos</a></li>
+                                    <li><a href="{$smarty.const.SITE_URL}vidos?fwrid={$fwrid}&bt=2"  onmouseover="document.getElementById('poplistid').style.display='block'" > videos</a></li>
+                                    <li><a href="{$smarty.const.SITE_URL}articles?fwrid={$fwrid}&bt=2" onmouseover="document.getElementById('poplistid').style.display='block'"  > articles</a></li>
+                        
+                                </ul>-->
+
+            </li>
+
+
+            <li {if $ac eq 2}class="active"{/if}><a href="{$smarty.const.SITE_URL}{$fanwires.url}/socialMedia"><span><strong> Social</strong></span></a></li>
+            <!--<li {if $ac eq 3}class="active"{/if}><a href="{$smarty.const.SITE_URL}fanwiresInfo?fwrid={$fwrid}&ac=3"><span><strong> about</strong></span></a></li>-->
+
+
+
+            <!--            <li {if $ac eq 4}class="active"{/if}><a href="{$smarty.const.SITE_URL}fanwiresFan?fwrid={$fwrid}&ac=4"><span><strong> events</strong></span></a></li>-->
+            <!--<li {if $ac eq 5}class="active"{/if}><a href="{$smarty.const.SITE_URL}fanwiresFan?fwrid={$fwrid}&ac=5"><span><strong> fans</strong></span></a></li>-->
+            <!--                         {*if $ac eq 6*} -->
+            <!--                         <li class="active"><a href="{$smarty.const.SITE_URL}fanwiresFan?fwrid={$fwrid}&ac=6"><span><strong> about</strong></span></a></li> -->
+            <!--                         {*else*} -->
+            <!--                         <li><a href="{$smarty.const.SITE_URL}fanwiresFan?fwrid={$fwrid}&ac=6"><span><strong> about</strong></span></a></li> -->
+            <!--                         {*/if*} -->
+
+
+        </ul>
+
+
+
+    </div>
+
+</div>

@@ -1,0 +1,56 @@
+ {include file="$ADMIN/header.tpl.html"}
+{literal}
+ <script type="text/javascript">
+	$().ready(function() {
+	$("#addcategory").validate({
+		rules: {
+			name: {
+				required:true				
+			} 
+		}
+	});
+
+});
+</script>
+{/literal}
+
+<div id="data_sectionarea">
+        <div class="data_rightsection1">
+        <div class="rightcontent">
+        <div class="datatabsection">        
+        <div class="datatabrightsection"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="search_fanwire">
+        <div class="search"  style="float:right;">        
+            
+        </div>
+        <div class="numbers">
+<!--        <div><p> First  <a href="#">&lt;</a>  1 Page of 2103 <a href="#"> &gt; </a> Last</p></div>-->
+        </div>
+        <div class="clear"></div>
+        </div>
+         <h1 style="color:#424140;text-transform:capitalize; padding: 5px 0 5px 110px; font-size: 20px;">Edit Category</h1>
+                     <form action="" method="post" id="addcategory" enctype="multipart/form-data">
+                          {section name="id" loop= $list}
+                          <div class="dataforms">
+                              <label class="name">Name</label>
+                                     <input type="hidden" name="id" id="id" value="{$list[id].id}" />
+                                     <input type="text" class="textfield" name="name" id="name" value="{$list[id].name}" />
+                          </div>
+                          
+                          <div class="dataforms">
+                              <label class="name">Meta Title</label>                                     
+                                     <input type="text" class="textfield" name="metatitle" id="metatitle" value="{$list[id].metatitle}" />
+                          </div>
+                          
+                              <label class="name"></label><input type="submit"  class="connect_login10" name="submit" value="Submit" />
+                          
+                          {/section}
+                     </form>
+                  
+    </div>
+</div>
+</div> 
+
+{include file="$ADMIN/footer.tpl.html"} 

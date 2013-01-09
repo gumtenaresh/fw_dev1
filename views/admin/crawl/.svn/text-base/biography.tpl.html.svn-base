@@ -1,0 +1,61 @@
+{include file="{$smarty.const.ADMIN}/header.tpl.html"}
+
+
+</div>
+
+<div  class="fbTimelineUnit" style="margin: 10px 50px;">
+    <form id="crawlForm" method="post">
+        <table>
+            <tr id="fanwiretr">
+                <td>
+                    <label class="name">Fanwire Name</label>
+                </td>
+                <td>    
+                    <select name="fanwire" id="fanwire" >
+                        <option value="">------select-----</option>
+                        {foreach from=$fanwires key=myId item=i}
+                        <option value="{$i.id}~{$i.name}" title="{$i.id}" >{$i.name}</option>
+                        {/foreach}
+                    </select>
+                </td>
+            </tr>
+
+            <tr >
+                <td>
+
+                </td>
+                <td>
+                    <input type="submit" name="submit" value="submit"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+    {$error}
+
+</div>
+{if $list}
+
+<div class="plr_about" id="plr_about">
+    <div class="plr_about_left">
+        <img src="//{$list['image']}" height="108" width="82" alt="" ></div>
+    <div class="plr_about_right"> 
+
+        <p> {$list['name']}</p> 
+        <span>{$list[0]['description']|truncate:150}</span>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="plr_about_center">
+        {foreach from=$list[0] key=k item=v}
+        {if $k eq 'description'}
+        {else}
+        <b>{$k}:</b>&nbsp; {$v} <br>
+        {/if}
+
+        {/foreach}
+
+    </div>
+
+</div>
+{/if}

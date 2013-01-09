@@ -1,0 +1,124 @@
+{include file="$ADMIN/header.tpl.html"}
+                       <div id="data_sectionarea">
+                           <div style="background-color: #FFF">
+               
+                            <table class="table_01" cellpadding="5" cellspacing="5" align="center">      
+                                <tr><td style="font-family: arial;font-size: 14px;"><h3>Facebook List</h3></td></tr>
+                                <tr  class="table_header">
+                                    <th class="tableheader">TITLE</th>
+                                    <th class="tableheader">DESCRIPTION</th>
+                                    <th class="tableheader">FANWIRE</th>
+                                    <th class="tableheader">PHOTO</th>
+                                    <th class="tableheader">CREATED DATE</th>
+                                    <th class="tableheader">RELEASED DATE</th>                                    
+                                    {if $smarty.session.admintype eq '2'}<th class="tableheader">DELETE</th>{/if}
+                                </tr> 
+                                {section name="id" loop= $list}
+                                <tr {if $smarty.section.id.iteration % 2 eq '0'}class="color"{/if}>
+                                    <td align="left" width="15%">{$list[id].title}</td>
+                                    <td align="left" width="30%">{$list[id].description}</td>
+                                    <td align="left">{$list[id].fanwire}</td>
+                                    <td align="left"><img src="{$smarty.const.IMAGE_URL}{$list[id].photo}" height="100" width="100" alt=""/></td>
+                                    <td align="left"><div>{$list[id].cdate|date_format:'%m-%d-%y %I:%M %p'}&nbsp;&nbsp;
+                                            <a href="javascript:void(0);" onclick="showpopup('{$list[id].id}');"> 
+                                                <img src="{$smarty.const.SITE_URL}views/images/blackcal.jpg" width="15" height="20"/>
+                                            </a>
+                                            <!--                                           
+                                                {if $list[id].released_date lt $date}
+                                                <img src="{$smarty.const.SITE_URL}views/images/calendar.png" width="15" height="20" />
+                                                {else}
+                                                <img src="{$smarty.const.SITE_URL}views/images/cale_1.png" />
+                                                {/if}
+                                            -->
+                                <div id="update_date{$list[id].id}" class="update_date" style="display: none;">
+                                    <span style="float:right" onclick="closepopup('{$list[id].id}');" class="close_popup">X</span>
+                                    <div style="line-height: 50px;font-weight: bold;" align="center">Update Date</div>
+                                    <div>
+                                        <form  action="" method="post" name="{$list[id].id}cal">
+                                            <input type="hidden" name="id" id="id" value="{$fanwire_id}" />
+                                            <input type="hidden" name="article_id" id="article_id" value="{$list[id].id}" />
+                                            <input type="text" id="cdate{$list[id].id}" name="cdate" maxlength="25" size="25" class="input_text" style="width:170px;"  value="{$list[id].cdate|date_format:'%Y-%m-%d %I:%M %p'}" readonly>&nbsp;
+<!--                                            <a href="javascript: void(0);" onclick="javascript: NewCssCal('cdate{$list[id].id}','yyyyMMdd','arrow',true,12,false)"> 
+                                                <img src="{$smarty.const.SITE_URL}views/images/blackcal.jpg" width="15" height="20"/>
+                                            </a>-->
+<!--                                            {if $list[id].released_date lt $date}
+                                                <img src="{$smarty.const.SITE_URL}views/images/calendar.png" width="15" height="20" />
+                                                {else}
+                                                <img src="{$smarty.const.SITE_URL}views/images/cale_1.png" width="18" height="18" border="0" alt="cal"></a>                                                
+                                            {/if}-->
+                                            <input type="submit" name="submit" value="Update"/>                                            
+                                        </form> 
+{literal}
+<script type="text/javascript" >
+$('#cdate{/literal}{$list[id].id}{literal}').datetimepicker({
+	timeFormat: "hh:mm tt"
+});
+</script>
+{/literal}                                        
+                                    </div>
+                               </div>
+                                            
+                                        </div></td>
+                                        
+                                <td align="left"><div>{if $list[id].released_date eq '0000-00-00 00:00:00'}00-00-00 00:00:00{else}{$list[id].released_date|date_format:'%m-%d-%y %I:%M %p'}{/if}&nbsp;&nbsp;
+                                        <a href="javascript:void(0);" onclick="showpopup('{$list[id].id}_released');">
+                                            {if $list[id].released_date eq '0000-00-00 00:00:00'}
+                                                <img src="{$smarty.const.SITE_URL}views/images/cale_1.png" width="18" height="18"/>
+                                                {else if $list[id].released_date lt $date}
+                                                <img src="{$smarty.const.SITE_URL}views/images/calendar.png" width="15" height="20" />
+                                                {else}
+                                                <img src="{$smarty.const.SITE_URL}views/images/yellowcal.jpg" width="18" height="25" />
+                                                {/if}
+                                        </a>
+                                <div id="update_date{$list[id].id}_released" class="update_date" style="display: none;">
+                                    <span style="float:right" onclick="closepopup('{$list[id].id}_released');" class="close_popup">X</span>
+                                    <div style="line-height: 50px;font-weight: bold;" align="center">Update Date</div>
+                                    <div>
+                                        <form  action="" method="post" name="{$list[id].id}cal">
+                                            <input type="hidden" name="id" id="id" value="{$fanwire_id}" />
+                                            <input type="hidden" name="article_id" id="article_id" value="{$list[id].id}" />
+                                                <input type="text" id="released_date{$list[id].id}" name="released_date" maxlength="25" size="25" class="input_text" style="width:170px;"  value="{$list[id].released_date|date_format:'%Y-%m-%d %I:%M %p'}" readonly>&nbsp;
+                                                <!--<a href="javascript: void(0);" onclick="javascript: NewCssCal('released_date{$list[id].id}','yyyyMMdd','arrow',true,12,false)"> 
+                                                {if $list[id].released_date eq '0000-00-00 00:00:00'}
+                                                <img src="{$smarty.const.SITE_URL}views/images/cale_1.png" width="18" height="18"/>
+                                                {else if $list[id].released_date lt $date}
+                                                <img src="{$smarty.const.SITE_URL}views/images/calendar.png" width="15" height="20" />
+                                                {else}
+                                                <img src="{$smarty.const.SITE_URL}views/images/yellowcal.jpg" width="18" height="25" />
+                                                {/if}
+                                                </a>-->
+                                                <input type="submit" name="release" value="Update"/>                                            
+                                        </form> 
+{literal}
+<script type="text/javascript" >
+$('#released_date{/literal}{$list[id].id}{literal}').datetimepicker({
+	timeFormat: "hh:mm tt"
+});
+</script>
+{/literal}                                        
+                                    </div>
+                               </div>
+                                            
+                                        </div></td>
+
+                                        {if $smarty.session.admintype eq '2'}<td align="left"><a onclick="return confirm('Delete Post?');" href="{$smarty.const.ADMIN_URL}articles/deleteFacebookPost?id={$list[id].id}&fanwire_id={$fanwire_id}">delete</a></td>{/if}
+                                    
+                                </tr>
+                                {sectionelse}
+                                <tr><td colspan="4" align="center" height="100px" valign="middle">NO POSTS</td></tr>
+                                {/section}
+                                {if !empty($navigation)}
+                                <tr>
+                                    <td colspan="4" align="right">
+                                        {$navigation}
+                                    </td></tr>
+                                {/if}
+                                <tr><td colspan="4">&nbsp;</td></tr>
+                            </table>
+                               
+                               
+                        </div>       
+                    </div>
+                </div>
+              
+        {include file="$ADMIN/footer.tpl.html"}

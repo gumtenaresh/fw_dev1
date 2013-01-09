@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/purpletalk_fanwire/!svn/ver/1171/fanwire/views/admin/photos
+END
+photosList.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/purpletalk_fanwire/!svn/ver/1171/fanwire/views/admin/photos/photosList.tpl.html
+END
+addPhotosAdmin.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/purpletalk_fanwire/!svn/ver/783/fanwire/views/admin/photos/addPhotosAdmin.tpl.html
+END
+editPhotos.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/purpletalk_fanwire/!svn/ver/1126/fanwire/views/admin/photos/editPhotos.tpl.html
+END

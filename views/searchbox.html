@@ -1,0 +1,23 @@
+<div class="search">
+
+    <div class="search_input">
+
+        <form method="post" action="{$smarty.const.SITE_URL}" id="searchform" onsubmit="return checklength();">
+            <input type="hidden" name="searchcriteria" id="searchcriteria" value="all" >
+            <input type="text" autocomplete="off" id="searchbox" name="searchterm" value="Search something.." class="search_text"> 
+            <a href="#" class="search_icon" onclick="submit();"></a>
+
+            <div id="suggestions" style="position:absolute;z-index:10"></div>
+        </form>
+
+    </div>
+
+</div>
+
+{if $searchedfor}
+{literal}
+<script>
+    document.getElementById('searchbox').value='{/literal}{$searchedfor}{literal}';
+</script>
+{/literal}
+{/if}

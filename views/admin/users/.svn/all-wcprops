@@ -1,0 +1,39 @@
+K 26
+svn:wc:ra_dav:activity-url
+V 33
+/svn/purpletalk_fanwire/!svn/act/
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/purpletalk_fanwire/!svn/ver/1169/fanwire/views/admin/users
+END
+createUser.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/purpletalk_fanwire/!svn/ver/1105/fanwire/views/admin/users/createUser.tpl.html
+END
+userslist.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/purpletalk_fanwire/!svn/ver/1069/fanwire/views/admin/users/userslist.tpl.html
+END
+editUser.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/purpletalk_fanwire/!svn/ver/1105/fanwire/views/admin/users/editUser.tpl.html
+END
+adminlist.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/purpletalk_fanwire/!svn/ver/1105/fanwire/views/admin/users/adminlist.tpl.html
+END
+changePassword.tpl.html
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/purpletalk_fanwire/!svn/ver/730/fanwire/views/admin/users/changePassword.tpl.html
+END

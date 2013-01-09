@@ -1,0 +1,71 @@
+<?php /* Smarty version Smarty3-RC3, created on 2012-07-26 15:51:32
+         compiled from "/var/www/fanwire/views/item/my_fanwire_add_item.tpl.html" */ ?>
+<?php /*%%SmartyHeaderCode:196341413450111a2c56d189-27808269%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'd97cfb9dcd60837fe5b1dde664281a36e11196c6' => 
+    array (
+      0 => '/var/www/fanwire/views/item/my_fanwire_add_item.tpl.html',
+      1 => 1342074257,
+    ),
+  ),
+  'nocache_hash' => '196341413450111a2c56d189-27808269',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
+<?php $_template = new Smarty_Internal_Template('header.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?><?php $_template = new Smarty_Internal_Template('zoom.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<?php $_template = new Smarty_Internal_Template('myfanwireLeftBar.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+<!--Right Section-->
+<div class="right_container">
+    <div id="rightsection">
+        <div id="right_area">
+            <div class="connect_fans">
+                <h2>Add a new item</h2>
+                <br />
+
+                <!--                <div class="settings_page">
+                                    <div class="awards_active">
+                                        <ul>
+                                            <li class="active"><a href="#"><span><strong>Step 1. Content Type</strong></span></a></li>
+                                            <li><a href="#"><span><strong>Step 2. Add Information</strong></span></a></li>
+                                            <li><a href="#"><span><strong>Step 3. organize</strong></span></a></li>
+                                            <li><a href="#"><span><strong>step 4. preview and publish</strong></span></a></li>
+                                        </ul>
+
+                                    </div>
+                                </div>-->
+
+                <div class="heading2"><h2>what are you adding</h2></div>
+
+                <div class="clear"></div>
+
+                <div class="add_new_icon">
+                    <!--        put class in div tag to active it class="article active" -->
+                    <a href="<?php echo @SITE_URL;?>
+my_fanwire_new_article"  class="article ">Article</a>
+                    <a href="<?php echo @SITE_URL;?>
+addPhotos" class="photo">Photo</a>
+                    <a href="<?php echo @SITE_URL;?>
+my_fanwire_add_new_videos" class="videos">video</a>
+                    <!--        <a href="<?php echo @SITE_URL;?>
+my_fanwire_add_new_wire" class="personal">personal wire</a>-->
+
+                    <!--        <a href="#" class="link">Link/embed</a>-->
+
+
+                </div>
+                <div class="clear"></div>
+
+            </div>
+
+            <div class="clear"></div>
+        </div>
+
+        <?php $_template = new Smarty_Internal_Template('footer.tpl.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
